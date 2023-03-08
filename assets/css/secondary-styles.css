@@ -1,0 +1,327 @@
+/* root element (sort of the <html> element) pseudo-class for global scoped variables*/
+:root {
+  /*Miscellaneous*/
+  --primary-shadow-color: 0 0 10px #ffffff, 0 0 20px #ffd100, 0 0 30px #ffd100,
+    0 0 40px #ffd100;
+  --primary-hex-color: #2774ae;
+  --secondary-hex-color: #ffd100;
+  --background-white-rgb-color: rgba(255, 255, 255, 1);
+  color-scheme: normal;
+}
+
+/* wildcard */
+* {
+  /*Box model stuff*/
+  padding: 0;
+  /*Typography stuff*/
+  font-family: Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /*Miscellaneous*/
+  box-sizing: border-box;
+  -webkit-animation: Loadup 5s linear;
+  /*Manipulations stuff*/
+  animation: Loadup 5s linear;
+}
+
+body {
+  /*Box model stuff*/
+  background-color: var(--secondary-hex-color);
+  /*Typography stuff*/
+  font-size: calc(14px + (26 - 14) * ((100vw - 300px) / (1600 - 300)));
+  font-weight: 300;
+  /*Miscellaneous*/
+  overflow: visible;
+  cursor: pointer;
+}
+
+header {
+  /*Display stuff*/
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  /*Positioning stuff*/
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  /*Box model stuff*/
+  padding: 10px 30px;
+  border: var(--secondary-hex-color) 10px double;
+  background-attachment: fixed;
+  background-color: var(--primary-hex-color);
+  background-position: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  /*Miscellaneous*/
+  list-style-type: none;
+  overflow: hidden;
+}
+
+nav {
+  /*Display stuff*/
+  flex-wrap: wrap;
+  align-items: center;
+  /*Box model stuff*/
+  width: 100%;
+  margin: 0 auto;
+  padding: 0;
+  /*Typography stuff*/
+  font-size: 20px;
+  text-align: center;
+  text-shadow: var(--primary-shadow-color);
+}
+
+header nav li {
+  /*Display stuff*/
+  display: inline-block;
+  /*Box model stuff*/
+  margin: 10px;
+  padding: 0px;
+  /*Miscellaneous*/
+  list-style: none;
+}
+
+header nav li a {
+  /*Display stuff*/
+  display: block;
+  /*Positioning stuff*/
+  z-index: 1;
+  /*Box model stuff*/
+  margin: 0;
+  padding: 5px 10px;
+  border-radius: 3px;
+  outline-color: var(--secondary-hex-color);
+  outline-style: double;
+  outline-width: 5px;
+  background-color: var(--secondary-hex-color);
+  /*Typography stuff*/
+  font-size: 18px;
+  font-weight: bold;
+  text-decoration: none;
+  color: var(--primary-hex-color);
+  /*Miscellaneous*/
+  line-height: 1.5;
+  cursor: pointer;
+}
+
+header nav li a:hover {
+  /*Positioning stuff*/
+  z-index: 1;
+  /*Box model stuff*/
+  padding: 5px 10px;
+  border-radius: 3px;
+  outline-color: var(--primary-hex-color);
+  outline-style: dashed;
+  outline-width: 2px;
+  background-color: var(--primary-hex-color);
+  /*Typography stuff*/
+  text-decoration: none;
+  color: var(--secondary-hex-color);
+  /*Miscellaneous*/
+  cursor: pointer;
+  box-shadow: 2px 0px 1px var(--primary-hex-color);
+  transform: scale(0.9) rotate(5deg) translate(10%, 10%);
+  filter: saturate(1) contrast(200%)
+    drop-shadow(5px 5px 2rem var(--secondary-hex-color)) brightness(1) sepia(5%)
+    opacity(95%) hue-rotate(4deg) grayscale(50%) blur(0px) invert(5%);
+}
+
+header nav li a:active {
+  /*Box model stuff*/
+  padding: 5px 10px;
+  border-radius: 3px;
+  outline-color: var(--primary-hex-color);
+  outline-style: dashed;
+  outline-width: 2px;
+  background-color: var(--primary-hex-color);
+  /*Typography stuff*/
+  text-decoration: none;
+  color: var(--secondary-hex-color);
+  /*Miscellaneous*/
+  cursor: pointer;
+  box-shadow: 2px 0px 1px var(--primary-hex-color);
+}
+
+header nav li a:focus {
+  /*Positioning stuff*/
+  z-index: 1;
+  /*Box model stuff*/
+  padding: 5px 10px;
+  border-radius: 3px;
+  outline-color: var(--primary-hex-color);
+  outline-style: dashed;
+  outline-width: 2px;
+  background-color: var(--primary-hex-color);
+  /*Typography stuff*/
+  text-decoration: none;
+  color: var(--secondary-hex-color);
+  /*Miscellaneous*/
+  cursor: pointer;
+  box-shadow: 2px 0px 1px var(--primary-hex-color);
+}
+
+.tooltip-nav {
+  /*Display stuff*/
+  display: inline-block;
+  /*Positioning stuff*/
+  position: relative;
+  /*Box model stuff*/
+  border-bottom: 1px dotted black;
+  /*Typography stuff*/
+  color: var(--primary-hex-color);
+  font-size: 14px;
+}
+
+.tooltip-nav .tooltiptext-nav {
+  /*Positioning stuff*/
+  position: absolute;
+  left: -5%;
+  top: 30px;
+  z-index: 4;
+  /*Box model stuff*/
+  width: auto;
+  padding: 2px 2px;
+  border-radius: 6px;
+  background-color: black;
+  /*Typography stuff*/
+  text-align: center;
+  color: var(--secondary-hex-color);
+  /*Miscellaneous*/
+  visibility: hidden;
+  /* Position the tooltip */
+}
+
+.tooltip-nav:hover .tooltiptext-nav {
+  /*Miscellaneous*/
+  visibility: visible;
+}
+
+hr {
+  /*Box model stuff*/
+  border: none;
+  /*Typography stuff*/
+  text-align: center;
+  color: #333;
+  /*Miscellaneous*/
+  overflow: visible;
+}
+
+hr:after {
+  /*Display stuff*/
+  content: "⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘";
+  /*Box model stuff*/
+  padding: 0 0px;
+}
+
+.hero {
+  background-position: bottom;
+  height: auto;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.page-title {
+  color: #5538fc;
+  display: inline-block;
+  border-bottom: 4px solid #2d2ae9;
+  padding: 0px 80px 15px 80px;
+  font-weight: normal;
+  font-size: 42px;
+  font-style: italic;
+}
+
+.secondary-content {
+  width: 80%;
+  margin: 0 auto;
+  color: #024e76;
+}
+
+.secondary-content h3 {
+  font-size: 25px;
+  margin: 20px 0;
+}
+
+.secondary-content p {
+  font-size: 16px;
+  line-height: 1.5;
+  margin: 20px 0;
+}
+
+.secondary-content ul {
+  margin: 15px 20px;
+  font-size: 16px;
+}
+
+.secondary-content li {
+  color: #39a6b2;
+  margin: 10px 0;
+  font-size: 16px;
+}
+
+footer {
+  /*Display stuff*/
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+  /*Box model stuff*/
+  background-color: var(--primary-hex-color);
+  /*Typography stuff*/
+  font-size: clamp(1.5rem, 1.8vw, 1.8rem);
+  font-weight: bold;
+  text-align: center;
+  color: var(--secondary-hex-color);
+  border: 10px ridge var(--secondary-hex-color);
+}
+
+footer p{
+  /*Typography stuff*/
+  font-size: clamp(1.8rem, 1.8vw, 2rem);
+  color: var(--secondary-hex-color);
+}
+
+@keyframes projects {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+@keyframes Loadup {
+  from {
+    opacity: 0.7;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes cursor {
+  0% {
+    cursor: url(../cursorfavicon/niksharfavicon16x.ico) 0 0, crosshair;
+  }
+
+  20% {
+    cursor: url(../cursorfavicon/niksharpfavicon16x.ico) 0 0, crosshair;
+  }
+
+  40% {
+    cursor: url(../cursorfavicon/niksharfavicon36x.ico) 0 0, crosshair;
+  }
+
+  60% {
+    cursor: url(../cursorfavicon/niksharpfavicon36x.ico) 0 0, crosshair;
+  }
+
+  80% {
+    cursor: url(../cursorfavicon/niksharfavicon64x.ico) 0 0, crosshair;
+  }
+
+  100% {
+    cursor: url(../cursorfavicon/niksharpfavicon64x.ico) 0 0, crosshair;
+  }
+}
