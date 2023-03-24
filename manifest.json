@@ -1,0 +1,69 @@
+{
+  "name": "Ńἱĸἱ৳α $hârρἱo UCLAx+U2 Page",
+  "short_name": "Ń$-UCLAx+U2",
+  "id": "./index.html",
+  "start_url": "./index.html",
+  "background_color": "#2774ae",
+  "display": "browser",
+  "scope": "/",
+  "theme_color": "#2774ae",
+  "orientation": "portrait-primary",
+  "lang": "en-US",
+  "dir": "ltr",
+  "description": "Ńἱĸἱ৳α Shârρἱo's aka Niksharpkings UCLAx+U2 Profile Resume github page",
+  "icons": [
+    {
+      "src": "./assets/manifestIcon/maskable_icon.png",
+      "type": "image/png",
+      "sizes": "250x250"
+    },
+    {
+      "src": "./assets/manifestIcon/maskable_icon_x192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "./assets/manifestIcon/maskable_icon_x128.png",
+      "type": "image/png",
+      "sizes": "128x128"
+    },
+    {
+      "src": "./assets/manifestIcon/maskable_icon_x96.png",
+      "type": "image/png",
+      "sizes": "96x96"
+    },
+    {
+      "src": "./assets/manifestIcon/maskable_icon_x72.png",
+      "type": "image/png",
+      "sizes": "72x72"
+    },
+    {
+      "src": "./assets/manifestIcon/maskable_icon_x48.png",
+      "type": "image/png",
+      "sizes": "48x48"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Avatar",
+      "short_name": "nikavatar",
+      "description": "myavatar",
+      "url": "./assets/images/avatarNikShar2022.webp",
+      "icons": [{ "src": "./assets/manifestIcon/maskable_icon_x192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Avatar2",
+      "short_name": "nikavatar2",
+      "description": "myavatar2",
+      "url": "./assets/images/avatarNikShar2022.webp",
+      "icons": [{ "src": "./assets/manifestIcon/maskable_icon_x192.png", "sizes": "128x128" }]
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "./image/README/1676130578243.png",
+      "type": "image/png",
+      "sizes": "2812x7156"
+    }
+  ]
+}

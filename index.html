@@ -1,582 +1,981 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr" contenteditable="false"> <!-- The root of the HTML document and parent of all other HTML elements on the webpage. represents the root of an HTML document, lang = language (en = english), dir = left to right reading, contenteditable = false for enumerated attribute and elements are not editable-->
-<head> <!-- head element represents a collection of enclosed metadata for the document collection and setup to run on a server -->
-  <meta charset="utf-8"> <!--Tells the web browser which character set to use. charset is set to UTF-8 which is a  standard IANA MIME name for character encodings-->
-  <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- Tells the web browser how to scale the page. viewport is screen size scaling. -->
-  <base href="/"> <!-- base is the base URL to use for all relative URLs within a document. -->
-  <title>Ńἱĸἱ৳α 'Niksharkings' Shârρἱo's GitHub Page</title> <!-- Browser-cross Tab Title-->
-  <meta http-equiv="content-security-policy"
-  content=" connect-src 'self';
+<html lang="en" dir="ltr" contenteditable="false">
+  <!-- The root of the HTML document and parent of all other HTML elements on the webpage. represents the root of an HTML document, lang = language (en = english), dir = left to right reading, contenteditable = false for enumerated attribute and elements are not editable-->
+
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <!-- head element represents a collection of enclosed metadata for the document collection and setup to run on a server -->
+    <!--Tells the web browser which character set to use. charset is set to UTF-8 which is a standard IANA MIME name for character encodings https://www.w3.org/TR/html4/charset.html#h-5.2.2-->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Tells the web browser how to scale the page. viewport is screen size scaling. -->
+    <!-- <base href=> base is the base URL to use for all relative URLs within a document. -->
+    <title>
+      Ńἱĸἱ৳α Shârρἱo's UCLAx+U2 HTML/CSS Portfolio/Project/Resume Page
+    </title>
+    <!-- Browser-cross Tab Title-->
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP -->
+    <!-- https://wiki.whatwg.org/wiki/MetaExtensions -->
+    <!-- https://web.dev/learn/html/metadata/ -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="connect-src 'self';
   font-src 'self';
   frame-src https://www.google.com/;
-  img-src 'self';
+  img-src * 'self' data: https:;
   manifest-src 'self';
   media-src 'self';
+  base-uri 'self';
+  form-action 'self';
   object-src 'self';
-  script-src 'none';
+  script-src 'self';
   script-src-elem 'self' 'sha256-vvt4KWwuNr51XfE5m+hzeNEGhiOfZzG97ccfqGsPwvE=';
   script-src-attr 'self';
-  style-src-elem 'self';
+  style-src-elem 'self' 'sha256-wG7aBvp9/yHanLKIFezWx95YfJa4kMhd7vcw9pyWgqE=';
   style-src-attr 'self';
-  worker-src 'self'">   <!-- content security policy is for privacy and security-->
-  <meta name="x-frame-options" content="DENY">   <!-- x-frame-options is for privacy and security-->
-  <meta name="x-xss-protection" content="1; mode=block">   <!-- x-xss-protection is for privacy and security-->
-  <meta name="x-content-type-options" content="nosniff">   <!-- x-content-type-options is for privacy and security-->
-  <meta name="origin-trial" content="no-referrer">   <!-- origin-trial is for privacy and security-->
-  <meta name="pragma" content="no-cache">   <!-- pragma is for privacy and security-->
-  <meta name="cache-control" content="no-cache">   <!-- cache-control is for privacy and security-->
-  <meta name="expires" content="0">   <!-- expires is for privacy and security-->
-  <meta name="referrer" content="no-referrer">   <!-- referrer is for privacy and security-->
-  <meta name="robots" content="noindex, nofollow">   <!-- robots.txt is for search engine results-->
-  <meta name="googlebot" content="noindex, nofollow">   <!-- googlebot is for search engine results-->
-  <meta name="bingbot" content="noindex, nofollow">   <!-- bingbot is for search engine results-->
-  <meta name="yahoo" content="noindex, nofollow">   <!-- yahoo is for search engine results-->
-  <meta name="baidu" content="noindex, nofollow">   <!-- baidu is for search engine results-->
-  <meta name="yandex" content="noindex, nofollow">   <!-- yandex is for search engine results-->
-  <meta name="google" content="noindex, nofollow">   <!-- google is for search engine results-->
-  <meta name="google-site-verification" content="noindex, nofollow">   <!-- google-site-verification is for search engine results-->
-  <meta name="googlebot-news" content="noindex, nofollow">   <!-- googlebot-news is for search engine results-->
-  <meta name="googlebot-image" content="noindex, nofollow">   <!-- googlebot-image is for search engine results-->
-  <meta name="googlebot-video" content="noindex, nofollow">   <!-- googlebot-video is for search engine results-->
-  <meta name="googlebot-ads" content="noindex, nofollow">   <!-- googlebot-ads is for search engine results-->
-  <meta name="googlebot-mobile" content="noindex, nofollow">   <!-- googlebot-mobile is for search engine results-->
-  <meta name="keywords"
-  content="
-  Ńἱĸἱ৳α Shârρἱo,
-  niksharpkings,
-  Nikita Sharpio,
-  Nik Sharpio,
+  worker-src 'self'"
+    />
+    <!-- content security policy is for privacy and security -->
+    <meta name="robots" content="index, nofollow" />
+    <!-- robots.txt is for search engine results <meta name=robots content=noindex, nofollow-->
+    <meta name="googlebot" content="index, nofollow" />
+    <!-- googlebot is for search engine results temp removal content=noindex, nofollow-->
+    <meta name="bingbot" content="index, nofollow" />
+    <!-- bingbot is for search engine results-->
+    <meta name="yahoo" content="index, nofollow" />
+    <!-- yahoo is for search engine results-->
+    <meta name="baidu" content="index, nofollow" />
+    <!-- baidu is for search engine results-->
+    <meta name="yandex" content="index, nofollow" />
+    <!-- yandex is for search engine results-->
+    <meta name="google" content="index, nofollow" />
+    <!-- https://web.dev/vitals/ -->
+    <!-- google is for search engine results temp removal content=noindex, nofollow-->
+    <meta
+      name="google-site-verification"
+      content="EauQU7rPJCYYGsyqxpmZv-hDfiGlYHLUu3GB7d_SBTM"
+    />
+    <!-- <meta name=google-site-verification content=noindex, nofollow -->
+    <!--google-site-verification is for search engine results -->
+    <meta name="googlebot-news" content="index, nofollow" />
+    <!-- googlebot-news is for search engine results temp removal content=noindex, nofollow-->
+    <meta name="googlebot-image" content="index, nofollow" />
+    <!-- googlebot-image is for search engine results temp removal content=noindex, nofollow-->
+    <meta name="googlebot-video" content="index, nofollow" />
+    <!-- googlebot-video is for search engine results temp removal content=noindex, nofollow-->
+    <meta name="googlebot-ads" content="index, nofollow" />
+    <!-- googlebot-ads is for search engine results temp removal content=noindex, nofollow-->
+    <meta name="googlebot-mobile" content="index, nofollow" />
+    <!-- googlebot-mobile is for search engine results temp removal content noindex, nofollow-->
+    <meta
+      name="keywords"
+      content="
+  Ńἱĸἱ৳α Shârρἱo's,
+  UCLAx,
+  Portfolio,
   Full Stack Web Dev,
-  Brentwood,
+  Coding Bootcamp,
   Los Angeles,
   California,
+  UCLA,
+  UCLA extension,
   Full Stack Web Developer,
   Github,
-  Github Page
-  "> <!-- keywords for search engine results (kinda pointless without a robot.txt because thats what google webcrawlers require to list it on google for example)-->
-<meta name="rating" content="General">   <!-- rating is for search engine results-->
-  <meta name="publisher" content="Ńἱĸἱ৳α 'Niksharpkings' Shârρἱo's">   <!-- publisher is the one who wrote this script/page(s)-->
-  <meta name="creator" content="Ńἱĸἱ৳α 'Niksharpkings' Shârρἱo's">   <!-- creator is the one who wrote this script/page(s)-->
-  <meta name="owner" content="Ńἱĸἱ৳α 'Niksharpkings' Shârρἱo's">   <!-- owner is the one who wrote this script/page(s)-->
-  <meta name="designer" content="Ńἱĸἱ৳α 'Niksharpkings' Shârρἱo's">   <!-- designer is the one who wrote this script/page(s)-->
-  <meta name="developer" content="Ńἱĸἱ৳α 'Niksharpkings' Shârρἱo's">   <!-- developer is the one who wrote this script/page(s)-->
-  <meta name="programmer" content="Ńἱĸἱ৳α 'Niksharpkings' Shârρἱo's">   <!-- programmer is the one who wrote this script/page(s)-->
-  <meta name="author" content="Ńἱĸἱ৳α Shârρἱo">
-  <meta name="description"
-    content="Ńἱĸἱ৳α 'Niksharkings' Shârρἱo's GitHub Page">   <!-- description meta is for saved bookmarks info-->
-  <meta name="generator" content="Visual Studio Code">   <!-- generator = Software used-->
-  <meta name="theme-color" content="#2774ae" media="(prefers-color-scheme: normal)">
-  <meta name="color-scheme" content="normal">
-  <!-- cursor image-->
-  <link rel="icon" type="image/x-icon" sizes="16x16" href="./assets/cursorfavicon/niksharpfavicon16x.ico">
-  <link rel="icon" type="image/x-icon" sizes="16x16" href="./assets/cursorfavicon/niksharfavicon16x.ico">
-  <link rel="icon" type="image/x-icon" sizes="36x36" href="./assets/cursorfavicon/niksharpfavicon36x.ico">
-  <link rel="icon" type="image/x-icon" sizes="36x36" href="./assets/cursorfavicon/niksharfavicon36x.ico">
-  <link rel="icon" type="image/x-icon" sizes="64x64" href="./assets/cursorfavicon/niksharpfavicon64x.ico">
-  <link rel="icon" type="image/x-icon" sizes="64x64" href="./assets/cursorfavicon/niksharfavicon64x.ico">
-  <link href="favicon.ico" rel="icon" type="image/x-icon">   <!-- github.pages favicon icon-->
-  <!-- css3 stylesheet-->
-  <link
-        title="stylesheet"
-        integrity="text"
-        media="only screen and (color)"
-        rel="stylesheet"
-        type="text/css"
-        href="./assets/css/styles.css"> <!-- supported token "stylesheet"-->
+  HTML/CSS,
+  IT,
+  motion graphic designer,
+  Freelance,
+  Online Fraud Investigator,
+  Loss Prevention,
+  Coordinator,
+  Security Guard,
+  Graphic Designer
+  "
+    />
+    <!-- keywords for search engine results (kinda pointless without a robot.txt because thats what google webcrawlers require to list it on google for example)-->
+    <meta name="rating" content="General" />
+    <!-- rating is for search engine results-->
+    <meta name="publisher" content="Ńἱĸἱ৳α 'Niksharpkings' Shârρἱo's" />
+    <!-- publisher is the one who wrote this script/page(s)-->
+    <meta name="creator" content="Ńἱĸἱ৳α 'Niksharpkings' Shârρἱo's" />
+    <!-- creator is the one who wrote this script/page(s)-->
+    <meta name="owner" content="Ńἱĸἱ৳α 'Niksharpkings' Shârρἱo's" />
+    <!-- owner is the one who wrote this script/page(s)-->
+    <meta name="designer" content="Ńἱĸἱ৳α 'Niksharpkings' Shârρἱo's" />
+    <!-- designer is the one who wrote this script/page(s)-->
+    <meta name="developer" content="Ńἱĸἱ৳α 'Niksharpkings' Shârρἱo's" />
+    <!-- developer is the one who wrote this script/page(s)-->
+    <meta name="programmer" content="Ńἱĸἱ৳α 'Niksharpkings' Shârρἱo's" />
+    <!-- programmer is the one who wrote this script/page(s)-->
+    <meta name="author" content="Ńἱĸἱ৳α Shârρἱo" />
+    <!-- author is the one who wrote this script/page(s)-->
+    <meta
+      name="description"
+      content="Ńἱĸἱ৳α Shârρἱo's UCLAx+U2 Coding Web Development BootCamp and Github HTML/CSS-Vanilla Portfolio Page"
+    />
+    <!-- description meta is for saved bookmarks info-->
+    <meta name="generator" content="Visual Studio Code" />
+    <!-- generator = Software used-->
+    <meta name="msvalidate.01" content="8B0BE8DDD2D4F343929BA403DD0CF7A2" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <link rel="preload" as="image" href="./assets/images/heriseon.webp" />
+    <link
+      rel="preload"
+      as="image"
+      href="./assets/images/module1-runbuddy.webp"
+    />
+    <link
+      rel="preload"
+      as="image"
+      href="./assets/images/avatarNikShar2022.webp"
+    />
+    <link
+      rel="preload"
+      as="image"
+      href="./assets/images/calculatorproject2.webp"
+    />
+    <link
+      rel="preload"
+      as="image"
+      href="./assets/images/ledwallproject5.webp"
+    />
+    <link
+      rel="preload"
+      as="image"
+      href="./assets/images/pastelpuzzelsproject3.webp"
+    />
+    <!-- <link rel=preload as=image href=./assets/images/runbuddy.webp> -->
+    <link
+      rel="preload"
+      as="image"
+      href="./assets/images/runbuddyproject4.webp"
+    />
+    <link
+      rel="preload"
+      as="image"
+      href="./assets/images/surfreportproject1.webp"
+    />
+    <link rel="preload" as="image" href="./assets/images/taskmasterpro.webp" />
+    <!-- cursor image, my cause lag over time, but added  it regardless since its a simple page-->
+    <!-- https://html.spec.whatwg.org/multipage/semantics.html#the-link-element -->
+    <link
+      rel="icon"
+      type="image/x-icon"
+      sizes="16x16"
+      href="./assets/cursorfavicon/niksharpfavicon16x.ico"
+    />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      sizes="16x16"
+      href="./assets/cursorfavicon/niksharfavicon16x.ico"
+    />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      sizes="36x36"
+      href="./assets/cursorfavicon/niksharpfavicon36x.ico"
+    />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      sizes="36x36"
+      href="./assets/cursorfavicon/niksharfavicon36x.ico"
+    />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      sizes="64x64"
+      href="./assets/cursorfavicon/niksharpfavicon64x.ico"
+    />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      sizes="64x64"
+      href="./assets/cursorfavicon/niksharfavicon64x.ico"
+    />
+    <link
+      rel="apple-touch-icon"
+      href="./assets/manifestIcon/maskable_icon_x128.png"
+    />
+    <link href="favicon.ico" rel="icon" type="image/x-icon" />
+    <!-- github.pages favicon icon-->
+    <!-- manifest  https://w3c.github.io/manifest/ https://web.dev/maskable-icon/ https://developer.mozilla.org/en-US/docs/Web/Manifest https://url.spec.whatwg.org/#concept-url-->
+    <link
+      rel="manifest"
+      href="./manifest.json"
+      crossorigin="use-credentials"
+      type="application/manifest+json"
+    />
+    <!-- css3 stylesheet-->
+    <link
+      title="stylesheet"
+      media="only screen and (color)"
+      rel="stylesheet"
+      type="text/css"
+      href="./assets/css/styles.css"
+    />
+  </head>
+  <!-- head element ending tag -->
 
-</head> <!-- head element ending tag -->
+  <body>
+    <!-- body element where everything is shown or scripted-->
+    <header>
+      <!-- header element where the navigation bar is-->
+      <nav>
+        <!-- navigation bar-->
+        <!-- navigation unorder and listed links-->
+        <ul>
+          <!-- unordered list for the navigation, will contain: about me, projects, contact info, github link, uclax link, and Privacy Policy -->
+          <li><a href="./index.html#about-me">About Me</a></li>
+          <!--listed tagged -  sends you to the about me section within this page-->
+          <li><a href="./index.html#projects">Projects</a></li>
+          <!--listed tagged -  sends you to the projects section within this page-->
+          <li><a href="./index.html#contact-me">Contact Info</a></li>
+          <!--listed tagged -  sends you to the contact me section -->
+          <li>
+            <!-- listed tagged - redirects to github account-->
+            <a
+              title="GitHub account"
+              type="text/html"
+              hreflang="en"
+              class="tooltip-nav"
+              href="https://github.com/Niksharpkings/"
+              target="_blank"
+              rel="noopener canonical noreferrer nofollow"
+            >
+              GitHub Account
+              <span class="tooltiptext-nav"
+                >https://github.com/Niksharpkings/</span
+              >
+            </a>
+            <!-- anchor tagged - a linked redirection to github account-->
+          </li>
+          <li>
+            <!--listed tagged -  redirects to UCLA extension site-->
+            <a
+              title="Ucla extension website"
+              type="text/html"
+              hreflang="en"
+              class="tooltip-nav"
+              href="https://bootcamp.uclaextension.edu/coding/"
+              target="_blank"
+              rel="noopener canonical noreferrer nofollow"
+            >
+              UCLA+U2 website
+              <span class="tooltiptext-nav"
+                >https://bootcamp.uclaextension.edu/coding/</span
+              >
+            </a>
+            <!-- anchor tagged - a linked redirection to uclaextension-->
+          </li>
+          <li>
+            <a
+              title="Privacy Policy"
+              type="text/html"
+              hreflang="en"
+              class="tooltip-nav"
+              href="./assets/html/privacy-policy.html"
+              target="_blank"
+              rel="noopener canonical noreferrer help nofollow"
+            >
+              Privacy Policy
+              <span class="tooltiptext-nav"
+                >./assets/html/privacy-policy.html</span
+              >
+            </a>
+            <!-- anchor tagged - a linked redirection to my privacy-policy-->
+          </li>
+        </ul>
+      </nav>
+      <!-- end of navigation -->
+    </header>
+    <!-- end of header -->
 
-<body> <!-- body element where everything is shown or scripted-->
-  <header> <!-- header element where the navigation bar is-->
-    <nav> <!-- navigation bar-->
-      <!-- navigation unorder and listed links-->
-      <ul>
-        <li><a href="./index.html#about-me">About Me</a></li> <!-- sends you to the about me section within this page-->
-        <li><a href="./index.html#projects">Projects</a></li> <!-- sends you to the projects section within this page-->
-        <li><a href="./index.html#contact-me">Contact Info</a></li> <!-- sends you to the contact me section -->
-        <li><!-- redirects to github account-->
-          <a
-          title="GitHub account"
-          type=text/html
-          hreflang=en
-          class="tooltip-nav"
-          href="https://github.com/Niksharpkings/"
-          target="_blank"
-          rel="noopener canonical noreferrer">
-          GitHub Account
-          <span class="tooltiptext-nav">https://github.com/Niksharpkings/</span>
-        </a>
-        <li><!-- redirects to github account-->
-          <a
-          title="GitHub repo"
-          type=text/html
-          hreflang=en
-          class="tooltip-nav"
-          href="https://github.com/Niksharpkings/niksharpkings.github.io/"
-          target="_blank"
-          rel="noopener canonical noreferrer">
-          This GitHub Repo
-          <span class="tooltiptext-nav">https://github.com/Niksharpkings/niksharpkings.github.io/</span>
-        </a>
-      </li>
-        <li><!-- redirects to UCLA extension site-->
-          <a
-          title="my-portfolio-uclax-C2"
-          type=text/html
-          hreflang=en
-          class="tooltip-nav"
-          href="https://niksharpkings.github.io/my-portfolio-uclax-C2/"
-          target="_blank"
-          rel="noopener canonical noreferrer">
-          My UCLA+U2 Profile
-          <span class="tooltiptext-nav">https://niksharpkings.github.io/my-portfolio-uclax-C2/</span>
-        </a>
-      </li>
-      <li>
-        <a
-          title="Privacy Policy"
-          type=text/html
-          hreflang=en
-          class="tooltip-nav"
-          href="./assets/html/privacy-policy.html"
-          target="_blank"
-          rel="noopener canonical noreferrer help">
-          Privacy Policy
-            <span class="tooltiptext-nav">./assets/html/privacy-policy.html</span>
-          </a>
-        </li>
-      </ul>
-    </nav> <!-- end of navigation -->
-  </header> <!-- end of header -->
-  <main> <!-- main element where the main content is-->
-    <section class="hero"> <!-- hero section-->
-        <hr> <!-- The Thematic Break (Horizontal Rule) element-->
-        <div class="hero-intro"> <!-- hero intro div -->
-          <h1>⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯
-            <br><!-- link break -->
-            <b> <!-- bold tag to thicken the font from regular size -->
-            </b>
+    <main>
+      <!-- main element where the main content is-->
+      <section class="hero">
+        <!-- hero section-->
+        <hr />
+        <!-- The Thematic Break (Horizontal Rule) element-->
+        <div class="hero-intro">
+          <!-- hero intro div -->
+          <h1>
+            ⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯ <br /><!-- link break -->
+            <b> <!-- bold tag to thicken the font from regular size --> </b>
           </h1>
-          <h3>--- *Note* Site Still Under Developemnt *Note* ----
-            <br><small>⋯⋯⋯⋯⋯⋯⋯⋯ (Site last updated: March 8, 2023 | v1.0.1 ) ⋯⋯⋯⋯⋯⋯</small>
-          </h3> <!-- Header Tag Level 3 - the school program I was in -->
-          <a class="tooltip" rel="noopener canonical noreferrer" href="https://www.linkedin.com/in/nikita-sharpio-18609ba6/"> <!-- linkedin profile anchor link-->
-            <img src="./assets/images/avatarNikShar2022.png" alt="linkedin profile and cartoon selfy"> <!-- avatar image-->
-            <p id="hero-name">Ńἱĸἱ৳α Shârρἱo</p><!-- hero name-->
-            <span class="tooltiptext">https://www.linkedin.com/in/Ńἱĸἱtâ$hârρi0-18609ba6/</span> <!-- Tool Tip hover linkedin profile link-->
+          <h2>
+            --- *Note* Site Still Under Developemnt *Note* ---- <br /><small
+              >⋯⋯⋯⋯⋯⋯⋯⋯ (Site last updated: March 8, 2023 | v1.0.1 )
+              ⋯⋯⋯⋯⋯⋯</small
+            >
+          </h2>
+          <!-- Header Tag Level 3 - the school program I was in -->
+          <a
+            class="tooltip"
+            rel="noopener canonical noreferrer"
+            target="_blank"
+            href="https://www.linkedin.com/in/nikita-sharpio-18609ba6/"
+            title="tooltip for linkedin profile"
+          >
+            <!-- linkedin profile anchor link-->
+            <picture>
+              <source
+                srcset="./assets/images/avatarNikShar2022.webp"
+                type="image/webp"
+                width="200"
+                height="200"
+                rel="noopener canonical noreferrer"
+                title="linkedin profile and cartoon selfy"
+              />
+              <img
+                src="./assets/images/avatarNikShar2022.png"
+                width="200"
+                height="200"
+                rel="noopener canonical noreferrer"
+                fetchpriority="low"
+                alt="linkedin profile and cartoon selfy png"
+                title="linkedin profile and cartoon selfy"
+              />
+            </picture>
+            <!-- avatar image https://web.dev/optimize-cls/?utm_source=lighthouse&utm_medium=lr#images-without-dimensions-->
+            <p id="hero-name">Ńἱĸἱ৳α Shârρἱo</p>
+            <!-- hero name-->
+            <span class="tooltiptext"
+              >https://www.linkedin.com/in/Ńἱĸἱtâ$hârρi0-18609ba6/</span
+            >
+            <!-- Tool Tip hover linkedin profile link-->
           </a>
-            <h1>⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯</h1> <!-- Header Tag Level 1 - the school program I was in -->
-          <hr> <!-- The Thematic Break (Horizontal Rule) element-->
+          <h3>⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯</h3>
+          <!-- Header Tag Level 1 - the school program I was in -->
+          <hr />
+          <!-- The Thematic Break (Horizontal Rule) element-->
         </div>
-    </section> <!-- end of Hero section header -->
-    <section class="about-me" id="about-me"> <!-- "About Me Section-->
-      <div class="container-heading">
-        <h1> <!-- Header Tag Level 1 - Welcome Greetings -->
-          <i> <!-- italicized tag for italicizing the normal font style directly -->
-            Hello &amp;<!-- ampersand html unicode -->
-            welcome to my personal github profile | project | resume page
-          </i>
+      </section>
+      <!-- end of Hero section header -->
+      <section class="about-me" id="about-me">
+        <!-- "About Me Section-->
+        <div class="container-heading">
+          <h1>
+            <!-- Header Tag Level 1 - Welcome Greetings -->
+            <i>
+              <!-- italicized tag for italicizing the normal font style directly -->
+              Hello &amp;<!-- ampersand html unicode -->
+              welcome to my personal github profile | project | resume page
+            </i>
           </h1>
-      </div>
-      <div class="container-content">
-              <p class="about-me-inner"> <!-- paragraph tag with info about me and what doing -->
-                Currently and intentionally build this very website to demonstrate my ability to build a website from
-                scratch and without any 3rd party site building tools, templates, or libraries, frameworks, or any other, excluding
-                bootstrap, jquery, node.js, npm modules, and so on. currently this site is using only the vanilla HTML5 and <abbr title="cascade style sheet">CSS3</abbr>.
-                I plan to intergrate javascript, bootstrap jquery, node.js packages, npm modules, and so on, in the future.
-                <br><br>
-                I will have and will soon post my React.js, Node.js, Express.js, and MongoDB project here soon
-                (in a few months from March 8, 2023 as this is the last time updated this gitpage site) with profiles/repos/projects/applicaitons that does use
-                javascript scripts, Api, SQL, Apollo, mongodb, CMS, redux, react, angular, ruby, c, C#, C++, python, graphql, yml, php, and so on, on to another GitHub page site.
-                <br><br>
-                Currently, I'm a full stack web developer, with new skills in python, java, c#, c++, c, dotnet, .net in
-                development with the pro edition of codeAcademy.com with a passion for learning these new languages
-                with an attempt to understand every little detail and syntax full and completely.
-                <br><br>
-                I was enrolled in the UCLA extension Full Stack Web Development Coding Bootcamp hosted by
-                U2BootcampNetworks and have successfully gradated.
-                <br><br>
-                Currently I have re-enrolled to Santa Monica College Spring 2023 to pursue a degree in Computer Programming Associate Degree
-                and then I will transfer to CSUN to pursue a Bachelor's and Master Degree in Computer Programming.
-                <br><br>
-                I am not looking for a fwork as I'm commiting myself to full time to achive this master degree mission, but will be looking for
-                maybe a part-time or full-time somewhere near brentwood, Los Angeles, California, but later as I get more confortable
-                with my schooling and schedule.
-                <br><br>
-                In the mean time I will be redoing all myassignments and projects as well
-                as new ones as I progress in Codecademy and in my own personal
-                interest and curiosity in mastering these diverse coding languages.
-                <br><br>
-                I am self-motivated, determinant, dedicated, and commited with diligence and composure in working hard with a passion for
-                learning and problem solving my way into completing projects and resolving bugs and issues in my code to improve and
-                develop my personal coding skills.
-                <br><br>
-                I am a fairly quick learner and a team player, but I do enjoy going
-                slow when it comes to coding as it allows me to make less mistakes and understand or find better or
-                innovative solution and techniques.
-                <br><br>
-                Naturally I'm a uniquely creative problem solver and designer and a good sport or team player when it
-                comes down to it.
-                <br><br>
-                I want to further develop my technological skill sets by taking software development courses and
-                learning the entire windows 10 development process and azure, aws, heroku, and google cloud
-                services as well as many language types there are at a controlled and gradual pace.
-                <br><br>
-                Ever since I owned a computer since I was 7 years of age, starting with an old windows 98 and ever
-                since then I been interested in computer technology and how it works, but I never really got into
-                programming until very recently as i figured i didn't really know where a good place to start was.
-                <br><br>
-                Spending most of my time behind a computer screen, I decided to stop being the consumer but to
-                become the developer which is inspiring me to narrow down my life career path into web development,
-                software development, network security, and business intelligence.
-                <br><br>
-                Special thanks to UCLAx-U2bootcampnetwork coding bootcamp got me started/ ball rolling n going into the right direction by
-                helping me finally pick and choose a career that I'm willing to work for an have passion for.
-              </p>
-            </div>
+        </div>
+        <div class="container-content">
+          <p class="about-me-inner">
+            <!-- paragraph tag with info about me and what doing -->
+            Currently and intentionally build this very website to demonstrate
+            my ability to build a website from scratch and without any 3rd party
+            site building tools, templates, or libraries, frameworks, or any
+            other, excluding bootstrap, jquery, node.js, npm modules, and so on.
+            currently this site is using only the vanilla HTML5 and
+            <abbr title="cascade style sheet">CSS3</abbr>. I plan to intergrate
+            javascript, bootstrap jquery, node.js packages, npm modules, and so
+            on, in the future. <br /><br />
+            I will have and will soon post my React.js, Node.js, Express.js, and
+            MongoDB project here soon (in a few months from March 8, 2023 as
+            this is the last time updated this gitpage site) with
+            profiles/repos/projects/applicaitons that does use javascript
+            scripts, Api, SQL, Apollo, mongodb, CMS, redux, react, angular,
+            ruby, c, C#, C++, python, graphql, yml, php, and so on, on to
+            another GitHub page site.
+            <br /><br />
+            Currently, I'm a full stack web developer, with new skills in
+            python, java, c#, c++, c, dotnet, .net in development with the pro
+            edition of codeAcademy.com with a passion for learning these new
+            languages with an attempt to understand every little detail and
+            syntax full and completely.
+            <br /><br />
+            I was enrolled in the UCLA extension Full Stack Web Development
+            Coding Bootcamp hosted by U2BootcampNetworks and have successfully
+            gradated.
+            <br /><br />
+            Currently I have re-enrolled to Santa Monica College Spring 2023 to
+            pursue a degree in Computer Programming Associate Degree and then I
+            will transfer to CSUN to pursue a Bachelor's and Master Degree in
+            Computer Programming.
+            <br /><br />
+            I am not looking for a fwork as I'm commiting myself to full time to
+            achive this master degree mission, but will be looking for maybe a
+            part-time or full-time somewhere near brentwood, Los Angeles,
+            California, but later as I get more confortable with my schooling
+            and schedule.
+            <br /><br />
+            In the mean time I will be redoing all myassignments and projects as
+            well as new ones as I progress in Codecademy and in my own personal
+            interest and curiosity in mastering these diverse coding languages.
+            <br /><br />
+            I am self-motivated, determinant, dedicated, and commited with
+            diligence and composure in working hard with a passion for learning
+            and problem solving my way into completing projects and resolving
+            bugs and issues in my code to improve and develop my personal coding
+            skills.
+            <br /><br />
+            I am a fairly quick learner and a team player, but I do enjoy going
+            slow when it comes to coding as it allows me to make less mistakes
+            and understand or find better or innovative solution and techniques.
+            <br /><br />
+            Naturally I'm a uniquely creative problem solver and designer and a
+            good sport or team player when it comes down to it.
+            <br /><br />
+            I want to further develop my technological skill sets by taking
+            software development courses and learning the entire windows 10
+            development process and azure, aws, heroku, and google cloud
+            services as well as many language types there are at a controlled
+            and gradual pace.
+            <br /><br />
+            Ever since I owned a computer since I was 7 years of age, starting
+            with an old windows 98 and ever since then I been interested in
+            computer technology and how it works, but I never really got into
+            programming until very recently as i figured i didn't really know
+            where a good place to start was.
+            <br /><br />
+            Spending most of my time behind a computer screen, I decided to stop
+            being the consumer but to become the developer which is inspiring me
+            to narrow down my life career path into web development, software
+            development, network security, and business intelligence.
+            <br /><br />
+            Special thanks to UCLAx-U2bootcampnetwork coding bootcamp got me
+            started/ ball rolling n going into the right direction by helping me
+            finally pick and choose a career that I'm willing to work for an
+            have passion for.
+          </p>
+        </div>
 
-          <div class="div-resume">
-            <p class="p-resume">Background &amp; Resume</p> <!-- paragraph tag with background and resume info-->
-                <details> <!-- detail tag with summary tag for a unique dropdown html feature-->
-                  <summary>
-                      <span class="legend-3-span">
-                        💂‍♂️Block By Block Westwood Ambassador 💂‍♂️
-                        <br>
-                        Westwood, CA - August 2019 to January 2020
-                        <br>
-                        <mark> » Click Me To Expand « </mark>
-                      </span>
-                  </summary>
-                  • Regulated, setup, enforced, managed public events/block-party/festivals
-                  <br>
-                  • Patrolled, guarded, secured, sentineled, legal enforcement, and business-to-business security
-                  services for all of westwood village.
-                  <br>
-                  • Monitored pedestrian safety and satisfaction throughout the village.
-                  <br>
-                  • Business-to-Business collaborate crime prevention and deterioration.
-                  <br>
-                  • Worked with Law Enforcement to detain or escort criminals and mischief-maker out of the premises of
-                  the town.
-                  <br>
-                  • Assisted street cleaning crew with removal of trash, graffiti, property damage, sanitation, and
-                  other malicious or hazard material or obstruction.
-                  <br>
-                  • Effectively communicated pertinent information to employees, visitors, guests, store managers and
-                  staff, locals, and tourists.
-                  <br>
-                  • Enforced and stopping vagrant panhandling, tent curfew, &amp; breaking up fights.
-                </details>
-                <details>
-                  <summary>
-                      <span class="legend-3-span">
-                        👮‍♂️ Security Officer/Guard | Vice President's Rover 👮‍♂️
-                        <br>
-                        Los Angeles, CA - July 2018 to June 2019
-                        <br>
-                        <mark> » Click Me To Expand « </mark>
-                      </span>
-                  </summary>
-                  • Documented reports of suspicious activity
-                  <br>
-                  • Ensured prohibited items were not brought into company property
-                  <br>
-                  • Enforced security regulations
-                  <br>
-                  • Promoted after two months from a standard guard to Private Rover Officer for the Vice President of
-                  the company.
-                  <br>
-                  • Patrolled and conducted security services for:
-                  <br>
-                  1. Blizzard Entertainment»Burbank
-                  <br>
-                  2. Riot Games»Santa Monica
-                  <br>
-                  3. NBCuniversal»Studio City
-                  <br>
-                  4. The Burbank Studio»Burbank
-                  <br>
-                  5. Fox 11 Studio»Los Angeles
-                  <br>
-                  6. Fox Sports»Los Angeles
-                  <br>
-                  7. Amazon Studios»Santa Monica
-                  <br>
-                  • Effectively communicated pertinent information to employees, visitors, and guests.
-                  <br>
-                  • Licensed professional security officer for four years.
-                </details>
-                <details>
-                  <summary>
-                      <span class="legend-3-span">
-                        🕵️‍♂️ Macy's (Beverly Center) Loss Prevention Agent 🕵️‍♂️
-                        <br>
-                        Beverly Hills, CA - March 2018 to July 2018
-                        <br>
-                        <mark> » Click Me To Expand « </mark>
-                      </span>
-                  </summary>
-                  • Conducted overnight watch of the store during construction and repair of the store and Beverly
-                  center.
-                  <br>
-                  • Provided escort access to construction workers of the entire backend of the store.
-                  <br>
-                  • Had full access to the store backend as a key holder, w/ arming and disarming the store.
-                  <br>
-                  •Provided assistance to other security during day watch for apprehensive assistance.
-                  <br>
-                  • CCTV controls in assistance in catching internal &amp; external suspects.
-                </details>
-                <details>
-                  <summary>
-                      <span class="legend-3-span">
-                        🕵️‍♂️👨‍💻 American Apparel Online Fraud Investigator/Coordinator/Warehouse-Keyholder/LP|AP
-                        👨‍💻🕵️‍♂️
-                        <br>
-                        Los Angeles(HQ) &amp; La Mirada (Warehouse Facility) - Los Angeles, CA - November 2012 to July 2014
-                        <br>
-                        <mark> » Click Me To Expand « </mark>
-                      </span>
-                  </summary>
-                  • Integrated and provided new methods to prevent fraudulent transaction.
-                  <br>
-                  • Create, organize, analyzed, synthesis, and evaluate data charts, flowcharts, and work charts to
-                  minimize fraudulent transactions and increases productive measures.
-                  <br>
-                  • Collaborated with a 3rd party E-Commerce Credit Card Payment System Management Company.
-                  <br>
-                  • Cybersource to generate more profit by funneling and preventing fraudulent ventures.
-                  <br>
-                  • Prevented over a million dollars in online fraud transactions in one year's work.
-                  <br>
-                  • Co-created and edited an operation manual for the retail floor operators on ways to prevent and
-                  respond to store fraud and petty theft, safety measures and guidelines, alarm system protocol.
-                  <br>
-                  • Assisted District Manager with data charts, Key Performance Indicator, Surveillance Video review.
-                  <br>
-                  • Locate retail employee fraud and theft. and locating retail employee fraud and theft.
-                </details>
-                <details>
-                  <summary>
-                      <span class="legend-3-span">
-                        👨‍💻 American Apparel IT Web Tester/Troubleshooter 👨‍💻
-                        <br>
-                        Los Angeles(HQ) - Los Angeles, CA - July 2012 to November 2012
-                      <br>
-                        <mark> » Click Me To Expand « </mark>
-                      </span>
-                  </summary>
-                  • Web Browser-cross platform testing, W3C Compliance testing, and web posting.
-                  <br>
-                  • Locate graphical and technical glitches and bugs on the company's e-commerce website.
-                  <br>
-                  • Troubleshoot and problem solve website or email related issues.
-                  <br>
-                  • Created excel spreadsheets to track and monitor website issues.
-                </details>
-                <details>
-                  <summary>
-                      <span class="legend-3-span">
-                        🕵️👨‍💻 Employment Skillset For AP/LP/Security/Retail Summary 👨‍💻🕵️
-                      <br>
-                        <mark> » Click Me To Expand « </mark>
-                      </span>
-                  </summary>
-                  • Ability to regulate retail floor operations, backstock, and POS with an anti-fraud background.
-                  <br>
-                  • Carry innovate creative marketing strategies for production sales and reduction of inflation.
-                  <br>
-                  • Integrate with customer or employee to extract fraudulent intelligence in a nice and safe manner.
-                  <br>
-                  • Expert knowledge in reducing online fraud in web and phone orders in innovative ways through
-                  experience with manual fraud check and web devel
-                  <br>
-                  • Highly motivated, organized, detail oriented, patient, disciplined and an ambitious learner.
-                  <br>
-                  • Able to handle EAS tags and AP equipment
-                  <br>
-                  • Plan, layout, create, and enhance; advertising banners/posters, webpages, data charts.
-                  <br>
-                  • Create Flowcharts, Excel Data Charts, custom security software applications.
-                </details>
-                <details>
-                  <summary>
-                      <span class="legend-3-span">
-                        🕵️👨‍💻 Computer Skills &amp; Experiences 👨‍💻
-                      <br>
-                        <mark> » Click Me To Expand « </mark>
-                      </span>
-                  </summary>
-                  Languages:
-                  <br>
-                  | <abbr title="Hyper Text Markup Language">HTML</abbr>5 &amp; XHTML | <abbr title="cascade style sheet">CSS</abbr>3 | JavaScript | REST | APIs | JSON | XML | AJAX | Typescript | NodeJs | ReactJs | Angular | Redux | C# | Java | SQL | Go | PHP | GIT | XML | Python | PowerShell | Bash |
-                  <br>
-                  <br>
-                  Software/Programs/Apps:
-                  <br>
-                  | NodeJs | npm | GitHub | CMS environments e.g. shopify | RetailPro | Applications-Savvy | Visual Studio &amp; Code | JetBrains | Android Studios | Blender | Adobe Creative Cloud | Microsoft Full 365 Apps | Employees Auditing and Data Analysis | SAP Business Objects | Retail KPI's and Data Formulations |
-                  <br>
-                  <br>
-                  Cloud:
-                  <br>
-                  | AWS | Google Cloud | Heroku | Azure | Docker | DevOps |
-                  <br>
-                  <br>
-                  Setup &amp; Operate:
-                  <br>
-                  | Web Servers | Databases | VPN | Cloud | VMs | UEFI | BIOS | Router | Printer | Scanner | Modem | AP/LP/Security Equipment | Clerical stations | OS | Administrative Roles | Server | Game-Servers | POS | Administrative Roles |
-                  <br>
-                  <br>
-                  Web Operations:
-                  <br>
-                  | Web Development | Web Design | Web Hosting | Web Security | Web Analytics | Web Marketing | SEO | SMO | SMM | SEM |
-                  <br>
-                  <br>
-                  Operating Systems:
-                  <br>
-                  | Microsoft Windows 1 - 11 | Apple MacOS Ventura | Ubuntu | Linux | WSL for windows | Raspberry pi | Android | iOS | Chrome |
-                </details>
-          </div>
-    </section> <!-- end about me section -->
+        <div class="div-resume">
+          <p class="p-resume">Background &amp; Resume</p>
+          <!-- paragraph tag with background and resume info-->
+          <details>
+            <!-- detail tag with summary tag for a unique dropdown html feature-->
+            <summary>
+              <span class="legend-3-span">
+                💂‍♂️Block By Block Westwood Ambassador 💂‍♂️
+                <br />
+                Westwood, CA - August 2019 to January 2020
+                <br />
+                <mark> » Click Me To Expand « </mark>
+              </span>
+            </summary>
+            • Regulated, setup, enforced, managed public
+            events/block-party/festivals
+            <br />
+            • Patrolled, guarded, secured, sentineled, legal enforcement, and
+            business-to-business security services for all of westwood village.
+            <br />
+            • Monitored pedestrian safety and satisfaction throughout the
+            village.
+            <br />
+            • Business-to-Business collaborate crime prevention and
+            deterioration.
+            <br />
+            • Worked with Law Enforcement to detain or escort criminals and
+            mischief-maker out of the premises of the town.
+            <br />
+            • Assisted street cleaning crew with removal of trash, graffiti,
+            property damage, sanitation, and other malicious or hazard material
+            or obstruction.
+            <br />
+            • Effectively communicated pertinent information to employees,
+            visitors, guests, store managers and staff, locals, and tourists.
+            <br />
+            • Enforced and stopping vagrant panhandling, tent curfew, &amp;
+            breaking up fights.
+          </details>
+          <details>
+            <summary>
+              <span class="legend-3-span">
+                👮‍♂️ Security Officer/Guard | Vice President's Rover 👮‍♂️
+                <br />
+                Los Angeles, CA - July 2018 to June 2019
+                <br />
+                <mark> » Click Me To Expand « </mark>
+              </span>
+            </summary>
+            • Documented reports of suspicious activity
+            <br />
+            • Ensured prohibited items were not brought into company property
+            <br />
+            • Enforced security regulations
+            <br />
+            • Promoted after two months from a standard guard to Private Rover
+            Officer for the Vice President of the company.
+            <br />
+            • Patrolled and conducted security services for:
+            <br />
+            1. Blizzard Entertainment»Burbank
+            <br />
+            2. Riot Games»Santa Monica
+            <br />
+            3. NBCuniversal»Studio City
+            <br />
+            4. The Burbank Studio»Burbank
+            <br />
+            5. Fox 11 Studio»Los Angeles
+            <br />
+            6. Fox Sports»Los Angeles
+            <br />
+            7. Amazon Studios»Santa Monica
+            <br />
+            • Effectively communicated pertinent information to employees,
+            visitors, and guests.
+            <br />
+            • Licensed professional security officer for four years.
+          </details>
+          <details>
+            <summary>
+              <span class="legend-3-span">
+                🕵️‍♂️ Macy's (Beverly Center) Loss Prevention Agent 🕵️‍♂️
+                <br />
+                Beverly Hills, CA - March 2018 to July 2018
+                <br />
+                <mark> » Click Me To Expand « </mark>
+              </span>
+            </summary>
+            • Conducted overnight watch of the store during construction and
+            repair of the store and Beverly center.
+            <br />
+            • Provided escort access to construction workers of the entire
+            backend of the store.
+            <br />
+            • Had full access to the store backend as a key holder, w/ arming
+            and disarming the store.
+            <br />
+            •Provided assistance to other security during day watch for
+            apprehensive assistance.
+            <br />
+            • CCTV controls in assistance in catching internal &amp; external
+            suspects.
+          </details>
+          <details>
+            <summary>
+              <span class="legend-3-span">
+                🕵️‍♂️👨‍💻 American Apparel Online Fraud
+                Investigator/Coordinator/Warehouse-Keyholder/LP|AP 👨‍💻🕵️‍♂️
+                <br />
+                Los Angeles(HQ) &amp; La Mirada (Warehouse Facility) - Los
+                Angeles, CA - November 2012 to July 2014
+                <br />
+                <mark> » Click Me To Expand « </mark>
+              </span>
+            </summary>
+            • Integrated and provided new methods to prevent fraudulent
+            transaction.
+            <br />
+            • Create, organize, analyzed, synthesis, and evaluate data charts,
+            flowcharts, and work charts to minimize fraudulent transactions and
+            increases productive measures.
+            <br />
+            • Collaborated with a 3rd party E-Commerce Credit Card Payment
+            System Management Company.
+            <br />
+            • Cybersource to generate more profit by funneling and preventing
+            fraudulent ventures.
+            <br />
+            • Prevented over a million dollars in online fraud transactions in
+            one year's work.
+            <br />
+            • Co-created and edited an operation manual for the retail floor
+            operators on ways to prevent and respond to store fraud and petty
+            theft, safety measures and guidelines, alarm system protocol.
+            <br />
+            • Assisted District Manager with data charts, Key Performance
+            Indicator, Surveillance Video review.
+            <br />
+            • Locate retail employee fraud and theft. and locating retail
+            employee fraud and theft.
+          </details>
+          <details>
+            <summary>
+              <span class="legend-3-span">
+                👨‍💻 American Apparel IT Web Tester/Troubleshooter 👨‍💻
+                <br />
+                Los Angeles(HQ) - Los Angeles, CA - July 2012 to November 2012
+                <br />
+                <mark> » Click Me To Expand « </mark>
+              </span>
+            </summary>
+            • Web Browser-cross platform testing, W3C Compliance testing, and
+            web posting.
+            <br />
+            • Locate graphical and technical glitches and bugs on the company's
+            e-commerce website.
+            <br />
+            • Troubleshoot and problem solve website or email related issues.
+            <br />
+            • Created excel spreadsheets to track and monitor website issues.
+          </details>
+          <details>
+            <summary>
+              <span class="legend-3-span">
+                🕵️👨‍💻 Employment Skillset For AP/LP/Security/Retail Summary 👨‍💻🕵️
+                <br />
+                <mark> » Click Me To Expand « </mark>
+              </span>
+            </summary>
+            • Ability to regulate retail floor operations, backstock, and POS
+            with an anti-fraud background.
+            <br />
+            • Carry innovate creative marketing strategies for production sales
+            and reduction of inflation.
+            <br />
+            • Integrate with customer or employee to extract fraudulent
+            intelligence in a nice and safe manner.
+            <br />
+            • Expert knowledge in reducing online fraud in web and phone orders
+            in innovative ways through experience with manual fraud check and
+            web devel
+            <br />
+            • Highly motivated, organized, detail oriented, patient, disciplined
+            and an ambitious learner.
+            <br />
+            • Able to handle EAS tags and AP equipment
+            <br />
+            • Plan, layout, create, and enhance; advertising banners/posters,
+            webpages, data charts.
+            <br />
+            • Create Flowcharts, Excel Data Charts, custom security software
+            applications.
+          </details>
+          <details>
+            <summary>
+              <span class="legend-3-span">
+                🕵️👨‍💻 Computer Skills &amp; Experiences 👨‍💻
+                <br />
+                <mark> » Click Me To Expand « </mark>
+              </span>
+            </summary>
+            Languages:
+            <br />
+            | <abbr title="Hyper Text Markup Language">HTML</abbr>5 &amp; XHTML
+            | <abbr title="cascade style sheet">CSS</abbr>3 | JavaScript | REST
+            | APIs | JSON | XML | AJAX | Typescript | NodeJs | ReactJs | Angular
+            | Redux | C# | Java | SQL | Go | PHP | GIT | XML | Python |
+            PowerShell | Bash |
+            <br />
+            <br />
+            Software/Programs/Apps:
+            <br />
+            | NodeJs | npm | GitHub | CMS environments e.g. shopify | RetailPro
+            | Applications-Savvy | Visual Studio &amp; Code | JetBrains |
+            Android Studios | Blender | Adobe Creative Cloud | Microsoft Full
+            365 Apps | Employees Auditing and Data Analysis | SAP Business
+            Objects | Retail KPI's and Data Formulations |
+            <br />
+            <br />
+            Cloud:
+            <br />
+            | AWS | Google Cloud | Heroku | Azure | Docker | DevOps |
+            <br />
+            <br />
+            Setup &amp; Operate:
+            <br />
+            | Web Servers | Databases | VPN | Cloud | VMs | UEFI | BIOS | Router
+            | Printer | Scanner | Modem | AP/LP/Security Equipment | Clerical
+            stations | OS | Administrative Roles | Server | Game-Servers | POS |
+            Administrative Roles |
+            <br />
+            <br />
+            Web Operations:
+            <br />
+            | Web Development | Web Design | Web Hosting | Web Security | Web
+            Analytics | Web Marketing | SEO | SMO | SMM | SEM |
+            <br />
+            <br />
+            Operating Systems:
+            <br />
+            | Microsoft Windows 1 - 11 | Apple MacOS Ventura | Ubuntu | Linux |
+            WSL for windows | Raspberry pi | Android | iOS | Chrome |
+          </details>
+        </div>
+      </section>
+      <!-- end about me section -->
 
-    <section class="projects" id="projects"> <!-- "Projects Section -->
-      <div class="project-section">
-          <h1 class="project-header">Projects: ⚒WIP Under Construction🛠</h1> <!-- header tag level 1 - Project section (under construction atm) -->
-
+      <section class="projects" id="projects">
+        <!-- "Projects Section -->
+        <div class="project-section">
+          <h1 class="project-header">Projects: ⚒WIP Under Construction🛠</h1>
+          <!-- header tag level 1 - Project section (under construction atm) -->
           <div class="project-container">
             <p class="project-title">M1: Run Buddy</p>
-            <article class="project-grid-container"> <!-- article tag element to hold and to be able to use the sections, figures, and figcaptions tags -->
+            <article class="project-grid-container">
+              <!-- article tag element to hold and to be able to use the sections, figures, and figcaptions tags -->
               <section class="project-container-left">
                 <figure>
-                  <figcaption>Repository Information:</figcaption>
+                  <figcaption>
+                    <h5>Repository Information:</h5>
+                  </figcaption>
                 </figure>
-                <h3 class="project-repository-dialog">Github Pages Live Deployed Link:
-                  <a class="project-repository-dialog" rel="noopener canonical noreferrer" href="https://niksharpkings.github.io/UCLAxU2-M1-Run-Buddy/" target="_blank"
-                    rel="noopener">https://niksharpkings.github.io/UCLAxU2-M1-Run-Buddy/
+                <h2 class="project-repository-dialog">
+                  Github Pages Live Deployed Link:
+                  <a
+                    class="project-repository-dialog"
+                    rel="noopener canonical noreferrer"
+                    href="https://niksharpkings.github.io/UCLAxU2-M1-Run-Buddy/"
+                    target="_blank"
+                    >https://niksharpkings.github.io/UCLAxU2-M1-Run-Buddy/
                   </a>
-                </h3>
-                <h3 class="project-repository-dialog">Github Repository Link:
-                  <a class="project-repository-dialog" rel="noopener canonical noreferrer" href="https://github.com/Niksharpkings/UCLAxU2-M1-Run-Buddy" target="_blank"
-                    rel="noopener">https://github.com/Niksharpkings/UCLAxU2-M1-Run-Buddy
+                </h2>
+                <h2 class="project-repository-dialog">
+                  Github Repository Link:
+                  <a
+                    class="project-repository-dialog"
+                    rel="noopener canonical noreferrer"
+                    href="https://github.com/Niksharpkings/UCLAxU2-M1-Run-Buddy"
+                    target="_blank"
+                    >https://github.com/Niksharpkings/UCLAxU2-M1-Run-Buddy
                   </a>
-                </h3>
+                </h2>
                 <p class="project-repository-dialog">
-                  Module 1: Run Buddy was and is the first UCLAx+U2 module 1 demo project &amp; website we created using:
-                  <br>
-                  Vanilla HTML5, CSS3, Github, Github Pages, ReadMe.md, Git-Bash.
-                  <br>
-                  It is a mockup/prototype/demo project that was used as template guide to teach
-                  <br>
-                  us and learn the very basics rudimentary and foundation in web development.
+                  Module 1: Run Buddy was and is the first UCLAx+U2 module 1
+                  demo project &amp; website we created using:
+                  <br />
+                  Vanilla HTML5, CSS3, Github, Github Pages, ReadMe.md,
+                  Git-Bash.
+                  <br />
+                  It is a mockup/prototype/demo project that was used as
+                  template guide to teach
+                  <br />
+                  us and learn the very basics rudimentary and foundation in web
+                  development.
                 </p>
               </section>
               <section class="project-container-right">
                 <figure>
-                  <figcaption>Banner Image:</figcaption>
+                  <figcaption>
+                    <h5>Banner Image:</h5>
+                  </figcaption>
                 </figure>
-                <img class="project-container-right-img" rel="preload noopener canonical noreferrer" title="module-1-run-buddy-project" src="./assets/images/module1-runbuddy.png" alt="module-1-run-buddy-project">
+                <picture>
+                  <source
+                    srcset="./assets/images/module1-runbuddy.webp"
+                    width="600"
+                    height="200"
+                    type="image/webp"
+                    rel="noopener canonical noreferrer"
+                    title="module-1-run-buddy-project"
+                  />
+                  <img
+                    src="./assets/images/module1-runbuddy.png"
+                    width="600"
+                    height="200"
+                    class="project-container-right-img"
+                    rel="preload noopener canonical noreferrer"
+                    title="module-1-run-buddy-project"
+                    alt="module-1-run-buddy-project"
+                  />
+                </picture>
               </section>
             </article>
           </div>
 
           <div class="project-container">
-              <p class="project-title">M1-C1: Horiseon</p>
+            <p class="project-title">M1-C1: Horiseon</p>
+            <article class="project-grid-container">
+              <section class="project-container-left">
+                <figure>
+                  <figcaption>
+                    <h5>Repository Information:</h5>
+                  </figcaption>
+                </figure>
+                <h2 class="project-repository-dialog">
+                  Github Pages Live Deployed Link:
+                  <a
+                    class="project-repository-dialog"
+                    rel="noopener canonical noreferrer"
+                    href="https://niksharpkings.github.io/Horiseon-Module-1-Challenge-1/"
+                    target="_blank"
+                    >https://niksharpkings.github.io/Horiseon-Module-1-Challenge-1/
+                  </a>
+                </h2>
+                <h2 class="project-repository-dialog">
+                  Github Repository Link:
+                  <a
+                    class="project-repository-dialog"
+                    rel="noopener canonical noreferrer"
+                    href="https://github.com/Niksharpkings/Horiseon-Module-1-Challenge-1"
+                    target="_blank"
+                    >https://github.com/Niksharpkings/Horiseon-Module-1-Challenge-1
+                  </a>
+                </h2>
+                <p class="project-repository-dialog">
+                  Horiseon was my first challenge website assignment for module
+                  1: HTML, CSS, Git. We created using:
+                  <br />
+                  Vanilla HTML5, CSS3, Github, Github Pages, ReadMe.md,
+                  Git-Bash.
+                  <br />
+                  It is a mockup/prototype/demo project that was used as
+                  template guide
+                  <br />
+                  to help us learn the basics rudimentary and foundation in web
+                  development.
+                </p>
+              </section>
+              <section class="project-container-right">
+                <figure>
+                  <figcaption>
+                    <h5>Banner Image:</h5>
+                  </figcaption>
+                </figure>
+                <picture>
+                  <source
+                    srcset="./assets/images/heriseon.webp"
+                    width="600"
+                    height="714"
+                    type="image/webp"
+                    rel="noopener canonical noreferrer"
+                    title="Horiseon Project Module 1 Challange 1 Assignment"
+                  />
+                  <img
+                    src="./assets/images/heriseon.png"
+                    width="600"
+                    height="714"
+                    rel="noopener canonical noreferrer"
+                    fetchpriority="low"
+                    class="project-container-right-img"
+                    title="Horiseon Project Module 1 Challange 1 Assignment"
+                    alt="Horiseon Project Module 1 Challange 1 Assignment"
+                  />
+                </picture>
+              </section>
+            </article>
+
+            <div class="project-container">
+              <p class="project-title">M2: Run Buddy Version 2.0</p>
               <article class="project-grid-container">
                 <section class="project-container-left">
                   <figure>
-                    <figcaption>Repository Information:</figcaption>
+                    <figcaption>
+                      <h5>Repository Information:</h5>
+                    </figcaption>
                   </figure>
-                  <h3 class="project-repository-dialog">Github Pages Live Deployed Link:
-                    <a class="project-repository-dialog" rel="noopener canonical noreferrer" href="https://niksharpkings.github.io/Horiseon-Module-1-Challenge-1/" target="_blank"
-                      rel="noopener">https://niksharpkings.github.io/Horiseon-Module-1-Challenge-1/
+                  <h2 class="project-repository-dialog">
+                    Github Pages Live Deployed Link:
+                    <a
+                      class="project-repository-dialog"
+                      rel="noopener canonical noreferrer"
+                      href="https://niksharpkings.github.io/Run-Buddy-v2/"
+                      target="_blank"
+                      >https://niksharpkings.github.io/Run-Buddy-v2/
                     </a>
-                  </h3>
-                  <h3 class="project-repository-dialog">Github Repository Link:
-                    <a class="project-repository-dialog" rel="noopener canonical noreferrer" href="https://github.com/Niksharpkings/Horiseon-Module-1-Challenge-1" target="_blank"
-                      rel="noopener">https://github.com/Niksharpkings/Horiseon-Module-1-Challenge-1
+                  </h2>
+                  <h2 class="project-repository-dialog">
+                    Github Repository Link:
+                    <a
+                      class="project-repository-dialog"
+                      rel="noopener canonical noreferrer"
+                      href="https://github.com/Niksharpkings/Run-Buddy"
+                      target="_blank"
+                      >https://github.com/Niksharpkings/Run-Buddy
                     </a>
-                  </h3>
+                  </h2>
                   <p class="project-repository-dialog">
-                    Horiseon was my first challenge website assignment for module 1: HTML, CSS, Git. We created using:
-                    <br>
-                    Vanilla HTML5, CSS3, Github, Github Pages, ReadMe.md, Git-Bash.
-                    <br>
-                    It is a mockup/prototype/demo project that was used as template guide
-                    <br>
-                    to help us learn the basics rudimentary and foundation in web development.
+                    UCLAx+U2's Run Buddy v2 was the second demonstrated module
+                    project provided by the school
+                    <br />
+                    <br />
+                    Website we created using:
+                    <br />
+                    Vanilla HTML5, CSS3, Github, Github Pages, ReadMe.md,
+                    Git-Bash.
+                    <br />
+                    It is a mockup/prototype/demo project that was used as
+                    template guide
+                    <br />
+                    to help us learn the basics rudimentary and foundation in
+                    web development.
                   </p>
                 </section>
                 <section class="project-container-right">
                   <figure>
-                    <figcaption>Banner Image:</figcaption>
+                    <figcaption>
+                      <h5>Banner Image:</h5>
+                    </figcaption>
                   </figure>
-                  <img class="project-container-right-img" rel="preload noopener canonical noreferrer" title="Horiseon Project Module 1 Challange 1 Assignment" src="./assets/images/heriseon.png" alt="Horiseon Project Module 1 Challange 1 Assignment">
+                  <picture>
+                    <source
+                      srcset="./assets/images/runbuddyproject4.webp"
+                      width="600"
+                      height="200"
+                      type="image/webp"
+                      rel="noopener canonical noreferrer"
+                    />
+                    <img
+                      src="./assets/images/runbuddyproject4.png"
+                      width="600"
+                      height="200"
+                      class="project-container-right-img"
+                      rel="noopener canonical noreferrer"
+                      fetchpriority="high"
+                      title="Run buddy V1 screenshot banner"
+                      alt="project-run-buddy-v2"
+                    />
+                  </picture>
                 </section>
               </article>
+            </div>
 
-              <div class="project-container">
-                <p class="project-title">M2: Run Buddy Version 2.0</p>
-                <article class="project-grid-container">
-                  <section class="project-container-left">
-                    <figure>
-                      <figcaption>Repository Information:</figcaption>
-                    </figure>
-                    <h3 class="project-repository-dialog">Github Pages Live Deployed Link:
-                      <a class="project-repository-dialog" rel="noopener canonical noreferrer" href="https://niksharpkings.github.io/Run-Buddy-v2/" target="_blank"
-                        rel="noopener">https://niksharpkings.github.io/Run-Buddy-v2/
-                      </a>
-                    </h3>
-                    <h3 class="project-repository-dialog">Github Repository Link:
-                      <a class="project-repository-dialog" rel="noopener canonical noreferrer" href="https://github.com/Niksharpkings/Run-Buddy" target="_blank"
-                        rel="noopener">https://github.com/Niksharpkings/Run-Buddy
-                      </a>
-                    </h3>
-                    <p class="project-repository-dialog">
-                      UCLAx+U2's Run Buddy v2 was the second demonstrated module project provided by the school
-                      <br>
-                      <br>
-                      Website we created using:
-                      <br>
-                      Vanilla HTML5, CSS3, Github, Github Pages, ReadMe.md, Git-Bash.
-                      <br>
-                      It is a mockup/prototype/demo project that was used as template guide
-                      <br>
-                      to help us learn the basics rudimentary and foundation in web development.
-                    </p>
-                  </section>
-                  <section class="project-container-right">
-                    <figure>
-                      <figcaption>Banner Image:</figcaption>
-                    </figure>
-                    <img class="project-container-right-img" rel="preload noopener canonical noreferrer" title="Run buddy V1 screenshot banner" src="./assets/images/runbuddyproject4.png" alt="project-run-buddy-v2">
-                  </section>
-                </article>
-              </div>
-              
             <div class="project-container">
               <p class="project-title">Surf Report</p>
               <article class="project-grid-container">
                 <section class="project-container-left">
                   <figure>
-                    <figcaption>Repository Information:</figcaption>
+                    <figcaption>
+                      <h5>Repository Information:</h5>
+                    </figcaption>
                   </figure>
-                  <h3 class="project-repository-dialog">Github Pages Live Deployed Link:
-                    <a class="project-repository-dialog" rel="noopener canonical noreferrer" href="https://niksharpkings.github.io/Run-Buddy-v2/" target="_blank"
-                      rel="noopener">N/a</a>
-                  </h3>
-                  <h3 class="project-repository-dialog">Github Repository Link:
-                    <a class="project-repository-dialog" rel="noopener canonical noreferrer" href="https://github.com/Niksharpkings/Run-Buddy" target="_blank"
-                      rel="noopener">N/a</a>
-                  </h3>
-                  <p class="project-repository-dialog">
-                    wip
-                  </p>
+                  <h2 class="project-repository-dialog">
+                    Github Pages Live Deployed Link:
+                    <a
+                      class="project-repository-dialog"
+                      rel="noopener canonical noreferrer"
+                      href="https://niksharpkings.github.io/Run-Buddy-v2/"
+                      target="_blank"
+                      >N/a</a
+                    >
+                  </h2>
+                  <h2 class="project-repository-dialog">
+                    Github Repository Link:
+                    <a
+                      class="project-repository-dialog"
+                      rel="noopener canonical noreferrer"
+                      href="https://github.com/Niksharpkings/Run-Buddy"
+                      target="_blank"
+                      >N/a</a
+                    >
+                  </h2>
+                  <p class="project-repository-dialog">wip</p>
                 </section>
                 <section class="project-container-right">
                   <figure>
-                    <figcaption>Banner Image:</figcaption>
+                    <figcaption>
+                      <h5>Banner Image:</h5>
+                    </figcaption>
                   </figure>
-                  <img class="project-container-right-img" rel="preload noopener canonical noreferrer" title="Surf Report screenshot banner" src="./assets/images/surfreportproject1.png" alt="project-1">
+                  <picture>
+                    <source
+                      srcset="./assets/images/surfreportproject1.webp"
+                      width="900"
+                      height="400"
+                      type="image/webp"
+                      rel="noopener canonical noreferrer"
+                      title="Surf Report screenshot banner"
+                    />
+                    <img
+                      src="./assets/images/surfreportproject1.png"
+                      width="900"
+                      height="400"
+                      class="project-container-right-img"
+                      rel="noopener canonical noreferrer"
+                      fetchpriority="low"
+                      title="Surf Report screenshot banner"
+                      alt="surfreportproject1"
+                    />
+                  </picture>
                 </section>
               </article>
             </div>
@@ -585,25 +984,57 @@
               <article class="project-grid-container">
                 <section class="project-container-left">
                   <figure>
-                    <figcaption>Repository Information:</figcaption>
+                    <figcaption>
+                      <h5>Repository Information:</h5>
+                    </figcaption>
                   </figure>
-                  <h3 class="project-repository-dialog">Github Pages Live Deployed Link:
-                    <a class="project-repository-dialog"rel="noopener canonical noreferrer" href="https://niksharpkings.github.io/" target="_blank"
-                      rel="noopener">N/a</a>
-                  </h3>
-                  <h3 class="project-repository-dialog">Github Repository Link:
-                    <a class="project-repository-dialog" rel="noopener canonical noreferrer" href="https://github.com/Niksharpkings/" target="_blank"
-                      rel="noopener">N/a</a>
-                  </h3>
-                  <p class="project-repository-dialog">
-                    wip
-                  </p>
+                  <h2 class="project-repository-dialog">
+                    Github Pages Live Deployed Link:
+                    <a
+                      class="project-repository-dialog"
+                      rel="noopener canonical noreferrer"
+                      href="https://niksharpkings.github.io/"
+                      target="_blank"
+                      >N/a</a
+                    >
+                  </h2>
+                  <h2 class="project-repository-dialog">
+                    Github Repository Link:
+                    <a
+                      class="project-repository-dialog"
+                      rel="noopener canonical noreferrer"
+                      href="https://github.com/Niksharpkings/"
+                      target="_blank"
+                      >N/a</a
+                    >
+                  </h2>
+                  <p class="project-repository-dialog">wip</p>
                 </section>
                 <section class="project-container-right">
                   <figure>
-                    <figcaption>Banner Image:</figcaption>
+                    <figcaption>
+                      <h5>Banner Image:</h5>
+                    </figcaption>
                   </figure>
-                  <img class="project-container-right-img" rel="preload noopener canonical noreferrer" title="calculator screenshot banner" src="./assets/images/calculatorproject2.jpg" alt="project-1">
+                  <picture>
+                    <source
+                      srcset="./assets/images/calculatorproject2.webp"
+                      width="600"
+                      height="200"
+                      type="image/webp"
+                      rel="noopener canonical noreferrer"
+                    />
+                    <img
+                      src="./assets/images/calculatorproject2.jpg"
+                      width="600"
+                      height="200"
+                      class="project-container-right-img"
+                      rel="noopener canonical noreferrer"
+                      fetchpriority="low"
+                      title="calculator screenshot banner"
+                      alt="project-1"
+                    />
+                  </picture>
                 </section>
               </article>
             </div>
@@ -612,25 +1043,57 @@
               <article class="project-grid-container">
                 <section class="project-container-left">
                   <figure>
-                    <figcaption>Repository Information:</figcaption>
+                    <figcaption>
+                      <h5>Repository Information:</h5>
+                    </figcaption>
                   </figure>
-                  <h3 class="project-repository-dialog">Github Pages Live Deployed Link:
-                    <a class="project-repository-dialog" rel="noopener canonical noreferrer" href="https://niksharpkings.github.io/" target="_blank"
-                      rel="noopener">N/a</a>
-                  </h3>
-                  <h3 class="project-repository-dialog">Github Repository Link:
-                    <a class="project-repository-dialog" rel="noopener canonical noreferrer" href="https://github.com/Niksharpkings/" target="_blank"
-                      rel="noopener">N/a</a>
-                  </h3>
-                  <p class="project-repository-dialog">
-                    wip
-                  </p>
+                  <h2 class="project-repository-dialog">
+                    Github Pages Live Deployed Link:
+                    <a
+                      class="project-repository-dialog"
+                      rel="noopener canonical noreferrer"
+                      href="https://niksharpkings.github.io/"
+                      target="_blank"
+                      >N/a</a
+                    >
+                  </h2>
+                  <h2 class="project-repository-dialog">
+                    Github Repository Link:
+                    <a
+                      class="project-repository-dialog"
+                      rel="noopener canonical noreferrer"
+                      href="https://github.com/Niksharpkings/"
+                      target="_blank"
+                      >N/a</a
+                    >
+                  </h2>
+                  <p class="project-repository-dialog">wip</p>
                 </section>
                 <section class="project-container-right">
                   <figure>
-                    <figcaption>Banner Image:</figcaption>
+                    <figcaption>
+                      <h5>Banner Image:</h5>
+                    </figcaption>
                   </figure>
-                  <img class="project-container-right-img" rel="preload noopener canonical noreferrer" title="Pastel Puzzels screenshot banner" src="./assets/images/pastelpuzzelsproject3.png" alt="project-1">
+                  <picture>
+                    <source
+                      srcset="./assets/images/pastelpuzzelsproject3.webp"
+                      width="600"
+                      height="200"
+                      type="image/webp"
+                      rel="noopener canonical noreferrer"
+                    />
+                    <img
+                      src="./assets/images/pastelpuzzelsproject3.png"
+                      width="600"
+                      height="200"
+                      class="project-container-right-img"
+                      rel="noopener canonical noreferrer"
+                      fetchpriority="high"
+                      title="Pastel Puzzels screenshot banner"
+                      alt="project-1"
+                    />
+                  </picture>
                 </section>
               </article>
             </div>
@@ -639,25 +1102,57 @@
               <article class="project-grid-container">
                 <section class="project-container-left">
                   <figure>
-                    <figcaption>Repository Information:</figcaption>
+                    <figcaption>
+                      <h5>Repository Information:</h5>
+                    </figcaption>
                   </figure>
-                  <h3 class="project-repository-dialog">Github Pages Live Deployed Link:
-                    <a class="project-repository-dialog" rel="noopener canonical noreferrer" href="https://niksharpkings.github.io/" target="_blank"
-                      rel="noopener">N/a</a>
-                  </h3>
-                  <h3 class="project-repository-dialog">Github Repository Link:
-                    <a class="project-repository-dialog" rel="noopener canonical noreferrer" href="https://github.com/Niksharpkings/" target="_blank"
-                      rel="noopener">N/a</a>
-                  </h3>
-                  <p class="project-repository-dialog">
-                    wip
-                  </p>
+                  <h2 class="project-repository-dialog">
+                    Github Pages Live Deployed Link:
+                    <a
+                      class="project-repository-dialog"
+                      rel="noopener canonical noreferrer"
+                      href="https://niksharpkings.github.io/"
+                      target="_blank"
+                      >N/a</a
+                    >
+                  </h2>
+                  <h2 class="project-repository-dialog">
+                    Github Repository Link:
+                    <a
+                      class="project-repository-dialog"
+                      rel="noopener canonical noreferrer"
+                      href="https://github.com/Niksharpkings/"
+                      target="_blank"
+                      >N/a</a
+                    >
+                  </h2>
+                  <p class="project-repository-dialog">wip</p>
                 </section>
                 <section class="project-container-right">
                   <figure>
-                    <figcaption>Banner Image:</figcaption>
+                    <figcaption>
+                      <h5>Banner Image:</h5>
+                    </figcaption>
                   </figure>
-                  <img class="project-container-right-img" rel="preload noopener canonical noreferrer" title="ledwall screenshot banner" src="./assets/images/ledwallproject5.png" alt="project-1">
+                  <picture>
+                    <source
+                      srcset="./assets/images/ledwallproject5.webp"
+                      width="600"
+                      height="200"
+                      type="image/webp"
+                      rel="noopener canonical noreferrer"
+                    />
+                    <img
+                      src="./assets/images/ledwallproject5.png"
+                      width="600"
+                      height="200"
+                      class="project-container-right-img"
+                      rel="noopener canonical noreferrer"
+                      fetchpriority="low"
+                      title="ledwall screenshot banner"
+                      alt="project-1"
+                    />
+                  </picture>
                 </section>
               </article>
             </div>
@@ -666,112 +1161,205 @@
               <article class="project-grid-container">
                 <section class="project-container-left">
                   <figure>
-                    <figcaption>Repository Information:</figcaption>
+                    <figcaption>
+                      <h5>Repository Information:</h5>
+                    </figcaption>
                   </figure>
-                  <h3 class="project-repository-dialog">Github Pages Live Deployed Link:
-                    <a class="project-repository-dialog" rel="noopener canonical noreferrer" href="https://niksharpkings.github.io/taskmaster-pro/" target="_blank"
-                      rel="noopener">https://niksharpkings.github.io/taskmaster-pro/</a>
-                  </h3>
-                  <h3 class="project-repository-dialog">Github Repository Link:
+                  <h2 class="project-repository-dialog">
+                    Github Pages Live Deployed Link:
                     <a
-                    class="project-repository-dialog"
-                    rel="noopener canonical noreferrer"
-                    href="https://github.com/Niksharpkings/taskmaster-pro/"
-                    target="_blank"
-                    rel="noopener">https://niksharpkings.github.io/taskmaster-pro/</a>
-                  </h3>
-                  <p class="project-repository-dialog">
-                    wip
-                  </p>
+                      class="project-repository-dialog"
+                      rel="noopener canonical noreferrer"
+                      href="https://niksharpkings.github.io/taskmaster-pro/"
+                      target="_blank"
+                      >https://niksharpkings.github.io/taskmaster-pro/</a
+                    >
+                  </h2>
+                  <h2 class="project-repository-dialog">
+                    Github Repository Link:
+                    <a
+                      class="project-repository-dialog"
+                      rel="noopener canonical noreferrer"
+                      href="https://github.com/Niksharpkings/taskmaster-pro/"
+                      target="_blank"
+                      >https://niksharpkings.github.io/taskmaster-pro/</a
+                    >
+                  </h2>
+                  <p class="project-repository-dialog">wip</p>
                 </section>
                 <section class="project-container-right">
                   <figure>
-                    <figcaption>Banner Image:</figcaption>
+                    <figcaption>
+                      <h5>Banner Image:</h5>
+                    </figcaption>
                   </figure>
-                  <img 
-                  class="project-container-right-img"
-                  rel="preload noopener canonical noreferrer"
-                  title="taskmaster-pro screenshot banner"
-                  src="./assets/images/taskmasterpro.png"
-                  alt="project-1">
+                  <picture>
+                    <source
+                      srcset="./assets/images/taskmasterpro.webp"
+                      width="600"
+                      height="200"
+                      type="image/webp"
+                      rel="noopener canonical noreferrer"
+                    />
+                    <img
+                      src="./assets/images/taskmasterpro.png"
+                      width="600"
+                      height="200"
+                      class="project-container-right-img"
+                      rel="noopener canonical noreferrer"
+                      fetchpriority="high"
+                      title="taskmaster-pro screenshot banner"
+                      alt="taskmaster-pro"
+                    />
+                  </picture>
                 </section>
               </article>
             </div>
           </div>
         </div>
-    </section><!-- end my projects -->
-  </main><!-- end main -->
+      </section>
+      <!-- end my projects -->
+    </main>
+    <!-- end main -->
 
-  <footer> <!-- Footer Information -->
-    <section class="contact-me" id="contact-me">  <!--  contact me Section with email, github, indeed and linkedin -->
-      <details> <!-- Detail tag -->
-        <summary> <!-- Details' summary tag -->
-            <div class="legend-3-span"> <!-- Contact div -->
-              <p>📬 Contact Me 📭</p> <!-- Paragraph tag for Contact me -->
-              <mark>» Click Me To Expand Below «</mark> <!-- a drop down mark tag to show a list of my contact list of info -->
+    <footer>
+      <!-- Footer Information -->
+      <section class="contact-me" id="contact-me">
+        <!--  contact me Section with email, github, indeed and linkedin -->
+        <details>
+          <!-- Detail tag -->
+          <summary class="legend-3-span">
+            <!-- Details' summary tag -->
+            <h2>📬 Contact Me 📭</h2>
+            <!-- Paragraph tag for Contact me -->
+            <mark>» Click Me To Expand Below «</mark
+            ><!-- a drop down mark tag to show a list of my contact list of info -->
+          </summary>
+          <h4 class="edit-info">
+            [Hover over] or [click on the link] to see the info below. <br />
+            Note: Due to privacy concerns, you'll have to rename/replace the
+            characters with real english characters
+          </h4>
+          <!-- Header level 4 for hover tooltip message rule -->
+          <div class="contact-list">
+            <div class="contact-list-item">
+              <a rel="author" href="mailto:Ńἱĸs$hârρĸἱng$@gmail.com">
+                <!-- My gmail - anchor tag -->
+                <p class="tooltip">
+                  ◼Email:
+                  <span class="tooltiptext">Ńἱĸs$hârρĸἱng$@gmail.com</span>
+                  <!--my email w/ special protection character tool tip when hovered over -->
+                </p>
+              </a>
             </div>
-        </summary>
-        <h4 class="edit-info">[Hover over] or [click on the link] to see the info below.
-          <br> Note: Due to privacy concerns, you'll have to rename/replace the
-          characters with real english characters
-        </h4> <!-- Header level 4 for hover tooltip message rule -->
-        <div class="contact-list">
-          <div class="contact-list-item">
-            <a rel="author" href="mailto:Ńἱĸs$hârρĸἱng$@gmail.com"> <!-- My gmail - anchor tag -->
-              <p class="tooltip">
-                ◼Email:
-                <span   class="tooltiptext">Ńἱĸs$hârρĸἱng$@gmail.com</span> <!--my email w/ special protection character tool tip when hovered over -->
-              </p>
-            </a>
+            <div class="contact-list-item">
+              <a
+                rel="noreferrer canonical noopener"
+                target="_blank"
+                hreflang="en"
+                href="https://github.com/niksharpkings"
+              >
+                <!-- My Github page - anchor tag -->
+                <p class="tooltip">
+                  ◼Github:
+                  <span class="tooltiptext"
+                    >https://github.com/Ńἱĸs$hârρĸἱng$</span
+                  >
+                  <!-- My main github page tool tip when hovered over -->
+                </p>
+              </a>
+            </div>
+            <div class="contact-list-item">
+              <a
+                hreflang="en"
+                rel="nofollow canonical noopener"
+                href="https://my.indeed.com/p/Ńἱĸἱtâ$-18b6zfq"
+              >
+                <!-- My Indeed page - anchor tag -->
+                <p class="tooltip">
+                  ◼Indeed:
+                  <span class="tooltiptext"
+                    >https://my.indeed.com/p/Ńἱĸἱtâ$-18b6zfq {all
+                    lowercase}</span
+                  >
+                  <!-- Indeed tool tip when hovered over -->
+                </p>
+              </a>
+            </div>
+            <div class="contact-list-item">
+              <a
+                hreflang="en"
+                rel="nofollow canonical noopener"
+                href="https://www.linkedin.com/in/Ńἱĸἱtâ$hârρi0-18609ba6/"
+              >
+                <!-- My Linkedin - anchor tag -->
+                <p class="tooltip">
+                  ◼Linkedin:
+                  <span class="tooltiptext"
+                    >https://www.linkedin.com/in/Ńἱĸἱtâ$hârρi0-18609ba6/</span
+                  >
+                  <!-- Linkedin tool tip when hovered over -->
+                </p>
+              </a>
+            </div>
           </div>
-          <div class="contact-list-item">
-            <a rel="noreferrer canonical noopener" target="_blank" hreflang=en href="https://github.com/niksharpkings"> <!-- My Github page - anchor tag -->
-              <p class="tooltip">
-                ◼Github:
-                <span  class="tooltiptext">https://github.com/Ńἱĸs$hârρĸἱng$</span> <!-- My main github page tool tip when hovered over -->
-              </p>
-            </a>
-          </div>
-          <div class="contact-list-item">
-            <a hreflang=en rel="nofollow canonical noopener" href="https://my.indeed.com/p/Ńἱĸἱtâ$-18b6zfq"> <!-- My Indeed page - anchor tag -->
-              <p class="tooltip">
-                ◼Indeed:
-                <span class="tooltiptext">https://my.indeed.com/p/Ńἱĸἱtâ$-18b6zfq {all lowercase}</span> <!-- Indeed tool tip when hovered over -->
-              </p>
-            </a>
-          </div>
-          <div class="contact-list-item"> 
-            <a hreflang=en rel="nofollow canonical noopener" href="https://www.linkedin.com/in/Ńἱĸἱtâ$hârρi0-18609ba6/"> <!-- My Linkedin - anchor tag -->
-              <p class="tooltip">
-                ◼Linkedin:
-                <span class="tooltiptext">https://www.linkedin.com/in/Ńἱĸἱtâ$hârρi0-18609ba6/</span> <!-- Linkedin tool tip when hovered over -->
-              </p>
-            </a>
-          </div>
-        </div>
-      </details>
-    </section>
-    <div class="contact-info">
-      <iframe 
-      title="UCLA Extension Campus - Google Maps"
-      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d826.3469018221116!2d-118.4469525707389!3d34.05957679878775!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c2bc848b983479%3A0x75b6a356146b0fc9!2sUCLA%20Extension!5e0!3m2!1sen!2sus!4v1676120404276!5m2!1sen!2sus" 
-      width="600"
-      height="600"
-      allowfullscreen=""
-      loading="lazy"
-      referrerpolicy="no-referrer-when-downgrade">
-    </iframe> <!-- iframe to link a 600x600 google maps image of ucla extension location -->
-    </div>
-    <p><small>&copy; Copyright 2023 Ńἱĸἱ৳α/Nik 'niksharpking' Shârρἱo. All Rights Reserved.</small>
-      <br>
-      <small><a hreflang=en type=text/html title="MIT License" rel="license canonical noopener" href="http://www.opensource.org/licenses/mit-license.php">MIT Licensed Link</a></small>
-      <br>
-      <small><a hreflang=en type=text/html title="Apache License Version 2.0" rel="license canonical noopener" href="https://github.com/Niksharpkings/my-portfolio-uclax-C2/blob/main/LICENSE">&gt;Apache License Version 2.0 Link&lt;</a></small>
-      <br>
-      <small><a hreflang=en type=text/html title="Privacy Policy" rel="help canonical noopener" href="./assets/html/privacy-policy.html" target="_blank">Privacy Policy Link</a></small>
-    </p>
-  </footer>
-  <!-- end footer -->
-</body>
-
+        </details>
+      </section>
+      <div class="contact-info">
+        <iframe
+          class="google-map"
+          title="UCLA Extension Campus - Google Maps"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d826.3469018221116!2d-118.4469525707389!3d34.05957679878775!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c2bc848b983479%3A0x75b6a356146b0fc9!2sUCLA%20Extension!5e0!3m2!1sen!2sus!4v1676120404276!5m2!1sen!2sus"
+          width="600"
+          height="600"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          rel="help canonical noopener nofollow"
+        >
+        </iframe>
+        <!-- iframe to link a 600x600 google maps image of ucla extension location -->
+      </div>
+      <p>
+        <small
+          >&copy; Copyright 2023 Ńἱĸἱ৳α Shârρἱo. All Rights Reserved.</small
+        >
+        <br />
+        <small
+          ><a
+            type="text/html"
+            hreflang="en"
+            title="MIT License"
+            rel="license canonical noopener nofollow"
+            href="http://www.opensource.org/licenses/mit-license.php"
+            >MIT Licensed Link</a
+          ></small
+        >
+        <br />
+        <small
+          ><a
+            type="text/html"
+            hreflang="en"
+            title="Apache License Version 2.0"
+            rel="license canonical noopener"
+            href="https://github.com/Niksharpkings/my-portfolio-uclax-C2/blob/main/LICENSE"
+            >&gt;Apache License Version 2.0 Link&lt;</a
+          ></small
+        >
+        <br />
+        <small
+          ><a
+            type="text/html"
+            hreflang="en"
+            title="Privacy Policy"
+            rel="help canonical noopener nofollow"
+            href="./assets/html/privacy-policy.html"
+            target="_blank"
+            >Privacy Policy Link</a
+          ></small
+        >
+      </p>
+    </footer>
+    <!-- end footer -->
+  </body>
 </html>

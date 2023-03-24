@@ -1,123 +1,89 @@
 <!DOCTYPE html> <!-- Tells the web browser to expect an HTML document. -->
 <html lang="en" dir="ltr" contenteditable="false"> <!-- The root of the HTML document and parent of all other HTML elements on the webpage. represents the root of an HTML document, lang = language (en = english), dir = left to right reading, contenteditable = false for enumerated attribute and elements are not editable-->
 
-<head>
-  <meta http-equiv="Content-type" content="text/html; charset=utf-8">
-  <!-- head element represents a collection of enclosed metadata for the document collection and setup to run on a server -->
-  <!--Tells the web browser which character set to use. charset is set to UTF-8 which is a standard IANA MIME name for character encodings https://www.w3.org/TR/html4/charset.html#h-5.2.2-->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- Tells the web browser how to scale the page. viewport is screen size scaling. -->
-  <!-- <base href=> base is the base URL to use for all relative URLs within a document. -->
-  <title>Ńἱĸἱ৳α Shârρἱo's UCLAx+U2 HTML/CSS Portfolio/Project/Resume Page</title> <!-- Browser-cross Tab Title-->
-  <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP -->
-  <!-- https://wiki.whatwg.org/wiki/MetaExtensions -->
-  <!-- https://web.dev/learn/html/metadata/ -->
-  <meta http-equiv="Content-Security-Policy"
-  content="connect-src 'self';
+<head><!-- head element represents a collection of enclosed metadata for the document collection and setup to run on a server -->
+  <meta charset="utf-8"> <!--Tells the web browser which character set to use. charset is set to UTF-8 which is a  standard IANA MIME name for character encodings-->
+  <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- Tells the web browser how to scale the page. viewport is screen size scaling. -->
+  <base href="/"> <!-- base is the base URL to use for all relative URLs within a document. -->
+  <title>Privacy-Policy - Ńἱĸἱ৳α Shârρἱo's GitHub Page</title> <!-- Browser-cross Tab Title-->
+  <meta http-equiv="content-security-policy"
+  content=" connect-src 'self';
   font-src 'self';
   frame-src https://www.google.com/;
-  img-src * 'self' data: https:;
+  img-src 'self';
   manifest-src 'self';
   media-src 'self';
-  base-uri 'self';
-  form-action 'self';
   object-src 'self';
-  script-src 'self';
+  script-src 'none';
   script-src-elem 'self' 'sha256-vvt4KWwuNr51XfE5m+hzeNEGhiOfZzG97ccfqGsPwvE=';
   script-src-attr 'self';
-  style-src-elem 'self' 'sha256-wG7aBvp9/yHanLKIFezWx95YfJa4kMhd7vcw9pyWgqE=';
+  style-src-elem 'self';
   style-src-attr 'self';
-  worker-src 'self'"> <!-- content security policy is for privacy and security -->
-  <meta name="robots" content="index, nofollow">
-  <!-- robots.txt is for search engine results <meta name=robots content=noindex, nofollow-->
-  <meta name="googlebot" content="index, nofollow">
-  <!-- googlebot is for search engine results temp removal content=noindex, nofollow-->
-  <meta name="bingbot" content="index, nofollow"> <!-- bingbot is for search engine results-->
-  <meta name="yahoo" content="index, nofollow"> <!-- yahoo is for search engine results-->
-  <meta name="baidu" content="index, nofollow"> <!-- baidu is for search engine results-->
-  <meta name="yandex" content="index, nofollow"> <!-- yandex is for search engine results-->
-  <meta name="google" content="index, nofollow"> <!-- https://web.dev/vitals/ -->
-  <!-- google is for search engine results temp removal content=noindex, nofollow-->
-  <meta name="google-site-verification" content="EauQU7rPJCYYGsyqxpmZv-hDfiGlYHLUu3GB7d_SBTM">
-  <!-- <meta name=google-site-verification content=noindex, nofollow -->
-  <!--google-site-verification is for search engine results -->
-  <meta name="googlebot-news" content="index, nofollow">
-  <!-- googlebot-news is for search engine results temp removal content=noindex, nofollow-->
-  <meta name="googlebot-image" content="index, nofollow">
-  <!-- googlebot-image is for search engine results temp removal content=noindex, nofollow-->
-  <meta name="googlebot-video" content="index, nofollow">
-  <!-- googlebot-video is for search engine results temp removal content=noindex, nofollow-->
-  <meta name="googlebot-ads" content="index, nofollow">
-  <!-- googlebot-ads is for search engine results temp removal content=noindex, nofollow-->
-  <meta name="googlebot-mobile" content="index, nofollow">
-  <!-- googlebot-mobile is for search engine results temp removal content noindex, nofollow-->
-  <meta name="keywords" content="
-  Ńἱĸἱ৳α Shârρἱo's,
-  UCLAx,
-  Portfolio,
-  Full Stack Web Dev,
-  Coding Bootcamp,
-  Los Angeles,
-  California,
-  UCLA,
-  UCLA extension,
-  Full Stack Web Developer,
-  Github,
-  HTML/CSS,
-  IT,
-  motion graphic designer,
-  Freelance,
-  Online Fraud Investigator,
-  Loss Prevention,
-  Coordinator,
-  Security Guard,
-  Graphic Designer
-  ">
-  <!-- keywords for search engine results (kinda pointless without a robot.txt because thats what google webcrawlers require to list it on google for example)-->
-  <meta name="rating" content="General"> <!-- rating is for search engine results-->
-  <meta name="publisher" content="Ńἱĸἱ৳α 'Niksharpkings' Shârρἱo's">
-  <!-- publisher is the one who wrote this script/page(s)-->
-  <meta name="creator" content="Ńἱĸἱ৳α 'Niksharpkings' Shârρἱo's">
-  <!-- creator is the one who wrote this script/page(s)-->
-  <meta name="owner" content="Ńἱĸἱ৳α 'Niksharpkings' Shârρἱo's"> <!-- owner is the one who wrote this script/page(s)-->
-  <meta name="designer" content="Ńἱĸἱ৳α 'Niksharpkings' Shârρἱo's">
-  <!-- designer is the one who wrote this script/page(s)-->
-  <meta name="developer" content="Ńἱĸἱ৳α 'Niksharpkings' Shârρἱo's">
-  <!-- developer is the one who wrote this script/page(s)-->
-  <meta name="programmer" content="Ńἱĸἱ৳α 'Niksharpkings' Shârρἱo's">
-  <!-- programmer is the one who wrote this script/page(s)-->
-  <meta name="author" content="Ńἱĸἱ৳α Shârρἱo"> <!-- author is the one who wrote this script/page(s)-->
+  worker-src 'self'"> <!-- content security policy is for privacy and security-->
+  <meta name="x-frame-options" content="DENY">   <!-- x-frame-options is for privacy and security-->
+  <meta name="x-xss-protection" content="1; mode=block">   <!-- x-xss-protection is for privacy and security-->
+  <meta name="x-content-type-options" content="nosniff">   <!-- x-content-type-options is for privacy and security-->
+  <meta name="origin-trial" content="no-referrer">   <!-- origin-trial is for privacy and security-->
+  <meta name="pragma" content="no-cache">   <!-- pragma is for privacy and security-->
+  <meta name="cache-control" content="no-cache">   <!-- cache-control is for privacy and security-->
+  <meta name="expires" content="0">   <!-- expires is for privacy and security-->
+  <meta name="referrer" content="no-referrer">   <!-- referrer is for privacy and security-->
+  <meta name="robots" content="noindex, nofollow">   <!-- robots.txt is for search engine results-->
+  <meta name="googlebot" content="noindex, nofollow">   <!-- googlebot is for search engine results-->
+  <meta name="bingbot" content="noindex, nofollow">   <!-- bingbot is for search engine results-->
+  <meta name="yahoo" content="noindex, nofollow">   <!-- yahoo is for search engine results-->
+  <meta name="baidu" content="noindex, nofollow">   <!-- baidu is for search engine results-->
+  <meta name="yandex" content="noindex, nofollow">   <!-- yandex is for search engine results-->
+  <meta name="google" content="noindex, nofollow">   <!-- google is for search engine results-->
+  <meta name="google-site-verification" content="noindex, nofollow">   <!-- google-site-verification is for search engine results-->
+  <meta name="googlebot-news" content="noindex, nofollow">   <!-- googlebot-news is for search engine results-->
+  <meta name="googlebot-image" content="noindex, nofollow">   <!-- googlebot-image is for search engine results-->
+  <meta name="googlebot-video" content="noindex, nofollow">   <!-- googlebot-video is for search engine results-->
+  <meta name="googlebot-ads" content="noindex, nofollow">   <!-- googlebot-ads is for search engine results-->
+  <meta name="googlebot-mobile" content="noindex, nofollow">   <!-- googlebot-mobile is for search engine results-->
+  <meta name="keywords"
+    content="
+    Ńἱĸἱ৳α Shârρἱo,
+    niksharpkings,
+    Nikita Sharpio,
+    Nik Sharpio,
+    Full Stack Web Dev,
+    Brentwood,
+    Los Angeles,
+    California,
+    Full Stack Web Developer,
+    Github,
+    Github Page
+    "> <!-- keywords for search engine results (kinda pointless without a robot.txt because thats what google webcrawlers require to list it on google for example)-->
+  <meta name="rating" content="General">   <!-- rating is for search engine results-->
+  <meta name="publisher" content="Ńἱĸἱ৳α 'Niksharpkings' Shârρἱo's">   <!-- publisher is the one who wrote this script/page(s)-->
+  <meta name="creator" content="Ńἱĸἱ৳α 'Niksharpkings' Shârρἱo's">   <!-- creator is the one who wrote this script/page(s)-->
+  <meta name="owner" content="Ńἱĸἱ৳α 'Niksharpkings' Shârρἱo's">   <!-- owner is the one who wrote this script/page(s)-->
+  <meta name="designer" content="Ńἱĸἱ৳α 'Niksharpkings' Shârρἱo's">   <!-- designer is the one who wrote this script/page(s)-->
+  <meta name="developer" content="Ńἱĸἱ৳α 'Niksharpkings' Shârρἱo's">   <!-- developer is the one who wrote this script/page(s)-->
+  <meta name="programmer" content="Ńἱĸἱ৳α 'Niksharpkings' Shârρἱo's">   <!-- programmer is the one who wrote this script/page(s)-->
+  <meta name="author" content="Ńἱĸἱ৳α Shârρἱo">
   <meta name="description"
-    content="Ńἱĸἱ৳α Shârρἱo's UCLAx+U2 Coding Web Development BootCamp and Github HTML/CSS-Vanilla Portfolio Page">
-  <!-- description meta is for saved bookmarks info-->
-  <meta name="generator" content="Visual Studio Code"> <!-- generator = Software used-->
-  <meta name="msvalidate.01" content="8B0BE8DDD2D4F343929BA403DD0CF7A2">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="mobile-web-app-capable" content="yes">
-  <link rel="preload" as="image" href="../images/heriseon.webp">
-  <link rel="preload" as="image" href="../module1-runbuddy.webp">
-  <link rel="preload" as="image" href="../images/avatarNikShar2022.webp">
-  <link rel="preload" as="image" href="../images/calculatorproject2.webp">
-  <link rel="preload" as="image" href="../images/ledwallproject5.webp">
-  <link rel="preload" as="image" href="../images/pastelpuzzelsproject3.webp">
-  <link rel="preload" as="image" href="../images/runbuddyproject4.webp">
-  <link rel="preload" as="image" href="../images/surfreportproject1.webp">
-  <link rel="preload" as="image" href="../images/taskmasterpro.webp">
-  <!-- cursor image, my cause lag over time, but added  it regardless since its a simple page-->
-  <!-- https://html.spec.whatwg.org/multipage/semantics.html#the-link-element -->
-  <link rel="icon" type="image/x-icon" sizes="16x16" href="../cursorfavicon/niksharpfavicon16x.ico">
-  <link rel="icon" type="image/x-icon" sizes="16x16" href="../cursorfavicon/niksharfavicon16x.ico">
-  <link rel="icon" type="image/x-icon" sizes="36x36" href="../cursorfavicon/niksharpfavicon36x.ico">
-  <link rel="icon" type="image/x-icon" sizes="36x36" href="../cursorfavicon/niksharfavicon36x.ico">
-  <link rel="icon" type="image/x-icon" sizes="64x64" href="../cursorfavicon/niksharpfavicon64x.ico">
-  <link rel="icon" type="image/x-icon" sizes="64x64" href="../cursorfavicon/niksharfavicon64x.ico">
-  <link rel="apple-touch-icon" href="./assets/manifestIcon/maskable_icon_x128.png">
-  <link href="favicon.ico" rel="icon" type="image/x-icon"> <!-- github.pages favicon icon-->
-  <!-- manifest  https://w3c.github.io/manifest/ https://web.dev/maskable-icon/ https://developer.mozilla.org/en-US/docs/Web/Manifest https://url.spec.whatwg.org/#concept-url-->
-  <link rel="manifest" href="./manifest.json" crossorigin="use-credentials" type="application/manifest+json">
-  <!-- css3 stylesheet-->
-  <link title="stylesheet" media="only screen and (color)" rel="stylesheet" type="text/css" href="../css/secondary-styles.css" />
-</head>
+    content="Ńἱĸἱ৳α Shârρἱo's Github Page"> <!-- description meta is for saved bookmarks info-->
+  <meta name="generator" content="Visual Studio Code">   <!-- generator = Software used-->
+  <meta name="theme-color" content="#2774ae" media="(prefers-color-scheme: normal)">
+  <meta name="color-scheme" content="normal">
+  <!-- cursor image-->
+  <link rel="icon" type="image/x-icon" sizes="16x16" href="./assets/cursorfavicon/niksharpfavicon16x.ico">
+  <link rel="icon" type="image/x-icon" sizes="16x16" href="./assets/cursorfavicon/niksharfavicon16x.ico">
+  <link rel="icon" type="image/x-icon" sizes="36x36" href="./assets/cursorfavicon/niksharpfavicon36x.ico">
+  <link rel="icon" type="image/x-icon" sizes="36x36" href="./assets/cursorfavicon/niksharfavicon36x.ico">
+  <link rel="icon" type="image/x-icon" sizes="64x64" href="./assets/cursorfavicon/niksharpfavicon64x.ico">
+  <link rel="icon" type="image/x-icon" sizes="64x64" href="./assets/cursorfavicon/niksharfavicon64x.ico">
+  <link href="favicon.ico" rel="icon" type="image/x-icon">
+  <link
+  title="stylesheet"
+  integrity="text"
+  media="only screen and (color)"
+  rel="stylesheet"
+  type="text/css"
+  href="../css/secondary-styles.css" />
+  </head>
 
   <body>
     <header>
@@ -160,7 +126,7 @@
     </header>
     <section class="hero">
       <h2 class="page-title"><a href="./privacy-policy.html" title="privacy-policy">&gt;Privacy Policy&lt;</a><br /></h2>
-      <br>
+      <br/>
     </section>
     <article class="secondary-content">
       <h2>Website Terms of Use</h2>
@@ -618,7 +584,7 @@
     </article>
     <!-- footer -->
     <footer>
-      <h2>❤️ Made with love by Nikita "Nik" Sharpio or niksharpkings</h2>
+      <h2>❤️ Made with love by Nikita "Nik" Sharpio  or niksharpkings for UCLAx+U2NetworkBootcamp</h2>
       <div>
         <small><a hreflang=en type=text/html title="MIT License" rel="license canonical noopener" href="http://www.opensource.org/licenses/mit-license.php">&gt;MIT Licensed Link&lt;</a></small>
         <small><a hreflang=en type=text/html title="Apache License Version 2.0" rel="license canonical noopener" href="https://github.com/Niksharpkings/my-portfolio-uclax-C2/blob/main/LICENSE">&gt;Apache License Version 2.0 Link&lt;</a></small>
