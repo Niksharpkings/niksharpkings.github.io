@@ -1,12 +1,11 @@
 /* root element (sort of the <html> element) pseudo-class for global scoped variables*/
 :root {
   /*Miscellaneous*/
-  --primary-shadow-color: 0 0 10px #ffffff, 0 0 20px #ffd100, 0 0 30px #ffd100,
+  --primary-shadow-color: 0 0 10px #01c044, 0 0 20px #2c15c2, 0 0 30px #5815b6,
     0 0 40px #ffd100;
-  --primary-hex-color: #2774ae;
-  --secondary-hex-color: #ffd100;
+  --primary-hex-color: #000000;
+  --secondary-hex-color: #32a824;
   --background-white-rgb-color: rgba(255, 255, 255, 1);
-  color-scheme: normal;
 }
 
 /* wildcard */
