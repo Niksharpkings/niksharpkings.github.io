@@ -21,14 +21,14 @@
   /*Miscellaneous*/
   box-sizing: border-box;
   /*Manipulations stuff*/
-  animation: Loadup 5s linear;
+  animation-name: cursor;
+  animation-duration: 2s;
+  animation-direction: normal;
+  animation-iteration-count: infinite;
+  animation-play-state: running;
 }
 
 html * {
-  /*Miscellaneous*/
-  -webkit-animation: cursor 4s infinite;
-  /*Manipulations stuff*/
-  animation: cursor 4s infinite;
   touch-action: manipulation;
 }
 
