@@ -13,6 +13,10 @@ Last Updated to this repo: March 8, 2023 2:30pm PDT -8gmt
 #### Git push Versions :
 
 * ```
+v1.0.3 - | Removed n moved all comments to html/indexwithcomments.html.bak. removed unnesary code and reoptimazed html and css. preparing for project repo import. small manifest and meta update.
+  ```
+
+* ```
   v1.0.2 - | Major update - added manifest, png to webp, preloads, w3 verifications pass, new and deleted html attributes, and css edits.
   ```
 * ```

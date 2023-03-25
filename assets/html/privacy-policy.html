@@ -1,17 +1,10 @@
-<!DOCTYPE html> <!-- Tells the web browser to expect an HTML document. -->
-<html lang="en" dir="ltr" contenteditable="false"> <!-- The root of the HTML document and parent of all other HTML elements on the webpage. represents the root of an HTML document, lang = language (en = english), dir = left to right reading, contenteditable = false for enumerated attribute and elements are not editable-->
+<!DOCTYPE html>
+<html lang="en" dir="ltr" contenteditable="false">
 
 <head>
-  <meta http-equiv="Content-type" content="text/html; charset=utf-8">
-  <!-- head element represents a collection of enclosed metadata for the document collection and setup to run on a server -->
-  <!--Tells the web browser which character set to use. charset is set to UTF-8 which is a standard IANA MIME name for character encodings https://www.w3.org/TR/html4/charset.html#h-5.2.2-->
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- Tells the web browser how to scale the page. viewport is screen size scaling. -->
-  <!-- <base href=> base is the base URL to use for all relative URLs within a document. -->
-  <title>Ńἱĸἱ৳α Shârρἱo's UCLAx+U2 HTML/CSS Portfolio/Project/Resume Page</title> <!-- Browser-cross Tab Title-->
-  <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP -->
-  <!-- https://wiki.whatwg.org/wiki/MetaExtensions -->
-  <!-- https://web.dev/learn/html/metadata/ -->
+  <title>Ńἱĸἱ৳α Shârρἱo's UCLAx+U2 HTML/CSS Portfolio/Project/Resume Page</title>
   <meta http-equiv="Content-Security-Policy"
   content="connect-src 'self';
   font-src 'self';
@@ -27,12 +20,10 @@
   script-src-attr 'self';
   style-src-elem 'self' 'sha256-wG7aBvp9/yHanLKIFezWx95YfJa4kMhd7vcw9pyWgqE=';
   style-src-attr 'self';
-  worker-src 'self'"> <!-- content security policy is for privacy and security -->
+  worker-src 'self'">
   <meta name="robots" content="index, nofollow">
-  <!-- robots.txt is for search engine results <meta name=robots content=noindex, nofollow-->
   <meta name="googlebot" content="index, nofollow">
   <meta name="google" content="index, nofollow"> <!-- https://web.dev/vitals/ -->
-  <!-- google is for search engine results temp removal content=noindex, nofollow-->
   <meta name="google-site-verification" content="EauQU7rPJCYYGsyqxpmZv-hDfiGlYHLUu3GB7d_SBTM">
   <meta name="keywords" content="
   Ńἱĸἱ৳α Shârρἱo's,
@@ -56,25 +47,14 @@
   Security Guard,
   Graphic Designer
   ">
-  <!-- keywords for search engine results (kinda pointless without a robot.txt because thats what google webcrawlers require to list it on google for example)-->
-  <meta name="rating" content="General"> <!-- rating is for search engine results-->
+  <meta name="rating" content="General">
   <meta name="publisher" content="Ńἱĸἱ৳α 'Niksharpkings' Shârρἱo's">
   <meta name="designer" content="Ńἱĸἱ৳α 'Niksharpkings' Shârρἱo's">
-  <meta name="author" content="Ńἱĸἱ৳α Shârρἱo"> <!-- author is the one who wrote this script/page(s)-->
+  <meta name="author" content="Ńἱĸἱ৳α Shârρἱo">
   <meta name="description"
     content="Ńἱĸἱ৳α Shârρἱo's Github HTML/CSS-Vanilla Portfolio Page">
-  <!-- description meta is for saved bookmarks info-->
-  <meta name="generator" content="Visual Studio Code"> <!-- generator = Software used-->
+  <meta name="generator" content="Visual Studio Code">
   <meta name="msvalidate.01" content="8B0BE8DDD2D4F343929BA403DD0CF7A2">
-  <link rel="preload" href="../images/heriseon.webp">
-  <link rel="preload" href="../module1-runbuddy.webp">
-  <link rel="preload" href="../images/avatarNikShar2022.webp">
-  <link rel="preload" href="../images/calculatorproject2.webp">
-  <link rel="preload" href="../images/ledwallproject5.webp">
-  <link rel="preload" href="../images/pastelpuzzelsproject3.webp">
-  <link rel="preload" href="../images/runbuddyproject4.webp">
-  <link rel="preload" href="../images/surfreportproject1.webp">
-  <link rel="preload" href="../images/taskmasterpro.webp">
   <!-- cursor image, my cause lag over time, but added  it regardless since its a simple page-->
   <!-- https://html.spec.whatwg.org/multipage/semantics.html#the-link-element -->
   <link rel="icon" type="image/x-icon" sizes="16x16" href="../cursorfavicon/niksharpfavicon16x.ico">
@@ -87,7 +67,6 @@
   <link href="favicon.ico" rel="icon" type="image/x-icon"> <!-- github.pages favicon icon-->
   <!-- manifest  https://w3c.github.io/manifest/ https://web.dev/maskable-icon/ https://developer.mozilla.org/en-US/docs/Web/Manifest https://url.spec.whatwg.org/#concept-url-->
   <link rel="manifest" href="./manifest.json" type="application/manifest+json">
-  <!-- css3 stylesheet-->
   <link title="stylesheet" media="only screen and (color)" rel="stylesheet" type="text/css" href="../css/secondary-styles.css" />
 </head>
 
@@ -100,7 +79,7 @@
         <ul>
           <li><a href="../../index.html">Home</a></li>
           <li><a href="./privacy-policy.html#contact-me">Contact</a></li>
-          <li><!-- redirects to github account-->
+          <li>
             <a
             title="GitHub account"
             type=text/html
@@ -108,7 +87,7 @@
             class="tooltip-nav"
             href="https://github.com/Niksharpkings/"
             target="_blank"
-            rel="noopener canonical noreferrer">
+            rel="noopener noreferrer">
             GitHub Account
             <span class="tooltiptext-nav">https://github.com/Niksharpkings/</span>
           </a>
@@ -121,7 +100,7 @@
             class="tooltip-nav"
             href="https://niksharpkings.github.io/my-portfolio-uclax-C2/"
             target="_blank"
-            rel="noopener canonical noreferrer">
+            rel="noopener noreferrer">
             My UCLA+U2 Profile
             <span class="tooltiptext-nav">https://niksharpkings.github.io/my-portfolio-uclax-C2/</span>
           </a>
@@ -592,8 +571,8 @@
     <footer>
       <h2>❤️ Made with love by Nikita "Nik" Sharpio or niksharpkings</h2>
       <div>
-        <small><a hreflang=en type=text/html title="MIT License" rel="license canonical noopener" href="http://www.opensource.org/licenses/mit-license.php">&gt;MIT Licensed Link&lt;</a></small>
-        <small><a hreflang=en type=text/html title="Apache License Version 2.0" rel="license canonical noopener" href="https://github.com/Niksharpkings/my-portfolio-uclax-C2/blob/main/LICENSE">&gt;Apache License Version 2.0 Link&lt;</a></small>
+        <small><a hreflang=en type=text/html title="MIT License" rel="license noopener" href="http://www.opensource.org/licenses/mit-license.php">&gt;MIT Licensed Link&lt;</a></small>
+        <small><a hreflang=en type=text/html title="Apache License Version 2.0" rel="license noopener" href="https://github.com/Niksharpkings/my-portfolio-uclax-C2/blob/main/LICENSE">&gt;Apache License Version 2.0 Link&lt;</a></small>
         <br />
         &copy; 2023 Nikita "niksharpkings Sharpio All rights reserved.
       </div>
