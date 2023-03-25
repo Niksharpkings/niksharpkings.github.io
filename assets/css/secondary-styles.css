@@ -6,6 +6,8 @@
   --primary-hex-color: #000000;
   --secondary-hex-color: #32a824;
   --background-white-rgb-color: rgba(255, 255, 255, 1);
+  color-scheme: light dark;
+  scrollbar-color: rebeccapurple green;
 }
 
 /* wildcard */
@@ -18,9 +20,16 @@
   -moz-osx-font-smoothing: grayscale;
   /*Miscellaneous*/
   box-sizing: border-box;
-  -webkit-animation: Loadup 5s linear;
   /*Manipulations stuff*/
-  animation: Loadup 5s linear;
+  animation-name: cursor;
+  animation-duration: 2s;
+  animation-direction: normal;
+  animation-iteration-count: infinite;
+  animation-play-state: running;
+}
+
+html * {
+  touch-action: manipulation;
 }
 
 body {
