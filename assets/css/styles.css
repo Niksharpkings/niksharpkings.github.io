@@ -215,11 +215,6 @@ hr:after {
 }
 
 .hero {
-  /*Display stuff*/
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
   /*Box model stuff*/
   margin: 0 auto;
   padding: 0;
@@ -281,11 +276,7 @@ hr:after {
 
 .about-me {
   /*Display stuff*/
-  display: inline-flex;
-  flex-direction: column;
-  margin: auto;
-  align-items: center;
-  justify-content: center;
+
   /*Box model stuff*/
   background-color: var(--secondary-hex-color);
   /*Typography stuff*/
@@ -304,8 +295,6 @@ section .container-heading h1 {
 .container-content {
   border: 10px ridge var(--primary-hex-color);
   background-color:rgb(0, 0, 0);
-  align-items: center;
-  justify-content: center;
 }
 
 .container-content p {
@@ -334,13 +323,11 @@ section .container-heading h1 {
 
 .fieldset-1 {
   /*Display stuff*/
-  display: flex;
   background-color: var(--primary-hex-color);
   font-weight: bold;
 }
 
 .fieldset-2 {
-  display: flex;
   background-color: var(--primary-hex-color);
 }
 
@@ -352,13 +339,8 @@ details {
   border: 1px dotted;
   border-radius: 4px;
   padding: 0.5em 0.5em 0;
-  align-items: stretch;
-  display: flex;
-  justify-content: center;
+  display: inline;
   align-self: center;
-  align-content: center;
-  justify-self: center;
-  justify-items: center;
   max-width: 1200px;
   width: auto;
 }
@@ -367,11 +349,7 @@ summary {
   font-weight: bold;
   margin: -0.5em -0.5em 0;
   padding: 0.5em;
-  align-items: stretch;
-  display: flex;
-  justify-content: center;
-  align-self: stretch;
-  justify-items: center;
+  display: inline;
   max-width: 1200px;
   width: 1200px;
   text-align: center;
@@ -405,9 +383,7 @@ details[open] summary {
 
 .projects {
   /*Display stuff*/
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: block;
   /*Box model stuff*/
   background-color: var(--primary-hex-color);
   /*Typography stuff*/
@@ -429,8 +405,7 @@ details[open] summary {
   border: thin var(--secondary-hex-color) solid;
   background-color: rgb(0, 0, 0);
   width: max(200px, 10%);
-  display: inline-flex;
-  justify-content: center;
+  display: inline-block;
 }
 .project-grid-container {
   display: flex;
@@ -438,11 +413,8 @@ details[open] summary {
   justify-content: center;
   flex-flow: row wrap;
   margin: auto;
-  grid-template-areas: "left right";
-  grid-template-columns: 400px 400px;
-  grid-template-rows: 200px 200px;
+
   overflow: hidden;
-  object-fit: fill;
   max-width: 100%;
 }
 
@@ -450,7 +422,7 @@ details[open] summary {
   border: thin var(--secondary-hex-color) solid;
   background-color: rgb(0, 0, 0);
   font-size: calc(16px + (16 - 14) * ((100vw - 300px) / (1600 - 300)));
-  grid-area: left;
+  
   width: 600px;
   max-width: 600px;
   min-width: 100px;
@@ -504,13 +476,7 @@ figcaption {
   width: auto;
 }
 
-
 footer {
-  /*Display stuff*/
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-  justify-content: center;
   /*Box model stuff*/
   background-color: var(--primary-hex-color);
   /*Typography stuff*/
@@ -591,18 +557,32 @@ footer details[open] summary {
 
 #contact-me > details > .legend-3-span {
   font-size:  20px;
-  display: inline;
+  display: inline-grid;
+  border: thin var(--secondary-hex-color) solid;
+  color: var(--secondary-hex-color);
+}
+
+div .contact-list-item {
+  font-size:  20px;
+  padding: 5px;
+  margin: 10px;
   width: auto;
   border: thin var(--secondary-hex-color) solid;
   color: var(--secondary-hex-color);
 }
 
 div .contact-list-item span {
+  padding: 5px;
+  margin: 10px;
+  color: var(--secondary-hex-color);
+}
+
+div .contact-list-item p {
   color: var(--secondary-hex-color);
 }
 
 .contact-info iframe {
-  border: 1px solid black;
+  border: 1px solid rgb(10, 231, 2);
   max-width: 600px;
   max-height: 600px;
 }
