@@ -48,4 +48,4 @@ Disallow: /assets/html/
 Disallow: /assets/images/
 
 User-agent: *
-Disallow: /
+allow: /

@@ -20,7 +20,6 @@
   -moz-osx-font-smoothing: grayscale;
   /*Miscellaneous*/
   box-sizing: border-box;
-  -webkit-animation: Loadup 5s linear;
   /*Manipulations stuff*/
   animation: Loadup 5s linear;
 }
