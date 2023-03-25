@@ -1,8 +1,8 @@
 /* root element (sort of the <html> element) pseudo-class for global scoped variables*/
 :root {
   /*Miscellaneous*/
-  --primary-shadow-color: 0 0 10px #01c044, 0 0 20px #2c15c2, 0 0 30px #5815b6,
-    0 0 40px #ffd100;
+  --primary-shadow-color: 0 0 10px #01c044, 0 0 20px #20ace4, 0 0 30px #4a0aa3;
+  --secondary-shadow-color: 0 0 5px #0affeb, 0 0 10px #00ffff, 0 0 20px #11ebeb;
   --primary-hex-color: #000000;
   --secondary-hex-color: #32a824;
   --background-white-rgb-color: rgba(255, 255, 255, 1);
@@ -46,9 +46,6 @@ body {
 header {
   /*Display stuff*/
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
   /*Positioning stuff*/
   position: sticky;
   top: 0;
@@ -67,9 +64,6 @@ header {
 }
 
 nav {
-  /*Display stuff*/
-  flex-wrap: wrap;
-  align-items: center;
   /*Box model stuff*/
   width: 100%;
   margin: 0 auto;
@@ -77,7 +71,7 @@ nav {
   /*Typography stuff*/
   font-size: 20px;
   text-align: center;
-  text-shadow: var(--primary-shadow-color);
+  text-shadow: var(--secondary-shadow-color);
 }
 
 header nav li {
@@ -215,7 +209,7 @@ hr {
 
 hr:after {
   /*Display stuff*/
-  content: "⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘";
+  content: "⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘";
   /*Box model stuff*/
   padding: 0 0px;
 }
@@ -230,7 +224,7 @@ hr:after {
   margin: 0 auto;
   padding: 0;
   background-attachment: fixed;
-  background-image: url(../images/space-moon-earth-beer-banner.jpg);
+  background-image: url(../images/Frameless-Acrylic-paint-By-Numbers-DIY-Little-White-Boat-Home-decor-Wall-font-b-Art-b.webp);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
