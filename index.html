@@ -4,22 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Ńἱĸἱ৳α Shârρἱo's Portfolio/Project/Resume Page</title>
-    <meta http-equiv="Content-Security-Policy"
-      content="
-          connect-src 'self';
-          font-src 'self';
-          frame-src https://www.google.com/;
-          img-src * 'self' data: https:;
-          manifest-src 'self';
-          media-src 'self';
-          base-uri 'self';
-          object-src * 'self' data: https:;
-          script-src * 'self' data: https:;
-          script-src-elem 'self' 'sha256-vvt4KWwuNr51XfE5m+hzeNEGhiOfZzG97ccfqGsPwvE=';
-          script-src-attr 'self';
-          style-src-elem 'self' 'sha256-wG7aBvp9/yHanLKIFezWx95YfJa4kMhd7vcw9pyWgqE=';
-          style-src-attr 'self';
-          worker-src 'self'">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta name="robots" content="index, nofollow">
     <meta name="googlebot" content="index, nofollow">
     <meta name="google" content="index, nofollow">
@@ -55,7 +40,26 @@
     <link rel="manifest" href="./manifest.json" type="application/manifest+json">
     <link title="stylesheet" media="only screen and (color)" rel="stylesheet" type="text/css" href="./assets/css/styles.css">
   </head>
-  <body>
+  <body onload="startTime()">
+    <details>
+      <summary class="legend-3-span">
+            <mark >» Click Me Here To See Your (not mine) Gathered Info Expand Below «</mark>
+      </summary>
+    <ul id="dhbinfoui"> <!-- dhb stands for dom, browser, and browser info-->
+      <li><p id="dhbinfo"></p></li>
+      <li><p id="dhbinfo2"></p></li>
+      <li><p id="dhbinfo3"></p></li>
+      <li><p id="dhbinfo4"></p></li>
+      <li><p id="dhbinfo5"></p></li>
+      <li><p id="dhbinfo6"></p></li>
+      <li><p id="dhbinfo7"></p></li>
+      <li><p id="dhbinfo8"></p></li>
+      <li><p id="dhbinfo9"></p></li>
+      <li><p id="dhbinfo10"></p></li>
+      <li><p id="dhbinfo11"></p></li>
+      <li><p id="dhbinfo12"></p></li>
+    </ul>
+  </details>
     <header>
       <nav>
         <ul>
@@ -78,25 +82,29 @@
               </a>
           </li>
         </ul>
+        <canvas id="canvas" width="70" height="70"></canvas>
+        <div id="currentTime"></div>
       </nav>
     </header>
 
     <main>
       <section class="hero">
         <hr>
+        <div id="txt"></div>
         <div class="hero-intro">
           <h1>⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯
             <br>
             <b>--- *Note* Site Still Under Developemnt *Note* ----</b>
           </h1>
-          <h2>--- (Site last updated: March 24, 2023 | v1.0.2 ) ----
+          <p >--- (Site last updated: <span id="lastupdate"></span> | v1.0.2 ) ----
             <br><small>
               ⋯⋯⋯⋯⋯⋯⋯⋯ -updating the site tonight or tomorrow, March 25, 2023.
               <br>
               with all my active working projects in the project section.
               <br>
               currently its the old mock-up repos and projects ⋯⋯⋯⋯⋯⋯</small>
-          </h2>
+          </p>
+
           <a href="https://www.linkedin.com/in/nikita-sharpio-18609ba6/" class="tooltip"  title="tooltip for linkedin profile" rel="noopener  noreferrer" target="_blank">
             <picture>
               <source
@@ -1125,6 +1133,8 @@
             target="_blank">Privacy Policy Link</a></small>
       </p>
     </footer>
+    <script src="./assets/javascript/dhbinfo.js"></script>
+    <script src="./assets/javascript/clock.js"></script>
     <noscript>Your browser does not support JavaScript!</noscript>
   </body>
 </html>
