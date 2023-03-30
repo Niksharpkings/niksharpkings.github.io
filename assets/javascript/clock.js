@@ -111,7 +111,7 @@ function drawTime(ctx, radius) {
     (hour * Math.PI) / 6 +
     (minute * Math.PI) / (6 * 60) +
     (second * Math.PI) / (360 * 60) +
-    (ms * Math.PI) / (360 * 60 * 1000);
+    (ms * Math.PI) / (360 * 60 * 1000); // add milisecond to the clock hand movement for the hour
 
   drawHand(ctx, hour, radius * 0.5, radius * 0.07);
   //minute
