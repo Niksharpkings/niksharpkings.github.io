@@ -63,6 +63,14 @@ header {
   overflow: hidden;
 }
 
+ul li p {
+  font-size: 10px;
+  color: var(--secondary-hex-color);
+  font-weight: bold;
+  display: flex;
+  text-align: left;
+}
+
 nav {
   /*Box model stuff*/
   width: 100%;
@@ -159,6 +167,10 @@ header nav li a:focus {
   /*Miscellaneous*/
   cursor: pointer;
   box-shadow: 2px 0px 1px var(--primary-hex-color);
+}
+
+.canvas {
+  background-color: url(./assets/images/avatarNikShar2022.png);
 }
 
 .tooltip-nav {
@@ -339,7 +351,7 @@ details {
   border: 1px dotted;
   border-radius: 4px;
   padding: 0.5em 0.5em 0;
-  display: inline;
+  text-align: center;
   align-self: center;
   max-width: 1200px;
   width: auto;
@@ -365,6 +377,7 @@ mark:hover {
   background-color: var(--secondary-hex-color);
   color: var(--primary-hex-color);
 }
+
 
 details[open] {
   padding: 0.5em;
@@ -422,7 +435,6 @@ details[open] summary {
   border: thin var(--secondary-hex-color) solid;
   background-color: rgb(0, 0, 0);
   font-size: calc(16px + (16 - 14) * ((100vw - 300px) / (1600 - 300)));
-  
   width: 600px;
   max-width: 600px;
   min-width: 100px;
