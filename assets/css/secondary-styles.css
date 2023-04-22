@@ -13,11 +13,8 @@
 /* wildcard */
 * {
   /*Box model stuff*/
-  padding: 0;
-  /*Typography stuff*/
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0px;
+  margin: 0px;
   /*Miscellaneous*/
   box-sizing: border-box;
   /*Manipulations stuff*/
@@ -28,16 +25,16 @@
   animation-play-state: running;
 }
 
-html * {
+html {
   touch-action: manipulation;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--secondary-hex-color);
 }
 
 body {
-  /*Box model stuff*/
-  background-color: var(--secondary-hex-color);
   /*Typography stuff*/
   font-size: calc(14px + (26 - 14) * ((100vw - 300px) / (1600 - 300)));
-  font-weight: 300;
+  font-weight: bolder;
   /*Miscellaneous*/
   overflow: visible;
   cursor: pointer;
@@ -51,7 +48,6 @@ header {
   justify-content: space-between;
   /*Positioning stuff*/
   position: sticky;
-  top: 0;
   z-index: 1;
   /*Box model stuff*/
   padding: 10px 30px;
@@ -110,7 +106,6 @@ header nav li a {
   color: var(--primary-hex-color);
   /*Miscellaneous*/
   line-height: 1.5;
-  cursor: pointer;
 }
 
 header nav li a:hover {
@@ -127,7 +122,6 @@ header nav li a:hover {
   text-decoration: none;
   color: var(--secondary-hex-color);
   /*Miscellaneous*/
-  cursor: pointer;
   box-shadow: 2px 0px 1px var(--primary-hex-color);
   transform: scale(0.9) rotate(5deg) translate(10%, 10%);
   filter: saturate(1) contrast(200%)
@@ -147,7 +141,6 @@ header nav li a:active {
   text-decoration: none;
   color: var(--secondary-hex-color);
   /*Miscellaneous*/
-  cursor: pointer;
   box-shadow: 2px 0px 1px var(--primary-hex-color);
 }
 
@@ -165,7 +158,6 @@ header nav li a:focus {
   text-decoration: none;
   color: var(--secondary-hex-color);
   /*Miscellaneous*/
-  cursor: pointer;
   box-shadow: 2px 0px 1px var(--primary-hex-color);
 }
 
@@ -286,7 +278,6 @@ footer {
 footer p{
   /*Typography stuff*/
   font-size: clamp(1.8rem, 1.8vw, 2rem);
-  color: var(--secondary-hex-color);
 }
 
 @keyframes projects {
