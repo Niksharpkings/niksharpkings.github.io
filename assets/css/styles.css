@@ -13,11 +13,8 @@
 /* wildcard */
 * {
   /*Box model stuff*/
-  padding: 0;
-  /*Typography stuff*/
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0px;
+  margin: 0px;
   /*Miscellaneous*/
   box-sizing: border-box;
   /*Manipulations stuff*/
@@ -30,6 +27,8 @@
 
 html * {
   touch-action: manipulation;
+  font-family: Arial, Helvetica, sans-serif;
+  cursor: crosshair;
 }
 
 body {
@@ -37,10 +36,8 @@ body {
   background-color: var(--secondary-hex-color);
   /*Typography stuff*/
   font-size: calc(14px + (26 - 14) * ((100vw - 300px) / (1600 - 300)));
-  font-weight: 300;
   /*Miscellaneous*/
   overflow: visible;
-  cursor: pointer;
 }
 
 header {
@@ -48,10 +45,10 @@ header {
   display: flex;
   /*Positioning stuff*/
   position: sticky;
-  top: 0;
+  top: 0px;
   z-index: 1;
   /*Box model stuff*/
-  padding: 10px 30px;
+  padding: 5px 10px;
   border: var(--secondary-hex-color) 10px double;
   background-attachment: fixed;
   background-color: var(--primary-hex-color);
@@ -72,12 +69,18 @@ ul li p {
 }
 
 nav {
+  /*Display stuff*/
+  display: flexbox;
+  align-items: center;
+  justify-content: center;
   /*Box model stuff*/
   width: 100%;
-  margin: 0 auto;
-  padding: 0;
+  margin: 5px auto;
+  padding: 5px;
   /*Typography stuff*/
   font-size: 20px;
+  font-weight: bold;
+  text-decoration: none;
   text-align: center;
   text-shadow: var(--secondary-shadow-color);
 }
@@ -86,8 +89,8 @@ header nav li {
   /*Display stuff*/
   display: inline-block;
   /*Box model stuff*/
-  margin: 10px;
-  padding: 0px;
+  margin: 5px;
+  padding: 5px;
   /*Miscellaneous*/
   list-style: none;
 }
@@ -98,28 +101,24 @@ header nav li a {
   /*Positioning stuff*/
   z-index: 1;
   /*Box model stuff*/
-  margin: 0;
-  padding: 5px 10px;
+  margin: 0px;
+  padding: 10px 10px;
   border-radius: 3px;
   outline-color: var(--secondary-hex-color);
   outline-style: double;
   outline-width: 5px;
-  background-color: var(--secondary-hex-color);
+  background-color: rgb(72, 12, 212);
   /*Typography stuff*/
-  font-size: 18px;
-  font-weight: bold;
-  text-decoration: none;
   color: var(--primary-hex-color);
   /*Miscellaneous*/
   line-height: 1.5;
-  cursor: pointer;
 }
 
 header nav li a:hover {
   /*Positioning stuff*/
   z-index: 1;
   /*Box model stuff*/
-  padding: 5px 10px;
+  padding: 4px 5px;
   border-radius: 3px;
   outline-color: var(--primary-hex-color);
   outline-style: dashed;
@@ -129,7 +128,6 @@ header nav li a:hover {
   text-decoration: none;
   color: var(--secondary-hex-color);
   /*Miscellaneous*/
-  cursor: pointer;
   box-shadow: 2px 0px 1px var(--primary-hex-color);
   transform: scale(0.9) rotate(5deg) translate(10%, 10%);
   filter: saturate(1) contrast(200%) drop-shadow(5px 5px 2rem var(--secondary-hex-color)) brightness(1) sepia(5%) opacity(95%) hue-rotate(4deg) grayscale(50%) blur(0px) invert(5%);
@@ -147,7 +145,6 @@ header nav li a:active {
   text-decoration: none;
   color: var(--secondary-hex-color);
   /*Miscellaneous*/
-  cursor: pointer;
   box-shadow: 2px 0px 1px var(--primary-hex-color);
 }
 
@@ -165,12 +162,7 @@ header nav li a:focus {
   text-decoration: none;
   color: var(--secondary-hex-color);
   /*Miscellaneous*/
-  cursor: pointer;
   box-shadow: 2px 0px 1px var(--primary-hex-color);
-}
-
-.canvas {
-  background-color: url(./assets/images/avatarNikShar2022.png);
 }
 
 .tooltip-nav {
@@ -297,8 +289,6 @@ hr:after {
 
 section .container-heading h1 {
   text-shadow: var(--primary-shadow-color);
-  color: var(--primary-hex-color);
-  background-color: var(--primary-hex-color);
   font-weight: bolder;
   border: 10px ridge var(--primary-hex-color);
   padding: 1.2rem;
@@ -353,7 +343,6 @@ details {
   padding: 0.5em 0.5em 0;
   text-align: center;
   align-self: center;
-  max-width: 1200px;
   width: auto;
 }
 
@@ -362,8 +351,8 @@ summary {
   margin: -0.5em -0.5em 0;
   padding: 0.5em;
   display: inline;
-  max-width: 1200px;
-  width: 1200px;
+
+  width: auto;
   text-align: center;
 }
 
@@ -489,13 +478,10 @@ figcaption {
 }
 
 footer {
-  /*Box model stuff*/
-  background-color: var(--primary-hex-color);
   /*Typography stuff*/
   font-size: clamp(1.5rem, 1.8vw, 1.8rem);
   font-weight: bold;
   text-align: center;
-  color: var(--primary-hex-color);
   border: 10px ridge var(--secondary-hex-color);
 }
 
@@ -508,8 +494,6 @@ footer p{
 footer details[open] summary {
   border-bottom: 1px solid #aaa;
   margin-bottom: 0.5em;
-  background-color: var(--primary-hex-color);
-  color: var(--primary-hex-color);
 }
 
 .tooltip {
@@ -598,7 +582,6 @@ div .contact-list-item p {
   max-width: 600px;
   max-height: 600px;
 }
-
 
 @media only screen and (max-width: 1200px) {
   details,
