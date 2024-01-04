@@ -12,7 +12,8 @@ Last Updated to this repo: March 8, 2023 2:30pm PDT -8gmt
 
 #### Git push Versions :
 
-* `v1.0.6 - | May6, 2023 ~10:30pm PDT | fixed the clock millisecond dial.`
+* `v1.0.7 - | Jan 3, 2024 ~10:30pm PDT | Fixed typos & minor tune |`
+* `v1.0.6 - | May 6, 2023 ~10:30pm PDT | fixed the clock millisecond dial.`
 * `v1.0.5 - | April 22, 2023 ~2:00pm PDT | fixed and testing some meta tags, improved css, added a noscript with custom info.`
 * `v1.0.4 - | March 25, 2023 ~2:14pm PDT | Added the  Revamped Password Generator V2 project to the project/repo section.`
 * `v1.0.3 - | March 25, 2023 ~1:30am PDT | Removed & moved all comments to html/indexwithcomments.html.bak. removed unnesary code and reoptimazed html and css. preparing for project repo import. small manifest and meta update.`

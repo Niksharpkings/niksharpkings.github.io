@@ -383,6 +383,11 @@ details[open] summary {
   color: var(--secondary-hex-color);
 }
 
+.details-p {
+  font-size: 12px;
+  text-align: left;
+}
+
 .projects {
   /*Display stuff*/
   display: block;
