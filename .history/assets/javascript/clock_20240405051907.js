@@ -49,7 +49,7 @@ function checkTime(i) {
 
 // Source below https://www.w3schools.com/graphics/tryit.asp?filename=trycanvas_clock_start
 // And Chatgpt chat.openai.com
-// except for the millisecond thats I add and style color and font size.
+// except for the milisecond thats I add and style color and font size.
 // get the canvas element and set its context to 2d
 
 
