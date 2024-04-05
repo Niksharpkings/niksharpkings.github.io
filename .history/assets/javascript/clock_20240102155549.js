@@ -1,4 +1,4 @@
-// StartTime function is called when the page is loaded and the clock is started and updated every second by the setTimeout function and the checkTime function is called to add a zero in front of numbers < 10 and the time and date is displayed in the format of "Current Time: 00h:00m:00s:00ms 00/00/00pm" in the html element with the id of "txt" by using the document DOM object and the getElementById method and the innerHTML property to set the innerHTML to the current time and date in the format of "Current Time: 00h:00m:00s:00ms 00/00/00pm" and the setTimeout function is called to update the time and date every second.
+// StartTime fuction is called when the page is loaded and the clock is started and updated every second by the setTimeout function and the checkTime function is called to add a zero in front of numbers < 10 and the time and date is displayed in the format of "Current Time: 00h:00m:00s:00ms 00/00/00pm" in the html element with the id of "txt" by using the document DOM object and the getElementById method and the innerHTML property to set the innerHTML to the current time and date in the format of "Current Time: 00h:00m:00s:00ms 00/00/00pm" and the setTimeout function is called to update the time and date every second.
 function startTime() {
   const today = new Date(); // get current date and time
   let mh = today.getMonth(); // Month, using local time.
@@ -7,7 +7,7 @@ function startTime() {
   let h = today.getHours(); // Hours
   let m = today.getMinutes(); // minutes
   let s = today.getSeconds(); // seconds
-  let ms = today.getMilliseconds(); // milliseconds
+  let ms = today.getMilliseconds(); // miliseconds
 
   mh = checkTime(mh); // add zero in front of numbers < 10
   day = checkTime(day); // add zero in front of numbers < 10
@@ -39,7 +39,7 @@ function startTime() {
   setTimeout(startTime, 10); // update every second
 }
 
-// checkTime function iterates through the time and adds a zero in front of numbers < 10
+// checktime function iterates through the time and adds a zero in front of numbers < 10
 function checkTime(i) {
   if (i < 10) {
     i = "0" + i;
@@ -49,7 +49,7 @@ function checkTime(i) {
 
 // Source below https://www.w3schools.com/graphics/tryit.asp?filename=trycanvas_clock_start
 // And Chatgpt chat.openai.com
-// except for the millisecond thats I add and style color and font size.
+// except for the milisecond thats I add and style color and font size.
 // get the canvas element and set its context to 2d
 
 
