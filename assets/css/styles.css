@@ -70,7 +70,7 @@ ul li p {
 
 nav {
   /*Display stuff*/
-  display: flexbox;
+  display: flex;
   align-items: center;
   justify-content: center;
   /*Box model stuff*/
