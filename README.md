@@ -12,6 +12,7 @@ Last Updated to this repo: March 8, 2023 2:30pm PDT -8gmt
 
 #### Git push Versions :
 
+* `v1.0.9 - | June 15, 2024 ~12:10am PDT | Changed the background and hero background image. `
 * `v1.0.8 - | April 5, 2024 ~5:30am PDT | Fixed typos & minor tune |`
 * `v1.0.7 - | Jan 3, 2024 ~10:30pm PDT | Fixed typos & minor tune |`
 * `v1.0.6 - | May 6, 2023 ~10:30pm PDT | fixed the clock millisecond dial.`

@@ -4,8 +4,8 @@
   --primary-shadow-color: 0 0 10px #01c044, 0 0 20px #20ace4, 0 0 30px #4a0aa3;
   --secondary-shadow-color: 0 0 5px #0affeb, 0 0 10px #00ffff, 0 0 20px #11ebeb;
   --primary-hex-color: #000000;
-  --secondary-hex-color: #32a824;
-  --background-white-rgb-color: rgba(255, 255, 255, 1);
+  --secondary-hex-color: #72926d;
+  --background-white-rgb-color: rgb(255, 255, 255);
   color-scheme: light dark;
   scrollbar-color: rebeccapurple green;
 }
@@ -35,7 +35,7 @@ body {
   /*Box model stuff*/
   background-color: var(--secondary-hex-color);
   /*Typography stuff*/
-  font-size: calc(14px + (26 - 14) * ((100vw - 300px) / (1600 - 300)));
+  font-size: calc(12px + (26 - 12) * ((100vw - 300px) / (1600 - 300)));
   /*Miscellaneous*/
   overflow: visible;
 }
@@ -58,6 +58,25 @@ header {
   /*Miscellaneous*/
   list-style-type: none;
   overflow: hidden;
+}
+
+head details summary mark {
+  /*Display stuff*/
+  display: inline;
+  /*Positioning stuff*/
+  position: relative;
+  /*Box model stuff*/
+  padding: 5px;
+  margin: 5px;
+  /*Typography stuff*/
+  font-size: 12px;
+  font-weight: bold;
+  text-align: center;
+  text-shadow: var(--primary-shadow-color);
+  color: rgb(148, 46, 46);
+  /*Miscellaneous*/
+  list-style-type: none;
+
 }
 
 ul li p {
@@ -104,6 +123,7 @@ header nav li a {
   margin: 0px;
   padding: 10px 10px;
   border-radius: 3px;
+  
   outline-color: var(--secondary-hex-color);
   outline-style: double;
   outline-width: 5px;
@@ -129,8 +149,8 @@ header nav li a:hover {
   color: var(--secondary-hex-color);
   /*Miscellaneous*/
   box-shadow: 2px 0px 1px var(--primary-hex-color);
-  transform: scale(0.9) rotate(5deg) translate(10%, 10%);
-  filter: saturate(1) contrast(200%) drop-shadow(5px 5px 2rem var(--secondary-hex-color)) brightness(1) sepia(5%) opacity(95%) hue-rotate(4deg) grayscale(50%) blur(0px) invert(5%);
+  transform: scale(1) rotate(0deg) translate(0%, 0%);
+  filter: saturate(6) contrast(100%) drop-shadow(0px 0px 1.2rem var(--secondary-hex-color)) brightness(1) sepia(0%) opacity(95%) hue-rotate(4deg) grayscale(50%) blur(0px) invert(5%);
 }
 
 header nav li a:active {
@@ -165,6 +185,35 @@ header nav li a:focus {
   box-shadow: 2px 0px 1px var(--primary-hex-color);
 }
 
+.rightNow {
+  /*Display stuff*/
+  display: grid;
+  /*Positioning stuff*/
+  margin: 5px;
+  align-items: center;
+  justify-content: center;
+  background-color: whitesmoke;
+  /*Box model stuff*/
+  border: 1px dotted rgb(148, 46, 46);
+  /*Typography stuff*/
+  color: var(--primary-hex-color);
+  font-size: 14px;
+}
+
+#canvasID {
+  /*Display stuff*/
+  display:grid;
+  /*Positioning stuff*/
+  background-color: #000000;
+  align-items: center;
+  justify-content: center;
+  /*Box model stuff*/
+  border: 2px dotted rgb(39, 54, 36);
+  /*Typography stuff*/
+  color: var(--primary-hex-color);
+  font-size: 14px;
+}
+
 .tooltip-nav {
   /*Display stuff*/
   display: inline-block;
@@ -187,7 +236,7 @@ header nav li a:focus {
   width: auto;
   padding: 2px 2px;
   border-radius: 6px;
-  background-color: black;
+  background-color: rgb(48, 41, 41);
   /*Typography stuff*/
   text-align: center;
   color: var(--secondary-hex-color);
@@ -223,7 +272,7 @@ hr:after {
   margin: 0 auto;
   padding: 0;
   background-attachment: fixed;
-  background-image: url(../images/Frameless-Acrylic-paint-By-Numbers-DIY-Little-White-Boat-Home-decor-Wall-font-b-Art-b.webp);
+  background-image: url(../images/ns-6-14-2024-stsci-01h1q2vfhvmajgh4wrnmk0dy52.png);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -297,6 +346,10 @@ section .container-heading h1 {
 .container-content {
   border: 10px ridge var(--primary-hex-color);
   background-color:rgb(0, 0, 0);
+  width: 100%;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
 }
 
 .container-content p {
@@ -308,7 +361,7 @@ section .container-heading h1 {
 
 .div-resume {
   border: 10px ridge var(--primary-hex-color);
-  background-color: var(--secondary-hex-color);
+  background-color: rgb(155, 177, 128);
   width: 100%;
   padding: 0.5rem;
   display: flex;
@@ -351,7 +404,8 @@ summary {
   margin: -0.5em -0.5em 0;
   padding: 0.5em;
   display: inline;
-
+  align-self: center;
+  
   width: auto;
   text-align: center;
 }
@@ -406,6 +460,10 @@ details[open] summary {
   font-size: calc(26px + (26 - 14) * ((100vw - 300px) / (1600 - 300)));
   text-shadow: var(--primary-shadow-color);
   color: var(--primary-hex-color);
+  border: 10px ridge var(--secondary-hex-color);
+  padding: 1.2rem;
+  display: flex;
+  justify-self: center;
 }
 
 .project-title{
@@ -415,14 +473,14 @@ details[open] summary {
   display: inline-block;
 }
 .project-grid-container {
-  display: flex;
-  position: relative;
+  margin: 0 auto;
+  display: inline-flex;
   justify-content: center;
-  flex-flow: row wrap;
-  margin: auto;
-
-  overflow: hidden;
-  max-width: 100%;
+  gap: 5px;
+  width: 100%;
+  padding: 0.5rem;
+  border: 10px ridge var(--primary-hex-color);
+  background-color: rgb(30, 24, 43)
 }
 
 .project-container-left {
@@ -464,12 +522,10 @@ details[open] summary {
 
 figure {
   display: flex;
-  flex-flow: column;
-  margin: auto;
+  flex-direction: column;
   border: thin #c0c0c0 solid;
-  padding: 5px;
-  background-color: black;
-  width: 600px;
+  background-color: rgb(0, 0, 0);
+  
 }
 
 figcaption {
