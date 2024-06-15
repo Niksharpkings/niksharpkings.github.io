@@ -71,18 +71,18 @@ function drawFace(ctx, radius) { // create a function called drawFace with the c
   let grad; // create a variable called grad to be used later on in the code to create a gradient for the clock face
   ctx.beginPath(); // begin the path to draw the clock face and numbers
   ctx.arc(0, 0, radius, 0, 2 * Math.PI); // draw the arc for the clock face and numbers
-  ctx.fillStyle = "#32a824"; // set the fill style to a green color
+  ctx.fillStyle = "#a1c5bf"; // set the fill style to a green color
   ctx.fill(); // fill the clock face and numbers
   grad = ctx.createRadialGradient(0, 0, radius * 0.95, 0, 0, radius * 1.05); // create a radial gradient for the clock face and numbers
-  grad.addColorStop(0, "#333"); // add a color stop to the gradient
-  grad.addColorStop(0.5, "#0affeb"); // add a color stop to the gradient
-  grad.addColorStop(1, "#333"); // add a color stop to the gradient
+  grad.addColorStop(0, "#173015"); // add a color stop to the gradient
+  grad.addColorStop(0.5, "#0c0c0c"); // add a color stop to the gradient
+  grad.addColorStop(1, "#49c012"); // add a color stop to the gradient
   ctx.strokeStyle = grad; // set the stroke style to the gradient color
   ctx.lineWidth = radius * 0.1; // set the line width to the radius * 0.1
   ctx.stroke(); // stroke the clock face and numbers to the canvas element
   ctx.beginPath(); // begin the path to draw the clock face and numbers again
-  ctx.arc(0, 0, radius * 0.1, 0, 2 * Math.PI); // draw the arc for the clock face and numbers 
-  ctx.fillStyle = "#333"; // set the fill style to a dark color for the center of the clock face and numbers
+  ctx.arc(0, 0, radius * 0.1, 0, 2 * Math.PI); // draw the arc for the clock face and numbers
+  ctx.fillStyle = "#000000"; // set the fill style to a dark color for the center of the clock face and numbers
   ctx.fill(); // fill the clock face and numbers
 }
 
@@ -110,10 +110,11 @@ function drawTime(ctx, radius) { // create a function called drawTime with the c
   let minute = now.getMinutes(); // get the minutes from the date object
   let second = now.getSeconds();  // get the seconds from the date object
   let ms = now.getMilliseconds(); // get the milliseconds from the date object
+// get the nanoseconds from the date object
   //hour
   hour = hour % 12; // set the hour to 12
   hour =
-    (hour * Math.PI) / 6 + // add the hour to the clock hand movement for the hour 
+    (hour * Math.PI) / 6 + // add the hour to the clock hand movement for the hour
     (minute * Math.PI) / (6 * 60) + // add the minute to the clock hand movement for the hour
     (second * Math.PI) / (360 * 60) + // add the second to the clock hand movement for the hour
     (ms * Math.PI) / (360 * 60 * 500); // add milliseconds to the clock hand movement for the hour
