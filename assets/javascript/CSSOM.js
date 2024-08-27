@@ -44,6 +44,10 @@ function resetModifierKeys(e) {
 }
 
 function getAdditionalInfo(element) {
+  if (!element) {
+    return {}; // Return an empty object if element is null or undefined
+  }
+
   const attributes = [
     'innerText', 'title', 'alt', 'value', 'type', 'name', 'action', 'method', 'enctype', 'acceptCharset', 'accept', 
     'autocomplete', 'autofocus', 'autocapitalize', 'autocorrect', 'autosave', 'checked', 'disabled', 'form', 
@@ -88,6 +92,10 @@ function setCoords(e) {
   resetModifierKeys(e);
 
   const element = document.elementFromPoint(coords.clientX, coords.clientY);
+  if (!element) {
+    return; // Exit the function if no element is found
+  }
+
   const info = getAdditionalInfo(element);
 
   log.innerText = generateLogMessage(coords, e, element, info);
