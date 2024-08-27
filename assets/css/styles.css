@@ -4,9 +4,9 @@
   --primary-shadow-color: 0 0 10px #01c044, 0 0 20px #20ace4, 0 0 30px #4a0aa3;
   --secondary-shadow-color: 0 0 5px #0affeb, 0 0 10px #00ffff, 0 0 20px #11ebeb;
   --primary-hex-color: #000000;
-  --secondary-hex-color: #72926d;
+  --secondary-hex-color: #8eb8a3;
   --background-white-rgb-color: rgb(255, 255, 255);
-  color-scheme: light dark;
+  color-scheme: normal;
   scrollbar-color: rebeccapurple green;
 }
 
@@ -31,6 +31,14 @@ html * {
   cursor: crosshair;
 }
 
+noscript {
+  background-color: red;
+  color: rgb(0, 0, 0);
+  font-size: 25px;
+  font-weight: bold;
+  text-align: center;
+}
+
 body {
   /*Box model stuff*/
   background-color: var(--secondary-hex-color);
@@ -50,6 +58,7 @@ header {
   /*Box model stuff*/
   padding: 5px 10px;
   border: var(--secondary-hex-color) 10px double;
+  border-radius: 20px;
   background-attachment: fixed;
   background-color: var(--primary-hex-color);
   background-position: 100%;
@@ -60,9 +69,33 @@ header {
   overflow: hidden;
 }
 
-head details summary mark {
+.Custom-Script-Details summary mark {
   /*Display stuff*/
-  display: inline;
+  display: flex;
+  /*Positioning stuff*/
+  position: relative;
+  /*Box model stuff*/
+  padding: 10px;
+  margin: 0px;
+  /*Typography stuff*/
+  font-size: 12px;
+  font-weight: bold;
+  text-align: center;
+  text-shadow: 0 0 10px #ec5f5fbb, 0 0 20px #20ace4, 0 0 30px #4a0aae;
+  color: rgb(148, 46, 46);
+  /*Miscellaneous*/
+  list-style-type: none;
+  border-radius: 20px;
+}
+
+.Custom-Script-Details ul li p {
+  color: white;
+  text-shadow: var(--primary-shadow-color);
+}
+
+.Custom-Script-Details summary mark:hover {
+  /*Display stuff*/
+  display: flow;
   /*Positioning stuff*/
   position: relative;
   /*Box model stuff*/
@@ -76,7 +109,15 @@ head details summary mark {
   color: rgb(148, 46, 46);
   /*Miscellaneous*/
   list-style-type: none;
+  border-radius: 20px;
+  background-color: var(--primary-hex-color);
+  color: var(--secondary-hex-color);
+  text-shadow: var(--secondary-shadow-color);
+}
 
+.Custom-Script-Details summary mark:hover .tooltiptext {
+  /*Miscellaneous*/
+  visibility: visible;
 }
 
 ul li p {
@@ -89,19 +130,27 @@ ul li p {
 
 nav {
   /*Display stuff*/
-  display: flex;
+  display: flexbox;
   align-items: center;
   justify-content: center;
   /*Box model stuff*/
-  width: 100%;
-  margin: 5px auto;
-  padding: 5px;
+  width: 40%;
+  margin: 0px auto;
+  padding: 0px;
   /*Typography stuff*/
-  font-size: 20px;
+  font-size: 14px;
   font-weight: bold;
   text-decoration: none;
   text-align: center;
   text-shadow: var(--secondary-shadow-color);
+  border-radius: 20px;
+}
+header nav ul {
+  display: flex;
+  justify-content: center; /* Evenly space the items */
+  padding: 0;
+  margin: 0;
+  list-style: none;
 }
 
 header nav li {
@@ -112,6 +161,8 @@ header nav li {
   padding: 5px;
   /*Miscellaneous*/
   list-style: none;
+  flex: 1; /* Make each list item take up equal space */
+  text-align: center; /* Center the text within each list item */
 }
 
 header nav li a {
@@ -119,77 +170,42 @@ header nav li a {
   display: block;
   /*Positioning stuff*/
   z-index: 1;
+  width: 100%; /* Make the anchor tag take up the full width of the list item */
   /*Box model stuff*/
   margin: 0px;
-  padding: 10px 10px;
+  padding: 10px 0px;
   border-radius: 3px;
-  
   outline-color: var(--secondary-hex-color);
   outline-style: double;
   outline-width: 5px;
   background-color: rgb(72, 12, 212);
   /*Typography stuff*/
   color: var(--primary-hex-color);
+  text-decoration: none;
   /*Miscellaneous*/
   line-height: 1.5;
 }
 
-header nav li a:hover {
-  /*Positioning stuff*/
-  z-index: 1;
-  /*Box model stuff*/
-  padding: 4px 5px;
-  border-radius: 3px;
-  outline-color: var(--primary-hex-color);
-  outline-style: dashed;
-  outline-width: 2px;
-  background-color: var(--primary-hex-color);
-  /*Typography stuff*/
-  text-decoration: none;
-  color: var(--secondary-hex-color);
-  /*Miscellaneous*/
-  box-shadow: 2px 0px 1px var(--primary-hex-color);
+header nav li a:hover,
+header nav li a:active,
+header nav li a:focus {
+  background-color: var(--primary-hex-color) drop-shadow(0px 0px 1.2rem var(--secondary-hex-color));
+  color: white;
+  outline-color: whitesmoke;
   transform: scale(1) rotate(0deg) translate(0%, 0%);
   filter: saturate(6) contrast(100%) drop-shadow(0px 0px 1.2rem var(--secondary-hex-color)) brightness(1) sepia(0%) opacity(95%) hue-rotate(4deg) grayscale(50%) blur(0px) invert(5%);
-}
-
-header nav li a:active {
-  /*Box model stuff*/
-  padding: 5px 10px;
-  border-radius: 3px;
-  outline-color: var(--primary-hex-color);
   outline-style: dashed;
   outline-width: 2px;
-  background-color: var(--primary-hex-color);
-  /*Typography stuff*/
-  text-decoration: none;
-  color: var(--secondary-hex-color);
-  /*Miscellaneous*/
   box-shadow: 2px 0px 1px var(--primary-hex-color);
-}
-
-header nav li a:focus {
-  /*Positioning stuff*/
-  z-index: 1;
-  /*Box model stuff*/
-  padding: 5px 10px;
   border-radius: 3px;
-  outline-color: var(--primary-hex-color);
-  outline-style: dashed;
-  outline-width: 2px;
-  background-color: var(--primary-hex-color);
-  /*Typography stuff*/
-  text-decoration: none;
-  color: var(--secondary-hex-color);
-  /*Miscellaneous*/
-  box-shadow: 2px 0px 1px var(--primary-hex-color);
 }
 
 .rightNow {
   /*Display stuff*/
   display: grid;
   /*Positioning stuff*/
-  margin: 5px;
+  margin: 5px auto;
+  padding: 5px;
   align-items: center;
   justify-content: center;
   background-color: whitesmoke;
@@ -198,20 +214,61 @@ header nav li a:focus {
   /*Typography stuff*/
   color: var(--primary-hex-color);
   font-size: 14px;
+  border-radius: 20px;
+  width: 400px;
 }
-
 #canvasID {
   /*Display stuff*/
-  display:grid;
-  /*Positioning stuff*/
-  background-color: #000000;
+  display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  /*Positioning stuff*/
+  background-color: #000000;
   /*Box model stuff*/
   border: 2px dotted rgb(39, 54, 36);
   /*Typography stuff*/
   color: var(--primary-hex-color);
   font-size: 14px;
+}
+.outer {
+  width: 100%;
+  border-color: #000000;
+  border-width: 5px;
+}
+
+.inner {
+  font-family: monospace;
+  position:relative;
+  width: 100%;
+  background-color: rgb(0, 0, 0);
+  color: white;
+  cursor: crosshair;
+  user-select: none;
+  border-color: #000000;
+  border-width: 5px;
+}
+
+.log {
+  /*Display stuff*/
+  display: block;
+    /*Positioning stuff*/
+  position: absolute;
+    /*Box model stuff*/
+  /*Typography stuff*/
+  color:white;
+  text-shadow: var(--primary-shadow-color);
+  font-size: 16px;
+  font-weight: bold;
+  background-color: rgba(0, 0, 0, 0.7);
+  border: 2px double rgb(51, 252, 11, 0.4);
+  border-radius: 5px;
+  pointer-events: none; /* Prevents the log from interfering with mouse events */
+  font-size: x-small;
+  padding: 10px;
+  margin: 0px 60px;
+  overflow: visible;
+  z-index: 1000;
 }
 
 .tooltip-nav {
@@ -282,6 +339,7 @@ hr:after {
   text-shadow: var(--primary-shadow-color);
   color: var(--primary-hex-color);
   border: 10px double var(--secondary-hex-color);
+  border-radius: 20px;
 }
 
 .hero img {
@@ -309,6 +367,7 @@ hr:after {
   top: -50px;
   /*Box model stuff*/
   padding: 0 0px;
+  border-radius: 10px;
   /*Typography stuff*/
 }
 
@@ -360,11 +419,11 @@ section .container-heading h1 {
 }
 
 .div-resume {
+  display: flexbox;
   border: 10px ridge var(--primary-hex-color);
-  background-color: rgb(155, 177, 128);
+  background-color: rgb(92, 92, 92);
   width: 100%;
   padding: 0.5rem;
-  display: flex;
   flex-direction: column;
 }
 
@@ -405,7 +464,6 @@ summary {
   padding: 0.5em;
   display: inline;
   align-self: center;
-  
   width: auto;
   text-align: center;
 }
@@ -437,6 +495,38 @@ details[open] summary {
   color: var(--secondary-hex-color);
 }
 
+.legend-3-span mark {
+    /*Display stuff*/
+    display: flexbox;
+    /*Positioning stuff*/
+    position: relative;
+    /*Box model stuff*/
+    margin: 0px;
+    /*Typography stuff*/
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+    text-shadow: 0 0 10px #ec5f5fbb, 0 0 20px #20ace4, 0 0 30px #4a0aae;
+    color: rgb(148, 46, 46);
+    /*Miscellaneous*/
+    list-style-type: none;
+    border-radius: 20px;
+  
+}
+
+.resume-details {
+  /*Display stuff*/
+  display: block;
+  /*Box model stuff*/
+  background-color: var(--primary-hex-color);
+  /*Typography stuff*/
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  color: var(--secondary-hex-color);
+  border: 10px ridge var(--secondary-hex-color);
+}
+
 .details-p {
   font-size: 12px;
   text-align: left;
@@ -444,7 +534,7 @@ details[open] summary {
 
 .projects {
   /*Display stuff*/
-  display: block;
+  display: flexbox;
   /*Box model stuff*/
   background-color: var(--primary-hex-color);
   /*Typography stuff*/
@@ -684,6 +774,7 @@ div .contact-list-item p {
     overflow: visible;
     text-align: center;
     height: 5px;
+    
   }
 
   hr:after {
@@ -691,11 +782,13 @@ div .contact-list-item p {
     padding: 0 0px;
     position: relative;
     top: -20px;
+    
   }
 
   .hero-intro h1{
     font-size: 16px;
     top: 30px;
+    border-radius: 10px;
   }
 
   .hero-intro img {
@@ -706,6 +799,7 @@ div .contact-list-item p {
     padding: 0 0px;
     font-size: 18px;
     top: -30px;
+    border-radius: 10px;
   }
 
   #hero-name {
