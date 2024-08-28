@@ -12,6 +12,7 @@ Last Updated to this repo: March 8, 2023 2:30pm PDT -8gmt
 
 #### Git push Versions :
 
+* `v1.1.2 - | Aug 28, 2024 ~3:32am PDT | Made some minor UI mouse hover viewport, renamed two of my Javascript custom code for the millisecond hand clock and custom CSSOM mouse trailtaletracker client-side info-stats`
 * `v1.1.1 - | Aug 27, 2024 ~1:00pm PDT | Made some minor UI mouse hover viewport fixes and other minor adjustments to the head>links and added some new resume computer skill sets.`
 * `v1.1.0 - | Aug 27, 2024 ~12:30pm PDT | Made some minor UI changes, Added CSSOM and some cool Mouse following UI.`
 * `v1.0.9 - | June 15, 2024 ~12:10am PDT | Changed the background and hero background image. `
