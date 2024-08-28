@@ -1,143 +1,52 @@
-<!DOCTYPE html>
-
-<html lang="en" dir="ltr" contenteditable="false">
-
-<head>
-
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Ńἱĸἱ৳α Shârρἱo's UCLAx+U2 HTML/CSS Portfolio/Project/Resume Page</title>
-  <meta http-equiv="Content-Security-Policy" content="connect-src 'self';
-  font-src 'self';
-  frame-src https://www.google.com/;
-  img-src * 'self' data: https:;
-  manifest-src 'self';
-  media-src 'self';
-  base-uri 'self';
-  form-action 'self';
-  object-src 'self';
-  script-src 'self';
-  script-src-elem 'self' 'sha256-vvt4KWwuNr51XfE5m+hzeNEGhiOfZzG97ccfqGsPwvE=';
-  script-src-attr 'self';
-  style-src-elem 'self' 'sha256-wG7aBvp9/yHanLKIFezWx95YfJa4kMhd7vcw9pyWgqE=';
-  style-src-attr 'self';
-  worker-src 'self'">
-  <meta name="robots" content="index, nofollow">
-  <meta name="googlebot" content="index, nofollow">
-  <meta name="google" content="index, nofollow"> <!-- https://web.dev/vitals/ -->
-  <meta name="google-site-verification" content="EauQU7rPJCYYGsyqxpmZv-hDfiGlYHLUu3GB7d_SBTM">
-  <meta name="keywords" content="
-  Ńἱĸἱ৳α Shârρἱo's,
-  UCLAx,
-  Portfolio,
-  Full Stack Web Dev,
-  Coding Bootcamp,
-  Los Angeles,
-  California,
-  UCLA,
-  UCLA extension,
-  Full Stack Web Developer,
-  Github,
-  HTML/CSS,
-  IT,
-  motion graphic designer,
-  Freelance,
-  Online Fraud Investigator,
-  Loss Prevention,
-  Coordinator,
-  Security Guard,
-  Graphic Designer
-  ">
+/*
   <meta name="rating" content="General">
   <meta name="publisher" content="Ńἱĸἱ৳α 'Niksharpkings' Shârρἱo's">
   <meta name="designer" content="Ńἱĸἱ৳α 'Niksharpkings' Shârρἱo's">
   <meta name="author" content="Ńἱĸἱ৳α Shârρἱo">
   <meta name="description" content="Ńἱĸἱ৳α Shârρἱo's Github HTML/CSS-Vanilla Portfolio Page">
   <meta name="generator" content="Visual Studio Code">
-  <meta name="msvalidate.01" content="8B0BE8DDD2D4F343929BA403DD0CF7A2">
-  <!-- cursor image, my cause lag over time, but added  it regardless since its a simple page-->
-  <!-- https://html.spec.whatwg.org/multipage/semantics.html#the-link-element -->
-  <link rel="icon" type="image/x-icon" sizes="16x16" href="../cursorfavicon/niksharpfavicon16x.ico">
-  <link rel="icon" type="image/x-icon" sizes="16x16" href="../cursorfavicon/niksharfavicon16x.ico">
-  <link rel="icon" type="image/x-icon" sizes="36x36" href="../cursorfavicon/niksharpfavicon36x.ico">
-  <link rel="icon" type="image/x-icon" sizes="36x36" href="../cursorfavicon/niksharfavicon36x.ico">
-  <link rel="icon" type="image/x-icon" sizes="64x64" href="../cursorfavicon/niksharpfavicon64x.ico">
-  <link rel="icon" type="image/x-icon" sizes="64x64" href="../cursorfavicon/niksharfavicon64x.ico">
-  <link rel="apple-touch-icon" href="./assets/manifestIcon/maskable_icon_x128.png">
-  <link href="favicon.ico" rel="icon" type="image/x-icon"> <!-- github.pages favicon icon-->
-  <!-- manifest  https://w3c.github.io/manifest/ https://web.dev/maskable-icon/ https://developer.mozilla.org/en-US/docs/Web/Manifest https://url.spec.whatwg.org/#concept-url-->
-  <link rel="manifest" href="./manifest.json" type="application/manifest+json">
-  <link title="stylesheet" media="only screen and (color)" rel="stylesheet" type="text/css"
-    href="../css/secondary-styles.css">
 
-</head>
+ privacy-policy.html
+ GitHub account = https://github.com/Niksharpkings/
+ https://niksharpkings.github.io
+ https://niksharpkings.github.io/privacy-policy.html
 
-<body>
-  <header>
-    <nav>
-      <h1 class="title">
-        <a class="title-name" href="./index.html">Ńἱĸἱ৳α Shârρἱo's Github Page</a>
-      </h1>
-      <ul>
-        <li><a href="../../index.html">Home</a></li>
-        <li><a href="./privacy-policy.html#contact-me">Contact</a></li>
-        <li>
-          <a title="GitHub account" type=text/html hreflang=en class="tooltip-nav"
-            href="https://github.com/Niksharpkings/" target="_blank" rel="noopener noreferrer">
-            GitHub Account
-            <span class="tooltiptext-nav">https://github.com/Niksharpkings/</span>
-          </a>
-        </li>
-        <li><!-- redirects to UCLA extension site-->
-          <a title="my-portfolio-uclax-C2" type=text/html hreflang=en class="tooltip-nav"
-            href="https://niksharpkings.github.io/my-portfolio-uclax-C2/" target="_blank" rel="noopener noreferrer">
-            My UCLA+U2 Profile
-            <span class="tooltiptext-nav">https://niksharpkings.github.io/my-portfolio-uclax-C2/</span>
-          </a>
-        </li>
-        <li><a href="./assets/html/privacy-policy.html">Privacy Policy</a></li>
-      </ul>
-    </nav>
-  </header>
-  <section class="hero">
-    <h2 class="page-title"><a href="./privacy-policy.html" title="privacy-policy">&gt;Privacy Policy&lt;</a><br></h2>
-    <br>
-  </section>
-  <article class="secondary-content">
-    <h2>Website Terms of Use</h2>
-    <h4>Version 1.0</h4>
-    <p>
+ Privacy Policy
+
+    Website Terms of Use
+    Version 1.0
+    
       The Nikita Sharpio GitHub website located at
       https://niksharpkings.github.io/ is a copyrighted work belonging to
       Nikita "Nik" Sharpio. Certain features of the Site may be subject to
       additional guidelines, terms, or rules, which will be posted on the Site
       in connection with such features.
-    </p>
-    <p>
+    
+    
       All such additional terms, guidelines, and rules are incorporated by
       reference into these Terms.
-    </p>
-    <p>
+    
+    
       These Terms of Use described the legally binding terms and conditions
       that oversee your use of the Site. BY LOGGING INTO THE SITE, YOU ARE
       BEING COMPLIANT THAT THESE TERMS and you represent that you have the
       authority and capacity to enter into these Terms. YOU SHOULD BE AT LEAST
       18 YEARS OF AGE TO ACCESS THE SITE. IF YOU DISAGREE WITH ALL OF THE
       PROVISION OF THESE TERMS, DO NOT LOG INTO AND/OR USE THE SITE.
-    </p>
-    <p>
+    
+    
       These terms require the use of arbitration Section 10.2 on an individual
       basis to resolve disputes and also limit the remedies available to you
       in the event of a dispute. These Terms of Use were created with the help
       of the Terms Of Use Generator and the Privacy Policy Template.
-    </p>
-    <h3>Access to the Site</h3>
-    <p>
+    
+    Access to the Site
+    
       Subject to these Terms. Company grants you a non-transferable,
       non-exclusive, revocable, limited license to access the Site solely for
       your own personal, noncommercial use.
-    </p>
-    <p>
+    
+    
       Certain Restrictions. The rights approved to you in these Terms are
       subject to the following restrictions: (a) you shall not sell, rent,
       lease, transfer, assign, distribute, host, or otherwise commercially
@@ -151,29 +60,29 @@
       addition to functionality of the Site shall be subject to these Terms.
       All copyright and other proprietary notices on the Site must be retained
       on all copies thereof.
-    </p>
-    <p>
+    
+    
       Company reserves the right to change, suspend, or cease the Site with or
       without notice to you. You approved that Company will not be held liable
       to you or any third-party for any change, interruption, or termination
       of the Site or any part.
-    </p>
-    <p>
+    
+    
       No Support or Maintenance. You agree that Company will have no
       obligation to provide you with any support in connection with the Site.
-    </p>
-    <p>
+    
+    
       Excluding any User Content that you may provide, you are aware that all
       the intellectual property rights, including copyrights, patents,
       trademarks, and trade secrets, in the Site and its content are owned by
-      Company or Companyâ€™s suppliers. Note that these Terms and access to
+      Company or Companys suppliers. Note that these Terms and access to
       the Site do not give you any rights, title or interest in or to any
       intellectual property rights, except for the limited access rights
       expressed in Section 2.1. Company and its suppliers reserve all rights
       not granted in these Terms.
-    </p>
-    <h3>Third-Party Links & Ads; Other Users</h3>
-    <p>
+    
+    Third-Party Links & Ads; Other Users
+    
       Third-Party Links & Ads. The Site may contain links to third-party
       websites and services, and/or display advertisements for third-parties.
       Such Third-Party Links & Ads are not under the control of Company, and
@@ -183,11 +92,11 @@
       any representations with respect to Third-Party Links & Ads. You use all
       Third-Party Links & Ads at your own risk, and should apply a suitable
       level of caution and discretion in doing so. When you click on any of
-      the Third-Party Links & Ads, the applicable third partyâ€™s terms and
-      policies apply, including the third partyâ€™s privacy and data gathering
+      the Third-Party Links & Ads, the applicable third partys terms and
+      policies apply, including the third partys privacy and data gathering
       practices.
-    </p>
-    <p>
+    
+    
       Other Users. Each Site user is solely responsible for any and all of its
       own User Content. Because we do not control User Content, you
       acknowledge and agree that we are not responsible for any User Content,
@@ -195,8 +104,8 @@
       responsible for any loss or damage incurred as the result of any such
       interactions. If there is a dispute between you and any Site user, we
       are under no obligation to become involved.
-    </p>
-    <p>
+    
+    
       You hereby release and forever discharge the Company and our officers,
       employees, agents, successors, and assigns from, and hereby waive and
       relinquish, each and every past, present and future dispute, claim,
@@ -209,18 +118,18 @@
       suspect to exist in his or her favor at the time of executing the
       release, which if known by him or her must have materially affected his
       or her settlement with the debtor."
-    </p>
-    <p>
+    
+    
       Cookies and Web Beacons. Like any other website,
-      https://niksharpkings.github.io/ uses â€˜cookiesâ€™. These cookies are
-      used to store information including visitorsâ€™ preferences, and the
+      https://niksharpkings.github.io/ uses cookies. These cookies are
+      used to store information including visitors preferences, and the
       pages on the website that the visitor accessed or visited. The
-      information is used to optimize the usersâ€™ experience by customizing
-      our web page content based on visitorsâ€™ browser type and/or other
+      information is used to optimize the users experience by customizing
+      our web page content based on visitors browser type and/or other
       information.
-    </p>
-    <h3>Disclaimers:</h3>
-    <p>
+    
+    Disclaimers:
+    
       The site is provided on an "as-is" and "as available" basis, and company
       and our suppliers expressly disclaim any and all warranties and
       conditions of any kind, whether express, implied, or statutory,
@@ -233,15 +142,15 @@
       applicable law requires any warranties with respect to the site, all
       such warranties are limited in duration to ninety (90) days from the
       date of first use.
-    </p>
-    <p>
+    
+    
       Some jurisdictions do not allow the exclusion of implied warranties, so
       the above exclusion may not apply to you. Some jurisdictions do not
       allow limitations on how long an implied warranty lasts, so the above
       limitation may not apply to you.
-    </p>
-    <h3>Limitation on Liability</h3>
-    <p>
+    
+    Limitation on Liability
+    
       To the maximum extent permitted by law, in no event shall company or our
       suppliers be liable to you or any third-party for any lost profits, lost
       data, costs of procurement of substitute products, or any indirect,
@@ -251,8 +160,8 @@
       such damages. Access to and use of the site is at your own discretion
       and risk, and you will be solely responsible for any damage to your
       device or computer system, or loss of data resulting therefrom.
-    </p>
-    <p>
+    
+    
       To the maximum extent permitted by law, notwithstanding anything to the
       contrary contained herein, our liability to you for any damages arising
       from or related to this agreement, will at all times be limited to a
@@ -260,13 +169,13 @@
       claim will not enlarge this limit. You agree that our suppliers will
       have no liability of any kind arising from or relating to this
       agreement.
-    </p>
-    <p>
+    
+    
       Some jurisdictions do not allow the limitation or exclusion of liability
       for incidental or consequential damages, so the above limitation or
       exclusion may not apply to you.
-    </p>
-    <p>
+    
+    
       Term and Termination. Subject to this Section, these Terms will remain
       in full force and effect while you use the Site. We may suspend or
       terminate your rights to use the Site at any time for any reason at our
@@ -280,9 +189,9 @@
       under these Terms are terminated, the following provisions of these
       Terms will remain in effect: Sections 2 through 2.5, Section 3 and
       Sections 4 through 10.
-    </p>
-    <h3>Copyright Policy.</h3>
-    <p>
+    
+    Copyright Policy.
+    
       Company respects the intellectual property of others and asks that users
       of our Site do the same. In connection with our Site, we have adopted
       and implemented a policy respecting copyright law that provides for the
@@ -293,42 +202,42 @@
       work, and wish to have the allegedly infringing material removed, the
       following information in the form of a written notification (pursuant to
       17 U.S.C. Â§ 512(c)) must be provided to our designated Copyright Agent:
-    </p>
-    <ul>
-      <li>your physical or electronic signature;</li>
-      <li>
+    
+    
+      your physical or electronic signature;
+      
         identification of the copyrighted work(s) that you claim to have been
         infringed;
-      </li>
-      <li>
+      
+      
         identification of the material on our services that you claim is
         infringing and that you request us to remove;
-      </li>
-      <li>
+      
+      
         sufficient information to permit us to locate such material; your
         address, telephone number, and e-mail address;
-      </li>
-      <li>
+      
+      
         a statement that you have a good faith belief that use of the
         objectionable material is not authorized by the copyright owner, its
         agent, or under the law; and
-      </li>
-      <li>
+      
+      
         a statement that the information in the notification is accurate, and
         under penalty of perjury, that you are either the owner of the
         copyright that has allegedly been infringed or that you are authorized
         to act on behalf of the copyright owner.
-      </li>
+      
     </ul>
-    <p>
+    
       Please note that, pursuant to 17 U.S.C. Â§ 512(f), any misrepresentation
       of material fact in a written notification automatically subjects the
-      complaining party to liability for any damages, costs and attorneyâ€™s
+      complaining party to liability for any damages, costs and attorneys
       fees incurred by us in connection with the written notification and
       allegation of copyright infringement.
-    </p>
-    <h3>General:</h3>
-    <p>
+    
+    General:
+    
       These Terms are subject to occasional revision, and if we make any
       substantial changes, we may notify you by sending you an e-mail to the
       last e-mail address you provided to us and/or by prominently posting
@@ -347,8 +256,8 @@
       read this Arbitration Agreement carefully. It is part of your contract
       with Company and affects your rights. It contains procedures for
       MANDATORY BINDING ARBITRATION AND A CLASS ACTION WAIVER.
-    </p>
-    <p>
+    
+    
       Applicability of Arbitration Agreement. All claims and disputes in
       connection with the Terms or the use of any product or service provided
       by the Company that cannot be resolved informally or in small claims
@@ -359,8 +268,8 @@
       subsidiaries, affiliates, agents, employees, predecessors in interest,
       successors, and assigns, as well as all authorized or unauthorized users
       or beneficiaries of services or goods provided under the Terms.
-    </p>
-    <p>
+    
+    
       Notice Requirement and Informal Dispute Resolution. Before either party
       may seek arbitration, the party must first send to the other party a
       written Notice of Dispute describing the nature and basis of the claim
@@ -373,8 +282,8 @@
       offer made by any party may not be disclosed to the arbitrator until
       after the arbitrator has determined the amount of the award to which
       either party is entitled.
-    </p>
-    <p>
+    
+    
       Arbitration Rules. Arbitration shall be initiated through the American
       Arbitration Association, an established alternative dispute resolution
       provider that offers arbitration as set forth in this section. If AAA is
@@ -402,22 +311,22 @@
       $2,500.00. Each party shall bear its own costs and disbursements arising
       out of the arbitration and shall pay an equal share of the fees and
       costs of the ADR Provider.
-    </p>
-    <p>
+    
+    
       Additional Rules for Non-Appearance Based Arbitration. If non-appearance
       based arbitration is elected, the arbitration shall be conducted by
       telephone, online and/or based solely on written submissions; the
       specific manner shall be chosen by the party initiating the arbitration.
       The arbitration shall not involve any personal appearance by the parties
       or witnesses unless otherwise agreed by the parties.
-    </p>
-    <p>
+    
+    
       Time Limits. If you or the Company pursues arbitration, the arbitration
       action must be initiated and/or demanded within the statute of
       limitations and within any deadline imposed under the AAA Rules for the
       pertinent claim.
-    </p>
-    <p>
+    
+    
       Authority of Arbitrator. If arbitration is initiated, the arbitrator
       will decide the rights and liabilities of you and the Company, and the
       dispute will not be consolidated with any other matters or joined with
@@ -431,8 +340,8 @@
       the same authority to award relief on an individual basis that a judge
       in a court of law would have. The award of the arbitrator is final and
       binding upon you and the Company.
-    </p>
-    <p>
+    
+    
       Waiver of Jury Trial. THE PARTIES HEREBY WAIVE THEIR CONSTITUTIONAL AND
       STATUTORY RIGHTS TO GO TO COURT AND HAVE A TRIAL IN FRONT OF A JUDGE OR
       A JURY, instead electing that all claims and disputes shall be resolved
@@ -443,78 +352,78 @@
       any state or federal court in a suit to vacate or enforce an arbitration
       award or otherwise, YOU AND THE COMPANY WAIVE ALL RIGHTS TO A JURY
       TRIAL, instead electing that the dispute be resolved by a judge.
-    </p>
-    <p>
+    
+    
       Waiver of Class or Consolidated Actions. All claims and disputes within
       the scope of this arbitration agreement must be arbitrated or litigated
       on an individual basis and not on a class basis, and claims of more than
       one customer or user cannot be arbitrated or litigated jointly or
       consolidated with those of any other customer or user.
-    </p>
-    <p>
+    
+    
       Confidentiality. All aspects of the arbitration proceeding shall be
       strictly confidential. The parties agree to maintain confidentiality
       unless otherwise required by law. This paragraph shall not prevent a
       party from submitting to a court of law any information necessary to
       enforce this Agreement, to enforce an arbitration award, or to seek
       injunctive or equitable relief.
-    </p>
-    <p>
+    
+    
       Severability. If any part or parts of this Arbitration Agreement are
       found under the law to be invalid or unenforceable by a court of
       competent jurisdiction, then such specific part or parts shall be of no
       force and effect and shall be severed and the remainder of the Agreement
       shall continue in full force and effect.
-    </p>
-    <p>
+    
+    
       Right to Waive. Any or all of the rights and limitations set forth in
       this Arbitration Agreement may be waived by the party against whom the
       claim is asserted. Such waiver shall not waive or affect any other
       portion of this Arbitration Agreement.
-    </p>
-    <p>
+    
+    
       Survival of Agreement. This Arbitration Agreement will survive the
       termination of your relationship with Company.
-    </p>
-    <p>
+    
+    
       Small Claims Court. Nonetheless the foregoing, either you or the Company
       may bring an individual action in small claims court.
-    </p>
-    <p>
+    
+    
       Emergency Equitable Relief. Anyhow the foregoing, either party may seek
       emergency equitable relief before a state or federal court in order to
       maintain the status quo pending arbitration. A request for interim
       measures shall not be deemed a waiver of any other rights or obligations
       under this Arbitration Agreement.
-    </p>
-    <p>
+    
+    
       Claims Not Subject to Arbitration. Notwithstanding the foregoing, claims
       of defamation, violation of the Computer Fraud and Abuse Act, and
-      infringement or misappropriation of the other partyâ€™s patent,
+      infringement or misappropriation of the other partys patent,
       copyright, trademark or trade secrets shall not be subject to this
       Arbitration Agreement.
-    </p>
-    <p>
+    
+    
       In any circumstances where the foregoing Arbitration Agreement permits
       the parties to litigate in court, the parties hereby agree to submit to
       the personal jurisdiction of the courts located within Netherlands
       County, California, for such purposes.
-    </p>
-    <p>
+    
+    
       The Site may be subject to U.S. export control laws and may be subject
       to export or import regulations in other countries. You agree not to
       export, re-export, or transfer, directly or indirectly, any U.S.
       technical data acquired from Company, or any products utilizing such
       data, in violation of the United States export laws or regulations.
-    </p>
-    <p>
+    
+    
       Company is located at the address in Section 10.8. If you are a
       California resident, you may report complaints to the Complaint
       Assistance Unit of the Division of Consumer Product of the California
       Department of Consumer Affairs by contacting them in writing at 400 R
       Street, Sacramento, CA 95814, or by telephone at (800) 952-5210.
-    </p>
-    <p>
+    
+    
       Electronic Communications. The communications between you and Company
       use electronic means, whether you use the Site or send us emails, or
       whether Company posts notices on the Site or communicates with you via
@@ -524,8 +433,8 @@
       communications that Company provides to you electronically satisfy any
       legal obligation that such communications would satisfy if it were be in
       a hard copy writing.
-    </p>
-    <p>
+    
+    
       Entire Terms. These Terms constitute the entire agreement between you
       and us regarding the use of the Site. Our failure to exercise or enforce
       any right or provision of these Terms shall not operate as a waiver of
@@ -539,38 +448,401 @@
       that of an independent contractor, and neither party is an agent or
       partner of the other. These Terms, and your rights and obligations
       herein, may not be assigned, subcontracted, delegated, or otherwise
-      transferred by you without Companyâ€™s prior written consent, and any
+      transferred by you without Companys prior written consent, and any
       attempted assignment, subcontract, delegation, or transfer in violation
       of the foregoing will be null and void. Company may freely assign these
       Terms. The terms and conditions set forth in these Terms shall be
       binding upon assignees.
-    </p>
-    <p>Your Privacy. Please read our Privacy Policy.</p>
-    <p>
+
+    Your Privacy. Please read our Privacy Policy.
+
       Copyright/Trademark Information. Copyright Â©. All rights reserved. All
       trademarks, logos and service marks displayed on the Site are our
       property or the property of other third-parties. You are not permitted
       to use these Marks without our prior written consent or the consent of
       such third party which may own the Marks.
-    </p>
-    <h3 id="contact-me">Contact Information</h3>
-    <p>Address: ##N/A#### N/A Street, Brentwood, Los Angeles, CA, 90049</p>
-    <p>Email(email encrypted with duckduckgo): be29m84o@duck.com</p>
-  </article>
-  <!-- footer -->
-  <footer>
-    <h2>❤️ Made with love by Nikita "Nik" Sharpio or niksharpkings</h2>
-    <div>
-      <small><a type=text/html title="MIT License" rel="license noopener"
-          href="http://www.opensource.org/licenses/mit-license.php">&gt;MIT Licensed Link&lt;</a></small>
-      <small><a type=text/html title="Apache License Version 2.0" rel="license noopener"
-          href="https://github.com/Niksharpkings/my-portfolio-uclax-C2/blob/main/LICENSE">&gt;Apache License Version 2.0
-          Link&lt;</a></small>
-      <br>
-      &copy; 2023 Nikita "niksharpkings Sharpio All rights reserved.
-    </div>
-  </footer>
-  <noscript>Your browser does not support JavaScript!</noscript>
-</body>
 
-</html>
+  Contact Information
+    Address: ##N/A#### N/A Street, Brentwood, Los Angeles, CA, 90049
+    Email(email encrypted with duckduckgo): be29m84o@duck.com
+❤️ Made with love by Nikita "Nik" Sharpio or niksharpkings</h2>
+
+      MIT License
+          "http://www.opensource.org/licenses/mit-license.php">MIT Licensed Link
+      Apache License Version 2.0"
+          "https://github.com/Niksharpkings/LICENSE" Apache License Version 2.0
+
+          
+          
+          
+          
+          
+          
+          
+          
+          
+                                           Apache License
+                           Version 2.0, January 2004
+                        http://www.apache.org/licenses/
+
+   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
+
+   1. Definitions.
+
+      "License" shall mean the terms and conditions for use, reproduction,
+      and distribution as defined by Sections 1 through 9 of this document.
+
+      "Licensor" shall mean the copyright owner or entity authorized by
+      the copyright owner that is granting the License.
+
+      "Legal Entity" shall mean the union of the acting entity and all
+      other entities that control, are controlled by, or are under common
+      control with that entity. For the purposes of this definition,
+      "control" means (i) the power, direct or indirect, to cause the
+      direction or management of such entity, whether by contract or
+      otherwise, or (ii) ownership of fifty percent (50%) or more of the
+      outstanding shares, or (iii) beneficial ownership of such entity.
+
+      "You" (or "Your") shall mean an individual or Legal Entity
+      exercising permissions granted by this License.
+
+      "Source" form shall mean the preferred form for making modifications,
+      including but not limited to software source code, documentation
+      source, and configuration files.
+
+      "Object" form shall mean any form resulting from mechanical
+      transformation or translation of a Source form, including but
+      not limited to compiled object code, generated documentation,
+      and conversions to other media types.
+
+      "Work" shall mean the work of authorship, whether in Source or
+      Object form, made available under the License, as indicated by a
+      copyright notice that is included in or attached to the work
+      (an example is provided in the Appendix below).
+
+      "Derivative Works" shall mean any work, whether in Source or Object
+      form, that is based on (or derived from) the Work and for which the
+      editorial revisions, annotations, elaborations, or other modifications
+      represent, as a whole, an original work of authorship. For the purposes
+      of this License, Derivative Works shall not include works that remain
+      separable from, or merely link (or bind by name) to the interfaces of,
+      the Work and Derivative Works thereof.
+
+      "Contribution" shall mean any work of authorship, including
+      the original version of the Work and any modifications or additions
+      to that Work or Derivative Works thereof, that is intentionally
+      submitted to Licensor for inclusion in the Work by the copyright owner
+      or by an individual or Legal Entity authorized to submit on behalf of
+      the copyright owner. For the purposes of this definition, "submitted"
+      means any form of electronic, verbal, or written communication sent
+      to the Licensor or its representatives, including but not limited to
+      communication on electronic mailing lists, source code control systems,
+      and issue tracking systems that are managed by, or on behalf of, the
+      Licensor for the purpose of discussing and improving the Work, but
+      excluding communication that is conspicuously marked or otherwise
+      designated in writing by the copyright owner as "Not a Contribution."
+
+      "Contributor" shall mean Licensor and any individual or Legal Entity
+      on behalf of whom a Contribution has been received by Licensor and
+      subsequently incorporated within the Work.
+
+   2. Grant of Copyright License. Subject to the terms and conditions of
+      this License, each Contributor hereby grants to You a perpetual,
+      worldwide, non-exclusive, no-charge, royalty-free, irrevocable
+      copyright license to reproduce, prepare Derivative Works of,
+      publicly display, publicly perform, sublicense, and distribute the
+      Work and such Derivative Works in Source or Object form.
+
+   3. Grant of Patent License. Subject to the terms and conditions of
+      this License, each Contributor hereby grants to You a perpetual,
+      worldwide, non-exclusive, no-charge, royalty-free, irrevocable
+      (except as stated in this section) patent license to make, have made,
+      use, offer to sell, sell, import, and otherwise transfer the Work,
+      where such license applies only to those patent claims licensable
+      by such Contributor that are necessarily infringed by their
+      Contribution(s) alone or by combination of their Contribution(s)
+      with the Work to which such Contribution(s) was submitted. If You
+      institute patent litigation against any entity (including a
+      cross-claim or counterclaim in a lawsuit) alleging that the Work
+      or a Contribution incorporated within the Work constitutes direct
+      or contributory patent infringement, then any patent licenses
+      granted to You under this License for that Work shall terminate
+      as of the date such litigation is filed.
+
+   4. Redistribution. You may reproduce and distribute copies of the
+      Work or Derivative Works thereof in any medium, with or without
+      modifications, and in Source or Object form, provided that You
+      meet the following conditions:
+
+      (a) You must give any other recipients of the Work or
+         Derivative Works a copy of this License; and
+
+      (b) You must cause any modified files to carry prominent notices
+         stating that You changed the files; and
+
+      (c) You must retain, in the Source form of any Derivative Works
+         that You distribute, all copyright, patent, trademark, and
+         attribution notices from the Source form of the Work,
+         excluding those notices that do not pertain to any part of
+         the Derivative Works; and
+
+      (d) If the Work includes a "NOTICE" text file as part of its
+         distribution, then any Derivative Works that You distribute must
+         include a readable copy of the attribution notices contained
+         within such NOTICE file, excluding those notices that do not
+         pertain to any part of the Derivative Works, in at least one
+         of the following places: within a NOTICE text file distributed
+         as part of the Derivative Works; within the Source form or
+         documentation, if provided along with the Derivative Works; or,
+         within a display generated by the Derivative Works, if and
+         wherever such third-party notices normally appear. The contents
+         of the NOTICE file are for informational purposes only and
+         do not modify the License. You may add Your own attribution
+         notices within Derivative Works that You distribute, alongside
+         or as an addendum to the NOTICE text from the Work, provided
+         that such additional attribution notices cannot be construed
+         as modifying the License.
+
+      You may add Your own copyright statement to Your modifications and
+      may provide additional or different license terms and conditions
+      for use, reproduction, or distribution of Your modifications, or
+      for any such Derivative Works as a whole, provided Your use,
+      reproduction, and distribution of the Work otherwise complies with
+      the conditions stated in this License.
+
+   5. Submission of Contributions. Unless You explicitly state otherwise,
+      any Contribution intentionally submitted for inclusion in the Work
+      by You to the Licensor shall be under the terms and conditions of
+      this License, without any additional terms or conditions.
+      Notwithstanding the above, nothing herein shall supersede or modify
+      the terms of any separate license agreement you may have executed
+      with Licensor regarding such Contributions.
+
+   6. Trademarks. This License does not grant permission to use the trade
+      names, trademarks, service marks, or product names of the Licensor,
+      except as required for reasonable and customary use in describing the
+      origin of the Work and reproducing the content of the NOTICE file.
+
+   7. Disclaimer of Warranty. Unless required by applicable law or
+      agreed to in writing, Licensor provides the Work (and each
+      Contributor provides its Contributions) on an "AS IS" BASIS,
+      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+      implied, including, without limitation, any warranties or conditions
+      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A
+      PARTICULAR PURPOSE. You are solely responsible for determining the
+      appropriateness of using or redistributing the Work and assume any
+      risks associated with Your exercise of permissions under this License.
+
+   8. Limitation of Liability. In no event and under no legal theory,
+      whether in tort (including negligence), contract, or otherwise,
+      unless required by applicable law (such as deliberate and grossly
+      negligent acts) or agreed to in writing, shall any Contributor be
+      liable to You for damages, including any direct, indirect, special,
+      incidental, or consequential damages of any character arising as a
+      result of this License or out of the use or inability to use the
+      Work (including but not limited to damages for loss of goodwill,
+      work stoppage, computer failure or malfunction, or any and all
+      other commercial damages or losses), even if such Contributor
+      has been advised of the possibility of such damages.
+
+   9. Accepting Warranty or Additional Liability. While redistributing
+      the Work or Derivative Works thereof, You may choose to offer,
+      and charge a fee for, acceptance of support, warranty, indemnity,
+      or other liability obligations and/or rights consistent with this
+      License. However, in accepting such obligations, You may act only
+      on Your own behalf and on Your sole responsibility, not on behalf
+      of any other Contributor, and only if You agree to indemnify,
+      defend, and hold each Contributor harmless for any liability
+      incurred by, or claims asserted against, such Contributor by reason
+      of your accepting any such warranty or additional liability.
+
+   END OF TERMS AND CONDITIONS
+
+   APPENDIX: How to apply the Apache License to your work.
+
+      To apply the Apache License to your work, attach the following
+      boilerplate notice, with the fields enclosed by brackets "[]"
+      replaced with your own identifying information. (Don't include
+      the brackets!)  The text should be enclosed in the appropriate
+      comment syntax for the file format. We also recommend that a
+      file or class name and description of purpose be included on the
+      same "printed page" as the copyright notice for easier
+      identification within third-party archives.
+
+   Copyright [2024] [Nikita 'Niksharkings'/'Nik' Sharpio]
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+
+*
+
+/* Thank you MDN for the started code and bit of help from Github Copilot */
+/* I do give anymore permission to use my code that I have on this file (NikS-Custom-CSSOM-Trailtaletracker.js), 
+unless I approve it verbally and also with official signed documentations that give you permission to do so.
+This code is not for sale at the moment and is still in development phase, but the style and layout of this design. 
+I do claim and how it is presented and function, is of my own design and creative design from my own imagination or idea. */
+
+const log = document.querySelector(".log");
+
+const modifierKeys = {
+  altKey: false,
+  ctrlKey: false,
+  metaKey: false,
+  shiftKey: false
+};
+
+function handleTouchEvent(e) {
+  const touch = e.touches[0];
+  return {
+    clientX: touch.clientX,
+    clientY: touch.clientY,
+    pageX: touch.pageX,
+    pageY: touch.pageY,
+    screenX: touch.screenX,
+    screenY: touch.screenY,
+    offsetX: touch.clientX - touch.target.getBoundingClientRect().left,
+    offsetY: touch.clientY - touch.target.getBoundingClientRect().top
+  };
+}
+
+function handleMouseEvent(e) {
+  return {
+    clientX: e.clientX,
+    clientY: e.clientY,
+    pageX: e.pageX,
+    pageY: e.pageY,
+    screenX: e.screenX,
+    screenY: e.screenY,
+    offsetX: e.offsetX,
+    offsetY: e.offsetY
+  };
+}
+
+function resetModifierKeys(e) {
+  if (!e.altKey && !e.ctrlKey && !e.metaKey && !e.shiftKey) {
+    modifierKeys.altKey = false;
+    modifierKeys.ctrlKey = false;
+    modifierKeys.metaKey = false;
+    modifierKeys.shiftKey = false;
+  }
+}
+
+function getAdditionalInfo(element) {
+  if (!element) {
+    return {}; // Return an empty object if element is null or undefined
+  }
+
+  const attributes = [
+    'innerText', 'title', 'alt', 'value', 'type', 'name', 'action', 'method', 'enctype', 'acceptCharset', 'accept', 
+    'autocomplete', 'autofocus', 'autocapitalize', 'autocorrect', 'autosave', 'checked', 'disabled', 'form', 
+    'formAction', 'formEnctype', 'formMethod', 'formNoValidate'
+  ];
+
+  const info = {};
+  attributes.forEach(attr => {
+    info[attr] = element[attr] || '';
+  });
+
+  return info;
+}
+
+function generateLogMessage(coords, e, element, info) {
+  const tagName = element.tagName.toLowerCase();
+  const className = element.className ? `.${element.className.split(' ').join('.')}` : '';
+  const id = element.id ? `#${element.id}` : '';
+  const cssElement = `${id}${className}` || element.style.cssText;
+
+  return `
+    Offset   X: ${coords.offsetX},Y: ${coords.offsetY}
+    Viewport X: ${coords.clientX},Y: ${coords.clientY}
+    Page     X: ${coords.pageX},Y: ${coords.pageY}
+    Screen   X: ${coords.screenX},Y: ${coords.screenY}
+    Movement X: ${e.movementX}, Y: ${e.movementY}
+    Related Target: ${e.relatedTarget ? e.relatedTarget.tagName.toLowerCase() : 'none'}
+    Event X: ${e.x}, Y: ${e.y};
+    Alt Key: ${modifierKeys.altKey}
+    Ctrl Key: ${modifierKeys.ctrlKey}
+    Meta Key: ${modifierKeys.metaKey}
+    Shift Key: ${modifierKeys.shiftKey}
+    Button: ${e.button}, Buttons: ${e.buttons}
+    HTML Element  : ${tagName}
+    CSS Element: ${cssElement}
+    ${Object.entries(info).map(([key, value]) => value ? `${key.charAt(0).toUpperCase() + key.slice(1)}: ${value}` : '').filter(Boolean).join('\n')}
+  `;
+}
+
+function setCoords(e) {
+  const coords = e.touches ? handleTouchEvent(e) : handleMouseEvent(e);
+  resetModifierKeys(e);
+
+  const element = document.elementFromPoint(coords.clientX, coords.clientY);
+  if (!element) {
+    return; // Exit the function if no element is found
+  }
+
+  const info = getAdditionalInfo(element);
+
+  log.innerText = generateLogMessage(coords, e, element, info);
+
+  log.style.left = `${coords.pageX + 5}px`;
+  log.style.top = `${coords.pageY + 5}px`;
+}
+
+function showClickCoords(e) {
+  let pageX, pageY;
+
+  if (e.touches) {
+    const touch = e.changedTouches[0];
+    pageX = touch.pageX;
+    pageY = touch.pageY;
+  } else {
+    pageX = e.pageX;
+    pageY = e.pageY;
+  }
+
+  log.innerText += `
+    Clicked at Page X: ${pageX}, Y: ${pageY}`;
+}
+
+function updateModifierKeys(e) {
+  modifierKeys.altKey = e.altKey;
+  modifierKeys.ctrlKey = e.ctrlKey;
+  modifierKeys.metaKey = e.metaKey;
+  modifierKeys.shiftKey = e.shiftKey;
+  setCoords(e);
+}
+
+// Event Listeners 
+document.addEventListener("mousemove", setCoords);
+document.addEventListener("mouseenter", setCoords);
+document.addEventListener("mouseleave", setCoords);
+document.addEventListener("touchmove", setCoords);
+document.addEventListener("touchstart", setCoords);
+document.addEventListener("touchend", setCoords);
+document.addEventListener("click", showClickCoords);
+document.addEventListener("touchend", showClickCoords);
+
+document.addEventListener("keydown", (e) => {
+  if (["Shift", "Alt", "Control", "Meta"].includes(e.key)) {
+    updateModifierKeys(e);
+  }
+});
+
+document.addEventListener("keyup", (e) => {
+  if (["Shift", "Alt", "Control", "Meta"].includes(e.key)) {
+    updateModifierKeys(e);
+  }
+});
+
+document.addEventListener("wheel", (e) => {
+  updateModifierKeys(e);
+});
