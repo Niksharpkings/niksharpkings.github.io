@@ -41,8 +41,8 @@ noscript {
 
 body {
   /*Box model stuff*/
-  background: linear-gradient(90deg, #000000 0%, #494949 50%, #000000 100%);
   background-color: var(--secondary-hex-color);
+  background: linear-gradient(90deg, #000000 0%, #494949 50%, #000000 100%);
   /*Typography stuff*/
   font-size: calc(12px + (26 - 12) * ((100vw - 300px) / (1600 - 300)));
   /*Miscellaneous*/
@@ -68,6 +68,7 @@ header {
   /*Miscellaneous*/
   list-style-type: none;
   overflow: hidden;
+  
 }
 
 .Custom-Script-Details summary mark {
@@ -131,10 +132,11 @@ ul li p {
 
 nav {
   /*Display stuff*/
+  display: flexbox;
   align-items: center;
   justify-content: center;
   /*Box model stuff*/
-  width: 100%;
+  width: 40%;
   margin: 0px auto;
   padding: 0px;
   /*Typography stuff*/
@@ -178,8 +180,7 @@ header nav li a {
   outline-color: var(--secondary-hex-color);
   outline-style: double;
   outline-width: 5px;
-  background: linear-gradient(90deg, #000000 0%, #494949 50%, #000000 100%);
- /* background-color: rgb(72, 12, 212); */
+  background-color: rgb(72, 12, 212);
   /*Typography stuff*/
   color: var(--primary-hex-color);
   text-decoration: none;
@@ -628,18 +629,20 @@ footer details[open] summary {
 
 .tooltip {
   /*Display stuff*/
-  display: inline-block;
+  position: absolute; background-color: #ffffff; color: #fff; padding: 5px; border-radius: 5px; font-size: 12px; display: none; z-index: 1000; transform: translateY(-20px);
+
   /*Positioning stuff*/
-  position: relative;
+ 
   /*Box model stuff*/
   border-bottom: 1px dotted black;
   /*Typography stuff*/
   color: var(--primary-hex-color);
 }
+.tooltip.show { display: block;}
 
 .tooltip .tooltiptext {
   /*Positioning stuff*/
-  position: absolute;
+  position: relative;
   left: 105%;
   top: -5px;
   z-index: 4;
