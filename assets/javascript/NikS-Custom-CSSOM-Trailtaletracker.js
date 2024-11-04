@@ -472,16 +472,9 @@
       Apache License Version 2.0"
           "https://github.com/Niksharpkings/LICENSE" Apache License Version 2.0
 
+
           
-          
-          
-          
-          
-          
-          
-          
-          
-                                           Apache License
+                               Apache License
                            Version 2.0, January 2004
                         http://www.apache.org/licenses/
 
@@ -691,158 +684,240 @@ unless I approve it verbally and also with official signed documentations that g
 This code is not for sale at the moment and is still in development phase, but the style and layout of this design. 
 I do claim and how it is presented and function, is of my own design and creative design from my own imagination or idea. */
 
-const log = document.querySelector(".log");
+document.addEventListener("DOMContentLoaded", () => {
+  // Add fancy background color to the body
+  const body = document.querySelector("body");
 
-const modifierKeys = {
-  altKey: false,
-  ctrlKey: false,
-  metaKey: false,
-  shiftKey: false
-};
 
-function handleTouchEvent(e) {
-  const touch = e.touches[0];
-  return {
-    clientX: touch.clientX,
-    clientY: touch.clientY,
-    pageX: touch.pageX,
-    pageY: touch.pageY,
-    screenX: touch.screenX,
-    screenY: touch.screenY,
-    offsetX: touch.clientX - touch.target.getBoundingClientRect().left,
-    offsetY: touch.clientY - touch.target.getBoundingClientRect().top
+  // Create and append the log div
+  const log = document.createElement("div");
+  log.className = "log";
+  log.innerText = "Mouse over this section to view coordinates";
+  log.style.padding = "10px";
+  log.style.borderRadius = "5px";
+  log.style.backgroundColor = "rgba(0, 0, 0, 0.05)";
+  log.style.position = "absolute";
+  log.style.top = "10px";
+  log.style.left = "15px";
+  log.style.zIndex = "1000";
+  body.appendChild(log);
+
+  // Ensure the log element is correctly referenced
+  // const log = document.querySelector(".log");
+
+
+  if (!log) {
+    console.error("Element with class 'log' not found");
+    return;
+  } // Exit the function if element with class 'log' is not found
+
+// Object to keep track of modifier keys (Alt, Ctrl, Meta, Shift)
+  const modifierKeys = {
+    altKey: false,
+    ctrlKey: false,
+    metaKey: false,
+    shiftKey: false
   };
-}
+  
+// Function to handle touch events
+  function handleTouchEvent(e) {
 
-function handleMouseEvent(e) {
-  return {
-    clientX: e.clientX,
-    clientY: e.clientY,
-    pageX: e.pageX,
-    pageY: e.pageY,
-    screenX: e.screenX,
-    screenY: e.screenY,
-    offsetX: e.offsetX,
-    offsetY: e.offsetY
-  };
-}
-
-function resetModifierKeys(e) {
-  if (!e.altKey && !e.ctrlKey && !e.metaKey && !e.shiftKey) {
-    modifierKeys.altKey = false;
-    modifierKeys.ctrlKey = false;
-    modifierKeys.metaKey = false;
-    modifierKeys.shiftKey = false;
-  }
-}
-
-function getAdditionalInfo(element) {
-  if (!element) {
-    return {}; // Return an empty object if element is null or undefined
+    const touch = e.touches[0]; // Get the first touch in the list of touches (there will only be one touch in the list)
+// Return an object with the following properties
+    return {
+      clientX: touch.clientX, // X-coordinate of the touch point relative to the viewport
+      clientY: touch.clientY, // Y-coordinate of the touch point relative to the viewport
+      pageX: touch.pageX, // X-coordinate of the touch point relative to the full page
+      pageY: touch.pageY, // Y-coordinate of the touch point relative to the full page
+      screenX: touch.screenX, // X-coordinate of the touch point relative to the screen
+      screenY: touch.screenY, // Y-coordinate of the touch point relative to the screen
+      offsetX: touch.clientX - touch.target.getBoundingClientRect().left, // X-coordinate of the touch point relative to the target element
+      offsetY: touch.clientY - touch.target.getBoundingClientRect().top // Y-coordinate of the touch point relative to the target element
+    };
   }
 
-  const attributes = [
-    'innerText', 'title', 'alt', 'value', 'type', 'name', 'action', 'method', 'enctype', 'acceptCharset', 'accept', 
-    'autocomplete', 'autofocus', 'autocapitalize', 'autocorrect', 'autosave', 'checked', 'disabled', 'form', 
-    'formAction', 'formEnctype', 'formMethod', 'formNoValidate'
-  ];
+// Function to handle mouse events
+  function handleMouseEvent(e) {
+    return { // Return an object with the following properties
+      clientX: e.clientX, // X-coordinate of the mouse pointer relative to the viewport
+      clientY: e.clientY, // Y-coordinate of the mouse pointer relative to the viewport
+      pageX: e.pageX, // X-coordinate of the mouse pointer relative to the full page
+      pageY: e.pageY, // Y-coordinate of the mouse pointer relative to the full page
+      screenX: e.screenX, // X-coordinate of the mouse pointer relative to the screen
+      screenY: e.screenY, // Y-coordinate of the mouse pointer relative to the screen
+      offsetX: e.offsetX, // X-coordinate of the mouse pointer relative to the target element
+      offsetY: e.offsetY // Y-coordinate of the mouse pointer relative to the target element
+    };
+  }
 
-  const info = {};
-  attributes.forEach(attr => {
-    info[attr] = element[attr] || '';
+// Function to reset modifier keys if none of them are pressed
+  function resetModifierKeys(e) {
+// Check if none of the modifier keys are pressed (Alt, Ctrl, Meta, Shift)
+    if (!e.altKey && !e.ctrlKey && !e.metaKey && !e.shiftKey) {
+      modifierKeys.altKey = false; // Set altKey to false
+      modifierKeys.ctrlKey = false; // Set ctrlKey to false
+      modifierKeys.metaKey = false; // Set metaKey to false
+      modifierKeys.shiftKey = false; // Set shiftKey to false
+    }
+  }
+// Function to get additional information about the HTML element under the mouse pointer or touch point
+  function getAdditionalInfo(element) {
+
+    // Check if element is null or undefined
+    if (!element) {
+      return {}; // Return an empty object if element is null or undefined
+    }
+// Array of attributes to get information about from the HTML element under the mouse pointer or touch point
+    const attributes = [
+      'innerText', 'title', 'alt', 'value', 'type', 'name', 'action', 'method', 'enctype', 'acceptCharset', 'accept',
+      'autocomplete', 'autofocus', 'autocapitalize', 'autocorrect', 'autosave', 'checked', 'disabled', 'form',
+      'formAction', 'formEnctype', 'formMethod', 'formNoValidate', 'formTarget', 'height', 'inputMode', 'list',
+      'max', 'maxLength', 'min', 'minLength', 'multiple', 'pattern', 'placeholder', 'readOnly', 'required', 'size', 'src', 'step', 'width'
+    ];
+// Object to store the information about the HTML element under the mouse pointer or touch point
+    const info = {}; // Initialize an empty object to store the information about the HTML element under the mouse pointer or touch point
+    attributes.forEach(attr => {
+      info[attr] = element[attr] || '';
+    }); // Get the value of each attribute from the HTML element and store it in the info object if it exists or an empty string if it doesn't exist
+
+    return info; // Return the info object containing the information about the HTML element under the mouse pointer or touch point
+  }
+// Function to generate a log message with the coordinates, event, HTML element, and additional information about the HTML element under the mouse pointer or touch point
+  function generateLogMessage(coords, e, element, info) {
+
+    const tagName = element.tagName.toLowerCase(); // Get the tag name of the HTML element under the mouse pointer or touch point
+    const className = (typeof element.className === 'string' && element.className.length > 0) ? `.${element.className.split(' ').join('.')}` : ''; // Get the class name of the HTML element under the mouse pointer or touch point
+    const id = element.id ? `#${element.id}` : ''; // Get the ID of the HTML element under the mouse pointer or touch point
+    const cssElement = `${id}${className}` || element.style.cssText; // Get the CSS element of the HTML element under the mouse pointer or touch point
+
+// Return a template string with the following information about the coordinates, event, HTML element, and additional information about the HTML element
+
+        //Offset: X and Y coordinates of the mouse pointer or touch point relative to the target element
+    //Viewport: X and Y coordinates of the mouse pointer or touch point relative to the viewport
+    //Page: X and Y coordinates of the mouse pointer or touch point relative to the full page
+    //Screen: X and Y coordinates of the mouse pointer or touch point relative to the screen
+    //Movement: X and Y coordinates of the mouse pointer or touch point movement since the last event
+    //Related Target: Tag name of the related target element of the event or 'none' if there is no related target
+    //Event: X and Y coordinates of the mouse pointer or touch point relative to the event target element or 'none' if there is no event target
+    //Alt Key: State of the Alt key (true if pressed, false if not pressed)
+    //Ctrl Key: State of the Ctrl key (true if pressed, false if not pressed)
+    //Meta Key: State of the Meta key (true if pressed, false if not pressed)
+    //Shift Key: State of the Shift key (true if pressed, false if not pressed)
+    //Button: Button or buttons pressed during the event
+    //HTML Element: Tag name of the HTML element under the mouse pointer or touch point (e.g., 'div', 'a', 'input')
+    //CSS Element: CSS element of the HTML element under the mouse pointer or touch point (e.g., '#id.class', 'div.container')
+    //text: Inner text of the HTML element under the mouse pointer or touch point (e.g., 'Click me', 'Submit')
+    //Additional information about the HTML element under the mouse pointer or touch point
+    return `
+    ~~ Info: Links, Media, Frame, Text ~~
+      ${Object.entries(info).map(([key, value]) => value ? `${key.charAt(0).toUpperCase() + key.slice(1)}: ${value}` : '').filter(Boolean).join('\n')}
+      
+    ~~ Cursor Stats ~~
+      Offset   X: ${coords.offsetX},Y: ${coords.offsetY}
+      Viewport X: ${coords.clientX},Y: ${coords.clientY}
+      Page     X: ${coords.pageX},Y: ${coords.pageY}
+      Screen   X: ${coords.screenX},Y: ${coords.screenY}
+      Movement X: ${e.movementX}, Y: ${e.movementY}
+      Related Target: ${e.relatedTarget ? e.relatedTarget.tagName.toLowerCase() : 'none'}
+      Event X: ${e.x}, Y: ${e.y};
+      
+    ~~ KeyBoard Button Press/Hold ~~
+      Alt Key: ${modifierKeys.altKey}
+      Ctrl Key: ${modifierKeys.ctrlKey}
+      Meta Key: ${modifierKeys.metaKey}
+      Shift Key: ${modifierKeys.shiftKey}
+      Button: ${e.button}, Buttons: ${e.buttons}
+      
+    Broswer Elements:
+      HTML Element  : ${tagName}
+      CSS Element: ${cssElement}
+      
+
+    `;
+  }
+// Function to set the coordinates of the mouse pointer or touch point and display the log message with the coordinates, event, HTML element, and additional information about the HTML element under the mouse pointer or touch point
+  function setCoords(e) {
+    const coords = e.touches ? handleTouchEvent(e) : handleMouseEvent(e); // Get the coordinates of the mouse pointer or touch point based on the event type (mouse or touch)
+    resetModifierKeys(e); // Reset the modifier keys if none of them are pressed (Alt, Ctrl, Meta, Shift)
+
+    const element = document.elementFromPoint(coords.clientX, coords.clientY); // Get the HTML element under the mouse pointer or touch point based on the coordinates (X, Y) relative to the viewport (clientX, clientY) or the full page (pageX, pageY) or the target element (offsetX, offsetY) or the screen (screenX, screenY) or the event target (x, y) or the related target (relatedTarget) of the event (e) or the touch point (touch) of the touch event (e) or the mouse pointer (e) of the mouse event (e) or the target element (target) of the event (e) or the touch point (touch) of the touch event (e) or the mouse pointer (e) of the mouse event (e)
+    // Check if element is null or undefined
+    if (!element) {
+      return; // Exit the function if no element is found
+    }
+
+    const info = getAdditionalInfo(element); // Get additional information about the HTML element under the mouse pointer or touch point
+
+    log.innerText = generateLogMessage(coords, e, element, info); // Generate and display the log message with the coordinates, event, HTML element, and additional information about the HTML element under the mouse pointer or touch point
+
+    log.style.left = `${coords.pageX + 5}px`; // Set the left position of the log element to the X-coordinate of the mouse pointer or touch point plus 5 pixels
+    log.style.top = `${coords.pageY + 5}px`; // Set the top position of the log element to the Y-coordinate of the mouse pointer or touch point plus 5 pixels
+
+log.style.display = "block";
+log.style.position = "absolute";
+log.style.color = "white";
+log.style.textShadow = "var(--primary-shadow-color)";
+log.style.fontSize = "16px";
+log.style.fontWeight = "bold";
+log.style.backgroundColor = "rgba(0, 0, 0, 0.7)";
+log.style.border = "2px double rgba(51, 252, 11, 0.4)";
+log.style.borderRadius = "5px";
+log.style.pointerEvents = "none"; // Prevents the log from interfering with mouse events
+log.style.fontSize = "x-small";
+log.style.padding = "10px";
+log.style.margin = "0px 60px";
+log.style.overflow = "visible";
+log.style.zIndex = "1000";
+
+  }
+
+  function showClickCoords(e) {
+    let pageX, pageY;
+
+    if (e.touches) {
+      const touch = e.changedTouches[0];
+      pageX = touch.pageX;
+      pageY = touch.pageY;
+    } else {
+      pageX = e.pageX;
+      pageY = e.pageY;
+    }
+
+    log.innerText += `
+      Clicked at Page X: ${pageX}, Y: ${pageY}`;
+  }
+
+  function updateModifierKeys(e) {
+    modifierKeys.altKey = e.altKey;
+    modifierKeys.ctrlKey = e.ctrlKey;
+    modifierKeys.metaKey = e.metaKey;
+    modifierKeys.shiftKey = e.shiftKey;
+    setCoords(e);
+  }
+
+  // Event Listeners 
+  document.addEventListener("mousemove", setCoords);
+  document.addEventListener("mouseenter", setCoords);
+  document.addEventListener("mouseleave", setCoords);
+  document.addEventListener("touchmove", setCoords);
+  document.addEventListener("touchstart", setCoords);
+  document.addEventListener("touchend", setCoords);
+  document.addEventListener("click", showClickCoords);
+  document.addEventListener("touchend", showClickCoords);
+
+  document.addEventListener("keydown", (e) => {
+    if (["Shift", "Alt", "Control", "Meta"].includes(e.key)) {
+      updateModifierKeys(e);
+    }
   });
 
-  return info;
-}
+  document.addEventListener("keyup", (e) => {
+    if (["Shift", "Alt", "Control", "Meta"].includes(e.key)) {
+      updateModifierKeys(e);
+    }
+  });
 
-function generateLogMessage(coords, e, element, info) {
-  const tagName = element.tagName.toLowerCase();
-  const className = element.className ? `.${element.className.split(' ').join('.')}` : '';
-  const id = element.id ? `#${element.id}` : '';
-  const cssElement = `${id}${className}` || element.style.cssText;
-
-  return `
-    Offset   X: ${coords.offsetX},Y: ${coords.offsetY}
-    Viewport X: ${coords.clientX},Y: ${coords.clientY}
-    Page     X: ${coords.pageX},Y: ${coords.pageY}
-    Screen   X: ${coords.screenX},Y: ${coords.screenY}
-    Movement X: ${e.movementX}, Y: ${e.movementY}
-    Related Target: ${e.relatedTarget ? e.relatedTarget.tagName.toLowerCase() : 'none'}
-    Event X: ${e.x}, Y: ${e.y};
-    Alt Key: ${modifierKeys.altKey}
-    Ctrl Key: ${modifierKeys.ctrlKey}
-    Meta Key: ${modifierKeys.metaKey}
-    Shift Key: ${modifierKeys.shiftKey}
-    Button: ${e.button}, Buttons: ${e.buttons}
-    HTML Element  : ${tagName}
-    CSS Element: ${cssElement}
-    ${Object.entries(info).map(([key, value]) => value ? `${key.charAt(0).toUpperCase() + key.slice(1)}: ${value}` : '').filter(Boolean).join('\n')}
-  `;
-}
-
-function setCoords(e) {
-  const coords = e.touches ? handleTouchEvent(e) : handleMouseEvent(e);
-  resetModifierKeys(e);
-
-  const element = document.elementFromPoint(coords.clientX, coords.clientY);
-  if (!element) {
-    return; // Exit the function if no element is found
-  }
-
-  const info = getAdditionalInfo(element);
-
-  log.innerText = generateLogMessage(coords, e, element, info);
-
-  log.style.left = `${coords.pageX + 5}px`;
-  log.style.top = `${coords.pageY + 5}px`;
-}
-
-function showClickCoords(e) {
-  let pageX, pageY;
-
-  if (e.touches) {
-    const touch = e.changedTouches[0];
-    pageX = touch.pageX;
-    pageY = touch.pageY;
-  } else {
-    pageX = e.pageX;
-    pageY = e.pageY;
-  }
-
-  log.innerText += `
-    Clicked at Page X: ${pageX}, Y: ${pageY}`;
-}
-
-function updateModifierKeys(e) {
-  modifierKeys.altKey = e.altKey;
-  modifierKeys.ctrlKey = e.ctrlKey;
-  modifierKeys.metaKey = e.metaKey;
-  modifierKeys.shiftKey = e.shiftKey;
-  setCoords(e);
-}
-
-// Event Listeners 
-document.addEventListener("mousemove", setCoords);
-document.addEventListener("mouseenter", setCoords);
-document.addEventListener("mouseleave", setCoords);
-document.addEventListener("touchmove", setCoords);
-document.addEventListener("touchstart", setCoords);
-document.addEventListener("touchend", setCoords);
-document.addEventListener("click", showClickCoords);
-document.addEventListener("touchend", showClickCoords);
-
-document.addEventListener("keydown", (e) => {
-  if (["Shift", "Alt", "Control", "Meta"].includes(e.key)) {
+  document.addEventListener("wheel", (e) => {
     updateModifierKeys(e);
-  }
-});
-
-document.addEventListener("keyup", (e) => {
-  if (["Shift", "Alt", "Control", "Meta"].includes(e.key)) {
-    updateModifierKeys(e);
-  }
-});
-
-document.addEventListener("wheel", (e) => {
-  updateModifierKeys(e);
+  });
 });
