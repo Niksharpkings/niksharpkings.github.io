@@ -4,8 +4,8 @@
   --primary-shadow-color: 0 0 10px #01c044, 0 0 20px #2c15c2, 0 0 30px #5815b6,
     0 0 40px #ffd100;
   --primary-hex-color: #000000;
-  --secondary-hex-color: #32a824;
-  --background-white-rgb-color: rgba(255, 255, 255, 1);
+  --secondary-hex-color: #909090;
+  --background-white-rgb-color: rgb(175, 175, 175);
   color-scheme: light dark;
   scrollbar-color: rebeccapurple green;
 }
@@ -28,7 +28,8 @@
 html {
   touch-action: manipulation;
   font-family: Arial, Helvetica, sans-serif;
-  background-color: var(--secondary-hex-color);
+  background-color: var(--background-white-rgb-color);
+  font-size: 16px; /* Base font size for better scaling */
 }
 
 body {
@@ -46,11 +47,12 @@ header {
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
+  flex-direction: column; /* Stack items vertically on smaller screens */
   /*Positioning stuff*/
   position: sticky;
   z-index: 1;
   /*Box model stuff*/
-  padding: 10px 30px;
+  padding: 10px 15px; /* Adjust padding for smaller screens */
   border: var(--secondary-hex-color) 10px double;
   background-attachment: fixed;
   background-color: var(--primary-hex-color);
@@ -71,7 +73,7 @@ nav {
   margin: 0 auto;
   padding: 0;
   /*Typography stuff*/
-  font-size: 20px;
+  font-size: 18px; /* Adjust font size for better readability on smaller screens */
   text-align: center;
   text-shadow: var(--primary-shadow-color);
 }
@@ -80,7 +82,7 @@ header nav li {
   /*Display stuff*/
   display: inline-block;
   /*Box model stuff*/
-  margin: 10px;
+  margin: 5px; /* Reduce margin for better spacing on smaller screens */
   padding: 0px;
   /*Miscellaneous*/
   list-style: none;
@@ -93,7 +95,7 @@ header nav li a {
   z-index: 1;
   /*Box model stuff*/
   margin: 0;
-  padding: 5px 10px;
+  padding: 5px 8px; /* Adjust padding for better touch targets on smaller screens */
   border-radius: 3px;
   outline-color: var(--secondary-hex-color);
   outline-style: double;
@@ -176,8 +178,8 @@ header nav li a:focus {
 .tooltip-nav .tooltiptext-nav {
   /*Positioning stuff*/
   position: absolute;
-  left: -5%;
-  top: 30px;
+  left: 0; /* Adjust positioning for better visibility on smaller screens */
+  top: 100%; /* Position below the element */
   z-index: 4;
   /*Box model stuff*/
   width: auto;
@@ -232,31 +234,31 @@ hr:after {
 }
 
 .secondary-content {
-  width: 80%;
+  width: 90%; /* Increase width for better readability on smaller screens */
   margin: 0 auto;
   color: #024e76;
 }
 
 .secondary-content h3 {
-  font-size: 25px;
+  font-size: 22px; /* Adjust font size for better readability on smaller screens */
   margin: 20px 0;
 }
 
 .secondary-content p {
-  font-size: 16px;
+  font-size: 14px; /* Adjust font size for better readability on smaller screens */
   line-height: 1.5;
   margin: 20px 0;
 }
 
 .secondary-content ul {
   margin: 15px 20px;
-  font-size: 16px;
+  font-size: 14px; /* Adjust font size for better readability on smaller screens */
 }
 
 .secondary-content li {
   color: #39a6b2;
   margin: 10px 0;
-  font-size: 16px;
+  font-size: 14px; /* Adjust font size for better readability on smaller screens */
 }
 
 footer {
@@ -267,6 +269,7 @@ footer {
   justify-content: center;
   /*Box model stuff*/
   background-color: var(--primary-hex-color);
+  padding: 10px; /* Add padding for better spacing on smaller screens */
   /*Typography stuff*/
   font-size: clamp(1.5rem, 1.8vw, 1.8rem);
   font-weight: bold;
@@ -277,7 +280,7 @@ footer {
 
 footer p{
   /*Typography stuff*/
-  font-size: clamp(1.8rem, 1.8vw, 2rem);
+  font-size: 1.5rem; /* Adjust font size for better readability on smaller screens */
 }
 
 @keyframes projects {
@@ -322,5 +325,47 @@ footer p{
 
   100% {
     cursor: url(../cursorfavicon/niksharpfavicon64x.ico) 0 0, crosshair;
+  }
+}
+
+/* Media queries for mobile responsiveness */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    padding: 10px 15px;
+  }
+
+  nav {
+    font-size: 18px;
+  }
+
+  header nav li {
+    margin: 5px;
+  }
+
+  header nav li a {
+    padding: 5px 8px;
+  }
+
+  .secondary-content {
+    width: 90%;
+  }
+
+  .secondary-content h3 {
+    font-size: 22px;
+  }
+
+  .secondary-content p,
+  .secondary-content ul,
+  .secondary-content li {
+    font-size: 14px;
+  }
+
+  footer {
+    padding: 10px;
+  }
+
+  footer p {
+    font-size: 1.5rem;
   }
 }
