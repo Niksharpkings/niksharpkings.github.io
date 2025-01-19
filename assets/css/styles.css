@@ -753,15 +753,13 @@ div .contact-list-item p {
     overflow: visible;
     text-align: center;
     height: 5px;
-    
   }
 
   hr:after {
-    content: "⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘";
+    content: "⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘";
     padding: 0 0px;
     position: relative;
     top: -20px;
-    
   }
 
   .hero-intro h1{
@@ -851,6 +849,81 @@ div .contact-list-item p {
   .contact-info iframe {
     width: auto;
     height: auto;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  html {
+    font-size: 14px;
+  }
+
+  body {
+    font-size: 14px;
+  }
+
+  header {
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  header nav ul {
+    flex-direction: column;
+  }
+
+  header nav li {
+    margin: 5px 0;
+  }
+
+  header nav li a {
+    font-size: 14px;
+    padding: 8px 0;
+  }
+
+  .hero {
+    padding: 10px;
+    border-radius: 10px;
+  }
+
+  .hero img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+  }
+
+  .hero-intro {
+    top: 0;
+    padding: 10px;
+  }
+
+  #hero-name {
+    font-size: 24px;
+  }
+
+  .project-grid-container {
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  .project-container-left,
+  .project-container-right {
+    width: 100%;
+    max-width: 100%;
+    min-width: 100%;
+    max-height: auto;
+    min-height: auto;
+  }
+
+  .contact-info iframe {
+    width: 100%;
+    height: auto;
+  }
+
+  footer {
+    padding: 10px;
+  }
+
+  footer p {
+    font-size: 14px;
   }
 }
 
