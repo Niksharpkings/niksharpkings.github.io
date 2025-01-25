@@ -12,8 +12,11 @@ Last Updated to this repo: Jan 19, 2025 7:00am PDT -8 GMT
 
 #### Git push Versions :
 
+<<<<<<< HEAD
 
 * `v1.1.5 - | Jan 25, 2025 ~12:00pm PDT | Converted project and about-me sections into javascript for future additions`
+=======
+>>>>>>> cc1be426595eaaf7b288a2a11bc1fc1cee5dabde
 * `v1.1.4 - | Jan 19, 2025 ~8:50am PDT | Typos and fine tuning with some revision.`
 * `v1.1.3 - | Nov 4, 2024 ~5:15am PDT | Made Improvements to the Mouse hover tailer JS code, CSS redundancy remove, testing with custom tooltips`
 * `v1.1.2 - | Aug 28, 2024 ~3:32am PDT | Made some minor UI mouse hover viewport, renamed two of my Javascript custom code for the millisecond hand clock and custom CSSOM mouse trailtaletracker client-side info-stats`
