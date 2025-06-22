@@ -12,6 +12,7 @@ Last Updated to this repo: Jan 19, 2025 7:00am PDT -8 GMT
 
 #### Git push Versions :
 
+* `v1.1.7 - | June 22, 2025 ~7:30am PDT | Fixed some typos and nano seconds to the project section.`
 * `v1.1.6 - | June 22, 2025 ~7:20am PDT | Fixed some typos and minor UI adjustments, added a new project section with a new project, and added a new about-me section with a new about-me page.`
 * `v1.1.5 - | Jan 25, 2025 ~12:00pm PDT | Converted project and about-me sections into javascript for future additions`
 * `v1.1.4 - | Jan 19, 2025 ~8:50am PDT | Typos and fine tuning with some revision.`

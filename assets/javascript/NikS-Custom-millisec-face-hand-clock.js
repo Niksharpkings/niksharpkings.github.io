@@ -783,7 +783,7 @@ function drawNumbers(ctx, radius) { // create a function called drawNumbers with
   ctx.font = radius * 0.3 + "px arial"; // set the font size and font family for the clock numbers
   ctx.textBaseline = "middle"; // set the text baseline to middle
   ctx.textAlign = "center"; // set the text align to center
-  for (num = 1; num < 13; num++) { // create a for loop to draw the clock numbers
+  for (num = 1; num <= 12; num++) { // create a for loop to draw the clock numbers
     ang = (num * Math.PI) / 6; // set the angle to the clock numbers
     ctx.rotate(ang); // rotate the clock numbers
     ctx.translate(0, -radius * 0.85); // translate the clock numbers
@@ -801,22 +801,26 @@ function drawTime(ctx, radius) { // create a function called drawTime with the c
   let minute = now.getMinutes(); // get the minutes from the date object
   let second = now.getSeconds();  // get the seconds from the date object
   let ms = now.getMilliseconds(); // get the milliseconds from the date object
-// get the nanoseconds from the date object
+  let ns = (typeof performance !== 'undefined' && performance.now) ? Math.floor((performance.now() % 1) * 1e6) : 0; // get the nanoseconds (approximate)
+
   //hour
   hour = hour % 12; // set the hour to 12
   hour =
     (hour * Math.PI) / 6 + // add the hour to the clock hand movement for the hour
     (minute * Math.PI) / (6 * 60) + // add the minute to the clock hand movement for the hour
     (second * Math.PI) / (360 * 60) + // add the second to the clock hand movement for the hour
-    (ms * Math.PI) / (360 * 60 * 500); // add milliseconds to the clock hand movement for the hour
+    (ms * Math.PI) / (360 * 60 * 500) + // add milliseconds to the clock hand movement for the hour
+    (ns * Math.PI) / (360 * 60 * 500 * 1e3); // add nanoseconds to the clock hand movement for the hour
 
   drawHand(ctx, hour, radius * 0.5, radius * 0.07); // call the drawHand function to draw the clock hand for the hour
-  minute = (minute * Math.PI) / 30 + (second * Math.PI) / (30 * 60); // add the minute to the clock hand movement for the minute
-  drawHand(ctx, minute, radius * 0.8, radius * 0.07); // call the drawHand function to draw the clock hand for the minute
-  second = (second * Math.PI) / 30; // add the second to the clock hand movement for the second
-  drawHand(ctx, second, radius * 0.9, radius * 0.02); // call the drawHand function to draw the clock hand for the second
-  ms = (ms * Math.PI) / 500; // add the milliseconds to the clock hand movement for the milliseconds
-  drawHand(ctx, ms, radius * 0.9, radius * 0.01); // call the drawHand function to draw the clock hand for the milliseconds
+  minute = (minute * Math.PI) / 30 + (second * Math.PI) / (30 * 60);
+  drawHand(ctx, minute, radius * 0.8, radius * 0.07);
+  second = (second * Math.PI) / 30;
+  drawHand(ctx, second, radius * 0.9, radius * 0.02);
+  ms = (ms * Math.PI) / 500;
+  drawHand(ctx, ms, radius * 0.9, radius * 0.01);
+  ns = (ns * Math.PI) / 500000; // scale nanoseconds for a visible hand
+  drawHand(ctx, ns, radius * 0.9, radius * 0.005); // draw the nanosecond hand
 }
 
 function drawHand(ctx, pos, length, width) {
