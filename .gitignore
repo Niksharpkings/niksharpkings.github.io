@@ -73,8 +73,8 @@ package-lock.json
 .history
 /tex.txt
 /.history
-/hidefolder/*
-./hidefolder/*
+hidefolder
+*/hidefolder
 *./hidefolder/*
 
 /assets/html/ENglish2-SMC-Intro-copy.html
