@@ -65,6 +65,9 @@ package-lock.json
 .vscode
 .vs
 .env
+.contextive
+.contextive/definitions.yml
+.contextive/definitions.yml
 /package.json
 /package-lock.json
 /~chv_wb_index.html
@@ -79,9 +82,7 @@ hidefolder
 /assets/html/ENglish2-SMC-Intro-copy.html
 /assets/html/ENglish2-SMC-Intro.html
 /assets/css/styles-copy backup.css
-contextive/definitions.yml
-contextive/definitions.yml
-*.contextive
+
 /assets/html/indexWithComments.html.bak
 
 
