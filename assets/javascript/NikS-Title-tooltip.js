@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
     tooltip.innerText = element.getAttribute("title");
     document.body.appendChild(tooltip);
 
-    // Remove the title attribute to prevent the default tooltip
+    // Remove the title attribute to prevent the default browser tooltip
     element.removeAttribute("title");
 
     let timeout;

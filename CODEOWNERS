@@ -19,9 +19,9 @@
 *.go niksharpkings@gmail.com
 
 # Teams can be specified as code owners as well. Teams should
-# be identified in the format @niksharpkings @Nikita-Sharpio. Teams must have
+# be identified in the format @niksharpkings or @Nikita-Sharpio. Teams must have
 # explicit write access to the repository. In this example,
-# the @niksharpkings team in the niksharpkings Nikita-Sharpio organization owns all .txt files.
+# the @niksharpkings team in the niksharpkings or Nikita-Sharpio organization owns all .txt files.
 *.txt @niksharpkings @Nikita-Sharpio
 
 # In this example, @niksharpkings @Nikita-Sharpio owns any files in the build/logs

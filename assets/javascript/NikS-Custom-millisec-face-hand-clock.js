@@ -686,8 +686,8 @@ Privacy Policy
 
 */
 
-/* Thank you MDN for the started code and bit of help from Github Copilot*/
-/* I do give anymore permission to use my code that I have on this file (NikS-Custom-millisec-face-hand-clock.js), unless I approve it verbally and also with official signed documentations that give you permission to do so, This code is not for sale at the moment and is still in development phase, but the style and layout of this design, I do claim and how it is presented and function, is of my own design and creative design from my own imagination or idea.  */
+/* Thank you MDN for the starter code and a bit of help from GitHub Copilot */
+/* I do not give anyone permission to use my code that I have in this file (NikS-Custom-millisec-face-hand-clock.js), unless I approve it verbally and also with official signed documentation that gives you permission to do so. This code is not for sale at the moment and is still in development phase, but the style and layout of this design, I do claim and how it is presented and functions, is of my own design and creative design from my own imagination or idea.  */
 
 // StartTime function is called when the page is loaded and the clock is started and updated every second by the setTimeout function and the checkTime function is called to add a zero in front of numbers < 10 and the time and date is displayed in the format of "Current Time: 00h:00m:00s:00ms 00/00/00pm" in the html element with the id of "txt" by using the document DOM object and the getElementById method and the innerHTML property to set the innerHTML to the current time and date in the format of "Current Time: 00h:00m:00s:00ms 00/00/00pm" and the setTimeout function is called to update the time and date every second.
 function startTime() {

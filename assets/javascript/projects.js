@@ -48,7 +48,7 @@ const projectsData = [
     imageAlt: "project-1"
   },
   {
-    title: "Pastel puzzels",
+    title: "Pastel Puzzles",
     liveLink: "N/a",
     repoLink: "N/a",
     description: "wip",
@@ -80,7 +80,7 @@ function generateProjects() {
 
   const projectHeader = document.createElement('h1');
   projectHeader.className = 'project-header';
-  projectHeader.innerHTML = 'Projects: ⚒WIP Under Construction🛠 <small>Redoing, Most of my projects are not shown, some are mockups or blank fillers</small>';
+  projectHeader.innerHTML = 'Projects: ⚒WIP Under Construction🛠 <small>Redoing, most of my projects are not shown, some are mockups or blank fillers</small>';
   projectsSection.appendChild(projectHeader);
 
   projectsData.forEach(project => {
@@ -108,12 +108,12 @@ function generateProjects() {
 
     const liveLink = document.createElement('h2');
     liveLink.className = 'project-repository-dialog';
-    liveLink.innerHTML = `Github Pages Live Deployed Link: <a class="project-repository-dialog" rel="noopener noreferrer" href="${project.liveLink}" target="_blank">${project.liveLink}</a>`;
+    liveLink.innerHTML = `GitHub Pages Live Deployed Link: <a class="project-repository-dialog" rel="noopener noreferrer" href="${project.liveLink}" target="_blank">${project.liveLink}</a>`;
     projectContainerLeft.appendChild(liveLink);
 
     const repoLink = document.createElement('h2');
     repoLink.className = 'project-repository-dialog';
-    repoLink.innerHTML = `Github Repository Link: <a class="project-repository-dialog" rel="noopener noreferrer" href="${project.repoLink}" target="_blank">${project.repoLink}</a>`;
+    repoLink.innerHTML = `GitHub Repository Link: <a class="project-repository-dialog" rel="noopener noreferrer" href="${project.repoLink}" target="_blank">${project.repoLink}</a>`;
     projectContainerLeft.appendChild(repoLink);
 
     const description = document.createElement('p');

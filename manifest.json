@@ -10,7 +10,7 @@
   "orientation": "portrait-primary",
   "lang": "en-US",
   "dir": "ltr",
-  "description": "Ńἱĸἱ৳α Shârρἱo's aka Niksharpkings UCLAx+U2 Profile Resume github page",
+  "description": "Ńἱĸἱ৳α Shârρἱo's aka Niksharpkings UCLAx+U2 Profile Resume GitHub page",
   "icons": [
     {
       "src": "./assets/manifestIcon/maskable_icon.png",
@@ -47,21 +47,21 @@
     {
       "name": "Avatar",
       "short_name": "nikavatar",
-      "description": "myavatar",
+      "description": "My avatar",
       "url": "./assets/images/avatarNikShar2022.webp",
       "icons": [{ "src": "./assets/manifestIcon/maskable_icon_x192.png", "sizes": "192x192" }]
     },
     {
       "name": "Avatar2",
       "short_name": "nikavatar2",
-      "description": "myavatar2",
+      "description": "My avatar 2",
       "url": "./assets/images/avatarNikShar2022.webp",
       "icons": [{ "src": "./assets/manifestIcon/maskable_icon_x192.png", "sizes": "128x128" }]
     }
   ],
   "screenshots": [
     {
-      "src": "./image/README/1676130578243.png",
+      "src": "./assets/images/README/1676130578243.png",
       "type": "image/png",
       "sizes": "2812x7156"
     }

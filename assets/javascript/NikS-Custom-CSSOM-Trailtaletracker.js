@@ -790,7 +790,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const id = element.id ? `#${element.id}` : ''; // Get the ID of the HTML element under the mouse pointer or touch point
     const cssElement = `${id}${className}` || element.style.cssText; // Get the CSS element of the HTML element under the mouse pointer or touch point
 
-// Return a template string with the following information about the coordinates, event, HTML element, and additional information about the HTML element
+// Return a template string with the following information about the coordinates, event, HTML element, and additional information about the HTML element under the mouse pointer or touch point
 
         //Offset: X and Y coordinates of the mouse pointer or touch point relative to the target element
     //Viewport: X and Y coordinates of the mouse pointer or touch point relative to the viewport
@@ -813,23 +813,23 @@ document.addEventListener("DOMContentLoaded", () => {
       ${Object.entries(info).map(([key, value]) => value ? `${key.charAt(0).toUpperCase() + key.slice(1)}: ${value}` : '').filter(Boolean).join('\n')}
       
     ~~ Cursor Stats ~~
-      Offset   X: ${coords.offsetX},Y: ${coords.offsetY}
-      Viewport X: ${coords.clientX},Y: ${coords.clientY}
-      Page     X: ${coords.pageX},Y: ${coords.pageY}
-      Screen   X: ${coords.screenX},Y: ${coords.screenY}
+      Offset   X: ${coords.offsetX}, Y: ${coords.offsetY}
+      Viewport X: ${coords.clientX}, Y: ${coords.clientY}
+      Page     X: ${coords.pageX}, Y: ${coords.pageY}
+      Screen   X: ${coords.screenX}, Y: ${coords.screenY}
       Movement X: ${e.movementX}, Y: ${e.movementY}
       Related Target: ${e.relatedTarget ? e.relatedTarget.tagName.toLowerCase() : 'none'}
       Event X: ${e.x}, Y: ${e.y};
       
-    ~~ KeyBoard Button Press/Hold ~~
+    ~~ Keyboard Button Press/Hold ~~
       Alt Key: ${modifierKeys.altKey}
       Ctrl Key: ${modifierKeys.ctrlKey}
       Meta Key: ${modifierKeys.metaKey}
       Shift Key: ${modifierKeys.shiftKey}
       Button: ${e.button}, Buttons: ${e.buttons}
       
-    Broswer Elements:
-      HTML Element  : ${tagName}
+    Browser Elements:
+      HTML Element: ${tagName}
       CSS Element: ${cssElement}
       
 
