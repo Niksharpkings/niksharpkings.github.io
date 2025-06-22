@@ -713,6 +713,63 @@ div .contact-list-item p {
   max-height: 600px;
 }
 
+/* === dhbinfo.js Info Panel Spreadsheet Style (Force Visibility) === */
+#dhbinfo-panel {
+  width: 100% !important;
+  max-width: 700px;
+  margin: 1.5em auto !important;
+  border-collapse: collapse;
+  background: #181818 !important;
+  border-radius: 8px !important;
+  box-shadow: 0 2px 12px 0 #0008 !important;
+  font-size: 1rem !important;
+  overflow-x: auto !important;
+  padding: 0.5em 0.5em 1em 0.5em !important;
+  color: #e0e0e0 !important;
+  display: block !important;
+  z-index: 1000 !important;
+}
+.dhbinfo-row {
+  display: table-row !important;
+  border-bottom: 1px solid #333 !important;
+}
+.dhbinfo-label, .dhbinfo-value {
+  display: table-cell !important;
+  padding: 0.5em 1em !important;
+  vertical-align: middle !important;
+  border-bottom: 1px solid #333 !important;
+}
+.dhbinfo-label {
+  font-weight: bold !important;
+  color: #8eb8a3 !important;
+  background: #232323 !important;
+  min-width: 180px !important;
+  border-right: 1px solid #333 !important;
+}
+.dhbinfo-value {
+  color: #e0e0e0 !important;
+  background: #181818 !important;
+  min-width: 120px !important;
+  text-align: left !important;
+}
+#dhbinfo-panel .dhbinfo-row:last-child .dhbinfo-label,
+#dhbinfo-panel .dhbinfo-row:last-child .dhbinfo-value {
+  border-bottom: none !important;
+}
+@media (max-width: 600px) {
+  #dhbinfo-panel {
+    font-size: 0.9rem !important;
+    max-width: 100vw !important;
+    padding: 0.2em !important;
+  }
+  .dhbinfo-label, .dhbinfo-value {
+    padding: 0.3em 0.5em !important;
+    min-width: 80px !important;
+  }
+}
+
+/* === End dhbinfo.js Info Panel Spreadsheet Style === */
+
 @media only screen and (max-width: 1200px) {
   details,
   summary {

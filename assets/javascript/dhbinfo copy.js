@@ -581,15 +581,3 @@ setInterval(updateInfoPanel, 3000);
 
 // --- Export for Extensibility ---
 window.dhbinfo = Object.freeze({ infoMap, updateInfoPanel });
-// --- Utility Functions ---
-function safe(fn) {
-  try {
-    return fn();
-  } catch (e) {
-    console.warn('dhbinfo: Error in safe function', e);
-    return 'N/A';
-  }
-};
-function yesNo(value) {
-  return value ? 'Yes' : 'No';
-}

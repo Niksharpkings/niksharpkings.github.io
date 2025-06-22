@@ -662,7 +662,7 @@
       same "printed page" as the copyright notice for easier
       identification within third-party archives.
 
-   Copyright [2024] [Nikita 'Niksharkings'/'Nik' Sharpio]
+   Copyright [2025] [Nikita 'Niksharkings'/'Nik' Sharpio]
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -718,7 +718,7 @@ document.addEventListener("DOMContentLoaded", () => {
     metaKey: false,
     shiftKey: false
   };
-  
+
 // Function to handle touch events
   function handleTouchEvent(e) {
 
@@ -811,7 +811,7 @@ document.addEventListener("DOMContentLoaded", () => {
     return `
     ~~ Info: Links, Media, Frame, Text ~~
       ${Object.entries(info).map(([key, value]) => value ? `${key.charAt(0).toUpperCase() + key.slice(1)}: ${value}` : '').filter(Boolean).join('\n')}
-      
+
     ~~ Cursor Stats ~~
       Offset   X: ${coords.offsetX}, Y: ${coords.offsetY}
       Viewport X: ${coords.clientX}, Y: ${coords.clientY}
@@ -820,18 +820,17 @@ document.addEventListener("DOMContentLoaded", () => {
       Movement X: ${e.movementX}, Y: ${e.movementY}
       Related Target: ${e.relatedTarget ? e.relatedTarget.tagName.toLowerCase() : 'none'}
       Event X: ${e.x}, Y: ${e.y};
-      
+
     ~~ Keyboard Button Press/Hold ~~
       Alt Key: ${modifierKeys.altKey}
       Ctrl Key: ${modifierKeys.ctrlKey}
       Meta Key: ${modifierKeys.metaKey}
       Shift Key: ${modifierKeys.shiftKey}
       Button: ${e.button}, Buttons: ${e.buttons}
-      
+
     Browser Elements:
       HTML Element: ${tagName}
       CSS Element: ${cssElement}
-      
 
     `;
   }
@@ -848,27 +847,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const info = getAdditionalInfo(element); // Get additional information about the HTML element under the mouse pointer or touch point
 
-    log.innerText = generateLogMessage(coords, e, element, info); // Generate and display the log message with the coordinates, event, HTML element, and additional information about the HTML element under the mouse pointer or touch point
-
-    log.style.left = `${coords.pageX + 5}px`; // Set the left position of the log element to the X-coordinate of the mouse pointer or touch point plus 5 pixels
-    log.style.top = `${coords.pageY + 5}px`; // Set the top position of the log element to the Y-coordinate of the mouse pointer or touch point plus 5 pixels
-
-log.style.display = "block";
-log.style.position = "absolute";
-log.style.color = "white";
-log.style.textShadow = "var(--primary-shadow-color)";
-log.style.fontSize = "16px";
-log.style.fontWeight = "bold";
-log.style.backgroundColor = "rgba(0, 0, 0, 0.7)";
-log.style.border = "2px double rgba(51, 252, 11, 0.4)";
-log.style.borderRadius = "5px";
-log.style.pointerEvents = "none"; // Prevents the log from interfering with mouse events
-log.style.fontSize = "x-small";
-log.style.padding = "10px";
-log.style.margin = "0px 60px";
-log.style.overflow = "visible";
-log.style.zIndex = "1000";
-
+// Use requestAnimationFrame for log updates to avoid layout thrashing and improve performance
+    if (setCoords.rafId) cancelAnimationFrame(setCoords.rafId);
+    setCoords.rafId = requestAnimationFrame(() => {
+      log.innerText = generateLogMessage(coords, e, element, info);
+      log.style.left = `${coords.pageX + 5}px`;
+      log.style.top = `${coords.pageY + 5}px`;
+      log.style.display = "block";
+      log.style.position = "absolute";
+      log.style.color = "white";
+      log.style.textShadow = "var(--primary-shadow-color)";
+      log.style.fontSize = "x-small";
+      log.style.fontWeight = "bold";
+      log.style.backgroundColor = "rgba(0, 0, 0, 0.7)";
+      log.style.border = "2px double rgba(51, 252, 11, 0.4)";
+      log.style.borderRadius = "5px";
+      log.style.pointerEvents = "none";
+      log.style.padding = "10px";
+      log.style.margin = "0px 60px";
+      log.style.overflow = "visible";
+      log.style.zIndex = "1000";
+    });
   }
 
   function showClickCoords(e) {
@@ -895,16 +894,34 @@ log.style.zIndex = "1000";
     setCoords(e);
   }
 
-  // Event Listeners 
-  document.addEventListener("mousemove", setCoords);
-  document.addEventListener("mouseenter", setCoords);
-  document.addEventListener("mouseleave", setCoords);
-  document.addEventListener("touchmove", setCoords);
-  document.addEventListener("touchstart", setCoords);
-  document.addEventListener("touchend", setCoords);
-  document.addEventListener("click", showClickCoords);
-  document.addEventListener("touchend", showClickCoords);
+  // --- Optimized Event Delegation and Listener Management ---
+  // Use a Set to track active pointer types for durability
+  const activePointers = new Set();
 
+  // Unified pointer event handler for mouse and touch
+  function pointerHandler(e) {
+    setCoords(e);
+    if (e.type === "touchstart" || e.type === "mousedown") {
+      activePointers.add(e.pointerId || "mouse");
+    } else if (e.type === "touchend" || e.type === "mouseup" || e.type === "mouseleave") {
+      activePointers.delete(e.pointerId || "mouse");
+    }
+  }
+
+  // Use passive listeners for touch/move for better scroll performance
+  document.addEventListener("mousemove", pointerHandler, { passive: true });
+  document.addEventListener("mouseenter", pointerHandler, { passive: true });
+  document.addEventListener("mouseleave", pointerHandler, { passive: true });
+  document.addEventListener("touchmove", pointerHandler, { passive: true });
+  document.addEventListener("touchstart", pointerHandler, { passive: true });
+  document.addEventListener("touchend", pointerHandler, { passive: true });
+  document.addEventListener("mousedown", pointerHandler, { passive: true });
+  document.addEventListener("mouseup", pointerHandler, { passive: true });
+
+  document.addEventListener("click", showClickCoords, { passive: true });
+  document.addEventListener("touchend", showClickCoords, { passive: true });
+
+  // Keyboard and wheel listeners remain as is for modifier key tracking
   document.addEventListener("keydown", (e) => {
     if (["Shift", "Alt", "Control", "Meta"].includes(e.key)) {
       updateModifierKeys(e);
@@ -919,5 +936,14 @@ log.style.zIndex = "1000";
 
   document.addEventListener("wheel", (e) => {
     updateModifierKeys(e);
+  }, { passive: true });
+
+  // --- Debounce log updates for durability under rapid events ---
+  // (Already handled by requestAnimationFrame in setCoords)
+
+  // --- Defensive: Clean up on page unload to avoid leaks ---
+  window.addEventListener("beforeunload", () => {
+    if (setCoords.rafId) cancelAnimationFrame(setCoords.rafId);
+    activePointers.clear();
   });
 });

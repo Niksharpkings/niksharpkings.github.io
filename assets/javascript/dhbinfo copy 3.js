@@ -1,0 +1,390 @@
+// dhbinfo.js
+// Modern, extensible, and durable browser/system info display
+
+/**
+ * Utility: Safely get a property or return fallback
+ * @param {Function} fn - function to execute
+ * @param {any} fallback - fallback value
+ * @returns {any}
+ */
+const safe = (fn, fallback = 'N/A') => {
+  try { return fn(); } catch { return fallback; }
+};
+
+/**
+ * Helper: Format boolean as Yes/No
+ * @param {any} v
+ * @returns {string}
+ */
+const yesNo = v => v === true ? 'Yes' : v === false ? 'No' : v;
+
+/**
+ * infoMap: Array of info fields to display
+ * id: DOM id
+ * label: Short label
+ * description: Detailed description (for tooltips or accessibility)
+ * value: Function returning the value
+ */
+const infoMap = [
+  // === Page/Document ===
+  { id: "lastupdate", label: "Last page update", description: "The last time this page was modified on the server.", value: () => safe(() => document.lastModified) },
+  { id: "dhbinfo", label: "Page hostname", description: "The domain name of the current page.", value: () => safe(() => window.location.hostname) },
+  { id: "dhbinfo2", label: "Full URL", description: "The full URL of the current page.", value: () => safe(() => window.location.href) },
+  { id: "dhbinfo3", label: "Page path", description: "The path portion of the URL.", value: () => safe(() => window.location.pathname) },
+  { id: "dhbinfo4", label: "Protocol", description: "The protocol used (http, https, etc).", value: () => safe(() => window.location.protocol) },
+  { id: "dhbinfo5", label: "Cookies enabled", description: "Whether cookies are enabled in your browser.", value: () => yesNo(safe(() => navigator.cookieEnabled)) },
+  { id: "dhbinfo6", label: "Page title", description: "The title of the current page.", value: () => safe(() => document.title) },
+  { id: "dhbinfo7", label: "Referrer", description: "The URL of the previous page (if any).", value: () => safe(() => document.referrer || 'None') },
+  { id: "dhbinfo8", label: "Charset", description: "The character encoding of the page.", value: () => safe(() => document.characterSet || document.charset) },
+  { id: "dhbinfo9", label: "Viewport", description: "The viewport meta tag content.", value: () => safe(() => document.querySelector("meta[name='viewport']")?.content || 'None') },
+  { id: "dhbinfo10", label: "Description", description: "The meta description of the page.", value: () => safe(() => document.querySelector("meta[name='description']")?.content || 'None') },
+  { id: "dhbinfo11", label: "Keywords", description: "The meta keywords of the page.", value: () => safe(() => document.querySelector("meta[name='keywords']")?.content || 'None') },
+  { id: "dhbinfo12", label: "Canonical link", description: "The canonical link for SEO.", value: () => safe(() => document.querySelector("link[rel='canonical']")?.href || 'None') },
+  { id: "dhbinfo13", label: "Favicon", description: "The favicon URL.", value: () => safe(() => document.querySelector("link[rel='icon']")?.href || 'None') },
+  { id: "dhbinfo14", label: "Page language", description: "The language of the page.", value: () => safe(() => document.documentElement.lang || navigator.language) },
+
+  // === Browser/Platform ===
+  { id: "dhbinfo15", label: "Browser name", description: "The name of your browser.", value: () => safe(() => navigator.appName) },
+  { id: "dhbinfo16", label: "Browser version", description: "The version string of your browser.", value: () => safe(() => navigator.appVersion) },
+  { id: "dhbinfo17", label: "User agent", description: "The user agent string sent by your browser.", value: () => safe(() => navigator.userAgent) },
+  { id: "dhbinfo18", label: "Platform", description: "The platform your browser is running on.", value: () => safe(() => navigator.platform) },
+  { id: "dhbinfo19", label: "Languages", description: "Your preferred languages.", value: () => safe(() => navigator.languages?.join(', ') || navigator.language) },
+  { id: "dhbinfo20", label: "Online", description: "Whether your browser is online.", value: () => yesNo(safe(() => navigator.onLine)) },
+  { id: "dhbinfo21", label: "Do Not Track", description: "Your browser's Do Not Track setting.", value: () => safe(() => navigator.doNotTrack) },
+  { id: "dhbinfo22", label: "Java enabled", description: "Whether Java is enabled in your browser.", value: () => yesNo(safe(() => navigator.javaEnabled?.())) },
+  { id: "dhbinfo23", label: "CPU threads", description: "Number of logical CPU threads.", value: () => safe(() => navigator.hardwareConcurrency) },
+  { id: "dhbinfo24", label: "Device memory (GB)", description: "Approximate device memory in GB.", value: () => safe(() => navigator.deviceMemory) },
+  { id: "dhbinfo25", label: "Max touch points", description: "Maximum number of simultaneous touch points.", value: () => safe(() => navigator.maxTouchPoints) },
+  { id: "dhbinfo26", label: "Vendor", description: "Browser vendor string.", value: () => safe(() => navigator.vendor) },
+  { id: "dhbinfo27", label: "ProductSub", description: "Browser productSub string.", value: () => safe(() => navigator.productSub) },
+  { id: "dhbinfo28", label: "VendorSub", description: "Browser vendorSub string.", value: () => safe(() => navigator.vendorSub) },
+  { id: "dhbinfo29", label: "Webdriver (automation)", description: "Is the browser under automation control?", value: () => yesNo(safe(() => navigator.webdriver)) },
+  { id: "dhbinfo30", label: "Browser build ID", description: "Browser build identifier (if available).", value: () => safe(() => navigator.buildID || 'N/A') },
+  { id: "dhbinfo31", label: "Browser product", description: "Browser product string.", value: () => safe(() => navigator.product) },
+  { id: "dhbinfo32", label: "Browser user agent data", description: "Structured user agent data (if supported).", value: () => safe(() => JSON.stringify(navigator.userAgentData || {}, null, 2)) },
+
+  // === Network/Connection ===
+  { id: "dhbinfo33", label: "Connection type", description: "Type of network connection (if supported).", value: () => safe(() => navigator.connection?.type || 'N/A') },
+  { id: "dhbinfo34", label: "Effective connection type", description: "Effective network connection type (if supported).", value: () => safe(() => navigator.connection?.effectiveType || 'N/A') },
+  { id: "dhbinfo35", label: "Downlink (Mbps)", description: "Estimated effective bandwidth in megabits per second.", value: () => safe(() => navigator.connection?.downlink || 'N/A') },
+  { id: "dhbinfo36", label: "RTT (ms)", description: "Estimated effective round-trip time of the current connection.", value: () => safe(() => navigator.connection?.rtt || 'N/A') },
+  { id: "dhbinfo37", label: "Save data mode", description: "Is save-data mode enabled?", value: () => yesNo(safe(() => navigator.connection?.saveData)) },
+  { id: "dhbinfo38", label: "Network information", description: "Detailed network information (if supported).", value: () => safe(() => JSON.stringify(navigator.connection || {}, null, 2)) },
+  { id: "dhbinfo39", label: "Network downlink max (Mbps)", description: "Maximum downlink speed in megabits per second (if supported).", value: () => safe(() => navigator.connection?.downlinkMax || 'N/A') },
+  { id: "dhbinfo40", label: "Network latency (ms)", description: "Estimated network latency in milliseconds (if supported).", value: () => safe(() => navigator.connection?.latency || 'N/A') },
+  { id: "dhbinfo41", label: "Network effective bandwidth (Mbps)", description: "Estimated effective bandwidth in megabits per second (if supported).", value: () => safe(() => navigator.connection?.bandwidth || 'N/A') },
+  { id: "dhbinfo42", label: "Network downlink speed (Mbps)", description: "Estimated downlink speed in megabits per second (if supported).", value: () => safe(() => navigator.connection?.downlinkSpeed || 'N/A') },
+  { id: "dhbinfo43", label: "Network up link speed (Mbps)", description: "Estimated uplink speed in megabits per second (if supported).", value: () => safe(() => navigator.connection?.upLinkSpeed || 'N/A') },
+  { id: "dhbinfo44", label: "Network connection save data mode", description: "Is save-data mode enabled for the network connection?", value: () => yesNo(safe(() => navigator.connection?.saveData)) },
+  { id: "dhbinfo45", label: "Network connection type", description: "Type of network connection (if supported).", value: () => safe(() => navigator.connection?.type || 'N/A') },
+  { id: "dhbinfo46", label: "Network connection effective type", description: "Effective network connection type (if supported).", value: () => safe(() => navigator.connection?.effectiveType || 'N/A') },
+  { id: "dhbinfo47", label: "Network connection downlink", description: "Estimated effective bandwidth in megabits per second (if supported).", value: () => safe(() => navigator.connection?.downlink || 'N/A') },
+
+  // === Battery ===
+  { id: "dhbinfo38", label: "Battery charging", description: "Is the device charging? (if supported)", value: () => safe(() => navigator.getBattery ? navigator.getBattery().then(b => yesNo(b.charging)) : 'N/A') },
+  { id: "dhbinfo39", label: "Battery level", description: "Battery level as a percentage (if supported).", value: () => safe(() => navigator.getBattery ? navigator.getBattery().then(b => `${Math.round(b.level * 100)}%`) : 'N/A') },
+  { id: "dhbinfo40", label: "Battery charging time", description: "Time remaining to full charge in seconds (if supported).", value: () => safe(() => navigator.getBattery ? navigator.getBattery().then(b => b.chargingTime) : 'N/A') },
+  { id: "dhbinfo41", label: "Battery discharging time", description: "Time remaining to discharge in seconds (if supported).", value: () => safe(() => navigator.getBattery ? navigator.getBattery().then(b => b.dischargingTime) : 'N/A') },
+
+  // === Screen/Window ===
+  { id: "dhbinfo42", label: "Screen resolution", description: "Screen width x height in pixels.", value: () => `${safe(() => screen.width)} x ${safe(() => screen.height)}` },
+  { id: "dhbinfo43", label: "Available screen size", description: "Available screen width x height.", value: () => `${safe(() => screen.availWidth)} x ${safe(() => screen.availHeight)}` },
+  { id: "dhbinfo44", label: "Color depth", description: "Number of bits used to display one color.", value: () => safe(() => screen.colorDepth) },
+  { id: "dhbinfo45", label: "Pixel depth", description: "Number of bits per pixel.", value: () => safe(() => screen.pixelDepth) },
+  { id: "dhbinfo46", label: "Device pixel ratio", description: "Ratio of physical to CSS pixels.", value: () => safe(() => window.devicePixelRatio) },
+  { id: "dhbinfo47", label: "Window outer size", description: "Browser window outer width x height.", value: () => `${safe(() => window.outerWidth)} x ${safe(() => window.outerHeight)}` },
+  { id: "dhbinfo48", label: "Window inner size", description: "Browser window inner width x height.", value: () => `${safe(() => window.innerWidth)} x ${safe(() => window.innerHeight)}` },
+  { id: "dhbinfo49", label: "Page zoom (if supported)", description: "Current zoom level.", value: () => safe(() => document.body?.style.zoom || '1') },
+  { id: "dhbinfo50", label: "Scroll position", description: "Current scroll X, Y.", value: () => `${safe(() => window.scrollX)}, ${safe(() => window.scrollY)}` },
+
+  // === Permissions/Capabilities ===
+  { id: "dhbinfo51", label: "Permissions API", description: "Is the Permissions API supported?", value: () => yesNo(safe(() => !!navigator.permissions)) },
+  { id: "dhbinfo52", label: "Clipboard API", description: "Is the Clipboard API supported?", value: () => yesNo(safe(() => !!navigator.clipboard)) },
+  { id: "dhbinfo53", label: "Geolocation API", description: "Is the Geolocation API supported?", value: () => yesNo(safe(() => !!navigator.geolocation)) },
+  { id: "dhbinfo54", label: "Vibration API", description: "Is the Vibration API supported?", value: () => yesNo(safe(() => 'vibrate' in navigator)) },
+  { id: "dhbinfo55", label: "Pointer events", description: "Are pointer events supported?", value: () => yesNo(safe(() => 'onpointerdown' in window)) },
+  { id: "dhbinfo56", label: "Touch events", description: "Are touch events supported?", value: () => yesNo(safe(() => 'ontouchstart' in window)) },
+  { id: "dhbinfo57", label: "Speech synthesis", description: "Is the Speech Synthesis API supported?", value: () => yesNo(safe(() => 'speechSynthesis' in window)) },
+  { id: "dhbinfo58", label: "Speech recognition", description: "Is the Speech Recognition API supported?", value: () => yesNo(safe(() => 'SpeechRecognition' in window || 'webkitSpeechRecognition' in window)) },
+  { id: "dhbinfo59", label: "Gamepad API", description: "Is the Gamepad API supported?", value: () => yesNo(safe(() => 'getGamepads' in navigator)) },
+  { id: "dhbinfo60", label: "Battery API", description: "Is the Battery API supported?", value: () => yesNo(safe(() => 'getBattery' in navigator)) },
+  { id: "dhbinfo61", label: "Media devices", description: "Are media devices supported?", value: () => yesNo(safe(() => 'mediaDevices' in navigator)) },
+  { id: "dhbinfo62", label: "WebGL supported", description: "Is WebGL supported?", value: () => yesNo(safe(() => !!window.WebGLRenderingContext)) },
+  { id: "dhbinfo63", label: "WebAssembly supported", description: "Is WebAssembly supported?", value: () => yesNo(safe(() => !!window.WebAssembly)) },
+  { id: "dhbinfo64", label: "IndexedDB supported", description: "Is IndexedDB supported?", value: () => yesNo(safe(() => !!window.indexedDB)) },
+  { id: "dhbinfo65", label: "LocalStorage supported", description: "Is LocalStorage supported?", value: () => yesNo(safe(() => !!window.localStorage)) },
+  { id: "dhbinfo66", label: "SessionStorage supported", description: "Is SessionStorage supported?", value: () => yesNo(safe(() => !!window.sessionStorage)) },
+  { id: "dhbinfo67", label: "ServiceWorker supported", description: "Is ServiceWorker supported?", value: () => yesNo(safe(() => 'serviceWorker' in navigator)) },
+  { id: "dhbinfo68", label: "Notification API", description: "Is the Notification API supported?", value: () => yesNo(safe(() => 'Notification' in window)) },
+  { id: "dhbinfo69", label: "Performance API", description: "Is the Performance API supported?", value: () => yesNo(safe(() => 'performance' in window)) },
+  { id: "dhbinfo70", label: "WebSocket supported", description: "Is WebSocket supported?", value: () => yesNo(safe(() => 'WebSocket' in window)) },
+  { id: "dhbinfo71", label: "History API", description: "Is the History API supported?", value: () => yesNo(safe(() => 'history' in window)) },
+  { id: "dhbinfo72", label: "URL API", description: "Is the URL API supported?", value: () => yesNo(safe(() => 'URL' in window)) },
+  { id: "dhbinfo73", label: "DOMParser supported", description: "Is DOMParser supported?", value: () => yesNo(safe(() => 'DOMParser' in window)) },
+  { id: "dhbinfo74", label: "MutationObserver supported", description: "Is MutationObserver supported?", value: () => yesNo(safe(() => 'MutationObserver' in window)) },
+  { id: "dhbinfo75", label: "Shadow DOM supported", description: "Is Shadow DOM supported?", value: () => yesNo(safe(() => 'ShadowRoot' in window)) },
+  { id: "dhbinfo76", label: "Custom Elements supported", description: "Are Custom Elements supported?", value: () => yesNo(safe(() => 'customElements' in window)) },
+  { id: "dhbinfo77", label: "MathML supported", description: "Is MathML supported?", value: () => yesNo(safe(() => 'MathMLElement' in window)) },
+  { id: "dhbinfo78", label: "SVG supported", description: "Is SVG supported?", value: () => yesNo(safe(() => 'SVGElement' in window)) },
+  { id: "dhbinfo79", label: "HTMLCollection supported", description: "Is HTMLCollection supported?", value: () => yesNo(safe(() => 'HTMLCollection' in window)) },
+  { id: "dhbinfo80", label: "NodeList supported", description: "Is NodeList supported?", value: () => yesNo(safe(() => 'NodeList' in window)) },
+  { id: "dhbinfo81", label: "Element supported", description: "Is Element supported?", value: () => yesNo(safe(() => 'Element' in window)) },
+  { id: "dhbinfo82", label: "Document supported", description: "Is Document supported?", value: () => yesNo(safe(() => 'Document' in window)) },
+  { id: "dhbinfo83", label: "Window supported", description: "Is Window supported?", value: () => yesNo(safe(() => 'Window' in window)) },
+  { id: "dhbinfo84", label: "HTMLDocument supported", description: "Is HTMLDocument supported?", value: () => yesNo(safe(() => 'HTMLDocument' in window)) },
+
+  // === CSS Features ===
+  { id: "dhbinfo85", label: "Browser has CSSStyleSheet", description: "Does the browser support CSSStyleSheet?", value: () => yesNo(safe(() => 'CSSStyleSheet' in window)) },
+  { id: "dhbinfo86", label: "Browser has CSSRule", description: "Does the browser support CSSRule?", value: () => yesNo(safe(() => 'CSSRule' in window)) },
+  { id: "dhbinfo87", label: "Browser has CSSStyleDeclaration", description: "Does the browser support CSSStyleDeclaration?", value: () => yesNo(safe(() => 'CSSStyleDeclaration' in window)) },
+  { id: "dhbinfo88", label: "Browser has CSSMediaRule", description: "Does the browser support CSSMediaRule?", value: () => yesNo(safe(() => 'CSSMediaRule' in window)) },
+  { id: "dhbinfo89", label: "Browser has CSSStyleRule", description: "Does the browser support CSSStyleRule?", value: () => yesNo(safe(() => 'CSSStyleRule' in window)) },
+  { id: "dhbinfo90", label: "Browser has CSSFontFaceRule", description: "Does the browser support CSSFontFaceRule?", value: () => yesNo(safe(() => 'CSSFontFaceRule' in window)) },
+  { id: "dhbinfo91", label: "Browser has CSSKeyframesRule", description: "Does the browser support CSSKeyframesRule?", value: () => yesNo(safe(() => 'CSSKeyframesRule' in window)) },
+  { id: "dhbinfo92", label: "Browser has CSSKeyframeRule", description: "Does the browser support CSSKeyframeRule?", value: () => yesNo(safe(() => 'CSSKeyframeRule' in window)) },
+  { id: "dhbinfo93", label: "Browser has CSSSupportsRule", description: "Does the browser support CSSSupportsRule?", value: () => yesNo(safe(() => 'CSSSupportsRule' in window)) },
+  { id: "dhbinfo94", label: "Browser has CSSViewportRule", description: "Does the browser support CSSViewportRule?", value: () => yesNo(safe(() => 'CSSViewportRule' in window)) },
+  { id: "dhbinfo95", label: "Browser has CSSNamespaceRule", description: "Does the browser support CSSNamespaceRule?", value: () => yesNo(safe(() => 'CSSNamespaceRule' in window)) },
+  { id: "dhbinfo96", label: "Browser has CSSImportRule", description: "Does the browser support CSSImportRule?", value: () => yesNo(safe(() => 'CSSImportRule' in window)) },
+  { id: "dhbinfo97", label: "Browser has CSSCalc", description: "Does the browser support CSS calc() function?", value: () => yesNo(safe(() => 'CSS' in window && 'supports' in window.CSS && window.CSS.supports('width', 'calc(1px)'))) },
+  { id: "dhbinfo98", label: "Browser has CSSGrid", description: "Does the browser support CSS Grid layout?", value: () => yesNo(safe(() => 'CSS' in window && 'supports' in window.CSS && window.CSS.supports('display', 'grid'))) },
+  { id: "dhbinfo99", label: "Browser has CSSFlexbox", description: "Does the browser support CSS Flexbox layout?", value: () => yesNo(safe(() => 'CSS' in window && 'supports' in window.CSS && window.CSS.supports('display', 'flex'))) },
+  { id: "dhbinfo100", label: "Browser has CSSVariables", description: "Does the browser support CSS Variables?", value: () => yesNo(safe(() => 'CSS' in window && 'supports' in window.CSS && window.CSS.supports('--fake-var', 'red'))) },
+  { id: "dhbinfo101", label: "Browser has CSSAnimations", description: "Does the browser support CSS Animations?", value: () => yesNo(safe(() => 'CSS' in window && 'supports' in window.CSS && window.CSS.supports('animation', '1s'))) },
+  { id: "dhbinfo102", label: "Browser has CSSTransitions", description: "Does the browser support CSS Transitions?", value: () => yesNo(safe(() => 'CSS' in window && 'supports' in window.CSS && window.CSS.supports('transition', 'all 1s'))) },
+  { id: "dhbinfo103", label: "Browser has CSSTransforms", description: "Does the browser support CSS Transforms?", value: () => yesNo(safe(() => 'CSS' in window && 'supports' in window.CSS && window.CSS.supports('transform', 'rotate(1deg)'))) },
+  { id: "dhbinfo104", label: "Browser has CSSFilters", description: "Does the browser support CSS Filters?", value: () => yesNo(safe(() => 'CSS' in window && 'supports' in window.CSS && window.CSS.supports('filter', 'blur(1px)'))) },
+  { id: "dhbinfo105", label: "Browser has CSSShapes", description: "Does the browser support CSS Shapes?", value: () => yesNo(safe(() => 'CSS' in window && 'supports' in window.CSS && window.CSS.supports('shape-outside', 'circle(50%)'))) },
+  { id: "dhbinfo106", label: "Browser has CSSRegions", description: "Does the browser support CSS Regions?", value: () => yesNo(safe(() => 'CSS' in window && 'supports' in window.CSS && window.CSS.supports('flow-into', 'region'))) },
+  { id: "dhbinfo107", label: "Browser has CSSScrollSnap", description: "Does the browser support CSS Scroll Snap?", value: () => yesNo(safe(() => 'CSS' in window && 'supports' in window.CSS && window.CSS.supports('scroll-snap-type', 'x mandatory'))) },
+  { id: "dhbinfo108", label: "Browser has CSSContain", description: "Does the browser support CSS Containment?", value: () => yesNo(safe(() => 'CSS' in window && 'supports' in window.CSS && window.CSS.supports('contain', 'layout'))) },
+  { id: "dhbinfo109", label: "Browser has CSSBackdropFilter", description: "Does the browser support CSS Backdrop Filter?", value: () => yesNo(safe(() => 'CSS' in window && 'supports' in window.CSS && window.CSS.supports('backdrop-filter', 'blur(1px)'))) },
+  { id: "dhbinfo110", label: "Browser has CSSLogicalProperties", description: "Does the browser support CSS Logical Properties?", value: () => yesNo(safe(() => 'CSS' in window && 'supports' in window.CSS && window.CSS.supports('margin-inline-start', '1px'))) },
+  { id: "dhbinfo111", label: "Browser has CSSScrollBehavior", description: "Does the browser support CSS Scroll Behavior?", value: () => yesNo(safe(() => 'CSS' in window && 'supports' in window.CSS && window.CSS.supports('scroll-behavior', 'smooth'))) },
+  { id: "dhbinfo112", label: "Browser has CSSColorAdjust", description: "Does the browser support CSS Color Adjust?", value: () => yesNo(safe(() => 'CSS' in window && 'supports' in window.CSS && window.CSS.supports('color-adjust', 'exact'))) },
+  { id: "dhbinfo113", label: "Browser has CSSColorScheme", description: "Does the browser support CSS Color Scheme?", value: () => yesNo(safe(() => 'CSS' in window && 'supports' in window.CSS && window.CSS.supports('color-scheme', 'dark light'))) },
+  { id: "dhbinfo114", label: "Browser has CSSAspectRatio", description: "Does the browser support CSS Aspect Ratio?", value: () => yesNo(safe(() => 'CSS' in window && 'supports' in window.CSS && window.CSS.supports('aspect-ratio', '1 / 1'))) },
+  { id: "dhbinfo115", label: "Browser has CSSLogicalBoxModel", description: "Does the browser support CSS Logical Box Model?", value: () => yesNo(safe(() => 'CSS' in window && 'supports' in window.CSS && window.CSS.supports('box-decoration-break', 'clone'))) },
+  { id: "dhbinfo116", label: "Browser has CSSContainerQueries", description: "Does the browser support CSS Container Queries?", value: () => yesNo(safe(() => 'CSS' in window && 'supports' in window.CSS && window.CSS.supports('container', 'size'))) },
+  { id: "dhbinfo117", label: "Browser has CSSColorFunctions", description: "Does the browser support CSS Color Functions?", value: () => yesNo(safe(() => 'CSS' in window && 'supports' in window.CSS && window.CSS.supports('color', 'color(display-p3 1 0 0)'))) },
+  { id: "dhbinfo118", label: "Browser has CSSImageSet", description: "Does the browser support CSS Image Set?", value: () => yesNo(safe(() => 'CSS' in window && 'supports' in window.CSS && window.CSS.supports('image-set', 'url(image.png) 1x, url(abandoned.png) 2x'))) },
+  { id: "dhbinfo119", label: "Browser has CSSLogicalPropertiesAndValues", description: "Does the browser support CSS Logical Properties and Values?", value: () => yesNo(safe(() => 'CSS' in window && 'supports' in window.CSS && window.CSS.supports('margin-inline', '1px'))) },
+
+  // === Fun/Diagnostics/Advanced ===
+  { id: "dhbinfo120", label: "Timezone", description: "Your current timezone.", value: () => safe(() => Intl.DateTimeFormat().resolvedOptions().timeZone) },
+  { id: "dhbinfo121", label: "Page visibility", description: "Is the page visible or hidden?", value: () => safe(() => document.visibilityState) },
+  { id: "dhbinfo122", label: "Page focus", description: "Is the page focused?", value: () => yesNo(safe(() => document.hasFocus())) },
+  { id: "dhbinfo123", label: "Page fullscreen", description: "Is the page in fullscreen mode?", value: () => yesNo(safe(() => !!document.fullscreenElement)) },
+  { id: "dhbinfo124", label: "Page scrollable", description: "Is the page scrollable?", value: () => yesNo(safe(() => document.body.scrollHeight > window.innerHeight)) },
+  { id: "dhbinfo125", label: "Page editable", description: "Is the page editable?", value: () => yesNo(safe(() => document.designMode === 'on' || document.body.isContentEditable)) },
+  { id: "dhbinfo126", label: "Page URL hash", description: "The hash portion of the URL.", value: () => safe(() => window.location.hash) },
+  { id: "dhbinfo127", label: "Page search params", description: "The search/query string of the URL.", value: () => safe(() => window.location.search) },
+  { id: "dhbinfo128", label: "Page referrer policy", description: "The referrer policy for this page.", value: () => safe(() => document.referrerPolicy || 'N/A') },
+  { id: "dhbinfo129", label: "Page scripts count", description: "Number of <script> tags on the page.", value: () => safe(() => document.scripts.length) },
+  { id: "dhbinfo130", label: "Page links count", description: "Number of <a> tags on the page.", value: () => safe(() => document.links.length) },
+  { id: "dhbinfo131", label: "Page images count", description: "Number of <img> tags on the page.", value: () => safe(() => document.images.length) },
+  { id: "dhbinfo132", label: "Page forms count", description: "Number of <form> tags on the page.", value: () => safe(() => document.forms.length) },
+  { id: "dhbinfo133", label: "Page anchors count", description: "Number of <a name> anchors on the page.", value: () => safe(() => document.anchors.length) },
+  { id: "dhbinfo134", label: "Page styleSheets count", description: "Number of stylesheets on the page.", value: () => safe(() => document.styleSheets.length) },
+  { id: "dhbinfo135", label: "Page fonts count", description: "Number of loaded fonts.", value: () => safe(() => document.fonts?.size ?? 'N/A') },
+  { id: "dhbinfo136", label: "Page cookies count", description: "Number of cookies for this page.", value: () => safe(() => document.cookie ? document.cookie.split(';').length : 0) },
+  { id: "dhbinfo137", label: "Page domain", description: "The domain of the page.", value: () => safe(() => document.domain) },
+  { id: "dhbinfo138", label: "Page baseURI", description: "The base URI of the page.", value: () => safe(() => document.baseURI) },
+  { id: "dhbinfo139", label: "Page readyState", description: "The document's readyState.", value: () => safe(() => document.readyState) },
+  { id: "dhbinfo140", label: "Page compatMode", description: "The document's compatibility mode.", value: () => safe(() => document.compatMode) },
+  { id: "dhbinfo141", label: "Page last element child", description: "The last element child of <body>.", value: () => safe(() => document.body.lastElementChild?.tagName) },
+  { id: "dhbinfo142", label: "Page first element child", description: "The first element child of <body>.", value: () => safe(() => document.body.firstElementChild?.tagName) },
+  { id: "dhbinfo143", label: "Browser timezone offset", description: "Minutes offset from UTC.", value: () => safe(() => new Date().getTimezoneOffset()) },
+  { id: "dhbinfo144", label: "Browser color scheme", description: "Preferred color scheme (dark/light).", value: () => safe(() => window.matchMedia('(prefers-color-scheme: dark)').matches ? 'Dark' : 'Light') },
+  { id: "dhbinfo145", label: "Browser memory JS heap limit (MB)", description: "JS heap memory limit (if supported).", value: () => safe(() => window.performance?.memory?.jsHeapSizeLimit ? (window.performance.memory.jsHeapSizeLimit / 1048576).toFixed(2) : 'N/A') },
+  { id: "dhbinfo146", label: "Browser device type", description: "Device type (mobile/tablet/desktop)", value: () => safe(() => /Mobi|Android/i.test(navigator.userAgent) ? 'Mobile/Tablet' : 'Desktop') },
+  { id: "dhbinfo147", label: "Browser cookie policy", description: "Cookie policy (if supported).", value: () => safe(() => navigator.cookieEnabled ? 'Enabled' : 'Disabled') },
+  { id: "dhbinfo148", label: "Browser storage quota", description: "Storage quota (if supported).", value: () => safe(() => navigator.storage?.estimate?.().then(estimate => `${(estimate.quota / 1048576).toFixed(2)} MB`)) },
+  { id: "dhbinfo149", label: "Browser storage usage", description: "Storage usage (if supported).", value: () => safe(() => navigator.storage?.estimate?.().then(estimate => `${(estimate.usage / 1048576).toFixed(2)} MB`)) },
+  { id: "dhbinfo150", label: "Browser hardware concurrency", description: "Number of logical CPU cores.", value: () => safe(() => navigator.hardwareConcurrency) },
+  { id: "dhbinfo151", label: "Browser device memory", description: "Approximate device memory in GB.", value: () => safe(() => navigator.deviceMemory) },
+  { id: "dhbinfo152", label: "Browser max touch points", description: "Maximum number of simultaneous touch points.", value: () => safe(() => navigator.maxTouchPoints) },
+  // Fun/Advanced
+  { id: "dhbinfo153", label: "Is incognito/private mode?", description: "Detects if the browser is in private/incognito mode (best effort, may not be reliable).", value: () => safe(() => {
+    // Chrome/Edge/Opera
+    if (window.webkitRequestFileSystem) {
+      window.webkitRequestFileSystem(0, 100, () => 'No', () => 'Yes');
+    }
+    // Firefox
+    if ('MozAppearance' in document.documentElement.style) {
+      try {
+        indexedDB.open('test');
+        return 'No';
+      } catch (e) {
+        return 'Yes';
+      }
+    }
+    // Safari
+    try {
+      window.openDatabase(null, null, null, null);
+      return 'No';
+    } catch (e) {
+      return 'Yes';
+    }
+    return 'Unknown';
+  }) },
+  { id: "dhbinfo154", label: "Is touch device?", description: "Detects if the device supports touch events.", value: () => yesNo(safe(() => 'ontouchstart' in window || navigator.maxTouchPoints > 0)) },
+  { id: "dhbinfo155", label: "Is standalone (PWA)?", description: "Is the site running as a standalone PWA?", value: () => yesNo(safe(() => window.matchMedia('(display-mode: standalone)').matches)) },
+  { id: "dhbinfo156", label: "Is secure context?", description: "Is the page running in a secure context (HTTPS)?", value: () => yesNo(safe(() => window.isSecureContext)) },
+  { id: "dhbinfo157", label: "Is top-level window?", description: "Is this the top-level browsing context?", value: () => yesNo(safe(() => window.top === window.self)) },
+  { id: "dhbinfo158", label: "Is cross-origin isolated?", description: "Is the context cross-origin isolated?", value: () => yesNo(safe(() => window.crossOriginIsolated)) },
+  { id: "dhbinfo159", label: "Is pop-up window?", description: "Is this window a pop-up?", value: () => yesNo(safe(() => window.opener != null)) },
+  { id: "dhbinfo160", label: "Is in iframe?", description: "Is this page inside an iframe?", value: () => yesNo(safe(() => window.self !== window.top)) },
+  { id: "dhbinfo161", label: "Document hidden?", description: "Is the document hidden (not visible)?", value: () => yesNo(safe(() => document.hidden)) },
+  { id: "dhbinfo162", label: "Document pointer lock?", description: "Is pointer lock active?", value: () => yesNo(safe(() => document.pointerLockElement != null)) },
+  { id: "dhbinfo163", label: "Document fullscreen?", description: "Is the document in fullscreen mode?", value: () => yesNo(safe(() => document.fullscreenElement != null)) },
+  { id: "dhbinfo164", label: "Document has focus?", description: "Does the document have focus?", value: () => yesNo(safe(() => document.hasFocus())) },
+  { id: "dhbinfo165", label: "Document active element", description: "The tag name of the currently active element.", value: () => safe(() => document.activeElement?.tagName) },
+  { id: "dhbinfo166", label: "Document scroll width", description: "The scroll width of the document.", value: () => safe(() => document.documentElement.scrollWidth) },
+  { id: "dhbinfo167", label: "Document scroll height", description: "The scroll height of the document.", value: () => safe(() => document.documentElement.scrollHeight) },
+  { id: "dhbinfo168", label: "Document client width", description: "The client width of the document.", value: () => safe(() => document.documentElement.clientWidth) },
+  { id: "dhbinfo169", label: "Document client height", description: "The client height of the document.", value: () => safe(() => document.documentElement.clientHeight) },
+  { id: "dhbinfo170", label: "Document body scroll top", description: "The scrollTop of the body.", value: () => safe(() => document.body.scrollTop) },
+  { id: "dhbinfo171", label: "Document body scroll left", description: "The scrollLeft of the body.", value: () => safe(() => document.body.scrollLeft) },
+  { id: "dhbinfo172", label: "Document body offset width", description: "The offsetWidth of the body.", value: () => safe(() => document.body.offsetWidth) },
+  { id: "dhbinfo173", label: "Document body offset height", description: "The offsetHeight of the body.", value: () => safe(() => document.body.offsetHeight) },
+  { id: "dhbinfo174", label: "Browser is mobile?", description: "Detects if the browser is running on a mobile device.", value: () => yesNo(safe(() => /Mobi|Android/i.test(navigator.userAgent))) },
+  { id: "dhbinfo175", label: "Browser is iOS?", description: "Detects if the browser is running on iOS.", value: () => yesNo(safe(() => /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream)) },
+  { id: "dhbinfo176", label: "Browser is Android?", description: "Detects if the browser is running on Android.", value: () => yesNo(safe(() => /Android/.test(navigator.userAgent))) },
+  { id: "dhbinfo177", label: "Browser is Chrome?", description: "Detects if the browser is Chrome.", value: () => yesNo(safe(() => /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor))) },
+  { id: "dhbinfo178", label: "Browser is Firefox?", description: "Detects if the browser is Firefox.", value: () => yesNo(safe(() => /Firefox/.test(navigator.userAgent))) },
+  { id: "dhbinfo179", label: "Browser is Safari?", description: "Detects if the browser is Safari.", value: () => yesNo(safe(() => /Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor))) },
+  { id: "dhbinfo180", label: "Browser is Edge?", description: "Detects if the browser is Microsoft Edge.", value: () => yesNo(safe(() => /Edg/.test(navigator.userAgent))) },
+  { id: "dhbinfo181", label: "Browser is Brave?", description: "Detects if the browser is Brave.", value: () => yesNo(safe(() => navigator.brave && typeof navigator.brave.isBrave === 'function')) },
+  { id: "dhbinfo182", label: "Device orientation", description: "Current device orientation (if supported).", value: () => safe(() => screen.orientation?.type || 'N/A') },
+  { id: "dhbinfo183", label: "Device orientation angle", description: "Current device orientation angle (if supported).", value: () => safe(() => screen.orientation?.angle || 'N/A') },
+  { id: "dhbinfo184", label: "Device motion supported?", description: "Is DeviceMotionEvent supported?", value: () => yesNo(safe(() => 'DeviceMotionEvent' in window)) },
+  { id: "dhbinfo185", label: "Device orientation supported?", description: "Is DeviceOrientationEvent supported?", value: () => yesNo(safe(() => 'DeviceOrientationEvent' in window)) },
+  { id: "dhbinfo186", label: "Clipboard read supported?", description: "Is navigator.clipboard.read supported?", value: () => yesNo(safe(() => typeof navigator.clipboard?.read === 'function')) },
+  { id: "dhbinfo187", label: "Clipboard write supported?", description: "Is navigator.clipboard.write supported?", value: () => yesNo(safe(() => typeof navigator.clipboard?.write === 'function')) },
+  { id: "dhbinfo188", label: "Web Share API supported?", description: "Is the Web Share API supported?", value: () => yesNo(safe(() => 'share' in navigator)) },
+  { id: "dhbinfo189", label: "Fullscreen API supported?", description: "Is the Fullscreen API supported?", value: () => yesNo(safe(() => 'fullscreenEnabled' in document)) },
+  { id: "dhbinfo190", label: "Wake Lock API supported?", description: "Is the Wake Lock API supported?", value: () => yesNo(safe(() => 'wakeLock' in navigator)) },
+  { id: "dhbinfo191", label: "Bluetooth API supported?", description: "Is the Web Bluetooth API supported?", value: () => yesNo(safe(() => 'bluetooth' in navigator)) },
+  { id: "dhbinfo192", label: "USB API supported?", description: "Is the WebUSB API supported?", value: () => yesNo(safe(() => 'usb' in navigator)) },
+  { id: "dhbinfo193", label: "Serial API supported?", description: "Is the Web Serial API supported?", value: () => yesNo(safe(() => 'serial' in navigator)) },
+  { id: "dhbinfo194", label: "NFC API supported?", description: "Is the Web NFC API supported?", value: () => yesNo(safe(() => 'nfc' in navigator)) },
+  { id: "dhbinfo195", label: "Idle Detection API supported?", description: "Is the Idle Detection API supported?", value: () => yesNo(safe(() => 'IdleDetector' in window)) },
+  { id: "dhbinfo196", label: "Media Session API supported?", description: "Is the Media Session API supported?", value: () => yesNo(safe(() => 'mediaSession' in navigator)) },
+  { id: "dhbinfo197", label: "Picture-in-Picture API supported?", description: "Is the Picture-in-Picture API supported?", value: () => yesNo(safe(() => 'pictureInPictureEnabled' in document)) },
+  { id: "dhbinfo198", label: "Payment Request API supported?", description: "Is the Payment Request API supported?", value: () => yesNo(safe(() => 'PaymentRequest' in window)) },
+  { id: "dhbinfo199", label: "XR (AR/VR) API supported?", description: "Is the WebXR API supported?", value: () => yesNo(safe(() => 'xr' in navigator)) },
+  { id: "dhbinfo200", label: "SpeechSynthesis voices count", description: "Number of available speech synthesis voices.", value: () => safe(() => window.speechSynthesis?.getVoices?.().length ?? 'N/A') },
+  { id: "dhbinfo201", label: "Navigator max touch points", description: "Maximum number of simultaneous touch points supported by the device.", value: () => safe(() => navigator.maxTouchPoints) },
+  { id: "dhbinfo202", label: "Navigator user activation supported?", description: "Is user activation API supported?", value: () => yesNo(safe(() => 'userActivation' in navigator)) },
+  { id: "dhbinfo203", label: "Navigator language", description: "Primary language of the browser.", value: () => safe(() => navigator.language) },
+  { id: "dhbinfo204", label: "Navigator languages", description: "List of preferred languages.", value: () => safe(() => navigator.languages?.join(', ') || navigator.language) },
+  { id: "dhbinfo205", label: "Navigator platform", description: "Platform the browser is running on.", value: () => safe(() => navigator.platform) },
+  { id: "dhbinfo206", label: "Navigator product", description: "Product string of the browser.", value: () => safe(() => navigator.product) },
+  { id: "dhbinfo207", label: "Navigator vendor", description: "Vendor string of the browser.", value: () => safe(() => navigator.vendor) },
+  { id: "dhbinfo208", label: "Navigator appVersion", description: "Version string of the browser.", value: () => safe(() => navigator.appVersion) },
+  { id: "dhbinfo209", label: "Navigator appName", description: "Name of the browser.", value: () => safe(() => navigator.appName) },
+  { id: "dhbinfo210", label: "Navigator appCodeName", description: "Code name of the browser.", value: () => safe(() => navigator.appCodeName) },
+  { id: "dhbinfo211", label: "Navigator productSub", description: "Product sub string of the browser.", value: () => safe(() => navigator.productSub) },
+  { id: "dhbinfo212", label: "Navigator vendorSub", description: "Vendor sub string of the browser.", value: () => safe(() => navigator.vendorSub) },
+  { id: "dhbinfo213", label: "Navigator doNotTrack", description: "Do Not Track setting.", value: () => safe(() => navigator.doNotTrack) },
+  { id: "dhbinfo214", label: "Navigator cookieEnabled", description: "Are cookies enabled?", value: () => yesNo(safe(() => navigator.cookieEnabled)) },
+  { id: "dhbinfo215", label: "Navigator javaEnabled", description: "Is Java enabled?", value: () => yesNo(safe(() => navigator.javaEnabled?.())) },
+  { id: "dhbinfo216", label: "Screen orientation lock supported?", description: "Is screen orientation lock supported?", value: () => yesNo(safe(() => 'lock' in (screen.orientation || {}))) },
+  { id: "dhbinfo217", label: "Device memory (approx. MB)", description: "Approximate device memory in megabytes.", value: () => safe(() => navigator.deviceMemory ? navigator.deviceMemory * 1024 : 'N/A') },
+  { id: "dhbinfo218", label: "Page is prerendered?", description: "Is the page being prerendered?", value: () => yesNo(safe(() => document.visibilityState === 'prerender')) },
+  { id: "dhbinfo219", label: "Page is in background tab?", description: "Is the page in a background tab?", value: () => yesNo(safe(() => document.hidden)) },
+  { id: "dhbinfo220", label: "Page referrer (detailed)", description: "The full referrer URL, if any.", value: () => safe(() => document.referrer || 'None') },
+  { id: "dhbinfo221", label: "Page is in browser history?", description: "Is the page in the browser's history?", value: () => yesNo(safe(() => window.performance?.navigation?.type === 2)) },
+  { id: "dhbinfo222", label: "Page load time (ms)", description: "Time taken to load the page in milliseconds.", value: () => safe(() => window.performance?.timing ? window.performance.timing.loadEventEnd - window.performance.timing.navigationStart : 'N/A') },
+  { id: "dhbinfo223", label: "Page navigation type", description: "Type of navigation that occurred to load the page.", value: () => safe(() => window.performance?.navigation?.type ?? 'N/A') },
+  { id: "dhbinfo224", label: "Page redirect count", description: "Number of redirects before landing on this page.", value: () => safe(() => window.performance?.navigation?.redirectCount ?? 'N/A') },
+  { id: "dhbinfo225", label: "Document has scripts?", description: "Does the document have any <script> tags?", value: () => yesNo(safe(() => document.scripts.length > 0)) },
+  { id: "dhbinfo226", label: "Document has forms?", description: "Does the document have any <form> tags?", value: () => yesNo(safe(() => document.forms.length > 0)) },
+  { id: "dhbinfo227", label: "Document has images?", description: "Does the document have any <img> tags?", value: () => yesNo(safe(() => document.images.length > 0)) },
+  { id: "dhbinfo228", label: "Document has stylesheets?", description: "Does the document have any stylesheets?", value: () => yesNo(safe(() => document.styleSheets.length > 0)) },
+  { id: "dhbinfo229", label: "Document has links?", description: "Does the document have any <a> tags?", value: () => yesNo(safe(() => document.links.length > 0)) },
+  { id: "dhbinfo230", label: "Document has anchors?", description: "Does the document have any <a name> anchors?", value: () => yesNo(safe(() => document.anchors.length > 0)) },
+  { id: "dhbinfo231", label: "Document fonts ready?", description: "Are document fonts ready?", value: () => yesNo(safe(() => document.fonts?.status === 'loaded')) },
+  { id: "dhbinfo232", label: "Document fonts loading?", description: "Are document fonts loading?", value: () => yesNo(safe(() => document.fonts?.status === 'loading')) },
+  { id: "dhbinfo233", label: "Document fonts size", description: "Number of loaded fonts.", value: () => safe(() => document.fonts?.size ?? 'N/A') },
+  { id: "dhbinfo234", label: "Document fonts check (Arial)", description: "Is Arial font available?", value: () => yesNo(safe(() => document.fonts?.check('12px Arial'))) },
+  { id: "dhbinfo235", label: "Document fonts check (monospace)", description: "Is monospace font available?", value: () => yesNo(safe(() => document.fonts?.check('12px monospace'))) },
+  { id: "dhbinfo236", label: "Document fonts check (serif)", description: "Is serif font available?", value: () => yesNo(safe(() => document.fonts?.check('12px serif'))) },
+  { id: "dhbinfo237", label: "Document fonts check (sans-serif)", description: "Is sans-serif font available?", value: () => yesNo(safe(() => document.fonts?.check('12px sans-serif'))) },
+  { id: "dhbinfo238", label: "Document fonts check (fantasy)", description: "Is fantasy font available?", value: () => yesNo(safe(() => document.fonts?.check('12px fantasy'))) },
+  { id: "dhbinfo239", label: "Document fonts check (cursive)", description: "Is cursive font available?", value: () => yesNo(safe(() => document.fonts?.check('12px cursive'))) },
+  { id: "dhbinfo240", label: "Document fonts check (system-ui)", description: "Is system-ui font available?", value: () => yesNo(safe(() => document.fonts?.check('12px system-ui'))) },
+  { id: "dhbinfo241", label: "Document fonts check (emoji)", description: "Is emoji font available?", value: () => yesNo(safe(() => document.fonts?.check('12px emoji'))) },
+  { id: "dhbinfo242", label: "Document fonts check (math)", description: "Is math font available?", value: () => yesNo(safe(() => document.fonts?.check('12px math'))) },
+  { id: "dhbinfo243", label: "Document fonts check (fangsong)", description: "Is fangsong font available?", value: () => yesNo(safe(() => document.fonts?.check('12px fangsong'))) },
+  { id: "dhbinfo244", label: "Document fonts check (ui-monospace)", description: "Is ui-monospace font available?", value: () => yesNo(safe(() => document.fonts?.check('12px ui-monospace'))) },
+  { id: "dhbinfo245", label: "Document fonts check (ui-serif)", description: "Is ui-serif font available?", value: () => yesNo(safe(() => document.fonts?.check('12px ui-serif'))) },
+  { id: "dhbinfo246", label: "Document fonts check (ui-sans-serif)", description: "Is ui-sans-serif font available?", value: () => yesNo(safe(() => document.fonts?.check('12px ui-sans-serif'))) },
+  { id: "dhbinfo247", label: "Document fonts check (ui-rounded)", description: "Is ui-rounded font available?", value: () => yesNo(safe(() => document.fonts?.check('12px ui-rounded'))) },
+  { id: "dhbinfo248", label: "Document fonts check (ui-symbol)", description: "Is ui-symbol font available?", value: () => yesNo(safe(() => document.fonts?.check('12px ui-symbol'))) },
+  { id: "dhbinfo249", label: "Document fonts check (ui-serif)", description: "Is ui-serif font available?", value: () => yesNo(safe(() => document.fonts?.check('12px ui-serif'))) },
+  { id: "dhbinfo250", label: "Document fonts check (ui-sans-serif)", description: "Is ui-sans-serif font available?", value: () => yesNo(safe(() => document.fonts?.check('12px ui-sans-serif'))) },
+  { id: "dhbinfo251", label: "Document fonts check (ui-rounded)", description: "Is ui-rounded font available?", value: () => yesNo(safe(() => document.fonts?.check('12px ui-rounded'))) },
+  { id: "dhbinfo252", label: "Document fonts check (ui-symbol)", description: "Is ui-symbol font available?", value: () => yesNo(safe(() => document.fonts?.check('12px ui-symbol'))) },
+  { id: "dhbinfo253", label: "Device is landscape?", description: "Is the device currently in landscape orientation?", value: () => yesNo(safe(() => window.matchMedia('(orientation: landscape)').matches)) },
+  { id: "dhbinfo254", label: "Device is portrait?", description: "Is the device currently in portrait orientation?", value: () => yesNo(safe(() => window.matchMedia('(orientation: portrait)').matches)) },
+  { id: "dhbinfo255", label: "Page is secure context?", description: "Is the page running in a secure context?", value: () => yesNo(safe(() => window.isSecureContext)) },
+  { id: "dhbinfo256", label: "Page is top-level?", description: "Is this the top-level browsing context?", value: () => yesNo(safe(() => window.top === window.self)) },
+  { id: "dhbinfo257", label: "Page is in iframe?", description: "Is this page inside an iframe?", value: () => yesNo(safe(() => window.self !== window.top)) },
+  { id: "dhbinfo258", label: "Page is pop-up?", description: "Is this window a pop-up?", value: () => yesNo(safe(() => window.opener != null)) },
+  { id: "dhbinfo259", label: "Page cross-origin isolated?", description: "Is the context cross-origin isolated?", value: () => yesNo(safe(() => window.crossOriginIsolated)) },
+  { id: "dhbinfo260", label: "Page pointer lock active?", description: "Is pointer lock active?", value: () => yesNo(safe(() => document.pointerLockElement != null)) },
+  { id: "dhbinfo261", label: "Page fullscreen active?", description: "Is the document in fullscreen mode?", value: () => yesNo(safe(() => document.fullscreenElement != null)) },
+  { id: "dhbinfo262", label: "Page has focus?", description: "Does the document have focus?", value: () => yesNo(safe(() => document.hasFocus())) },
+  { id: "dhbinfo263", label: "Page hidden?", description: "Is the document hidden (not visible)?", value: () => yesNo(safe(() => document.hidden)) },
+  { id: "dhbinfo264", label: "Page visibility state", description: "The visibility state of the document.", value: () => safe(() => document.visibilityState) },
+  { id: "dhbinfo265", label: "Page active element tag", description: "The tag name of the currently active element.", value: () => safe(() => document.activeElement?.tagName) },
+  { id: "dhbinfo266", label: "Page scroll X", description: "Current horizontal scroll position.", value: () => safe(() => window.scrollX) },
+  { id: "dhbinfo267", label: "Page scroll Y", description: "Current vertical scroll position.", value: () => safe(() => window.scrollY) },
+  { id: "dhbinfo268", label: "Page scrollable?", description: "Is the page scrollable?", value: () => yesNo(safe(() => document.body.scrollHeight > window.innerHeight)) },
+  { id: "dhbinfo269", label: "Page editable?", description: "Is the page editable?", value: () => yesNo(safe(() => document.designMode === 'on' || document.body.isContentEditable)) },
+  { id: "dhbinfo270", label: "Page designMode", description: "The document's designMode property.", value: () => safe(() => document.designMode) },
+  { id: "dhbinfo271", label: "Page compatMode", description: "The document's compatibility mode.", value: () => safe(() => document.compatMode) },
+  { id: "dhbinfo272", label: "Page readyState", description: "The document's readyState.", value: () => safe(() => document.readyState) },
+  { id: "dhbinfo273", label: "Page referrer policy", description: "The referrer policy for this page.", value: () => safe(() => document.referrerPolicy || 'N/A') },
+  { id: "dhbinfo274", label: "Page baseURI", description: "The base URI of the page.", value: () => safe(() => document.baseURI) },
+  { id: "dhbinfo275", label: "Page domain", description: "The domain of the page.", value: () => safe(() => document.domain) },
+  { id: "dhbinfo276", label: "Page URL hash", description: "The hash portion of the URL.", value: () => safe(() => window.location.hash) },
+  { id: "dhbinfo277", label: "Page search params", description: "The search/query string of the URL.", value: () => safe(() => window.location.search) },
+  { id: "dhbinfo278", label: "Page scripts count", description: "Number of <script> tags on the page.", value: () => safe(() => document.scripts.length) },
+  { id: "dhbinfo279", label: "Page links count", description: "Number of <a> tags on the page.", value: () => safe(() => document.links.length) },
+  { id: "dhbinfo280", label: "Page images count", description: "Number of <img> tags on the page.", value: () => safe(() => document.images.length) },
+  { id: "dhbinfo281", label: "Page forms count", description: "Number of <form> tags on the page.", value: () => safe(() => document.forms.length) },
+  { id: "dhbinfo282", label: "Page anchors count", description: "Number of <a name> anchors on the page.", value: () => safe(() => document.anchors.length) },
+  { id: "dhbinfo283", label: "Page styleSheets count", description: "Number of stylesheets on the page.", value: () => safe(() => document.styleSheets.length) },
+  { id: "dhbinfo284", label: "Page fonts count", description: "Number of loaded fonts.", value: () => safe(() => document.fonts?.size ?? 'N/A') },
+  { id: "dhbinfo285", label: "Page cookies count", description: "Number of cookies for this page.", value: () => safe(() => document.cookie ? document.cookie.split(';').length : 0) },
+  { id: "dhbinfo286", label: "Page is RTL?", description: "Is the page using right-to-left text direction?", value: () => yesNo(safe(() => document.documentElement.dir === 'rtl')) },
+  { id: "dhbinfo287", label: "Page scrollbars visible?", description: "Are scrollbars currently visible?", value: () => yesNo(safe(() => window.innerWidth > document.documentElement.clientWidth || window.innerHeight > document.documentElement.clientHeight)) },
+  { id: "dhbinfo288", label: "Page has meta viewport?", description: "Does the page have a meta viewport tag?", value: () => yesNo(safe(() => !!document.querySelector('meta[name=viewport]'))) },
+  { id: "dhbinfo289", label: "Page has meta description?", description: "Does the page have a meta description tag?", value: () => yesNo(safe(() => !!document.querySelector('meta[name=description]'))) },
+  { id: "dhbinfo290", label: "Page has meta keywords?", description: "Does the page have a meta keywords tag?", value: () => yesNo(safe(() => !!document.querySelector('meta[name=keywords]'))) },
+  { id: "dhbinfo291", label: "Page has canonical link?", description: "Does the page have a canonical link tag?", value: () => yesNo(safe(() => !!document.querySelector('link[rel=canonical]'))) },
+  { id: "dhbinfo292", label: "Page has favicon?", description: "Does the page have a favicon link tag?", value: () => yesNo(safe(() => !!document.querySelector('link[rel=icon]'))) },
+  { id: "dhbinfo293", label: "Page is in print mode?", description: "Is the page being rendered for print?", value: () => yesNo(safe(() => window.matchMedia('print').matches)) },
+  { id: "dhbinfo294", label: "Page prefers reduced motion?", description: "Does the user prefer reduced motion?", value: () => yesNo(safe(() => window.matchMedia('(prefers-reduced-motion: reduce)').matches)) },
+  { id: "dhbinfo295", label: "Page prefers contrast?", description: "Does the user prefer high contrast?", value: () => yesNo(safe(() => window.matchMedia('(prefers-contrast: more)').matches)) },
+  { id: "dhbinfo296", label: "Page prefers color scheme?", description: "Does the user prefer a specific color scheme?", value: () => safe(() => window.matchMedia('(prefers-color-scheme: dark)').matches ? 'Dark' : window.matchMedia('(prefers-color-scheme: light)').matches ? 'Light' : 'No preference') },
+  { id: "dhbinfo297", label: "Page prefers reduced data?", description: "Does the user prefer reduced data usage?", value: () => yesNo(safe(() => window.matchMedia('(prefers-reduced-data: reduce)').matches)) },
+  { id: "dhbinfo298", label: "Page prefers reduced transparency?", description: "Does the user prefer reduced transparency?", value: () => yesNo(safe(() => window.matchMedia('(prefers-reduced-transparency: reduce)').matches)) },
+  { id: "dhbinfo299", label: "Page prefers inverted colors?", description: "Does the user prefer inverted colors?", value: () => yesNo(safe(() => window.matchMedia('(inverted-colors: inverted)').matches)) },
+  { id: "dhbinfo300", label: "Page prefers monochrome?", description: "Does the user prefer monochrome display?", value: () => yesNo(safe(() => window.matchMedia('(monochrome)').matches)) }
+];
+// Utility functions
+function safe(fn) {
+  try {
+    return fn();
+  } catch (e) {
+    return 'Error: ' + e.message;
+  }
+}
+function yesNo(value) {
+  return value ? 'Yes' : 'No';
+}
+
