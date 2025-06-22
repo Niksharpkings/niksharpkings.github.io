@@ -70,6 +70,7 @@ package-lock.json
 .history
 /tex.txt
 /.history
+./hidefolder
 /assets/html/ENglish2-SMC-Intro-copy.html
 /assets/html/ENglish2-SMC-Intro.html
 /assets/css/styles-copy backup.css
@@ -81,3 +82,4 @@ package-lock.json
 /assets/javascript/dhbinfo-copy2.js
 /assets/javascript/dhbinfo-copy.js
 /assets/javascript/dhbinfo-copy3.js
+
