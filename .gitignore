@@ -56,6 +56,9 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+# Backups
+*.Backups
+
 #addional
 node_modules
 package-lock.json
@@ -70,7 +73,10 @@ package-lock.json
 .history
 /tex.txt
 /.history
-/hidefolder
+/hidefolder/*
+./hidefolder/*
+*./hidefolder/*
+
 /assets/html/ENglish2-SMC-Intro-copy.html
 /assets/html/ENglish2-SMC-Intro.html
 /assets/css/styles-copy backup.css
