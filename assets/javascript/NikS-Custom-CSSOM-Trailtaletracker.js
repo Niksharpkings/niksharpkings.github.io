@@ -662,7 +662,7 @@
       same "printed page" as the copyright notice for easier
       identification within third-party archives.
 
-   Copyright [2025] [Nikita 'Niksharkings'/'Nik' Sharpio]
+   Copyright [2026] [Nikita 'Niksharkings'/'Nik' Sharpio]
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -696,7 +696,7 @@ document.addEventListener("DOMContentLoaded", () => {
   log.style.padding = "10px";
   log.style.borderRadius = "5px";
   log.style.backgroundColor = "rgba(0, 0, 0, 0.05)";
-  log.style.position = "absolute";
+  log.style.position = "fixed";
   log.style.top = "10px";
   log.style.left = "15px";
   log.style.zIndex = "1000";
@@ -851,10 +851,12 @@ document.addEventListener("DOMContentLoaded", () => {
     if (setCoords.rafId) cancelAnimationFrame(setCoords.rafId);
     setCoords.rafId = requestAnimationFrame(() => {
       log.innerText = generateLogMessage(coords, e, element, info);
-      log.style.left = `${coords.pageX + 5}px`;
-      log.style.top = `${coords.pageY + 5}px`;
+      const left = Math.min(coords.clientX + 12, Math.max(0, window.innerWidth - 320));
+      const top = Math.min(coords.clientY + 12, Math.max(0, window.innerHeight - 180));
+      log.style.left = `${left}px`;
+      log.style.top = `${top}px`;
       log.style.display = "block";
-      log.style.position = "absolute";
+      log.style.position = "fixed";
       log.style.color = "white";
       log.style.textShadow = "var(--primary-shadow-color)";
       log.style.fontSize = "x-small";

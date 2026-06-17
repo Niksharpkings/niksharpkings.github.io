@@ -46,7 +46,8 @@ body {
   /*Typography stuff*/
   font-size: calc(12px + (26 - 12) * ((100vw - 300px) / (1600 - 300)));
   /*Miscellaneous*/
-  overflow: visible;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 header {
@@ -119,6 +120,64 @@ header {
 .Custom-Script-Details summary mark:hover .tooltiptext {
   /*Miscellaneous*/
   visibility: visible;
+}
+
+.Custom-Script-Details > summary.legend-3-span {
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
+.Custom-Script-Details > summary.legend-3-span > .privacy-summary-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 12px 16px;
+  border: 2px solid #2a4f61;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #07131a 0%, #0d2733 50%, #12394a 100%);
+  color: #dff6ff;
+  text-align: center;
+  text-shadow: none;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+}
+
+.Custom-Script-Details > summary.legend-3-span > .privacy-summary-card .privacy-summary-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #8ce6ff;
+  letter-spacing: 0.3px;
+}
+
+.Custom-Script-Details > summary.legend-3-span > .privacy-summary-card .privacy-summary-note {
+  font-size: 14px;
+  color: #c5ffd7;
+  font-weight: 600;
+}
+
+.Custom-Script-Details > summary.legend-3-span > .privacy-summary-card .privacy-summary-action {
+  font-size: 13px;
+  color: #ffd99c;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.Custom-Script-Details > summary.legend-3-span:hover > .privacy-summary-card,
+.Custom-Script-Details > summary.legend-3-span:focus-within > .privacy-summary-card {
+  border-color: #6fe3ff;
+  box-shadow: 0 0 0 2px rgba(111, 227, 255, 0.4), 0 10px 22px rgba(0, 0, 0, 0.42);
+}
+
+@media (max-width: 640px) {
+  .Custom-Script-Details > summary.legend-3-span > .privacy-summary-card {
+    padding: 10px 12px;
+    border-radius: 12px;
+    gap: 5px;
+  }
 }
 
 ul li p {
@@ -621,6 +680,56 @@ footer p{
   color: var(--secondary-hex-color);
 }
 
+#http-status-demo {
+  background-color: #0c1116;
+  border: 3px solid #2f5f7d;
+  border-radius: 14px;
+  margin: 16px auto;
+  padding: 12px 16px;
+  color: #d7f7ff;
+}
+
+#http-status-helper-title {
+  color: #7fe8ff;
+  text-shadow: 0 0 6px rgba(127, 232, 255, 0.45);
+}
+
+#http-status-helper-result {
+  color: #b8ffcf;
+}
+
+#http-status-helper-error {
+  color: #ff8f8f;
+  font-weight: bold;
+}
+
+#http-status-helper-list h3 {
+  color: #8cb7ff;
+}
+
+#http-status-helper-list ul {
+  color: #d8e8ff;
+}
+
+#http-status-helper-list li {
+  margin: 2px 0;
+}
+
+.http-status-code {
+  color: #2f80ff;
+  font-weight: bold;
+}
+
+.http-status-pass {
+  color: #27ae60;
+  font-weight: bold;
+}
+
+.http-status-dont-pass {
+  color: #e53935;
+  font-weight: bold;
+}
+
 footer details[open] summary {
   border-bottom: 1px solid #aaa;
   margin-bottom: 0.5em;
@@ -752,10 +861,139 @@ div .contact-list-item p {
   min-width: 120px !important;
   text-align: left !important;
 }
+
+#dhbinfo-panel .dhbinfo-value.dhbinfo-yes {
+  color: #27ae60 !important;
+  font-weight: 700;
+}
+
+#dhbinfo-panel .dhbinfo-value.dhbinfo-no {
+  color: #e53935 !important;
+  font-weight: 700;
+}
+
 #dhbinfo-panel .dhbinfo-row:last-child .dhbinfo-label,
 #dhbinfo-panel .dhbinfo-row:last-child .dhbinfo-value {
   border-bottom: none !important;
 }
+
+#dhbinfo-panel #dhbinfo-http-status {
+  margin-top: 0.8em;
+  border: 1px solid #333 !important;
+  border-radius: 8px;
+  background: #141414;
+  padding: 0.6em 0.8em;
+}
+
+#dhbinfo-panel #dhbinfo-http-status #http-status-helper-title,
+#dhbinfo-panel #dhbinfo-http-status #http-status-helper-list h3 {
+  margin: 0 0 0.45em 0;
+  color: #8eb8a3 !important;
+  text-shadow: none !important;
+  letter-spacing: 0.2px;
+}
+
+#dhbinfo-panel #dhbinfo-http-status #http-status-helper-result {
+  margin: 0 0 0.4em 0;
+  color: #d9f6e3 !important;
+}
+
+#dhbinfo-panel #dhbinfo-http-status #http-status-helper-error {
+  margin: 0 0 0.4em 0;
+  color: #ff8f8f !important;
+}
+
+#dhbinfo-panel #dhbinfo-http-status #http-status-helper-list ul {
+  margin: 0;
+  padding-left: 1.1em;
+  color: #e0e0e0 !important;
+}
+
+#dhbinfo-panel #dhbinfo-http-status #http-status-helper-list li {
+  margin: 0.2em 0;
+}
+
+#dhbinfo-panel #dhbinfo-http-status .http-status-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+}
+
+#dhbinfo-panel #dhbinfo-http-status .http-status-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: auto;
+}
+
+#dhbinfo-panel #dhbinfo-http-status .http-status-table th,
+#dhbinfo-panel #dhbinfo-http-status .http-status-table td {
+  text-align: left;
+  padding: 0.35em 0.5em;
+  border-bottom: 1px solid #2d2d2d;
+  color: #e0e0e0;
+}
+
+#dhbinfo-panel #dhbinfo-http-status .http-status-table th {
+  color: #8eb8a3;
+  font-weight: 700;
+  background: #1c1c1c;
+}
+
+#dhbinfo-panel #dhbinfo-http-status .http-status-table tbody tr:nth-child(even) {
+  background: #171717;
+}
+
+#dhbinfo-panel #dhbinfo-http-status .http-status-table tbody tr:hover {
+  background: #202020;
+}
+
+#dhbinfo-panel #dhbinfo-http-status .http-status-table td.http-status-code {
+  color: #2f80ff !important;
+  font-weight: 700;
+}
+
+#dhbinfo-panel #dhbinfo-http-status .http-status-table td.http-status-pass {
+  color: #27ae60 !important;
+  font-weight: 700;
+}
+
+#dhbinfo-panel #dhbinfo-http-status .http-status-table td.http-status-dont-pass {
+  color: #e53935 !important;
+  font-weight: 700;
+}
+
+#dhbinfo-panel #dhbinfo-http-status .http-status-hint-side {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1em;
+  font-size: 0.78rem;
+  line-height: 1.25;
+  padding: 0.35em 0.45em;
+  border: 1px solid #3a3a3a;
+  border-radius: 6px;
+  background: #121212;
+  color: #d8d8d8;
+  min-width: 190px;
+}
+
+#dhbinfo-panel #dhbinfo-http-status .http-status-hint-side-fail {
+  border: 2px solid #e53935;
+  box-shadow: inset 0 0 0 1px rgba(229, 57, 53, 0.25);
+}
+
+#dhbinfo-panel #dhbinfo-http-status .http-status-hint-label {
+  color: #ffd0cf;
+  font-weight: 700;
+}
+
+#dhbinfo-panel #dhbinfo-http-status .http-status-hint-text {
+  color: #d8d8d8;
+}
+
+#dhbinfo-panel #dhbinfo-http-status .http-status-hint-muted {
+  color: #767676;
+}
+
+
 @media (max-width: 600px) {
   #dhbinfo-panel {
     font-size: 0.9rem !important;

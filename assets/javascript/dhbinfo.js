@@ -3,8 +3,37 @@
 // Refactored June 2025 for optimal maintainability, speed, and ES7+ best practices
 
 // --- Utility: Safe Getter ---
-const safeGet = (getter, fallback = 'N/A') => {
+const NA_VALUE = 'N/A';
+
+const safeGet = (getter, fallback = NA_VALUE) => {
   try { return getter(); } catch { return fallback; }
+};
+
+const escapeHtml = (value) => String(value)
+  .replaceAll('&', '&amp;')
+  .replaceAll('<', '&lt;')
+  .replaceAll('>', '&gt;')
+  .replaceAll('"', '&quot;')
+  .replaceAll("'", '&#39;');
+
+let batterySnapshotPromise = null;
+const getBatterySnapshot = async () => {
+  if (!('getBattery' in navigator)) return null;
+  if (!batterySnapshotPromise) {
+    batterySnapshotPromise = navigator.getBattery()
+      .then((battery) => ({
+        level: Math.round(battery.level * 100),
+        charging: battery.charging
+      }))
+      .catch(() => null)
+      .finally(() => {
+        // Keep readings reasonably fresh while avoiding per-row repeated calls.
+        setTimeout(() => {
+          batterySnapshotPromise = null;
+        }, 1500);
+      });
+  }
+  return batterySnapshotPromise;
 };
 
 // --- Utility: Formatters ---
@@ -76,22 +105,24 @@ const infoMap = [
   { key: 'localStorage', label: 'Local Storage', desc: 'localStorage supported?', get: () => formatBool('localStorage' in window) },
   { key: 'sessionStorage', label: 'Session Storage', desc: 'sessionStorage supported?', get: () => formatBool('sessionStorage' in window) },
   { key: 'indexedDB', label: 'IndexedDB', desc: 'IndexedDB supported?', get: () => formatBool('indexedDB' in window) },
-  { key: 'quota', label: 'Storage Quota', desc: 'Estimated storage quota', get: () => safeGet(() => navigator.storage && navigator.storage.estimate ? formatBytes(navigator.storage.estimate().then(e => e.quota)) : 'N/A') },
+  { key: 'quota', label: 'Storage Quota', desc: 'Estimated storage quota', get: async () => {
+    if (!navigator.storage?.estimate) return NA_VALUE;
+    const estimate = await navigator.storage.estimate();
+    return formatBytes(estimate?.quota);
+  } },
   // --- Network ---
   { key: 'connectionType', label: 'Connection Type', desc: 'Network connection type', get: () => safeGet(() => navigator.connection ? navigator.connection.effectiveType : 'N/A') },
   { key: 'downlink', label: 'Downlink', desc: 'Estimated downlink (Mbps)', get: () => safeGet(() => navigator.connection ? navigator.connection.downlink : 'N/A') },
   { key: 'rtt', label: 'RTT', desc: 'Estimated round-trip time (ms)', get: () => safeGet(() => navigator.connection ? navigator.connection.rtt : 'N/A') },
   // --- Battery ---
-  { key: 'batteryLevel', label: 'Battery Level', desc: 'Battery charge level (%)', get: () => safeGet(async () => {
-    if (!navigator.getBattery) return 'N/A';
-    const b = await navigator.getBattery();
-    return `${Math.round(b.level * 100)}%`;
-  }) },
-  { key: 'batteryCharging', label: 'Battery Charging', desc: 'Is device charging?', get: () => safeGet(async () => {
-    if (!navigator.getBattery) return 'N/A';
-    const b = await navigator.getBattery();
-    return formatBool(b.charging);
-  }) },
+  { key: 'batteryLevel', label: 'Battery Level', desc: 'Battery charge level (%)', get: async () => {
+    const battery = await getBatterySnapshot();
+    return battery ? `${battery.level}%` : NA_VALUE;
+  } },
+  { key: 'batteryCharging', label: 'Battery Charging', desc: 'Is device charging?', get: async () => {
+    const battery = await getBatterySnapshot();
+    return battery ? formatBool(battery.charging) : NA_VALUE;
+  } },
   // --- Fun/Advanced ---
   { key: 'timezone', label: 'Timezone', desc: 'IANA timezone', get: () => Intl.DateTimeFormat().resolvedOptions().timeZone },
   { key: 'date', label: 'Date', desc: 'Current date/time', get: () => new Date().toLocaleString() },
@@ -483,6 +514,27 @@ const infoMap = [
 ];
 
 
+const normalizedInfoMap = (() => {
+  const seen = new Set();
+  const cleaned = [];
+
+  for (const entry of infoMap) {
+    if (!entry || typeof entry !== 'object') continue;
+    const key = entry.key ?? entry.id;
+    const getter = entry.get ?? entry.value;
+    if (!key || typeof getter !== 'function' || seen.has(String(key))) continue;
+    seen.add(String(key));
+    cleaned.push({
+      key: String(key),
+      label: entry.label ?? String(key),
+      desc: entry.desc ?? entry.description ?? '',
+      getter
+    });
+  }
+
+  return cleaned;
+})();
+
 // --- DOM: Dynamic Panel Generation ---
 (function ensureDhbinfoPanel() {
   let dhbinfoPanel = document.getElementById('dhbinfo-panel');
@@ -526,7 +578,62 @@ if (container) {
   const table = document.createElement('div');
   table.style.display = 'table';
   table.style.width = '100%';
-  infoMap.forEach(({ key, label, desc }) => {
+  table.style.tableLayout = 'fixed';
+
+  const headerRow = document.createElement('div');
+  headerRow.className = 'dhbinfo-row dhbinfo-row-header';
+  headerRow.style.display = 'table-row';
+
+  const labelHeader = document.createElement('span');
+  labelHeader.className = 'dhbinfo-label';
+  labelHeader.textContent = 'Label';
+  labelHeader.style.display = 'table-cell';
+  labelHeader.style.fontWeight = '400';
+  labelHeader.style.fontSize = '0.78rem';
+  labelHeader.style.width = '22%';
+  labelHeader.style.textAlign = 'left';
+  labelHeader.style.padding = '0.3em 0.45em';
+  labelHeader.style.whiteSpace = 'normal';
+  labelHeader.style.wordBreak = 'break-word';
+  labelHeader.style.overflowWrap = 'anywhere';
+
+  const descHeader = document.createElement('span');
+  descHeader.className = 'dhbinfo-description';
+  descHeader.textContent = 'Description';
+  descHeader.style.display = 'table-cell';
+  descHeader.style.fontWeight = '400';
+  descHeader.style.fontSize = '0.78rem';
+  descHeader.style.width = '52%';
+  descHeader.style.textAlign = 'left';
+  descHeader.style.padding = '0.3em 0.45em';
+  descHeader.style.whiteSpace = 'normal';
+  descHeader.style.wordBreak = 'break-word';
+  descHeader.style.overflowWrap = 'anywhere';
+
+  const valueHeader = document.createElement('span');
+  valueHeader.className = 'dhbinfo-value';
+  valueHeader.textContent = 'Value';
+  valueHeader.style.display = 'table-cell';
+  valueHeader.style.fontWeight = '700';
+  valueHeader.style.fontSize = '0.78rem';
+  valueHeader.style.width = '26%';
+  valueHeader.style.textAlign = 'left';
+  valueHeader.style.padding = '0.3em 0.45em';
+  valueHeader.style.setProperty('background-color', '#1f2b35', 'important');
+  valueHeader.style.borderLeft = '1px solid #2f3f4d';
+  valueHeader.style.whiteSpace = 'normal';
+  valueHeader.style.wordBreak = 'break-word';
+  valueHeader.style.overflowWrap = 'anywhere';
+
+  headerRow.appendChild(labelHeader);
+  headerRow.appendChild(descHeader);
+  headerRow.appendChild(valueHeader);
+  table.appendChild(headerRow);
+
+  normalizedInfoMap.forEach((entry) => {
+    const key = entry.key;
+    const label = entry.label;
+    const desc = entry.desc;
     const row = document.createElement('div');
     row.className = 'dhbinfo-row';
     row.style.display = 'table-row';
@@ -535,13 +642,46 @@ if (container) {
     labelCell.title = String(desc);
     labelCell.textContent = String(label);
     labelCell.style.display = 'table-cell';
+    labelCell.style.fontSize = '0.78rem';
+    labelCell.style.width = '22%';
+    labelCell.style.textAlign = 'left';
+    labelCell.style.padding = '0.3em 0.45em';
+    labelCell.style.whiteSpace = 'normal';
+    labelCell.style.wordBreak = 'break-word';
+    labelCell.style.overflowWrap = 'anywhere';
+
+    const descCell = document.createElement('span');
+    descCell.className = 'dhbinfo-description';
+    descCell.id = `dhbinfo-desc-${String(key)}`;
+    descCell.textContent = String(desc || 'No description available.');
+    descCell.style.display = 'table-cell';
+    descCell.style.fontSize = '0.78rem';
+    descCell.style.width = '52%';
+    descCell.style.textAlign = 'left';
+    descCell.style.padding = '0.3em 0.45em';
+    descCell.style.whiteSpace = 'normal';
+    descCell.style.wordBreak = 'break-word';
+    descCell.style.overflowWrap = 'anywhere';
+
     const valueCell = document.createElement('span');
     valueCell.className = 'dhbinfo-value';
     valueCell.id = `dhbinfo-${String(key)}`;
     valueCell.setAttribute('aria-label', String(desc));
     valueCell.textContent = '...';
     valueCell.style.display = 'table-cell';
+    valueCell.style.fontSize = '0.78rem';
+    valueCell.style.width = '26%';
+    valueCell.style.textAlign = 'left';
+    valueCell.style.padding = '0.3em 0.45em';
+    valueCell.style.setProperty('background-color', '#162028', 'important');
+    valueCell.style.borderLeft = '1px solid #2a3642';
+    valueCell.style.borderRadius = '3px';
+    valueCell.style.whiteSpace = 'normal';
+    valueCell.style.wordBreak = 'break-word';
+    valueCell.style.overflowWrap = 'anywhere';
+
     row.appendChild(labelCell);
+    row.appendChild(descCell);
     row.appendChild(valueCell);
     table.appendChild(row);
   });
@@ -556,18 +696,44 @@ if (container) {
 
 // --- Update Logic: Only Update Changed Values, Async Support ---
 const prevValues = {};
+let updateInProgress = false;
+
+async function resolveEntryValue(getter) {
+  try {
+    const value = await Promise.resolve(getter());
+    if (value === undefined || value === null || value === '') return NA_VALUE;
+    return value;
+  } catch {
+    return NA_VALUE;
+  }
+}
+
 async function updateInfoPanel() {
-  for (const { key, get } of infoMap) {
+  if (updateInProgress) return;
+  updateInProgress = true;
+
+  try {
+  for (const entry of normalizedInfoMap) {
+    const key = entry.key;
+    const getter = entry.getter;
     const el = document.getElementById(`dhbinfo-${key}`);
     if (!el) continue;
-    let value = get();
-    if (value instanceof Promise) value = await value;
-    // Normalize undefined/null to 'N/A' for durability
-    if (value === undefined || value === null) value = 'N/A';
+
+    const value = await resolveEntryValue(getter);
     if (prevValues[key] !== value) {
-      el.textContent = value;
+      const valueText = String(value);
+      el.textContent = valueText;
+      el.classList.remove('dhbinfo-yes', 'dhbinfo-no');
+      if (valueText === 'Yes') {
+        el.classList.add('dhbinfo-yes');
+      } else if (valueText === 'No') {
+        el.classList.add('dhbinfo-no');
+      }
       prevValues[key] = value;
     }
+  }
+  } finally {
+    updateInProgress = false;
   }
 }
 
@@ -580,7 +746,261 @@ if (window.requestAnimationFrame) {
 setInterval(updateInfoPanel, 3000);
 
 // --- Export for Extensibility ---
-window.dhbinfo = Object.freeze({ infoMap, updateInfoPanel });
+window.dhbinfo = Object.freeze({ infoMap: normalizedInfoMap, updateInfoPanel });
+
+// --- HTTP Status Helper ---
+const httpStatusCodes = {
+  informational: [
+    { code: 100, name: "Continue", description: "Request headers received, continue request body." },
+    { code: 101, name: "Switching Protocols", description: "Server is switching protocols as requested." },
+    { code: 102, name: "Processing", description: "Server has received and is processing the request." },
+    { code: 103, name: "Early Hints", description: "Hints sent before final response, often for preload links." }
+  ],
+  success: [
+    { code: 200, name: "OK", description: "Request succeeded." },
+    { code: 201, name: "Created", description: "Request succeeded and created a new resource." },
+    { code: 202, name: "Accepted", description: "Request accepted for processing, not completed yet." },
+    { code: 203, name: "Non-Authoritative Information", description: "Returned metadata is from a transformed source." },
+    { code: 204, name: "No Content", description: "Request succeeded with no response body." },
+    { code: 205, name: "Reset Content", description: "Client should reset the view that sent the request." },
+    { code: 206, name: "Partial Content", description: "Partial response to a range request." },
+    { code: 207, name: "Multi-Status", description: "Multiple status values for different operations." },
+    { code: 208, name: "Already Reported", description: "Members already enumerated in a previous part of the response." },
+    { code: 226, name: "IM Used", description: "Server fulfilled request using instance manipulations." }
+  ],
+  redirection: [
+    { code: 300, name: "Multiple Choices", description: "Multiple response options are available." },
+    { code: 301, name: "Moved Permanently", description: "Resource permanently moved to a new URL." },
+    { code: 302, name: "Found", description: "Resource temporarily found at a different URL." },
+    { code: 303, name: "See Other", description: "Response should be retrieved with GET at another URI." },
+    { code: 304, name: "Not Modified", description: "Cached resource is still valid." },
+    { code: 305, name: "Use Proxy", description: "Requested resource must be accessed through a proxy (deprecated)." },
+    { code: 306, name: "Unused", description: "Reserved status code, no longer used." },
+    { code: 307, name: "Temporary Redirect", description: "Temporary redirect; repeat request with same method." },
+    { code: 308, name: "Permanent Redirect", description: "Permanent redirect; repeat request with same method." }
+  ],
+  clientError: [
+    { code: 400, name: "Bad Request", description: "Server cannot process the request due to client error." },
+    { code: 401, name: "Unauthorized", description: "Authentication is required." },
+    { code: 402, name: "Payment Required", description: "Reserved for future use." },
+    { code: 403, name: "Forbidden", description: "Server understood request but refuses to authorize it." },
+    { code: 404, name: "Not Found", description: "Requested resource was not found." },
+    { code: 405, name: "Method Not Allowed", description: "Method is not allowed for this resource." },
+    { code: 406, name: "Not Acceptable", description: "No acceptable representation found." },
+    { code: 407, name: "Proxy Authentication Required", description: "Proxy authentication is required." },
+    { code: 408, name: "Request Timeout", description: "Server timed out waiting for request." },
+    { code: 409, name: "Conflict", description: "Request conflicts with current resource state." },
+    { code: 410, name: "Gone", description: "Resource is no longer available and will not return." },
+    { code: 411, name: "Length Required", description: "Content-Length header is required." },
+    { code: 412, name: "Precondition Failed", description: "Preconditions in request headers were not met." },
+    { code: 413, name: "Content Too Large", description: "Request content is too large for server limits." },
+    { code: 414, name: "URI Too Long", description: "Request URI is longer than server can process." },
+    { code: 415, name: "Unsupported Media Type", description: "Media type is unsupported for this resource." },
+    { code: 416, name: "Range Not Satisfiable", description: "Requested range cannot be fulfilled." },
+    { code: 417, name: "Expectation Failed", description: "Expectation in request headers cannot be met." },
+    { code: 418, name: "I'm a Teapot", description: "Server refuses to brew coffee because it is a teapot." },
+    { code: 421, name: "Misdirected Request", description: "Request directed to a server unable to produce response." },
+    { code: 422, name: "Unprocessable Content", description: "Request syntax is correct but semantically invalid." },
+    { code: 423, name: "Locked", description: "Resource is locked." },
+    { code: 424, name: "Failed Dependency", description: "Request failed due to dependency failure." },
+    { code: 425, name: "Too Early", description: "Server is unwilling to risk processing replayed request." },
+    { code: 426, name: "Upgrade Required", description: "Client should switch to a different protocol." },
+    { code: 428, name: "Precondition Required", description: "Origin server requires a conditional request." },
+    { code: 429, name: "Too Many Requests", description: "Client sent too many requests in a given time." },
+    { code: 431, name: "Request Header Fields Too Large", description: "Request header fields are too large." },
+    { code: 451, name: "Unavailable For Legal Reasons", description: "Resource unavailable due to legal demand." }
+  ],
+  serverError: [
+    { code: 500, name: "Internal Server Error", description: "Unexpected server-side error occurred." },
+    { code: 501, name: "Not Implemented", description: "Server does not support requested functionality." },
+    { code: 502, name: "Bad Gateway", description: "Invalid response received from upstream server." },
+    { code: 503, name: "Service Unavailable", description: "Server is temporarily unable to handle request." },
+    { code: 504, name: "Gateway Timeout", description: "Upstream server did not respond in time." },
+    { code: 505, name: "HTTP Version Not Supported", description: "HTTP version in request is not supported." },
+    { code: 506, name: "Variant Also Negotiates", description: "Server has internal content negotiation error." },
+    { code: 507, name: "Insufficient Storage", description: "Server cannot store the representation needed." },
+    { code: 508, name: "Loop Detected", description: "Server detected an infinite loop while processing." },
+    { code: 510, name: "Not Extended", description: "Further extensions to request are required." },
+    { code: 511, name: "Network Authentication Required", description: "Client must authenticate for network access." }
+  ]
+};
+
+const allHttpStatusCodes = [
+  ...httpStatusCodes.informational,
+  ...httpStatusCodes.success,
+  ...httpStatusCodes.redirection,
+  ...httpStatusCodes.clientError,
+  ...httpStatusCodes.serverError
+];
+
+const httpStatusCodeMap = allHttpStatusCodes.reduce((accumulator, item) => {
+  accumulator[item.code] = item;
+  return accumulator;
+}, {});
+
+function getHttpStatus(code) {
+  return httpStatusCodeMap[Number(code)] || null;
+}
+
+function getHttpStatusName(code) {
+  const status = getHttpStatus(code);
+  return status ? status.name : "Unknown Status";
+}
+
+function getHttpStatusDescription(code) {
+  const status = getHttpStatus(code);
+  return status ? status.description : "No description available for this status code.";
+}
+
+globalThis.httpStatusCodes = httpStatusCodes;
+globalThis.allHttpStatusCodes = allHttpStatusCodes;
+globalThis.getHttpStatus = getHttpStatus;
+globalThis.getHttpStatusName = getHttpStatusName;
+globalThis.getHttpStatusDescription = getHttpStatusDescription;
+
+function renderHttpStatusHelper() {
+  const panel = document.getElementById('dhbinfo-panel');
+  let host = panel ? panel.querySelector('#dhbinfo-http-status') : null;
+
+  if (panel && !host) {
+    host = document.createElement('section');
+    host.id = 'dhbinfo-http-status';
+    host.innerHTML = `
+      <h3 id="http-status-helper-title">HTTP Status Helper</h3>
+      <p id="http-status-helper-result"></p>
+      <p id="http-status-helper-error" aria-live="polite"></p>
+      <div id="http-status-helper-list"></div>
+    `;
+    panel.appendChild(host);
+  }
+
+  const result = host
+    ? host.querySelector('#http-status-helper-result')
+    : document.getElementById('http-status-helper-result');
+  const error = host
+    ? host.querySelector('#http-status-helper-error')
+    : document.getElementById('http-status-helper-error');
+  const list = host
+    ? host.querySelector('#http-status-helper-list')
+    : document.getElementById('http-status-helper-list');
+
+  if (!result || !error || !list) {
+    return;
+  }
+
+  const isPassStatus = (code) => {
+    const normalizedCode = Number(code);
+    return normalizedCode >= 100 && normalizedCode < 400;
+  };
+  const getPassLabel = (code) => (isPassStatus(code) ? 'Pass' : "Didn't Pass");
+  const getPassClass = (code) => (isPassStatus(code) ? 'http-status-pass' : 'http-status-dont-pass');
+  const getFailureReason = (item) => {
+    const code = Number(item.code);
+    return code >= 500
+      ? 'Server-side issue while processing the request.'
+      : 'Client-side request issue (invalid, unauthorized, forbidden, or missing data).';
+  };
+  const getHintText = (item) => {
+    const code = Number(item.code);
+    if (code >= 100 && code < 200) return 'Informational class (1xx).';
+    if (code >= 200 && code < 300) return 'Success class (2xx).';
+    if (code >= 300 && code < 400) return 'Redirection class (3xx).';
+    if (code >= 400 && code < 500) return 'Client error class (4xx).';
+    if (code >= 500 && code < 600) return 'Server error class (5xx).';
+    return 'Unknown status class.';
+  };
+  const getDescriptionText = (item) => String(
+    item.description
+    || globalThis.getHttpStatusDescription?.(item.code)
+    || 'No description was provided for this status code.'
+  ).trim();
+  const getPassReason = (item) => {
+    const code = Number(item.code);
+    if (code >= 100 && code < 200) return 'Informational response; request handling is in progress.';
+    if (code >= 200 && code < 300) return 'Success response; request completed as expected.';
+    if (code >= 300 && code < 400) return 'Redirection response; client should follow redirect rules.';
+    return 'No hint available.';
+  };
+
+  try {
+    if (typeof globalThis.getHttpStatus !== 'function' || !Array.isArray(globalThis.allHttpStatusCodes)) {
+      throw new TypeError('HTTP status helpers are not available right now.');
+    }
+
+    const status = globalThis.getHttpStatus(404);
+    result.textContent = status
+      ? `${status.code} ${status.name} - ${status.description}`
+      : 'No HTTP status data was returned.';
+    error.textContent = '';
+
+    const sortedStatuses = [...globalThis.allHttpStatusCodes].sort((a, b) => a.code - b.code);
+    const tableRows = sortedStatuses
+      .map(
+        (item) => {
+          const failed = Number(item.code) >= 400;
+          const descriptionText = escapeHtml(getDescriptionText(item));
+          const failReason = escapeHtml(getFailureReason(item));
+          const hintText = escapeHtml(getHintText(item));
+          const code = escapeHtml(item.code);
+          const name = escapeHtml(item.name);
+          const passReason = escapeHtml(getPassReason(item));
+          const hintCell = failed
+            ? `<div class="http-status-hint-side http-status-hint-side-fail">
+                 <span class="http-status-hint-label">Hint:</span>
+                 <span class="http-status-hint-text">${hintText}</span>
+                 <span class="http-status-hint-label">Description:</span>
+                 <span class="http-status-hint-text">${descriptionText}</span>
+                 <span class="http-status-hint-label">Why it didn't pass:</span>
+                 <span class="http-status-hint-text">${failReason}</span>
+               </div>`
+            : `<div class="http-status-hint-side">
+                 <span class="http-status-hint-label">Hint:</span>
+                 <span class="http-status-hint-text">${hintText}</span>
+                 <span class="http-status-hint-label">Description:</span>
+                 <span class="http-status-hint-text">${descriptionText}</span>
+                 <span class="http-status-hint-label">Why it pass:</span>
+                 <span class="http-status-hint-text">${passReason}</span>
+               </div>`;
+
+          return `<tr>
+            <td class="http-status-code">${code}</td>
+            <td>${name}</td>
+            <td class="${getPassClass(item.code)}">${getPassLabel(item.code)}</td>
+            <td>${hintCell}</td>
+          </tr>`;
+        }
+      )
+      .join('');
+
+    list.innerHTML = `
+      <h3>All HTTP Status Codes</h3>
+      <div class="http-status-table-wrap">
+        <table class="http-status-table" aria-label="HTTP status codes and pass state">
+          <thead>
+            <tr>
+              <th scope="col">Code</th>
+              <th scope="col">Status</th>
+              <th scope="col">Result</th>
+              <th scope="col">Hint</th>
+            </tr>
+          </thead>
+          <tbody>${tableRows}</tbody>
+        </table>
+      </div>
+    `;
+  } catch (exception) {
+    result.textContent = 'HTTP Status Helper';
+    error.textContent = `Error: ${exception.message}`;
+    list.innerHTML = '';
+    console.error('HTTP Status Helper error:', exception);
+  }
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', renderHttpStatusHelper, { once: true });
+} else {
+  renderHttpStatusHelper();
+}
 // --- Utility Functions ---
 function safe(fn) {
   try {

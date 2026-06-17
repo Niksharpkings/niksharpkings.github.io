@@ -1,8 +1,8 @@
 {
   "name": "Ńἱĸἱ৳α $hârρἱo UCLAx+U2 Page",
   "short_name": "Ń$-UCLAx+U2",
-  "id": "./index.html",
-  "start_url": "./index.html",
+  "id": "/index.html",
+  "start_url": "/index.html",
   "background_color": "#32a824",
   "display": "standalone",
   "scope": "/",
