@@ -529,7 +529,7 @@ hr {
 
 hr:after {
   /*Display stuff*/
-  content: "⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘";
+  content: "⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘";
   /*Box model stuff*/
   padding: 0 0px;
 }

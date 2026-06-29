@@ -1,21 +1,28 @@
 {
   "title": "Git push versions",
-  "currentVersion": "v1.2.3",
+  "currentVersion": "v1.2.4",
   "versions": [
+    {
+      "version": "v1.2.4",
+      "date": "June 29, 2026",
+      "time": "~10:30am PDT",
+      "notes": "Major CSS adjustments.",
+      "label": "v1.2.4 - | June 29, 2026 ~10:30am PDT | Major CSS and minor UI adjustments."
+    },
     {
       "version": "v1.2.3",
       "date": "June 29, 2026",
       "time": "~4:30am PDT",
       "notes": "Major CSS adjustments.",
       "label": "v1.2.3 - | June 29, 2026 ~4:30am PDT | Major CSS and minor UI adjustments."
-},
-{
+    },
+    {
       "version": "v1.2.2",
       "date": "June 29, 2026",
       "time": "~2:00am PDT",
       "notes": "Project add and CSS adjustments.",
       "label": "v1.2.2 - | June 29, 2026 ~2:00am PDT | Added a new project to the project section. Edited some CSS and minor UI adjustments."
-},
+    },
     {
       "version": "v1.2.1",
       "date": "June 28, 2026",
