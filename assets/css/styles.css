@@ -306,8 +306,8 @@ nav {
   /*Box model stuff*/
   width: 100%;
   margin: 0px auto;
-  padding: 8px;
-  border: 2px solid rgba(143, 227, 255, 0.65);
+  padding: 5px;
+  border: 3px solid rgba(143, 227, 255, 0.65);
   /*Typography stuff*/
   font-size: 14px;
   font-weight: bold;
@@ -321,7 +321,7 @@ nav {
 header nav ul {
   display: flex;
   justify-content: center; /* Evenly space the items */
-  gap: 10px;
+  gap: 5px;
   padding: 0;
   margin: 0;
   list-style: none;
@@ -436,7 +436,7 @@ header nav li a:focus {
   border-bottom: 2px solid rgba(143, 227, 255, 0.65);
   /*Typography stuff*/
   color: #f3fdff;
-  font-size: 1.05rem;
+  font-size: 1.0rem;
   font-weight: 700;
   letter-spacing: 0.02em;
   text-shadow: 0 0 10px rgba(89, 232, 255, 0.42);
@@ -550,52 +550,71 @@ hr:after {
 }
 
 .about-me {
-  /*Display stuff*/
-
-  /*Box model stuff*/
-  background-color: var(--secondary-hex-color);
-  /*Typography stuff*/
+  max-width: 1120px;
+  margin: 2.5rem auto;
+  padding: 0 1rem 2rem;
   color: var(--primary-hex-color);
 }
 
 section .container-heading h1 {
+  margin: 0 0 1rem;
+  background: linear-gradient(135deg, rgba(9, 21, 27, 0.95) 0%, rgba(15, 44, 56, 0.98) 100%);
   text-shadow: var(--primary-shadow-color);
   font-weight: bolder;
   border: 10px ridge var(--primary-hex-color);
   padding: 1.2rem;
+  border-radius: 1.25rem;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.32);
 }
 
 .container-content {
-  border: 10px ridge var(--primary-hex-color);
-  background-color:rgb(0, 0, 0);
+  border: 6px ridge var(--primary-hex-color);
+  background: linear-gradient(180deg, rgba(5, 15, 20, 0.96) 0%, rgba(11, 23, 30, 0.96) 100%);
   width: 100%;
-  padding: 0.5rem;
+  padding: 1.25rem 1.5rem;
   display: flex;
   flex-direction: column;
+  border-radius: 1.25rem;
+  box-shadow: 0 18px 38px rgba(0, 0, 0, 0.28);
 }
 
 .container-content p {
-  color: rgb(255, 255, 255);
-  padding-left: 5px;
+  color: rgb(235, 245, 247);
+  padding-left: 0;
+  margin: 0;
+  line-height: 1.7;
+  letter-spacing: 0.01em;
   font-weight: normal;
   font-size: calc(10px + (18 - 14) * ((100vw - 300px) / (1600 - 300)));
 }
 
 .div-resume {
   display: flex;
-  border: 10px ridge var(--primary-hex-color);
-  background-color: rgb(92, 92, 92);
+  gap: 1rem;
+  margin-top: 1.5rem;
+  border: 6px ridge var(--primary-hex-color);
+  background: linear-gradient(180deg, rgba(14, 19, 24, 0.94) 0%, rgba(18, 29, 36, 0.97) 100%);
   width: 100%;
-  padding: 0.5rem;
+  padding: 1rem 1rem 1.25rem;
   flex-direction: column;
+  border-radius: 1.25rem;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.3);
 }
 
 .p-resume {
+  margin: 0;
+  padding: 0.9rem 1.25rem;
+  border: 2px solid rgba(143, 227, 255, 0.45);
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.72) 0%, rgba(22, 53, 66, 0.75) 100%);
   font: small-caps bold 1.2rem sans-serif;
-  justify-content: center;
   display: flex;
-  font-size: 30px;
-  text-shadow: 0 0 10px var(--primary-hex-color), var(--primary-shadow-color), 0 0 10px var(--primary-hex-color);
+  justify-content: center;
+  align-items: center;
+  font-size: calc(20px + (34 - 20) * ((100vw - 320px) / (1600 - 320)));
+  letter-spacing: 0.08em;
+  color: #efffff;
+  text-shadow: 0 0 18px rgba(31, 182, 255, 0.45);
 }
 
 .fieldset-1 {
@@ -613,22 +632,24 @@ section .container-heading h1 {
 }
 
 details {
-  border: 1px dotted;
-  border-radius: 4px;
-  padding: 0.5em 0.5em 0;
+  border: 1px solid rgba(143, 227, 255, 0.28);
+  border-radius: 1rem;
+  padding: 0.75rem 1rem 0;
   text-align: center;
-  align-self: center;
-  width: auto;
+  align-self: stretch;
+  width: 100%;
+  background: rgba(9, 14, 18, 0.75);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.22);
 }
 
 summary {
   font-weight: bold;
-  margin: -0.5em -0.5em 0;
-  padding: 0.5em;
-  display: inline;
-  align-self: center;
-  width: auto;
-  text-align: center;
+  margin: -0.75rem -1rem 0;
+  padding: 1rem 1.1rem;
+  display: block;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
 }
 
 mark {
@@ -644,18 +665,18 @@ mark:hover {
 
 
 details[open] {
-  padding: 0.5em;
+  padding: 0.75rem 1rem 1rem;
   font-weight: bold;
   font-size: 14px;
-  background-color: black;
-  color: green;
+  background: rgba(4, 10, 14, 0.96);
+  color: #d7fff1;
 }
 
 details[open] summary {
-  border-bottom: 1px solid #aaa;
-  margin-bottom: 0.5em;
-  background-color: var(--primary-hex-color);
-  color: var(--secondary-hex-color);
+  border-bottom: 1px solid rgba(143, 227, 255, 0.2);
+  margin-bottom: 0.9rem;
+  background: linear-gradient(135deg, rgba(5, 33, 42, 0.95) 0%, rgba(11, 53, 66, 0.96) 100%);
+  color: #f0fdff;
 }
 
 .legend-3-span mark {
@@ -675,25 +696,24 @@ details[open] summary {
     /*Miscellaneous*/
     list-style-type: none;
     border-radius: 20px;
-  
 }
 
 .resume-details {
-  /*Display stuff*/
   display: block;
-  /*Box model stuff*/
-  background-color: var(--primary-hex-color);
-  /*Typography stuff*/
   font-size: 14px;
   font-weight: bold;
   text-align: center;
-  color: var(--secondary-hex-color);
-  border: 10px ridge var(--secondary-hex-color);
+  color: #ecfdff;
+  border: 1px solid rgba(143, 227, 255, 0.35);
 }
 
 .details-p {
-  font-size: 12px;
+  margin: 0;
+  padding: 0 0.25rem 0.25rem;
+  font-size: 0.95rem;
   text-align: left;
+  line-height: 1.7;
+  color: #d7e7eb;
 }
 
 .projects {
@@ -780,7 +800,6 @@ figure {
   flex-direction: column;
   border: thin #c0c0c0 solid;
   background-color: rgb(0, 0, 0);
-  
 }
 
 figcaption {
@@ -871,6 +890,7 @@ footer details[open] summary {
   border-bottom: 1px dotted black;
   /*Typography stuff*/
   color: var(--primary-hex-color);
+  font-size: 8px;
 }
 
 .tooltip .tooltiptext {

@@ -734,6 +734,14 @@ const projectsData = [
     imageAlt: "Git-it-done"
   },
   {
+    title: "My Work Day Scheduler Remake",
+    liveLink: "https://niksharpkings.github.io/My-Work-Day-Scheduler-UCLAx-U2bn-eDX-Remake/",
+    repoLink: "https://github.com/Niksharpkings/My-Work-Day-Scheduler-UCLAx-U2bn-eDX-Remake",
+    description: "My-Work-Day-Scheduler-UCLAx-U2bn-eDX-Remake was created for UCLAx assignment in 2022, but I revamped and upgraded the packages to 2026 and added my modifications to it. Its for student to easily create a schedule for managing a single work day in a time block. Requirement was to use jquery and moment.js with the use of bootstrap and google fonts. By Revamp I mean I redid the entire project from scratch after graduation.",
+    imageSrc: "./assets/images/Work-Day-Schheduler.png",
+    imageAlt: "My Work Day Scheduler Remake"
+  },
+  {
     title: "Pastel Puzzles",
     liveLink: "N/a",
     repoLink: "N/a",

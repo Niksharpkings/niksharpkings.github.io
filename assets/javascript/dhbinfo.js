@@ -893,7 +893,7 @@ function renderHttpStatusHelper() {
     return normalizedCode >= 100 && normalizedCode < 400;
   };
   const getPassLabel = (code) => (isPassStatus(code) ? 'Pass' : "Didn't Pass");
-  const getPassClass = (code) => (isPassStatus(code) ? 'http-status-pass' : 'http-status-dont-pass');
+  const getPassClass = (code) => (isPassStatus(code) ? 'http-status-pass' : 'http-status-don\'t-pass');
   const getFailureReason = (item) => {
     const code = Number(item.code);
     return code >= 500
