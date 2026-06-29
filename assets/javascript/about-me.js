@@ -1,12 +1,12 @@
 const aboutMeData = {
-  heading: "Hello & Welcome to My personal github.io profile | project | resume page",
+  heading: "Welcome to my personal github.io <br> [ profile | project | resume ] webpage",
   content: `
     <details class="resume-details">
       <summary>
         <span class="legend-3-span">
           My Profile Notes and About Me, Currently.
           <br>
-          <mark> » Click Me To Expand « </mark>
+          <mark> » Click Me To View Expanded Info « </mark>
         </span>
       </summary>
       <p class="about-me-inner">
@@ -32,6 +32,37 @@ const aboutMeData = {
     </details>
   `,
   resume: [
+        {
+      title: "🕵️👨‍💻 Computer Skills & Experiences 👨‍💻",
+      location: "",
+      details: `
+        <p class="details-p">
+          Languages:
+          <br>
+          | <abbr title="Hyper Text Markup Language">HTML</abbr>5 & XHTML | <abbr title="Cascading Style Sheets">CSS</abbr>3 | JavaScript | REST | APIs | JSON | XML | AJAX | TypeScript | Node.js | React.js | Angular | Redux | C | C# | C++ | HLA | .NET | Java | SQL | MySQL | GraphQL | Apollo | MongoDB | YAML | Go | PHP | GIT | XML | Python | PowerShell | Bash | English |
+          <br><br>
+          Software/Programs/Apps:
+          <br>
+          | Node.js | NPM | GitHub | CMS environments e.g. Shopify | RetailPro | Application-Savvy | Visual Studio & Code | JetBrains | Android Studio | Blender | Adobe Creative Cloud | Microsoft 365 Apps | Employee Auditing and Data Analysis | SAP Business Objects | Retail KPIs and Data Formulations |
+          <br><br>
+          Cloud:
+          <br>
+          | AWS | Google Cloud | Heroku | Azure | Docker | DevOps | Hyper-V |
+          <br><br>
+          Setup & Operate:
+          <br>
+          | Web Servers | Databases | VPN | Cloud | VMs | UEFI | BIOS | Router | Printer | Scanner | Cisco | Network Topologies and Architecture | Media and Signaling | Protocols | Addressing | Distributed Networks | Subnetting Physical, Virtual and Internetworks | Socket-API Structure | Apache Web Server | BIND Name Server | NFS | Samba File System Servers | DHCP Address Server | Modem | AP/LP/Security Equipment | Clerical Stations | OS | Administrative Roles | Server | Game Servers | POS | Administrative OS Roles |
+          <br><br>
+          Web Operations:
+          <br>
+          | Web Development | Web Design | Web Hosting | Web Security | Web Analytics | Web Marketing | SEO | SMO | SMM | SEM |
+          <br><br>
+          Operating Systems:
+          <br>
+          | Microsoft Windows 3.1 - 11 | Apple macOS Ventura | Ubuntu | Linux | WSL for Windows | Raspberry Pi | Android | iOS | Chrome |
+        </p>
+      `
+    },
     {
       title: "💂‍♂️Block By Block Westwood Ambassador 💂‍♂️",
       location: "Westwood, CA - August 2019 to January 2020",
@@ -184,38 +215,8 @@ const aboutMeData = {
           • Create flowcharts, Excel data charts, custom security software applications.
         </p>
       `
-    },
-    {
-      title: "🕵️👨‍💻 Computer Skills & Experiences 👨‍💻",
-      location: "",
-      details: `
-        <p class="details-p">
-          Languages:
-          <br>
-          | <abbr title="Hyper Text Markup Language">HTML</abbr>5 & XHTML | <abbr title="Cascading Style Sheets">CSS</abbr>3 | JavaScript | REST | APIs | JSON | XML | AJAX | TypeScript | Node.js | React.js | Angular | Redux | C | C# | C++ | HLA | .NET | Java | SQL | MySQL | GraphQL | Apollo | MongoDB | YAML | Go | PHP | GIT | XML | Python | PowerShell | Bash | English |
-          <br><br>
-          Software/Programs/Apps:
-          <br>
-          | Node.js | NPM | GitHub | CMS environments e.g. Shopify | RetailPro | Application-Savvy | Visual Studio & Code | JetBrains | Android Studio | Blender | Adobe Creative Cloud | Microsoft 365 Apps | Employee Auditing and Data Analysis | SAP Business Objects | Retail KPIs and Data Formulations |
-          <br><br>
-          Cloud:
-          <br>
-          | AWS | Google Cloud | Heroku | Azure | Docker | DevOps | Hyper-V |
-          <br><br>
-          Setup & Operate:
-          <br>
-          | Web Servers | Databases | VPN | Cloud | VMs | UEFI | BIOS | Router | Printer | Scanner | Cisco | Network Topologies and Architecture | Media and Signaling | Protocols | Addressing | Distributed Networks | Subnetting Physical, Virtual and Internetworks | Socket-API Structure | Apache Web Server | BIND Name Server | NFS | Samba File System Servers | DHCP Address Server | Modem | AP/LP/Security Equipment | Clerical Stations | OS | Administrative Roles | Server | Game Servers | POS | Administrative OS Roles |
-          <br><br>
-          Web Operations:
-          <br>
-          | Web Development | Web Design | Web Hosting | Web Security | Web Analytics | Web Marketing | SEO | SMO | SMM | SEM |
-          <br><br>
-          Operating Systems:
-          <br>
-          | Microsoft Windows 3.1 - 11 | Apple macOS Ventura | Ubuntu | Linux | WSL for Windows | Raspberry Pi | Android | iOS | Chrome |
-        </p>
-      `
     }
+
   ]
 };
 
@@ -223,6 +224,7 @@ function generateAboutMe() {
   const aboutMeSection = document.createElement('section');
   aboutMeSection.className = 'about-me';
   aboutMeSection.id = 'about-me';
+  aboutMeSection.textContent = '  About Me Section';
 
   const containerHeading = document.createElement('div');
   containerHeading.className = 'container-heading';
@@ -242,7 +244,7 @@ function generateAboutMe() {
 
   const pResume = document.createElement('p');
   pResume.className = 'p-resume';
-  pResume.textContent = 'Background & Resume';
+  pResume.textContent = 'Background & Resume:';
   divResume.appendChild(pResume);
 
   aboutMeData.resume.forEach(item => {
@@ -256,7 +258,7 @@ function generateAboutMe() {
         <br>
         ${item.location}
         <br>
-        <mark> » Click Me To Expand « </mark>
+        <mark> » Click Me To View Expanded Info « </mark>
       </span>
     `;
     details.appendChild(summary);

@@ -1,7 +1,14 @@
 {
   "title": "Git push versions",
-  "currentVersion": "v1.2.2",
+  "currentVersion": "v1.2.3",
   "versions": [
+    {
+      "version": "v1.2.3",
+      "date": "June 29, 2026",
+      "time": "~4:30am PDT",
+      "notes": "Major CSS adjustments.",
+      "label": "v1.2.3 - | June 29, 2026 ~4:30am PDT | Major CSS and minor UI adjustments."
+},
 {
       "version": "v1.2.2",
       "date": "June 29, 2026",

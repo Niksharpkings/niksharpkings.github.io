@@ -7,6 +7,14 @@
   --secondary-hex-color: #8eb8a3;
   --tridary-hex-color: #07ebc5;
   --background-white-rgb-color: rgb(255, 255, 255);
+  --page-shell-color: rgba(3, 9, 13, 0.92);
+  --surface-elevated-color: rgba(10, 24, 31, 0.88);
+  --surface-outline-color: rgba(143, 227, 255, 0.26);
+  --accent-cyan-color: #7fe8ff;
+  --accent-lime-color: #a3ffbf;
+  --accent-gold-color: #ffd78f;
+  --hero-overlay-color: rgba(4, 11, 18, 0.62);
+  --section-max-width: 1120px;
   color-scheme: normal;
   scrollbar-color: rebeccapurple green;
 }
@@ -42,13 +50,44 @@ noscript {
 
 body {
   /*Box model stuff*/
-  background: linear-gradient(90deg, #000000 0%, #494949 50%, #000000 100%);
+  background:
+    radial-gradient(circle at top left, rgba(10, 192, 145, 0.2) 0%, transparent 32%),
+    radial-gradient(circle at top right, rgba(88, 117, 255, 0.18) 0%, transparent 28%),
+    radial-gradient(circle at bottom center, rgba(255, 174, 77, 0.12) 0%, transparent 24%),
+    linear-gradient(135deg, #020507 0%, #08141b 32%, #0e2028 52%, #060b10 100%);
   background-color: var(--secondary-hex-color);
   /*Typography stuff*/
   font-size: calc(12px + (26 - 12) * ((100vw - 300px) / (1600 - 300)));
   /*Miscellaneous*/
+  position: relative;
   overflow-x: hidden;
   overflow-y: auto;
+}
+
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  inset: auto;
+  width: 28rem;
+  height: 28rem;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(24px);
+  opacity: 0.3;
+  z-index: -1;
+}
+
+body::before {
+  top: -8rem;
+  left: -7rem;
+  background: radial-gradient(circle, rgba(53, 232, 255, 0.45) 0%, rgba(53, 232, 255, 0) 70%);
+}
+
+body::after {
+  right: -8rem;
+  bottom: 10rem;
+  background: radial-gradient(circle, rgba(97, 255, 160, 0.3) 0%, rgba(97, 255, 160, 0) 72%);
 }
 
 header {
@@ -63,7 +102,7 @@ header {
   border: 2px solid rgba(143, 227, 255, 0.65);
   border-radius: 20px;
   background-attachment: fixed;
-  background: linear-gradient(180deg, rgba(2, 13, 18, 0.96) 0%, rgba(5, 21, 27, 0.96) 100%);
+  background: linear-gradient(180deg, rgba(2, 13, 18, 0.78) 0%, rgba(5, 21, 27, 0.9) 100%);
   background-position: 100%;
   background-repeat: no-repeat;
   background-size: cover;
@@ -71,6 +110,7 @@ header {
   list-style-type: none;
   overflow: hidden;
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(12px);
 }
 
 .Custom-Script-Details,
@@ -305,6 +345,7 @@ nav {
   justify-content: center;
   /*Box model stuff*/
   width: 100%;
+  max-width: var(--section-max-width);
   margin: 0px auto;
   padding: 5px;
   border: 3px solid rgba(143, 227, 255, 0.65);
@@ -449,17 +490,23 @@ header nav li a:focus {
 .tooltip-nav .tooltiptext-nav{
   /*Positioning stuff*/
   position: absolute;
-  left: -5%;
-  top: 30px;
+  left: 50%;
+  top: calc(100% + 0.55rem);
   z-index: 4;
+  transform: translateX(-50%);
   /*Box model stuff*/
-  width: auto;
-  padding: 2px 2px;
+  width: min(22rem, 80vw);
+  max-width: 80vw;
+  padding: 0.5rem 0.65rem;
   border-radius: 6px;
-  background-color: rgb(48, 41, 41);
+  background-color: rgba(20, 17, 17, 0.96);
+  border: 1px solid rgba(143, 227, 255, 0.3);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.28);
   /*Typography stuff*/
   text-align: center;
   color: var(--secondary-hex-color);
+  line-height: 1.4;
+  overflow-wrap: anywhere;
   /*Miscellaneous*/
   visibility: hidden;
   /* Position the tooltip */
@@ -490,7 +537,9 @@ hr:after {
 .hero {
   /*Box model stuff*/
   margin: 0 auto;
-  padding: 0;
+  padding: 2rem 1rem 2.5rem;
+  max-width: var(--section-max-width);
+  min-height: 42rem;
   background-attachment: fixed;
   background-image: url(../images/ns-6-14-2024-stsci-01h1q2vfhvmajgh4wrnmk0dy52.png);
   background-position: center;
@@ -503,6 +552,20 @@ hr:after {
   color: var(--primary-hex-color);
   border: 10px double var(--secondary-hex-color);
   border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.36);
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(4, 10, 14, 0.16) 0%, var(--hero-overlay-color) 76%),
+    radial-gradient(circle at top, rgba(104, 255, 211, 0.22) 0%, rgba(104, 255, 211, 0) 38%);
+  z-index: -1;
 }
 
 .hero img {
@@ -527,10 +590,16 @@ hr:after {
 .hero-intro {
   /*Positioning stuff*/
   position: relative;
-  top: -50px;
+  top: 0;
   /*Box model stuff*/
-  padding: 0 0px;
-  border-radius: 10px;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 1.75rem 1.5rem 1rem;
+  border: 1px solid rgba(190, 250, 255, 0.22);
+  border-radius: 28px;
+  background: linear-gradient(180deg, rgba(5, 18, 26, 0.68) 0%, rgba(9, 27, 35, 0.78) 100%);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.32);
   /*Typography stuff*/
 }
 
@@ -540,7 +609,8 @@ hr:after {
   /*Typography stuff*/
   font-size: 55px;
   text-shadow: var(--primary-shadow-color);
-  color: rgb(10, 231, 2);
+  color: #baffd5;
+  letter-spacing: 0.05em;
 }
 
 #hero-name:hover {
@@ -551,31 +621,63 @@ hr:after {
 
 .about-me {
   max-width: 1120px;
-  margin: 2.5rem auto;
+  margin: 3rem auto;
   padding: 0 1rem 2rem;
-  color: var(--primary-hex-color);
+  font-size: calc(10px + (26 - 14) * ((100vw - 300px) / (1600 - 300)));
+  text-shadow: var(--primary-shadow-color);
+  color: #f2ffff;
+  border: 10px ridge var(--secondary-hex-color);
+  border-radius: 1.25rem;
+  background: linear-gradient(135deg, rgba(4, 19, 24, 0.96) 0%, rgba(13, 47, 60, 0.98) 100%);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.3);
 }
 
 section .container-heading h1 {
   margin: 0 0 1rem;
-  background: linear-gradient(135deg, rgba(9, 21, 27, 0.95) 0%, rgba(15, 44, 56, 0.98) 100%);
+  background:
+    linear-gradient(135deg, rgba(9, 21, 27, 0.94) 0%, rgba(15, 44, 56, 0.98) 56%, rgba(9, 21, 27, 0.94) 100%);
   text-shadow: var(--primary-shadow-color);
   font-weight: bolder;
   border: 10px ridge var(--primary-hex-color);
   padding: 1.2rem;
   border-radius: 1.25rem;
   box-shadow: 0 20px 45px rgba(0, 0, 0, 0.32);
+  position: relative;
+  overflow: hidden;
+}
+
+section .container-heading h1::after {
+  content: "";
+  position: absolute;
+  left: 1.25rem;
+  right: 1.25rem;
+  bottom: 0.7rem;
+  height: 3px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(127, 232, 255, 0) 0%, rgba(127, 232, 255, 0.95) 50%, rgba(127, 232, 255, 0) 100%);
 }
 
 .container-content {
   border: 6px ridge var(--primary-hex-color);
-  background: linear-gradient(180deg, rgba(5, 15, 20, 0.96) 0%, rgba(11, 23, 30, 0.96) 100%);
+  background: linear-gradient(180deg, rgba(5, 15, 20, 0.88) 0%, rgba(11, 23, 30, 0.96) 100%);
   width: 100%;
   padding: 1.25rem 1.5rem;
   display: flex;
   flex-direction: column;
   border-radius: 1.25rem;
   box-shadow: 0 18px 38px rgba(0, 0, 0, 0.28);
+  position: relative;
+  overflow: hidden;
+}
+
+.container-content::before,
+.div-resume::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(127, 232, 255, 0) 0%, rgba(127, 232, 255, 0.82) 50%, rgba(127, 232, 255, 0) 100%);
 }
 
 .container-content p {
@@ -599,6 +701,8 @@ section .container-heading h1 {
   flex-direction: column;
   border-radius: 1.25rem;
   box-shadow: 0 20px 45px rgba(0, 0, 0, 0.3);
+  position: relative;
+  overflow: hidden;
 }
 
 .p-resume {
@@ -640,6 +744,13 @@ details {
   width: 100%;
   background: rgba(9, 14, 18, 0.75);
   box-shadow: 0 14px 30px rgba(0, 0, 0, 0.22);
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+
+details:hover {
+  transform: translateY(-2px);
+  border-color: rgba(143, 227, 255, 0.5);
+  box-shadow: 0 18px 32px rgba(0, 0, 0, 0.28);
 }
 
 summary {
@@ -719,25 +830,40 @@ details[open] summary {
 .projects {
   /*Display stuff*/
   display: block;
+  max-width: var(--section-max-width);
+  margin: 3rem auto;
+  padding: 0 1rem 2.5rem;
   /*Box model stuff*/
-  background-color: var(--primary-hex-color);
+  background: transparent;
   /*Typography stuff*/
   font-size: 14px;
   font-weight: bold;
   text-align: center;
   color: var(--secondary-hex-color);
-  border: 10px ridge var(--secondary-hex-color);
+  border: none;
 }
 
 .project-header {
   /*Typography stuff*/
   font-size: calc(26px + (26 - 14) * ((100vw - 300px) / (1600 - 300)));
   text-shadow: var(--primary-shadow-color);
-  color: var(--primary-hex-color);
+  color: #f2ffff;
   border: 10px ridge var(--secondary-hex-color);
   padding: 1.2rem;
   display: flex;
   justify-self: center;
+  margin: 0 0 1.4rem;
+  border-radius: 1.25rem;
+  background: linear-gradient(135deg, rgba(4, 19, 24, 0.96) 0%, rgba(13, 47, 60, 0.98) 100%);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.3);
+}
+
+.project-header small {
+  display: block;
+  margin-top: 0.55rem;
+  font-size: 0.45em;
+  color: #cdeff7;
+  text-shadow: none;
 }
 
 .project-title{
@@ -747,6 +873,11 @@ details[open] summary {
   max-width: 100%;
   display: inline-block;
 }
+
+.project-container {
+  margin-bottom: 1.5rem;
+}
+
 .project-grid-container {
   margin: 0 auto;
   display: inline-flex;
@@ -768,6 +899,8 @@ details[open] summary {
   max-height: 400px;
   min-height: 100px;
   overflow: auto;
+  border-radius: 1rem;
+  padding: 0.75rem;
 }
 
 .project-repository-dialog {
@@ -775,18 +908,29 @@ details[open] summary {
   text-align: left;
   font-size: 12px;
   padding-left: 5px;
+  color: #ddf8ff;
+  line-height: 1.65;
+}
+
+.project-repository-dialog a {
+  color: var(--accent-cyan-color);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.18em;
 }
 
 .project-container-right {
   border: thin var(--secondary-hex-color) solid;
   grid-area: right;
-  width: 600px;
-  max-width: 600px;
-  min-width: 100px;
+  width: 100%;
+  max-width: none;
+  min-width: 0;
   max-height: 400px;
   min-height: 100px;
   display: block;
   background-size: contain;
+  border-radius: 1rem;
+  overflow: hidden;
+  background: linear-gradient(180deg, rgba(4, 11, 17, 0.94) 0%, rgba(8, 18, 24, 0.96) 100%);
 }
 .project-container-right-img {
   width:100%;
@@ -798,8 +942,10 @@ details[open] summary {
 figure {
   display: flex;
   flex-direction: column;
-  border: thin #c0c0c0 solid;
-  background-color: rgb(0, 0, 0);
+  border: 1px solid rgba(143, 227, 255, 0.2);
+  background: rgba(0, 0, 0, 0.45);
+  border-radius: 0.75rem;
+  overflow: hidden;
 }
 
 figcaption {
@@ -807,7 +953,7 @@ figcaption {
   background-color: #222;
   color: #fff;
   font: italic smaller sans-serif;
-  padding: 3px;
+  padding: 0.55rem 0.7rem;
   text-align: left;
   width: auto;
 }
@@ -818,6 +964,12 @@ footer {
   font-weight: bold;
   text-align: center;
   border: 10px ridge var(--secondary-hex-color);
+  max-width: var(--section-max-width);
+  margin: 0 auto 2rem;
+  padding: 1rem;
+  border-radius: 1.5rem;
+  background: linear-gradient(180deg, rgba(5, 16, 22, 0.94) 0%, rgba(10, 25, 31, 0.98) 100%);
+  box-shadow: 0 18px 38px rgba(0, 0, 0, 0.28);
 }
 
 footer p{
@@ -1217,9 +1369,9 @@ div .contact-list-item p {
   }
 
   .hero-intro {
-    padding: 0 0px;
+    padding: 1rem 0.85rem;
     font-size: 18px;
-    top: -30px;
+    top: 0;
     border-radius: 10px;
   }
 
@@ -1237,7 +1389,7 @@ div .contact-list-item p {
 
   .project-grid-container {
     width: 100%;
-    flex-direction: column;
+    grid-template-columns: 1fr;
   }
 
   .projects img {
@@ -1334,6 +1486,7 @@ div .contact-list-item p {
   .hero {
     padding: 10px;
     border-radius: 10px;
+    min-height: auto;
   }
 
   .hero img {
@@ -1352,7 +1505,7 @@ div .contact-list-item p {
   }
 
   .project-grid-container {
-    flex-direction: column;
+    grid-template-columns: 1fr;
     padding: 10px;
   }
 
