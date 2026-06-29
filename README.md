@@ -12,6 +12,10 @@ Last Updated to this repo: Jan 19, 2025 7:00am PDT -8 GMT
 
 #### Git push Versions :
 
+
+* `v1.2.1 - | June 28, 2025 ~7:30pm PDT | Git Push Versions with version-history.json/.js added and a few css adjustments.`
+* `v1.2.0 - | June 17, 2025 ~1:50pm PDT | Added Web Status codes and updated css and minor UI adjustments.`
+* `v1.1.9 - | June 17, 2026 ~1:40pm PDT | Added new info to the project list.`
 * `v1.1.8 - | June 22, 2025 ~1:35pm PDT | Added nanoseconds to clock, updated browser information panel (local).`
 * `v1.1.7 - | June 22, 2025 ~7:30am PDT | Fixed some typos and nano seconds to the project section.`
 * `v1.1.6 - | June 22, 2025 ~7:20am PDT | Fixed some typos and minor UI adjustments, added a new project section with a new project, and added a new about-me section with a new about-me page.`

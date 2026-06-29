@@ -1,0 +1,161 @@
+{
+  "title": "Git push versions",
+  "currentVersion": "v1.2.1",
+  "versions": [
+
+    {
+      "version": "v1.2.1",
+      "date": "June 28, 2026",
+      "time": "~6:00pm PDT",
+      "notes": "Git Push Versions.",
+      "label": "v1.2.1 - | June 28, 2026 ~6:00pm PDT | Git Push Versions with version-history.json/.js added and a few css adjustments."
+    },
+    {
+      "version": "v1.2.0",
+      "date": "June 17, 2025",
+      "time": "~1:50pm PDT",
+      "notes": "Added Web Status codes and updated css and minor UI adjustments.",
+      "label": "v1.2.0 - | June 17, 2025 ~1:50pm PDT | Added Web Status codes and updated css and minor UI adjustments."
+    },
+    {
+      "version": "v1.1.9",
+      "date": "June 17, 2026",
+      "time": "~1:40pm PDT",
+      "notes": "Added new info to the project list.",
+      "label": "v1.1.9 - | June 17, 2026 ~1:40pm PDT | Added new info to the project list."
+    },
+    {
+      "version": "v1.1.8",
+      "date": "June 22, 2025",
+      "time": "~1:35pm PDT",
+      "notes": "Added nanoseconds to clock, updated browser information panel (local).",
+      "label": "v1.1.8 - | June 22, 2025 ~1:35pm PDT | Added nanoseconds to clock, updated browser information panel (local)."
+    },
+    {
+      "version": "v1.1.7",
+      "date": "June 22, 2025",
+      "time": "~7:30am PDT",
+      "notes": "Fixed some typos and nano seconds to the project section.",
+      "label": "v1.1.7 - | June 22, 2025 ~7:30am PDT | Fixed some typos and nano seconds to the project section."
+    },
+    {
+      "version": "v1.1.6",
+      "date": "June 22, 2025",
+      "time": "~7:20am PDT",
+      "notes": "Fixed some typos and minor UI adjustments, added a new project section with a new project, and added a new about-me section with a new about-me page.",
+      "label": "v1.1.6 - | June 22, 2025 ~7:20am PDT | Fixed some typos and minor UI adjustments, added a new project section with a new project, and added a new about-me section with a new about-me page."
+    },
+    {
+      "version": "v1.1.5",
+      "date": "Jan 25, 2025",
+      "time": "~12:00pm PDT",
+      "notes": "Converted project and about-me sections into javascript for future additions",
+      "label": "v1.1.5 - | Jan 25, 2025 ~12:00pm PDT | Converted project and about-me sections into javascript for future additions"
+    },
+    {
+      "version": "v1.1.4",
+      "date": "Jan 19, 2025",
+      "time": "~8:50am PDT",
+      "notes": "Typos and fine tuning with some revision.",
+      "label": "v1.1.4 - | Jan 19, 2025 ~8:50am PDT | Typos and fine tuning with some revision."
+    },
+    {
+      "version": "v1.1.3",
+      "date": "Nov 4, 2024",
+      "time": "~5:15am PDT",
+      "notes": "Made Improvements to the Mouse hover tailer JS code, CSS redundancy remove, testing with custom tooltips",
+      "label": "v1.1.3 - | Nov 4, 2024 ~5:15am PDT | Made Improvements to the Mouse hover tailer JS code, CSS redundancy remove, testing with custom tooltips"
+    },
+    {
+      "version": "v1.1.2",
+      "date": "Aug 28, 2024",
+      "time": "~3:32am PDT",
+      "notes": "Made some minor UI mouse hover viewport, renamed two of my Javascript custom code for the millisecond hand clock and custom CSSOM mouse trailtaletracker client-side info-stats",
+      "label": "v1.1.2 - | Aug 28, 2024 ~3:32am PDT | Made some minor UI mouse hover viewport, renamed two of my Javascript custom code for the millisecond hand clock and custom CSSOM mouse trailtaletracker client-side info-stats"
+    },
+    {
+      "version": "v1.1.1",
+      "date": "Aug 27, 2024",
+      "time": "~1:00pm PDT",
+      "notes": "Made some minor UI mouse hover viewport fixes and other minor adjustments to the head>links and added some new resume computer skill sets.",
+      "label": "v1.1.1 - | Aug 27, 2024 ~1:00pm PDT | Made some minor UI mouse hover viewport fixes and other minor adjustments to the head>links and added some new resume computer skill sets."
+    },
+    {
+      "version": "v1.1.0",
+      "date": "Aug 27, 2024",
+      "time": "~12:30pm PDT",
+      "notes": "Made some minor UI changes, Added CSSOM and some cool Mouse following UI.",
+      "label": "v1.1.0 - | Aug 27, 2024 ~12:30pm PDT | Made some minor UI changes, Added CSSOM and some cool Mouse following UI."
+    },
+    {
+      "version": "v1.0.9",
+      "date": "June 15, 2024",
+      "time": "~12:10am PDT",
+      "notes": "Changed the background and hero background image.",
+      "label": "v1.0.9 - | June 15, 2024 ~12:10am PDT | Changed the background and hero background image."
+    },
+    {
+      "version": "v1.0.8",
+      "date": "April 5, 2024",
+      "time": "~5:30am PDT",
+      "notes": "Fixed typos & minor tune |",
+      "label": "v1.0.8 - | April 5, 2024 ~5:30am PDT | Fixed typos & minor tune |"
+    },
+    {
+      "version": "v1.0.7",
+      "date": "Jan 3, 2024",
+      "time": "~10:30pm PDT",
+      "notes": "Fixed typos & minor tune |",
+      "label": "v1.0.7 - | Jan 3, 2024 ~10:30pm PDT | Fixed typos & minor tune |"
+    },
+    {
+      "version": "v1.0.6",
+      "date": "May 6, 2023",
+      "time": "~10:30pm PDT",
+      "notes": "fixed the clock millisecond dial.",
+      "label": "v1.0.6 - | May 6, 2023 ~10:30pm PDT | fixed the clock millisecond dial."
+    },
+    {
+      "version": "v1.0.5",
+      "date": "April 22, 2023",
+      "time": "~2:00pm PDT",
+      "notes": "fixed and testing some meta tags, improved css, added a noscript with custom info.",
+      "label": "v1.0.5 - | April 22, 2023 ~2:00pm PDT | fixed and testing some meta tags, improved css, added a noscript with custom info."
+    },
+    {
+      "version": "v1.0.4",
+      "date": "March 25, 2023",
+      "time": "~2:14pm PDT",
+      "notes": "Added the  Revamped Password Generator V2 project to the project/repo section.",
+      "label": "v1.0.4 - | March 25, 2023 ~2:14pm PDT | Added the  Revamped Password Generator V2 project to the project/repo section."
+    },
+    {
+      "version": "v1.0.3",
+      "date": "March 25, 2023",
+      "time": "~1:30am PDT",
+      "notes": "Removed & moved all comments to html/indexwithcomments.html.bak. removed unnecessary code and reoptimized html and css. preparing for project repo import. small manifest and meta update.",
+      "label": "v1.0.3 - | March 25, 2023 ~1:30am PDT | Removed & moved all comments to html/indexwithcomments.html.bak. removed unnecessary code and reoptimized html and css. preparing for project repo import. small manifest and meta update."
+    },
+    {
+      "version": "v1.0.2",
+      "date": "March 24, 2023",
+      "time": "~5:00pm PDT",
+      "notes": "Major update - added manifest, png to webp, preloads, w3 verifications pass, new and deleted html attributes, and css edits.",
+      "label": "v1.0.2 - | March 24, 2023 | ~5:00pm PDT| Major update - added manifest, png to webp, preloads, w3 verifications pass, new and deleted html attributes, and css edits."
+    },
+    {
+      "version": "v1.0.1",
+      "date": "March 8, 2023",
+      "time": "~3:00pm PDT",
+      "notes": "Added index.html, favicon, license, codeowners, robots.txt, favicon.ico, cursorfavicon, privacy-policy.html, .gitignore, styles.css, secondary-styles.css, images, & assets files and folder. Added Content to the index.html, privacy-policy.html, & .css's with pre-made content that I used from my UCLAx-U2 profile page and just made minor changed the textual information and changed the color schema and small css adjustments.",
+      "label": "v1.0.1 - | March 8, 2023 ~3:00pm PDT | Added index.html, favicon, license, codeowners, robots.txt, favicon.ico, cursorfavicon, privacy-policy.html, .gitignore, styles.css, secondary-styles.css, images, & assets files and folder. Added Content to the index.html, privacy-policy.html, & .css's with pre-made content that I used from my UCLAx-U2 profile page and just made minor changed the textual information and changed the color schema and small css adjustments."
+    },
+    {
+      "version": "v1.0.0",
+      "date": "Aug 11, 2021",
+      "time": "8:45pm PDT",
+      "notes": "Created and opened new Github account",
+      "label": "v1.0.0 - | Aug 11, 2021 8:45pm PDT | Created and opened new Github account"
+    }
+  ]
+}

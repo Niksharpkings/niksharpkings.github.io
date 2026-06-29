@@ -5,6 +5,7 @@
   --secondary-shadow-color: 0 0 5px #0affeb, 0 0 10px #00ffff, 0 0 20px #11ebeb;
   --primary-hex-color: #000000;
   --secondary-hex-color: #8eb8a3;
+  --tridary-hex-color: #07ebc5;
   --background-white-rgb-color: rgb(255, 255, 255);
   color-scheme: normal;
   scrollbar-color: rebeccapurple green;
@@ -58,17 +59,28 @@ header {
   top: 0px;
   z-index: 1;
   /*Box model stuff*/
-  padding: 5px 10px;
-  border: var(--secondary-hex-color) 10px double;
+  padding: 4px 8px;
+  border: 2px solid rgba(143, 227, 255, 0.65);
   border-radius: 20px;
   background-attachment: fixed;
-  background-color: var(--primary-hex-color);
+  background: linear-gradient(180deg, rgba(2, 13, 18, 0.96) 0%, rgba(5, 21, 27, 0.96) 100%);
   background-position: 100%;
   background-repeat: no-repeat;
   background-size: cover;
   /*Miscellaneous*/
   list-style-type: none;
   overflow: hidden;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.45);
+}
+
+.Custom-Script-Details,
+.version-card-details {
+  display: block;
+  width: 100%;
+  max-width: 680px;
+  margin: 0.35rem auto 0;
+  padding: 0.35em 0.35em 0;
+  border-width: 1px;
 }
 
 .Custom-Script-Details summary mark {
@@ -131,13 +143,13 @@ header {
 .Custom-Script-Details > summary.legend-3-span > .privacy-summary-card {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 4px;
   width: 100%;
-  max-width: 900px;
+  max-width: none;
   margin: 0 auto;
-  padding: 12px 16px;
+  padding: 8px 12px;
   border: 2px solid #2a4f61;
-  border-radius: 16px;
+  border-radius: 12px;
   background: linear-gradient(135deg, #07131a 0%, #0d2733 50%, #12394a 100%);
   color: #dff6ff;
   text-align: center;
@@ -146,20 +158,20 @@ header {
 }
 
 .Custom-Script-Details > summary.legend-3-span > .privacy-summary-card .privacy-summary-title {
-  font-size: 18px;
+  font-size: 12px;
   font-weight: 700;
   color: #8ce6ff;
   letter-spacing: 0.3px;
 }
 
 .Custom-Script-Details > summary.legend-3-span > .privacy-summary-card .privacy-summary-note {
-  font-size: 14px;
+  font-size: 10px;
   color: #c5ffd7;
   font-weight: 600;
 }
 
 .Custom-Script-Details > summary.legend-3-span > .privacy-summary-card .privacy-summary-action {
-  font-size: 13px;
+  font-size: 9px;
   color: #ffd99c;
   font-weight: 700;
   text-transform: uppercase;
@@ -172,11 +184,107 @@ header {
   box-shadow: 0 0 0 2px rgba(111, 227, 255, 0.4), 0 10px 22px rgba(0, 0, 0, 0.42);
 }
 
+.version-card-details > summary.legend-3-span {
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
+.version-card-details > summary.legend-3-span > .Version-summary-card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+  max-width: none;
+  margin: 0 auto;
+  padding: 8px 12px;
+  border: 2px solid #2a6130;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #07131a 0%, #0d2733 50%, #12394a 100%);
+  color: #dff6ff;
+  text-align: center;
+  text-shadow: none;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+}
+
+.version-card-details > summary.legend-3-span > .Version-summary-card .version-summary-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: #8ce6ff;
+  letter-spacing: 0.3px;
+}
+
+.version-card-details > summary.legend-3-span > .Version-summary-card .version-summary-note {
+  font-size: 9px;
+  color: #c5ffd7;
+  font-weight: 600;
+}
+
+.version-card-details > summary.legend-3-span > .Version-summary-card .version-summary-action {
+  font-size: 9px;
+  color: #ffd99c;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.version-card-details > summary.legend-3-span:hover > .Version-summary-card,
+.version-card-details > summary.legend-3-span:focus-within > .Version-summary-card {
+  border-color: #6fe3ff;
+  box-shadow: 0 0 0 2px rgba(111, 227, 255, 0.4), 0 10px 22px rgba(0, 0, 0, 0.42);
+}
+
+.version-card-details .version-card-content {
+  width: 100%;
+  max-width: none;
+  margin: 8px auto 0;
+  padding: 10px 12px;
+  border: 2px solid #2a4f61;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #07131a 0%, #0d2733 50%, #12394a 100%);
+  color: #dff6ff;
+  text-align: left;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+}
+
+.version-card-details .version-card-content ul {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+.version-card-details .version-card-content li {
+  margin: 0.35rem 0;
+  color: #dff6ff;
+}
+
+.version-card-details .version-card-content strong {
+  color: #8ce6ff;
+}
+
+.version-card-details .version-card-content p {
+  color: #dff6ff;
+  text-shadow: none;
+}
+
 @media (max-width: 640px) {
+  .Custom-Script-Details,
+  .version-card-details {
+    display: block;
+    width: 100%;
+    max-width: 440px;
+    margin: 0.35rem auto 0;
+  }
+
   .Custom-Script-Details > summary.legend-3-span > .privacy-summary-card {
     padding: 10px 12px;
     border-radius: 12px;
     gap: 5px;
+  }
+
+  .version-card-details > summary.legend-3-span > .Version-summary-card,
+  .version-card-details .version-card-content {
+    padding: 10px 12px;
+    border-radius: 12px;
   }
 }
 
@@ -190,12 +298,16 @@ ul li p {
 
 nav {
   /*Display stuff*/
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   align-items: center;
   justify-content: center;
   /*Box model stuff*/
   width: 100%;
   margin: 0px auto;
-  padding: 0px;
+  padding: 8px;
+  border: 2px solid rgba(143, 227, 255, 0.65);
   /*Typography stuff*/
   font-size: 14px;
   font-weight: bold;
@@ -203,13 +315,17 @@ nav {
   text-align: center;
   text-shadow: var(--secondary-shadow-color);
   border-radius: 20px;
+  background: linear-gradient(180deg, rgba(3, 16, 22, 0.72) 0%, rgba(7, 25, 32, 0.72) 100%);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
 }
 header nav ul {
   display: flex;
   justify-content: center; /* Evenly space the items */
+  gap: 10px;
   padding: 0;
   margin: 0;
   list-style: none;
+  width: 100%;
 }
 
 header nav li {
@@ -232,32 +348,34 @@ header nav li a {
   width: 100%; /* Make the anchor tag take up the full width of the list item */
   /*Box model stuff*/
   margin: 0px;
-  padding: 10px 0px;
-  border-radius: 3px;
-  outline-color: var(--secondary-hex-color);
-  outline-style: double;
-  outline-width: 5px;
-  background: linear-gradient(90deg, #000000 0%, #494949 50%, #000000 100%);
+  padding: 12px 16px;
+  border: 2px solid rgba(143, 227, 255, 0.65);
+  border-radius: 12px;
+  outline: none;
+  background: linear-gradient(135deg, rgba(4, 20, 27, 0.96) 0%, rgba(14, 52, 66, 0.96) 52%, rgba(5, 20, 26, 0.96) 100%);
  /* background-color: rgb(72, 12, 212); */
   /*Typography stuff*/
-  color: var(--primary-hex-color);
+  color: #f3fdff;
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
   text-decoration: none;
+  text-shadow: 0 0 10px rgba(89, 232, 255, 0.42);
   /*Miscellaneous*/
   line-height: 1.5;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1), 0 6px 18px rgba(0, 0, 0, 0.35);
 }
 
 header nav li a:hover,
 header nav li a:active,
 header nav li a:focus {
-  background-color: var(--primary-hex-color) drop-shadow(0px 0px 1.2rem var(--secondary-hex-color));
-  color: white;
-  outline-color: whitesmoke;
-  transform: scale(1) rotate(0deg) translate(0%, 0%);
-  filter: saturate(6) contrast(100%) drop-shadow(0px 0px 1.2rem var(--secondary-hex-color)) brightness(1) sepia(0%) opacity(95%) hue-rotate(4deg) grayscale(50%) blur(0px) invert(5%);
-  outline-style: dashed;
-  outline-width: 2px;
-  box-shadow: 2px 0px 1px var(--primary-hex-color);
-  border-radius: 3px;
+  background: linear-gradient(135deg, rgba(10, 40, 51, 0.98) 0%, rgba(21, 83, 101, 0.98) 52%, rgba(8, 36, 47, 0.98) 100%);
+  color: #ffffff;
+  transform: translateY(-1px);
+  filter: saturate(1.15) brightness(1.05);
+  border-color: #d7fbff;
+  box-shadow: 0 0 0 2px rgba(111, 227, 255, 0.28), 0 10px 22px rgba(0, 0, 0, 0.42);
+  border-radius: 12px;
 }
 
 .rightNow {
@@ -311,14 +429,21 @@ header nav li a:focus {
 
 .tooltip-nav {
   /*Display stuff*/
-  display: inline-block;
+  display: block;
   /*Positioning stuff*/
   position: relative;
   /*Box model stuff*/
-  border-bottom: 1px dotted black;
+  border-bottom: 2px solid rgba(143, 227, 255, 0.65);
   /*Typography stuff*/
-  color: var(--primary-hex-color);
-  font-size: 14px;
+  color: #f3fdff;
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-shadow: 0 0 10px rgba(89, 232, 255, 0.42);
+  text-decoration-line: underline;
+  text-decoration-color: currentColor;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.18em;
 }
 
 .tooltip-nav .tooltiptext-nav{
@@ -413,9 +538,9 @@ hr:after {
   /*Positioning stuff*/
   position: relative;
   /*Typography stuff*/
-  font-size: 50px;
+  font-size: 55px;
   text-shadow: var(--primary-shadow-color);
-  color: var(--primary-hex-color);
+  color: rgb(10, 231, 2);
 }
 
 #hero-name:hover {
@@ -457,7 +582,7 @@ section .container-heading h1 {
 }
 
 .div-resume {
-  display: flexbox;
+  display: flex;
   border: 10px ridge var(--primary-hex-color);
   background-color: rgb(92, 92, 92);
   width: 100%;
@@ -535,7 +660,8 @@ details[open] summary {
 
 .legend-3-span mark {
     /*Display stuff*/
-    display: flexbox;
+  display: flex;
+  flex-direction: column;
     /*Positioning stuff*/
     position: relative;
     /*Box model stuff*/
@@ -572,7 +698,7 @@ details[open] summary {
 
 .projects {
   /*Display stuff*/
-  display: flexbox;
+  display: block;
   /*Box model stuff*/
   background-color: var(--primary-hex-color);
   /*Typography stuff*/
@@ -597,7 +723,8 @@ details[open] summary {
 .project-title{
   border: thin var(--secondary-hex-color) solid;
   background-color: rgb(0, 0, 0);
-  width: max(200px, 10%);
+  width: 200px;
+  max-width: 100%;
   display: inline-block;
 }
 .project-grid-container {
@@ -668,7 +795,7 @@ figcaption {
 
 footer {
   /*Typography stuff*/
-  font-size: clamp(1.5rem, 1.8vw, 1.8rem);
+  font-size: 1.6rem;
   font-weight: bold;
   text-align: center;
   border: 10px ridge var(--secondary-hex-color);
@@ -676,7 +803,7 @@ footer {
 
 footer p{
   /*Typography stuff*/
-  font-size: clamp(1.8rem, 1.8vw, 2rem);
+  font-size: 1.4rem;
   color: var(--secondary-hex-color);
 }
 
@@ -818,8 +945,10 @@ div .contact-list-item p {
 
 .contact-info iframe {
   border: 1px solid rgb(10, 231, 2);
+  width: 100%;
   max-width: 600px;
-  max-height: 600px;
+  height: auto;
+  aspect-ratio: 1 / 1;
 }
 
 /* === dhbinfo.js Info Panel Spreadsheet Style (Force Visibility) === */
@@ -1012,7 +1141,7 @@ div .contact-list-item p {
   details,
   summary {
     max-width: 980px;
-    width: 980px;
+    width: 100%;
   }
 }
 
@@ -1030,7 +1159,7 @@ div .contact-list-item p {
   details,
   summary {
     max-width: 640px;
-    width: 640px;
+    width: 100%;
   }
 }
 
@@ -1083,25 +1212,44 @@ div .contact-list-item p {
   details,
   summary {
     max-width: 480px;
-    width: 480px;
+    width: 100%;
   }
 
   .project-grid-container {
-    width: 75%;
+    width: 100%;
+    flex-direction: column;
   }
 
   .projects img {
     width: 100%;
     height: auto;
   }
+
+  #contact-me > details > div {
+    flex-direction: column;
+  }
+
+  div .contact-list-item {
+    margin: 6px;
+  }
 }
 
 .google-map {
-  width: 480px;
-  height: 480px;
+  width: 100%;
+  max-width: 480px;
+  height: auto;
+  aspect-ratio: 1 / 1;
 }
 
 @media only screen and (max-width: 480px) {
+  html {
+    font-size: 14px;
+  }
+
+  body {
+    font-size: 14px;
+  }
+
   .projects h1 {
     font-size: 14px;
   }
@@ -1129,11 +1277,11 @@ div .contact-list-item p {
   details,
   summary {
     max-width: 300px;
-    width: 300px;
+    width: 100%;
   }
 
   .project-grid-container {
-    width: 50%;
+    width: 100%;
   }
 
   .projects img {
@@ -1142,18 +1290,7 @@ div .contact-list-item p {
   }
 
   .contact-info iframe {
-    width: auto;
-    height: auto;
-  }
-}
-
-@media only screen and (max-width: 480px) {
-  html {
-    font-size: 14px;
-  }
-
-  body {
-    font-size: 14px;
+    max-width: 100%;
   }
 
   header {
@@ -1204,13 +1341,13 @@ div .contact-list-item p {
     width: 100%;
     max-width: 100%;
     min-width: 100%;
-    max-height: auto;
+    max-height: none;
     min-height: auto;
   }
 
   .contact-info iframe {
     width: 100%;
-    height: auto;
+    max-width: 100%;
   }
 
   footer {
