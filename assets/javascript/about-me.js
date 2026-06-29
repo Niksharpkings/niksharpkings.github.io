@@ -224,7 +224,6 @@ function generateAboutMe() {
   const aboutMeSection = document.createElement('section');
   aboutMeSection.className = 'about-me';
   aboutMeSection.id = 'about-me';
-  aboutMeSection.textContent = '  About Me Section';
 
   const containerHeading = document.createElement('div');
   containerHeading.className = 'container-heading';

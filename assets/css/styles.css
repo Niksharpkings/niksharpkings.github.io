@@ -623,6 +623,7 @@ hr:after {
   max-width: 1120px;
   margin: 3rem auto;
   padding: 0 1rem 2rem;
+  font-weight: normal;
   font-size: calc(10px + (26 - 14) * ((100vw - 300px) / (1600 - 300)));
   text-shadow: var(--primary-shadow-color);
   color: #f2ffff;
