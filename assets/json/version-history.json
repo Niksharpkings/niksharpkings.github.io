@@ -1,7 +1,14 @@
 {
   "title": "Git push versions",
-  "currentVersion": "v1.2.4",
+  "currentVersion": "v1.2.5",
   "versions": [
+    {
+      "version": "v1.2.5",
+      "date": "July 6, 2026",
+      "time": "~9:30am PDT",
+      "notes": "Minor CSS adjustments.",
+      "label": "v1.2.5 - | June 29, 2026 ~9:30am PDT | Minor UI adjustments. FIxed Navigation bar and Text alignment issues. Plus Aboutme section and Computer Skills Section added."
+    },
     {
       "version": "v1.2.4",
       "date": "June 29, 2026",

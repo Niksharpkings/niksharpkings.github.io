@@ -12,6 +12,9 @@ Last Updated to this repo: Jan 19, 2025 7:00am PDT -8 GMT
 
 #### Git push Versions :
 
+* `v1.2.5 - | June 29, 2026 ~9:30am PDT | Minor UI adjustments. FIxed Navigation bar and Text alignment issues. Plus Aboutme section and Computer Skills Section added.`
+* `v1.2.4 - | June 29, 2026 ~10:30am PDT | Major CSS and minor UI adjustments.`
+* `v1.2.3 - | June 29, 2026 ~4:30am PDT | Major CSS and minor UI adjustments.`
 * `v1.2.2 - | June 29, 2026 ~2:00am PDT | Added a new project to the project section. Edited some CSS and minor UI adjustments.`
 * `v1.2.1 - | June 28, 2025 ~7:30pm PDT | Git Push Versions with version-history.json/.js added and a few css adjustments.`
 * `v1.2.0 - | June 17, 2025 ~1:50pm PDT | Added Web Status codes and updated css and minor UI adjustments.`

@@ -1,5 +1,5 @@
 const aboutMeData = {
-  heading: "Welcome to my personal github.io <br> [ profile | project | resume ] webpage",
+  heading: "Welcome, My [Profile] [Skills} [Resume] ",
   content: `
     <details class="resume-details">
       <summary>
@@ -9,7 +9,7 @@ const aboutMeData = {
           <mark> » Click Me To View Expanded Info « </mark>
         </span>
       </summary>
-      <p class="about-me-inner">
+      <p class="about-me-inner" style="text-align: justify; text-justify: inter-word;">
         <br>
         This website is built from scratch using vanilla HTML5, CSS3, and JavaScript. In the future, I plan to integrate more JavaScript, TypeScript, Node.js, and other technologies.
         <br><br>
@@ -33,7 +33,7 @@ const aboutMeData = {
   `,
   resume: [
         {
-      title: "🕵️👨‍💻 Computer Skills & Experiences 👨‍💻",
+      title: "� Computer Skills",
       location: "",
       details: `
         <p class="details-p">
@@ -233,6 +233,11 @@ function generateAboutMe() {
   containerHeading.appendChild(heading);
   aboutMeSection.appendChild(containerHeading);
 
+  const aboutMeLabel = document.createElement('p');
+  aboutMeLabel.className = 'p-resume';
+  aboutMeLabel.textContent = 'About Me';
+  aboutMeSection.appendChild(aboutMeLabel);
+
   const containerContent = document.createElement('div');
   containerContent.className = 'container-content';
   containerContent.innerHTML = aboutMeData.content;
@@ -241,12 +246,9 @@ function generateAboutMe() {
   const divResume = document.createElement('div');
   divResume.className = 'div-resume';
 
-  const pResume = document.createElement('p');
-  pResume.className = 'p-resume';
-  pResume.textContent = 'Background & Resume:';
-  divResume.appendChild(pResume);
+  const [skillsItem, ...experienceItems] = aboutMeData.resume;
 
-  aboutMeData.resume.forEach(item => {
+  const createResumeEntry = (item) => {
     const details = document.createElement('details');
     details.className = 'resume-details';
 
@@ -267,7 +269,22 @@ function generateAboutMe() {
     details.appendChild(detailsContent);
 
     divResume.appendChild(details);
-  });
+  };
+
+  if (skillsItem) {
+    const pSkills = document.createElement('p');
+    pSkills.className = 'p-resume';
+    pSkills.textContent = 'Computer Skills';
+    divResume.appendChild(pSkills);
+    createResumeEntry(skillsItem);
+  }
+
+  const pResume = document.createElement('p');
+  pResume.className = 'p-resume';
+  pResume.textContent = 'Background Job Experience';
+  divResume.appendChild(pResume);
+
+  experienceItems.forEach(createResumeEntry);
 
   aboutMeSection.appendChild(divResume);
   document.querySelector('main').appendChild(aboutMeSection);
