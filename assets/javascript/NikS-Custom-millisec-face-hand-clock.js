@@ -675,7 +675,12 @@ function startTime() {                                                          
 
   document.getElementById(                                                                                        // Update the HTML element with the current time display
     TIME_DISPLAY_ID                                                                                               // Get the element by ID for displaying the current time
-  ).innerHTML = `Current Time: ${h}h:${m}m:${s}s:${ms}ms:${us}us:${ns}ns:${ps}ps:${fs}fs:${as}as:${zs}zs:${ys}ys:${rs}rs:${qs}qs:${pt}pt ${pmam} ${mh}/${day}/${fy}`; // Set the inner HTML with formatted time string
+  ).innerHTML = `Current Time: ${h}h:${m}m:${s}s:${ms}ms:${us}us:${ns}ns:
+  ${ps}ps:${fs}fs:${as}as:
+  ${zs}zs:${ys}ys:
+  ${rs}rs:${qs}qs:
+  ${pt}pt ${pmam}
+  ${mh}/${day}/${fy}`; // Set the inner HTML with formatted time string
                                                                                                                   // Request the next animation frame or set a timeout for the next update
   if (typeof window !== "undefined" && window.requestAnimationFrame) {                                            // Check if requestAnimationFrame is available in the current environment
     window.requestAnimationFrame(startTime);                                                                      // Use requestAnimationFrame for smoother updates
