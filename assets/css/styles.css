@@ -132,7 +132,7 @@ header {
   padding: 10px;
   margin: 0px;
   /*Typography stuff*/
-  font-size: 12px;
+  font-size: 14px;
   font-weight: bold;
   text-align: center;
   text-shadow: 0 0 10px #ec5f5fbb, 0 0 20px #20ace4, 0 0 30px #4a0aae;
@@ -783,14 +783,15 @@ details[open] summary {
     /*Box model stuff*/
     margin: 0px;
     /*Typography stuff*/
-    font-size: 12px;
+    font-size: 14px;
     font-weight: bold;
-    text-align: center;
+    text-align: right;
     text-shadow: 0 0 10px #ec5f5fbb, 0 0 20px #20ace4, 0 0 30px #4a0aae;
-    color: rgb(148, 46, 46);
+    color: sandybrown;
     /*Miscellaneous*/
     list-style-type: none;
     border-radius: 20px;
+    padding: 5px;
 }
 
 .resume-details {
@@ -826,10 +827,18 @@ details[open] summary {
   color: var(--secondary-hex-color);
   border: none;
 }
+.projects figcaption {
+  font-size: 1.2rem;
+  color: #cdeff7;
+  text-shadow: none;
+  padding: 1rem 1rem;
+  border-top: 5px solid rgba(143, 227, 255, 0.2);
+  background-color: rgba(0, 0, 0, 0.45);
+}
 
 .project-header {
   /*Typography stuff*/
-  font-size: calc(26px + (26 - 14) * ((100vw - 300px) / (1600 - 300)));
+  font-size: calc(30px + (30 - 14) * ((100vw - 300px) / (1600 - 300)));
   text-shadow: var(--primary-shadow-color);
   color: #f2ffff;
   border: 10px ridge var(--secondary-hex-color);
@@ -851,9 +860,12 @@ details[open] summary {
 }
 
 .project-title{
-  border: thin var(--secondary-hex-color) solid;
+  font-size: xx-large;
+  color: var(--accent-gold-color);
+  text-shadow: 0 0 10px rgba(89, 232, 255, 0.42);
+  border: thick var(--secondary-hex-color) solid;
   background-color: rgb(0, 0, 0);
-  width: 200px;
+  width: 600px;
   max-width: 100%;
   display: inline-block;
 }

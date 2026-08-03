@@ -507,7 +507,7 @@ https://niksharpkings.github.io/privacy-policy.html
 // Returns the optimal clock update interval (ms) based on browser/device, tab state, incognito, and battery saver
 async function getAdaptiveClockInterval() {                                                                         // Detect browser and device capabilities
   const ua = navigator.userAgent;                                                                                   // User agent string for browser detection
-  let interval = 10;                                                                                                // Safe default for most browsers [Range 10-1000 ms]
+  let interval;                                                                                             // Safe default for most browsers [Range 10-1000 ms]
 
 // Helper: Detect private/incognito mode (best effort, async)
   async function isIncognito() {                                                                                    // Check for private/incognito mode in various browsers
@@ -565,7 +565,7 @@ async function getAdaptiveClockInterval() {                                     
   const isBackground = document.hidden;                                                                           // Use document.hidden to check if the tab is in the background
   const incognito = await isIncognito();                                                                          // Detect incognito mode using the helper function
   const batterySaver = await isBatterySaver();                                                                    // Detect battery saver mode using the helper function
-
+  
   // If background, incognito, or battery saver, use slowest interval
   if (isBackground || incognito || batterySaver) {                                                                // Check if the tab is in the background, incognito mode, or battery saver mode
     interval = 1000;                                                                                              // Set interval to 1000 ms (1 second) for background, incognito, or battery saver
@@ -646,22 +646,21 @@ function startTime() {                                                          
   let qs = Math.floor(fractionalMs * 1e27).toString().padStart(27, "0");                                                 // Convert the fractional millisecond to quectoseconds
   let pt = fractionalMs > 0 ? Math.floor(fractionalMs / PLANCK_TIME_SECONDS) : 0;                                         // Convert the fractional millisecond to Planck-time units
   pt = pt.toLocaleString("en-US", { useGrouping: false }).padStart(44, "0");                                            // Pad the Planck-time count for readability
-  const pmam = today.getHours() >= 12 ? "pm" : "am";                                                              // Determine if it's AM or PM based on the current hour
+  const pmam = today.getHours() >= 12 ? "PM" : "";                                                              // Determine if it's AM or PM based on the current hour
 
   const timeDisplayElement = document.getElementById(TIME_DISPLAY_ID);                                              // Find the time display element
   if (timeDisplayElement) {
-    timeDisplayElement.innerHTML = `Current Time: ${h} h:${m} m:${s} s:${ms} ms:
-    \n  ${us} us:${ns} ns:
-    \n  ${ps} ps:
-    \n  ${fs} fs:
-    \n  ${as} as:
-    \n  ${zs} zs:
-    \n  ${ys} ys:
-    \n  ${rs} rs:
-    \n  ${qs} qs:
-    \n  ${pt} pt
-    \n  ${pmam}
-    \n  ${mh}/${day}/${fy}`; // Set the inner HTML with formatted time string
+    timeDisplayElement.innerHTML = `Current Time: ${h}h:${m}m:${s}s:${ms}ms:${us}us:${ns}ns:
+    <br>
+    ${ps}ps:${fs}fs:${as}as:
+    <br>
+    ${zs}zs:${ys}ys:
+    <br>
+    ${rs}rs:${qs}qs:
+    <br>
+    ${pt}pt
+    <br>
+    ${pmam} ${mh}/${day}/${fy}`; // Set the inner HTML with formatted time string
   }
   if (typeof window !== "undefined" && typeof window.requestAnimationFrame === "function") {                         // Check if requestAnimationFrame is available in the current environment
     window.requestAnimationFrame(startTime);                                                                      // Use requestAnimationFrame for smoother updates
