@@ -419,28 +419,6 @@ header nav li a:focus {
   border-radius: 12px;
 }
 
-.rightNow {
-  /*Display stuff*/
-  display: grid;
-  /*Positioning stuff*/
-  margin: 5px auto;
-  padding: 10px 10px;
-  align-items: center;
-  justify-content: center;
-  background-color: whitesmoke;
-  /*Box model stuff*/
-  border: 1px dotted rgb(148, 46, 46);
-  box-sizing: border-box;
-  width: 95vw;
-  max-width: 500px;
-  overflow-wrap: anywhere;
-  /*Typography stuff*/
-  color: var(--primary-hex-color);
-  font-size: 12px;
-  line-height: 1.35;
-  white-space: normal;
-  border-radius: 20px;
-}
 #canvasID {
   /*Display stuff*/
   display: flex;
@@ -838,7 +816,7 @@ details[open] summary {
   display: block;
   max-width: var(--section-max-width);
   margin: 3rem auto;
-  padding: 0 1rem 2.5rem;
+  padding: 0 2rem 2.5rem;
   /*Box model stuff*/
   background: transparent;
   /*Typography stuff*/
@@ -886,24 +864,25 @@ details[open] summary {
 
 .project-grid-container {
   margin: 0 auto;
-  display: inline-flex;
-  justify-content: center;
-  gap: 5px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: stretch;
+  gap: 1rem;
   width: 100%;
   padding: 0.5rem;
   border: 10px ridge var(--primary-hex-color);
-  background-color: rgb(30, 24, 43)
+  background-color: rgb(30, 24, 43);
 }
 
 .project-container-left {
   border: thin var(--secondary-hex-color) solid;
   background-color: rgb(0, 0, 0);
   font-size: calc(16px + (16 - 14) * ((100vw - 300px) / (1600 - 300)));
-  width: 600px;
+  flex: 1 1 320px;
   max-width: 600px;
-  min-width: 100px;
-  max-height: 400px;
-  min-height: 100px;
+  min-width: 280px;
+  min-height: 260px;
   overflow: auto;
   border-radius: 1rem;
   padding: 0.75rem;
@@ -926,23 +905,41 @@ details[open] summary {
 
 .project-container-right {
   border: thin var(--secondary-hex-color) solid;
-  grid-area: right;
+  flex: 1 1 320px;
   width: 100%;
   max-width: none;
-  min-width: 0;
-  max-height: 400px;
-  min-height: 100px;
-  display: block;
-  background-size: contain;
+  min-width: 280px;
+  min-height: 260px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
   border-radius: 1rem;
   overflow: hidden;
   background: linear-gradient(180deg, rgba(4, 11, 17, 0.94) 0%, rgba(8, 18, 24, 0.96) 100%);
 }
-.project-container-right-img {
-  width:100%;
-  height: 200px;
+
+.project-container-right figure {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+}
+
+.project-container-right picture {
   display: block;
-  background-size: contain;
+  width: 100%;
+  flex: 1 1 auto;
+  overflow: hidden;
+}
+
+.project-container-right-img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+  object-position: center;
+  background-color: rgba(0, 0, 0, 0.15);
 }
 
 figure {
@@ -950,16 +947,16 @@ figure {
   flex-direction: column;
   border: 1px solid rgba(143, 227, 255, 0.2);
   background: rgba(0, 0, 0, 0.45);
-  border-radius: 0.75rem;
+  border-radius: 0.1rem;
   overflow: hidden;
 }
 
 figcaption {
-  border: thin var(--secondary-hex-color) solid;
+  border: var(--secondary-hex-color) solid;
   background-color: #222;
   color: #fff;
   font: italic smaller sans-serif;
-  padding: 0.55rem 0.7rem;
+  padding: 1rem 1rem;
   text-align: left;
   width: auto;
 }

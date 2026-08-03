@@ -826,7 +826,6 @@ function generateProjects() {
     h5.textContent = 'Banner Image:';
     figcaptionRight.appendChild(h5);
     figureRight.appendChild(figcaptionRight);
-    projectContainerRight.appendChild(figureRight);
 
     const picture = document.createElement('picture');
     const source = document.createElement('source');
@@ -838,8 +837,6 @@ function generateProjects() {
 
     const img = document.createElement('img');
     img.src = project.imageSrc;
-    img.width = 600;
-    img.height = 200;
     img.className = 'project-container-right-img';
     img.rel = 'noopener noreferrer';
     img.loading = 'eager';
@@ -853,8 +850,8 @@ function generateProjects() {
       }
     }, { once: true });
     picture.appendChild(img);
-
-    projectContainerRight.appendChild(picture);
+    figureRight.appendChild(picture);
+    projectContainerRight.appendChild(figureRight);
     projectGridContainer.appendChild(projectContainerRight);
 
     projectContainer.appendChild(projectGridContainer);

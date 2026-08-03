@@ -3,6 +3,13 @@
   "currentVersion": "v1.2.5",
   "versions": [
     {
+      "version": "v1.2.7",
+      "date": "Aug 3, 2026",
+      "time": "~12:00pm PDT",
+      "notes": "Tuned the clock and css for the clock and project section",
+      "label": "v1.2.7 - | Aug 3, 2026 ~12:00pm PDT | Tuned the clock and css for the clock and project section"
+    },
+    {
       "version": "v1.2.6",
       "date": "July 11, 2026",
       "time": "~11:30pm PDT",

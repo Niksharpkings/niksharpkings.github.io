@@ -1,0 +1,49 @@
+/* Clock widget styles */
+.clock-widget {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.75rem 1rem;
+  margin: 0.75rem auto;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 12px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+  box-shadow: 0 10px 24px rgba(0,0,0,0.28);
+  backdrop-filter: blur(6px);
+  z-index: 10;
+}
+
+.clock-widget .clock-canvas {
+  display: block;
+  border-radius: 50%;
+  width: 180px;
+  height: 180px;
+  background: radial-gradient(circle at 35% 25%, rgba(255,255,255,0.06), rgba(0,0,0,0.12) 60%);
+  box-shadow: inset 0 2px 8px rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+.clock-digital {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  font-size: 0.9rem;
+  color: #eef2ff;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+/* Strong high-contrast badge for readability */
+.clock-widget .clock-digital {
+  background: rgba(4,6,12,0.6);
+  color: #ffffff;
+  padding: 6px 10px;
+  border-radius: 8px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+  text-shadow: 0 1px 0 rgba(0,0,0,0.6);
+}
+
+@media (max-width: 640px) {
+  .clock-widget .clock-canvas { width: 140px; height: 140px; }
+  .clock-digital { font-size: 0.78rem; }
+}

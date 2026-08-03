@@ -12,6 +12,7 @@ Last Updated to this repo: July 11, 2026 11:00am PDT -8 GMT
 
 #### Git push Versions :
 
+* `v1.2.7 - | Aug 3, 2026 ~12:00pm PDT | Tuned the clock and css for the clock and project section`
 * `v1.2.6 - | July 11, 2026 ~11:30am PDT | Added more Orders_of_magnitude_(time).`
 * `v1.2.5 - | June 06, 2026 ~9:30am PDT | Minor UI adjustments. FIxed Navigation bar and Text alignment issues. Plus Aboutme section and Computer Skills Section added.`
 * `v1.2.4 - | June 29, 2026 ~10:30am PDT | Major CSS and minor UI adjustments.`

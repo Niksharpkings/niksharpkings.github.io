@@ -1,0 +1,85 @@
+/* Legacy clock CSS variables for NikS-Custom-millisec-face-hand-clock.js */
+:root {
+  /* Clock face and outline */
+  --clock-face-fill: #ffffff;
+  --clock-grad-0: #173015;
+  --clock-grad-1: #00cc;
+  --clock-grad-2: #49c012;
+  --clock-center: #000000;
+
+  /* Background and UI */
+  --clock-bg: #071024;
+  --clock-outline: rgba(255,255,255,0.18);
+  --clock-tick: rgba(240,240,240,0.9);
+
+  /* Hands */
+  --hand-hour: #001d19;
+  --hand-minute: #00463c;
+  --hand-second: #630c01;
+  --hand-ms: #001d19;
+  --hand-us: #ff9800;
+  --hand-ns: #1100ff;
+  --hand-ps: #ff00ff;
+  --hand-fs: #00e5ff;
+  --hand-as: #ffffff;
+  --hand-zs: #cddc39;
+  --hand-ys: #8bc34a;
+  --hand-rs: #4caf50;
+  --hand-qs: #009688;
+  --hand-pt: #9c27b0;
+}
+
+/* Optional helper class for the canvas container */
+.legacy-clock-canvas {
+  background-color: var(--clock-bg);
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin: 1.25rem auto 0;
+  padding: 8px;
+  box-shadow: 0 10px 24px rgba(0,0,0,0.35);
+  width: fit-content;
+}
+
+.legacy-clock-canvas .clock-canvas {
+  display: block;
+  width: 220px;
+  height: 220px;
+  max-width: min(84vw, 220px);
+  max-height: min(84vw, 220px);
+  border-radius: 50%;
+}
+
+/* High-contrast textual display */
+.legacy-clock-display {
+  background: rgba(4,6,12,0.72);
+  color: #ffffff;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-weight: 700;
+  font-family: monospace;
+  letter-spacing: 0.08em;
+  text-align: center;
+  min-width: 220px;
+}
+
+/* Shared legacy clock text styling */
+.rightNow {
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 6px 10px;
+  box-sizing: border-box;
+  background: transparent;
+  border: none;
+  color: inherit;
+  font-size: 12px;
+  line-height: 1.35;
+  white-space: normal;
+  border-radius: 6px;
+  overflow-wrap: anywhere;
+  max-width: 100%;
+}

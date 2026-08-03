@@ -19,7 +19,7 @@
   <meta name="designer" content="Ńἱĸἱ৳α 'Niksharpkings' Shârρἱo's">
   <meta name="author" lang="en-us" content="Ńἱĸἱ৳α Shârρἱo">
   <meta name="copyright" content="&copy; 2023 Ńἱĸἱ৳α 'Niksharpkings' Shârρἱo's">
-  <meta name="date" content="2026-07-11T01:52:00+00:00">
+  <meta name="date" content="2026-08-3T01:52:00+00:00">
   <meta name="description" content="Ńἱĸἱ৳α Shârρἱo's niksharpkings.github.io Portfolio">
   <meta name="generator" content="Visual Studio Code">
   <meta name="msvalidate.01" content="8B0BE8DDD2D4F343929BA403DD0CF7A2">
@@ -53,6 +53,8 @@
   <link as="font" crossorigin="anonymous" href="/fonts/google-sans/bold/latin.woff2" rel="preload">
   <link title="stylesheet" media="only screen and (color)" rel="stylesheet" type="text/css"
     href="./assets/css/styles.css">
+  <link rel="stylesheet" href="./assets/css/clock-widget.css">
+  <link rel="stylesheet" href="./assets/css/legacy-clock.css">
 </head>
 
 <body>
@@ -64,11 +66,9 @@
       }
     });
   </script>
-
-    <div id="canvasID">
-      <canvas id="canvas" width="70" height="70"></canvas>
-      <div class="rightNow" id="currentTime">
-    </div>
+  <div id="canvasID" class="clock-container clock-digital" aria-describedby="currentTime">
+    <canvas id="canvas" class="clock-widget clock-canvas" width="100" height="100"></canvas>
+    <div class="legacy-clock-display" id="currentTime"></div>
   </div>
   <header>
 
@@ -242,9 +242,11 @@
           href="./assets/html/privacy-policy.html" target="_blank">Privacy Policy Link</a></small>
     </p>
   </footer>
+
   <script src="./assets/javascript/dhbinfo.js"></script>
   <script src="./assets/javascript/NikS-Custom-millisec-face-hand-clock.js"></script>
   <script src="./assets/javascript/NikS-Custom-CSSOM-Trailtaletracker.js"></script>
+  <!--<script defer src="./assets/javascript/nik-clock-widget.js"></script> -->
   <script defer src="./assets/javascript/version-history.js"></script>
   <script defer src="./assets/javascript/about-me.js"></script>
   <script defer src="./assets/javascript/projects.js"></script>

@@ -1,5 +1,5 @@
 const aboutMeData = {
-  heading: "Welcome, My [Profile] [Skills} [Resume] ",
+  heading: "Welcome to my profile, skills & resume page",
   content: `
     <details class="resume-details">
       <summary>

@@ -590,6 +590,16 @@ const TIME_DISPLAY_ID = "currentTime";                                          
 const PLANCK_TIME_SECONDS = 5.391247e-44;                                                                         // Approximate Planck time in seconds
 let CLOCK_UPDATE_INTERVAL = 10;                                                                                   // Will be set dynamically
 
+// Read CSS custom properties (with fallback)
+function getCssVar(name, fallback) {
+  try {
+    const v = getComputedStyle(document.documentElement).getPropertyValue(name);
+    return v ? v.trim() : fallback;
+  } catch (e) {
+    return fallback;
+  }
+}
+
 // Update interval on visibility change, battery, or incognito
 async function updateClockInterval() {                                                                            // Function to update the clock interval based on visibility, battery, or incognito mode
   CLOCK_UPDATE_INTERVAL = await getAdaptiveClockInterval();                                                       // Get the adaptive clock interval
@@ -623,66 +633,37 @@ function startTime() {                                                          
   let m = checkTime(today.getMinutes());                                                                          // Get the current minute (0-59) and pad with leading zero
   let s = checkTime(today.getSeconds());                                                                          // Get the current second (0-59) and pad with leading zero
   let ms = today.getMilliseconds().toString().padStart(3, "0");                                                   // Get the current milliseconds (0-999) and pad with leading zero to 3 digits
-  const fractionalSecond = typeof performance !== "undefined" && performance.now ? performance.now() % 1 : 0;      // Get the fractional part of the current second
-  let us =                                                                                                        // Get the current microseconds (0-999999) using performance.now() if available, otherwise default to 0
-    typeof performance !== "undefined" && performance.now                                                         // Check if performance.now() is available
-      ? Math.floor(fractionalSecond * 1e6)                                                                        // Convert the fractional second to microseconds
-      : 0;                                                                                                        // If performance.now() is not available, default to 0
-  us = us.toString().padStart(6, "0");                                                                            // Pad the microseconds with leading zeros to 6 digits
-  let ns =                                                                                                        // Get the current nanoseconds (0-999999999) using performance.now() if available, otherwise default to 0
-    typeof performance !== "undefined" && performance.now                                                         // Check if performance.now() is available
-      ? Math.floor(fractionalSecond * 1e9)                                                                        // Convert the fractional second to nanoseconds
-      : 0;                                                                                                        // If performance.now() is not available, default to 0
-  ns = ns.toString().padStart(9, "0");                                                                            // Pad the nanoseconds with leading zeros to 9 digits
-  let ps =                                                                                                        // Get the current picoseconds (0-999999999999) using performance.now() if available, otherwise default to 0
-    typeof performance !== "undefined" && performance.now                                                         // Check if performance.now() is available
-      ? Math.floor(fractionalSecond * 1e12)                                                                       // Convert the fractional second to picoseconds
-      : 0;                                                                                                        // If performance.now() is not available, default to 0
-  ps = ps.toString().padStart(13, "0");                                                                           // Pad the picoseconds with leading zeros to 13 digits
-  let fs =                                                                                                        // Get the current femtoseconds (0-999999999999999) using performance.now() if available, otherwise default to 0
-    typeof performance !== "undefined" && performance.now                                                         // Check if performance.now() is available
-      ? Math.floor(fractionalSecond * 1e15)                                                                       // Convert the fractional second to femtoseconds
-      : 0;                                                                                                        // If performance.now() is not available, default to 0
-  fs = fs.toString().padStart(16, "0");                                                                           // Pad the femtoseconds with leading zeros to 16 digits
-  let as =                                                                                                        // Get the current attoseconds (0-999999999999999999) using performance.now() if available, otherwise default to 0
-    typeof performance !== "undefined" && performance.now                                                         // Check if performance.now() is available
-      ? Math.floor(fractionalSecond * 1e18)                                                                       // Convert the fractional second to attoseconds
-      : 0;                                                                                                        // If performance.now() is not available, default to 0
-  as = as.toString().padStart(19, "0");                                                                           // Pad the attoseconds with leading zeros to 19 digits
-  let zs =                                                                                                        // Get the current zeptoseconds (0-999999999999999999999) using performance.now() if available, otherwise default to 0
-    typeof performance !== "undefined" && performance.now                                                         // Check if performance.now() is available
-      ? Math.floor(fractionalSecond * 1e21)                                                                       // Convert the fractional second to zeptoseconds
-      : 0;                                                                                                        // If performance.now() is not available, default to 0
-  zs = zs.toString().padStart(22, "0");                                                                           // Pad the zeptoseconds with leading zeros to 22 digits
-  let ys =                                                                                                        // Get the current yoctoseconds (0-999999999999999999999999) using performance.now() if available, otherwise default to 0
-    typeof performance !== "undefined" && performance.now                                                         // Check if performance.now() is available
-      ? Math.floor(fractionalSecond * 1e24)                                                                       // Convert the fractional second to yoctoseconds
-      : 0;                                                                                                        // If performance.now() is not available, default to 0
-  ys = ys.toString().padStart(25, "0");                                                                           // Pad the yoctoseconds with leading zeros to 25 digits
-  let rs =                                                                                                        // Get the current rontoseconds (0-999999999999999999999999999) using performance.now() if available, otherwise default to 0
-    typeof performance !== "undefined" && performance.now                                                         // Check if performance.now() is available
-      ? Math.floor(fractionalSecond * 1e27)                                                                       // Convert the fractional second to rontoseconds
-      : 0;                                                                                                        // If performance.now() is not available, default to 0
-  rs = rs.toString().padStart(28, "0");                                                                           // Pad the rontoseconds with leading zeros to 28 digits
-  let qs =                                                                                                        // Get the current quectoseconds (0-999999999999999999999999999999) using performance.now() if available, otherwise default to 0
-    typeof performance !== "undefined" && performance.now                                                         // Check if performance.now() is available
-      ? Math.floor(fractionalSecond * 1e30)                                                                       // Convert the fractional second to quectoseconds
-      : 0;                                                                                                        // If performance.now() is not available, default to 0
-  qs = qs.toString().padStart(31, "0");                                                                           // Pad the quectoseconds with leading zeros to 31 digits
-  let pt = fractionalSecond > 0 ? Math.floor(fractionalSecond / PLANCK_TIME_SECONDS) : 0;                      // Convert the fractional second to Planck-time units
-  pt = pt.toLocaleString("en-US", { useGrouping: false }).padStart(44, "0");                                    // Pad the Planck-time count for readability
+  const performanceNow = typeof performance !== "undefined" && typeof performance.now === "function" ? performance.now() : 0; // Get high-resolution time if available
+  const fractionalMs = performanceNow - Math.floor(performanceNow);                                                       // Fractional milliseconds within the current ms
+  let us = Math.floor(fractionalMs * 1e3).toString().padStart(3, "0");                                                  // Convert the fractional millisecond to microseconds
+  let ns = Math.floor(fractionalMs * 1e6).toString().padStart(6, "0");                                                  // Convert the fractional millisecond to nanoseconds
+  let ps = Math.floor(fractionalMs * 1e9).toString().padStart(9, "0");                                                  // Convert the fractional millisecond to picoseconds
+  let fs = Math.floor(fractionalMs * 1e12).toString().padStart(12, "0");                                                 // Convert the fractional millisecond to femtoseconds
+  let as = Math.floor(fractionalMs * 1e15).toString().padStart(15, "0");                                                 // Convert the fractional millisecond to attoseconds
+  let zs = Math.floor(fractionalMs * 1e18).toString().padStart(18, "0");                                                 // Convert the fractional millisecond to zeptoseconds
+  let ys = Math.floor(fractionalMs * 1e21).toString().padStart(21, "0");                                                 // Convert the fractional millisecond to yoctoseconds
+  let rs = Math.floor(fractionalMs * 1e24).toString().padStart(24, "0");                                                 // Convert the fractional millisecond to rontoseconds
+  let qs = Math.floor(fractionalMs * 1e27).toString().padStart(27, "0");                                                 // Convert the fractional millisecond to quectoseconds
+  let pt = fractionalMs > 0 ? Math.floor(fractionalMs / PLANCK_TIME_SECONDS) : 0;                                         // Convert the fractional millisecond to Planck-time units
+  pt = pt.toLocaleString("en-US", { useGrouping: false }).padStart(44, "0");                                            // Pad the Planck-time count for readability
   const pmam = today.getHours() >= 12 ? "pm" : "am";                                                              // Determine if it's AM or PM based on the current hour
 
-  document.getElementById(                                                                                        // Update the HTML element with the current time display
-    TIME_DISPLAY_ID                                                                                               // Get the element by ID for displaying the current time
-  ).innerHTML = `Current Time: ${h}h:${m}m:${s}s:${ms}ms:${us}us:${ns}ns:
-  ${ps}ps:${fs}fs:${as}as:
-  ${zs}zs:${ys}ys:
-  ${rs}rs:${qs}qs:
-  ${pt}pt ${pmam}
-  ${mh}/${day}/${fy}`; // Set the inner HTML with formatted time string
-                                                                                                                  // Request the next animation frame or set a timeout for the next update
-  if (typeof window !== "undefined" && window.requestAnimationFrame) {                                            // Check if requestAnimationFrame is available in the current environment
+  const timeDisplayElement = document.getElementById(TIME_DISPLAY_ID);                                              // Find the time display element
+  if (timeDisplayElement) {
+    timeDisplayElement.innerHTML = `Current Time: ${h} h:${m} m:${s} s:${ms} ms:
+    \n  ${us} us:${ns} ns:
+    \n  ${ps} ps:
+    \n  ${fs} fs:
+    \n  ${as} as:
+    \n  ${zs} zs:
+    \n  ${ys} ys:
+    \n  ${rs} rs:
+    \n  ${qs} qs:
+    \n  ${pt} pt
+    \n  ${pmam}
+    \n  ${mh}/${day}/${fy}`; // Set the inner HTML with formatted time string
+  }
+  if (typeof window !== "undefined" && typeof window.requestAnimationFrame === "function") {                         // Check if requestAnimationFrame is available in the current environment
     window.requestAnimationFrame(startTime);                                                                      // Use requestAnimationFrame for smoother updates
   } else {                                                                                                        // If requestAnimationFrame is not available, use setTimeout
     setTimeout(startTime, CLOCK_UPDATE_INTERVAL);                                                                 // Use setTimeout to call startTime again after the specified interval
@@ -709,18 +690,18 @@ function drawClock() {                                                          
 function drawFace(ctx, radius) {                                                                 // Function to draw the clock face
   ctx.beginPath();                                                                                              // Begin a new path for the clock face
   ctx.arc(0, 0, radius, 0, 2 * Math.PI);                                                                       // Draw a circle for the clock face
-  ctx.fillStyle = "#ffffff";                                                                 // Set the fill color for the clock face
+  ctx.fillStyle = getCssVar('--clock-face-fill', '#ffffff');                                                                 // Set the fill color for the clock face
   ctx.fill();                                                                 // Fill the clock face with the specified color
   let grad = ctx.createRadialGradient(0, 0, radius * 0.95, 0, 0, radius * 1.05); // Create a radial gradient for the clock face
-  grad.addColorStop(0, "#173015"); // Start color of the gradient (dark green)
-  grad.addColorStop(0.5, "#00cc"); // Middle color of the gradient (light green)
-  grad.addColorStop(1, "#49c012"); // End color of the gradient (bright green)
+  grad.addColorStop(0, getCssVar('--clock-grad-0', '#173015')); // Start color of the gradient (dark green)
+  grad.addColorStop(0.5, getCssVar('--clock-grad-1', '#00cc')); // Middle color of the gradient (light green)
+  grad.addColorStop(1, getCssVar('--clock-grad-2', '#49c012')); // End color of the gradient (bright green)
   ctx.strokeStyle = grad; // Set the stroke style to the gradient
   ctx.lineWidth = radius * 0.1; // Set the line width for the clock face stroke
   ctx.stroke(); // Stroke the clock face with the gradient
   ctx.beginPath(); // Begin a new path for the clock center
   ctx.arc(0, 0, radius * 0.1, 0, 2 * Math.PI); // Draw a circle for the clock center
-  ctx.fillStyle = "#000000"; // Set the fill color for the clock center (black)
+  ctx.fillStyle = getCssVar('--clock-center', '#000000'); // Set the fill color for the clock center (black)
   ctx.fill(); // Fill the clock center with the specified color
 }
 
@@ -845,20 +826,20 @@ function drawTime(ctx, radius) {                                             // 
   const rsLen = radius * 0.9998, rsWidth = radius * 0.0005;
   const qsLen = radius * 0.99995, qsWidth = radius * 0.0002;
   const ptLen = radius * 0.99999, ptWidth = radius * 0.0001;
-  drawHand(ctx, hour, hourLen, hourWidth, "#001d19", 0, "#000");    // hour hand: 50% radius, thickest, dark green
-  drawHand(ctx, minute, minLen, minWidth, "#00463c", 0, "#000");   // minute hand: 80% radius, medium, teal
-  drawHand(ctx, second, secLen, secWidth, "#630c01", 0, "#000");   // second hand: 90% radius, thin, red
-  drawHand(ctx, ms, msLen, msWidth, "#001d19", 0, "#000");         // ms hand: 90% radius, very thin, dark green
-  drawHand(ctx, us, usLen, usWidth, "#ff9800", 0, "#000");         // us hand: 95% radius, orange
-  drawHand(ctx, ns, nsLen, nsWidth, "#1100ff", 0, "#000");         // ns hand: 98% radius, blue
-  drawHand(ctx, ps, psLen, psWidth, "#ff00ff", 0, "#000");         // ps hand: 99% radius, magenta
-  drawHand(ctx, fs, fsLen, fsWidth, "#00e5ff", 0, "#000");         // fs hand: 99.5% radius, cyan
-  drawHand(ctx, as, asLen, asWidth, "#ffffff", 0, "#000");         // as hand: 99.8% radius, white
-  drawHand(ctx, zs, zsLen, zsWidth, "#cddc39", 0, "#000");         // zs hand: 99.9% radius, lime
-  drawHand(ctx, ys, ysLen, ysWidth, "#8bc34a", 0, "#000");         // ys hand: 99.95% radius, light green
-  drawHand(ctx, rs, rsLen, rsWidth, "#4caf50", 0, "#000");         // rs hand: 99.98% radius, green
-  drawHand(ctx, qs, qsLen, qsWidth, "#009688", 0, "#000");         // qs hand: 99.995% radius, teal
-  drawHand(ctx, pt, ptLen, ptWidth, "#9c27b0", 0, "#000");         // pt hand: nearly full radius, purple
+  drawHand(ctx, hour, hourLen, hourWidth, getCssVar('--hand-hour', '#001d19'), 0, "#000");    // hour hand: 50% radius, thickest, dark green
+  drawHand(ctx, minute, minLen, minWidth, getCssVar('--hand-minute', '#00463c'), 0, "#000");   // minute hand: 80% radius, medium, teal
+  drawHand(ctx, second, secLen, secWidth, getCssVar('--hand-second', '#630c01'), 0, "#000");   // second hand: 90% radius, thin, red
+  drawHand(ctx, ms, msLen, msWidth, getCssVar('--hand-ms', '#001d19'), 0, "#000");         // ms hand: 90% radius, very thin, dark green
+  drawHand(ctx, us, usLen, usWidth, getCssVar('--hand-us', '#ff9800'), 0, "#000");         // us hand: 95% radius, orange
+  drawHand(ctx, ns, nsLen, nsWidth, getCssVar('--hand-ns', '#1100ff'), 0, "#000");         // ns hand: 98% radius, blue
+  drawHand(ctx, ps, psLen, psWidth, getCssVar('--hand-ps', '#ff00ff'), 0, "#000");         // ps hand: 99% radius, magenta
+  drawHand(ctx, fs, fsLen, fsWidth, getCssVar('--hand-fs', '#00e5ff'), 0, "#000");         // fs hand: 99.5% radius, cyan
+  drawHand(ctx, as, asLen, asWidth, getCssVar('--hand-as', '#ffffff'), 0, "#000");         // as hand: 99.8% radius, white
+  drawHand(ctx, zs, zsLen, zsWidth, getCssVar('--hand-zs', '#cddc39'), 0, "#000");         // zs hand: 99.9% radius, lime
+  drawHand(ctx, ys, ysLen, ysWidth, getCssVar('--hand-ys', '#8bc34a'), 0, "#000");         // ys hand: 99.95% radius, light green
+  drawHand(ctx, rs, rsLen, rsWidth, getCssVar('--hand-rs', '#4caf50'), 0, "#000");         // rs hand: 99.98% radius, green
+  drawHand(ctx, qs, qsLen, qsWidth, getCssVar('--hand-qs', '#009688'), 0, "#000");         // qs hand: 99.995% radius, teal
+  drawHand(ctx, pt, ptLen, ptWidth, getCssVar('--hand-pt', '#9c27b0'), 0, "#000");         // pt hand: nearly full radius, purple
 }
 
 // Draws a single hand on the clock
@@ -905,490 +886,3 @@ animationLoop(); // Start the animation loop
 startTime();     // Start the time display function to update the textual time
 
 //got to fix it up a little
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//Testing this code below.
-
-// document.addEventListener("DOMContentLoaded", () => { // Wait for the DOM to be fully
-//   const timeDisplay = document.getElementById(TIME_DISPLAY_ID); // Get the time display element by ID
-//   if (timeDisplay) { // Check if the time display element exists
-//     timeDisplay.style.display = "block"; // Show the time display element
-//   } else { // If the time display element does not exist
-//     console.warn(`Element with ID '${TIME_DISPLAY_ID}' not found.`); // Log a warning to the console
-//   }
-// }); // End of DOMContentLoaded event listener
-// // Set the canvas and time display styles
-// canvas.style.display = "block"; // Set the canvas display to block
-// canvas.style.margin = "0 auto"; // Center the canvas horizontally
-// canvas.style.border = "2px solid #000"; // Add a border to the canvas
-// document.getElementById(TIME_DISPLAY_ID).style.textAlign = "center"; // Center the time display text
-
-// // Set the canvas background color
-// canvas.style.backgroundColor = "#f0f0f0"; // Set a light gray background color for the canvas
-// // Set the canvas border radius
-// canvas.style.borderRadius = "10px"; // Add rounded corners to the canvas with a radius of 10 pixels
-// // Set the canvas box shadow
-// canvas.style.boxShadow = "0 4px 8px rgba(0, 0, 0, 0.2)"; // Add a subtle shadow effect to the canvas for depth
-// // Set the canvas cursor style
-// canvas.style.cursor = "pointer"; // Change the cursor to pointer when hovering over the canvas
-// // Set the canvas title attribute for tooltip
-// canvas.title = "Click to toggle clock visibility"; // Add a title attribute to the canvas for tooltip on hover
-// // Add click event listener to toggle clock visibility
-// canvas.addEventListener("click", () => { // Add a click event listener to the canvas
-//   const timeDisplay = document.getElementById(TIME_DISPLAY_ID); // Get the time display element by ID
-//   if (timeDisplay.style.display === "none") { // If the time display is currently hidden
-//     timeDisplay.style.display = "block"; // Show the time display
-//   } else { // If the time display is currently visible
-//     timeDisplay.style.display = "none"; // Hide the time display
-//   }
-// }); // End of click event listener
-// // Add a tooltip for the canvas
-// const tooltip = document.createElement("div"); // Create a new div element for the tooltip
-// tooltip.className = "tooltip"; // Set the class name for the tooltip
-// tooltip.innerText = canvas.title; // Set the tooltip text to the canvas title
-// document.body.appendChild(tooltip); // Append the tooltip to the body of the document
-
-// // Add mouseenter and mouseleave event listeners for the tooltip
-// let timeout; // Variable to store the timeout ID for the tooltip
-// canvas.addEventListener("mouseenter", (e) => { // Add mouseenter event listener to the canvas
-//   timeout = setTimeout(() => { // Set a timeout to show the tooltip after a delay
-//     const rect = canvas.getBoundingClientRect(); // Get the bounding rectangle of the canvas
-//     tooltip.style.left = `${rect.left + window.scrollX}px`; // Set the tooltip position based on the canvas position
-//     tooltip.style.top = `${rect.top + window.scrollY - 40}px`; // Position the tooltip 40 pixels above the canvas
-//     tooltip.classList.add("show"); // Add the 'show' class to the tooltip to make it visible
-//   }, 500); // Delay of 500 milliseconds before showing the tooltip
-// }); // End of mouseenter event listener
-
-// canvas.addEventListener("mouseleave", () => { // Add mouseleave event listener to the canvas
-//   clearTimeout(timeout); // Clear the timeout to prevent showing the tooltip if the mouse leaves before the delay
-//   tooltip.classList.remove("show"); // Remove the 'show' class from the tooltip to hide it
-// }); // End of mouseleave event listener
-
-// // Add CSS styles for the tooltip
-// const style = document.createElement("style"); // Create a new style element
-// style.innerHTML = `
-//   .tooltip {
-//     position: absolute;
-//     background-color: rgba(0, 0, 0, 0.8);
-//     color: #000000;
-//     padding: 10px 15px;
-//     border-radius: 5px;
-//     font-size: 14px;
-//     pointer-events: none;
-//     transition: opacity 0.3s ease;
-//     opacity: 0; /* Initially hidden */
-//   }
-//   .tooltip.show {
-//     opacity: 1; /* Show when the 'show' class is added */
-//   }
-// `; // Set the CSS styles for the tooltip
-// document.head.appendChild(style); // Append the style element to the head of the document
-// // End of NikS Custom Millisecond Clock script
-
-// ==============================
-/*
-// ---- Adaptive Interval Selection ----
-// Returns the optimal clock update interval (ms) based on browser/device, tab state, incognito, and battery saver
-async function getAdaptiveClockInterval() {                                                                         // Detect browser and device capabilities
-  const ua = navigator.userAgent;                                                                                   // User agent string for browser detection
-  let interval = 10;                                                                                                // Safe default for most browsers [Range 10-1000 ms]
-
-// Helper: Detect private/incognito mode (best effort, async)
-  async function isIncognito() {                                                                                    // Check for private/incognito mode in various browsers
-// Chrome/Edge/Opera: Check for file system access
-    if (window.webkitRequestFileSystem) {                                                                           // Check if webkitRequestFileSystem is available
-      return new Promise((resolve) => {                                                                             // Return a promise to resolve incognito status
-        window.webkitRequestFileSystem(                                                                             // Request file system access
-          window.TEMPORARY,                                                                                         // Use temporary storage for detection
-          100,                                                                                                      // Allocate 100 bytes (arbitrary small size for detection purpose) [Range: 100-1000 bytes]
-          () => resolve(false),                                                                                     // If access granted, not incognito
-          () => resolve(true)                                                                                       // If access denied, likely incognito mode
-        );                                                                                                          // End of webkitRequestFileSystem
-      });                                                                                                           // End of Promise
-    }
-//============
-// Firefox
-//============
-    if ('MozAppearance' in document.documentElement.style) {                                                        // Check for Firefox specific property
-      try {                                                                                                         // Try to open an IndexedDB database
-        window.indexedDB.open('test');                                                                              // Open a test IndexedDB database
-        return false;                                                                                               // If successful, not incognito
-      } catch (e) {                                                                                                 // If an error occurs, likely incognito
-        return true;                                                                                                // Return true indicating incognito mode
-      }                                                                                                             // End of try-catch
-    }
-//============
-// Safari
-//============
-    if (/Safari\//.test(ua) && !/Chrome|Chromium|Edg|OPR\//.test(ua)) {                                           // Check if Safari browser and not Chrome/Chromium/Edge/Opera
-      try {                                                                                                       // Try to open a database
-        window.openDatabase(null, null, null, null);                                                              // Attempt to open a database
-        return false;                                                                                             // If successful, not incognito
-      } catch (e) {                                                                                               // If an error occurs, likely incognito
-        return true;                                                                                              // Return true indicating incognito mode
-      }                                                                                                           // End of try-catch
-    }                                                                                                             // End of Safari check
-    return false;                                                                                                 // If no specific checks passed, assume not incognito
-  }
-
-//===================================================
-// Detect battery saver mode (best effort, async)
-//===================================================
-  async function isBatterySaver() {                                                                               // Check for battery saver mode
-    if (navigator.getBattery) {                                                                                   // Check if getBattery API is available
-      try {                                                                                                       // Try to get battery status
-        const battery = await navigator.getBattery();                                                             // Await the battery status
-        return battery.saveMode || battery.level < 0.2 || battery.charging === false && battery.level < 0.3;      // Return true if battery saver is active (save mode, low level, or not charging with low level)
-      } catch (e) {                                                                                               // If an error occurs, assume not battery saver
-        return false;                                                                                             // Return false indicating not battery saver mode
-      }                                                                                                           // End of try-catch
-    }                                                                                                             // If getBattery API is not available, assume not battery saver
-    return false;                                                                                                 // Return false indicating not battery saver mode
-  }
-
-  const isBackground = document.hidden;                                                                           // Use document.hidden to check if the tab is in the background
-  const incognito = await isIncognito();                                                                          // Detect incognito mode using the helper function
-  const batterySaver = await isBatterySaver();                                                                    // Detect battery saver mode using the helper function
-
-  // If background, incognito, or battery saver, use slowest interval
-  if (isBackground || incognito || batterySaver) {                                                                // Check if the tab is in the background, incognito mode, or battery saver mode
-    interval = 1000;                                                                                              // Set interval to 1000 ms (1 second) for background, incognito, or battery saver
-  } else if (/Chrome|Chromium|Edg|OPR\//.test(ua)) {                                                              // Check for Chrome, Chromium, Edge, or Opera browsers
-    interval = 4;                                                                                                 // Set interval to 4 ms for these browsers
-  } else if (/Firefox\//.test(ua)) {                                                                              // Check for Firefox browser
-    interval = 4;                                                                                                 // Set interval to 4 ms for Firefox
-  } else if (/Safari\//.test(ua) && !/Chrome|Chromium|Edg|OPR\//.test(ua)) {                                      // Check for Safari browser (not Chrome/Chromium/Edge/Opera)
-    interval = 10;                                                                                                // Set interval to 10 ms for Safari
-  } else if (/Mobile|Android|iPhone|iPad|iPod/.test(ua)) {                                                        // Check for mobile devices (Android, iPhone, iPad, iPod)
-    interval = 16;                                                                                                // Set interval to 16 ms for mobile devices (approx. 60 FPS)
-  } else {                                                                                                        // For all other browsers/devices
-    interval = 10;                                                                                                // Set interval to 10 ms as a safe default
-  }                                                                                                               // End of browser/device checks
-  return interval;                                                                                                // Return the determined interval
-}
-/*
-//=====================
-// ---- Constants ----
-//=====================
-const CANVAS_ID = "canvas";                                                                                       // ID for the canvas element
-const TIME_DISPLAY_ID = "currentTime";                                                                            // ID for the time display element
-let CLOCK_UPDATE_INTERVAL = 10;                                                                                   // Will be set dynamically
-
-// Update interval on visibility change, battery, or incognito
-async function updateClockInterval() {                                                                            // Function to update the clock interval based on visibility, battery, or incognito mode
-  CLOCK_UPDATE_INTERVAL = await getAdaptiveClockInterval();                                                       // Get the adaptive clock interval
-}                                                                                                                 // End of updateClockInterval function
-document.addEventListener("visibilitychange", updateClockInterval);                                               // Listen for visibility change to update the clock interval
-if (navigator.getBattery) {                                                                                       // If the getBattery API is available
-  navigator.getBattery().then(battery => {                                                                        // Get the battery status
-    battery.addEventListener('chargingchange', updateClockInterval);                                              // Listen for charging change to update the clock interval
-    battery.addEventListener('levelchange', updateClockInterval);                                                 // Listen for battery level change to update the clock interval
-    battery.addEventListener('chargingtimechange', updateClockInterval);                                          // Listen for charging time change to update the clock interval
-    battery.addEventListener('dischargingtimechange', updateClockInterval);                                       // Listen for discharging time change to update the clock interval
-  });                                                                                                             // End of getBattery promise
-}
-// Initial interval setup
-updateClockInterval();                                                                                            // Call the function to set the initial clock update interval
-
-// ---- Utility Functions ----
-// Pads numbers < 10 with a leading zero
-function checkTime(i) {                                                                                           // Function to pad numbers with leading zero if less than 10
-  return i < 10 ? "0" + i : i;                                                                                    // Return the number with leading zero if less than 10
-}                                                                                                                 // End of checkTime function
-
-// ---- Time Display Functions ----
-// Updates the textual time display with high precision
-function startTime() {                                                                                            // Function to start the time display
-  const today = new Date();                                                                                       // Get the current date and time
-  let mh = checkTime(today.getMonth() + 1);                                                                       // Get the current month (1-12) and pad with leading zero
-  let day = checkTime(today.getDate());                                                                           // Get the current day of the month (1-31) and pad with leading zero
-  let fy = checkTime(today.getFullYear());                                                                        // Get the current full year (4 digits) and pad with leading zero if needed
-  let h = checkTime(today.getHours());                                                                            // Get the current hour (0-23) and pad with leading zero
-  let m = checkTime(today.getMinutes());                                                                          // Get the current minute (0-59) and pad with leading zero
-  let s = checkTime(today.getSeconds());                                                                          // Get the current second (0-59) and pad with leading zero
-  let ms = today.getMilliseconds().toString().padStart(3, "0");                                                   // Get the current milliseconds (0-999) and pad with leading zero to 3 digits
-  let us =                                                                                                        // Get the current microseconds (0-999999) using performance.now() if available, otherwise default to 0
-    typeof performance !== "undefined" && performance.now                                                         // Check if performance.now() is available
-      ? Math.floor((performance.now() % 1) * 1e6)                                                                 // Get the fractional part of performance.now() and convert to microseconds
-      : 0;                                                                                                        // If performance.now() is not available, default to 0
-  us = us.toString().padStart(6, "0");                                                                            // Pad the microseconds with leading zeros to 6 digits
-  let ns =                                                                                                        // Get the current nanoseconds (0-999999999) using performance.now() if available, otherwise default to 0
-    typeof performance !== "undefined" && performance.now                                                         // Check if performance.now() is available
-      ? Math.floor((performance.now() % 1) * 1e9)                                                                 // Get the fractional part of performance.now() and convert to nanoseconds
-      : 0;                                                                                                        // If performance.now() is not available, default to 0
-  ns = ns.toString().padStart(9, "0");                                                                            // Pad the nanoseconds with leading zeros to 9 digits
-  let ps =                                                                                                        // Get the current picoseconds (0-999999999999) using performance.now() if available, otherwise default to 0
-    typeof performance !== "undefined" && performance.now                                                         // Check if performance.now() is available
-      ? Math.floor((performance.now() % 1) * 1e12)                                                                // Get the fractional part of performance.now() and convert to picoseconds
-      : 0;                                                                                                        // If performance.now() is not available, default to 0
-  ps = ps.toString().padStart(13, "0");                                                                           // Pad the picoseconds with leading zeros to 13 digits
-  let fs =                                                                                                        // Get the current femtoseconds (0-999999999999999) using performance.now() if available, otherwise default to 0
-    typeof performance !== "undefined" && performance.now                                                         // Check if performance.now() is available
-      ? Math.floor((performance.now() % 1) * 1e15)                                                                // Get the fractional part of performance.now() and convert to femtoseconds
-      : 0;                                                                                                        // If performance.now() is not available, default to 0
-  fs = fs.toString().padStart(16, "0");                                                                           // Pad the femtoseconds with leading zeros to 16 digits
-  let as =                                                                                                        // Get the current attoseconds (0-999999999999999999) using performance.now() if available, otherwise default to 0
-    typeof performance !== "undefined" && performance.now                                                         // Check if performance.now() is available
-      ? Math.floor((performance.now() % 1) * 1e18)                                                                // Get the fractional part of performance.now() and convert to attoseconds
-      : 0;                                                                                                        // If performance.now() is not available, default to 0
-  as = as.toString().padStart(19, "0");                                                                           // Pad the attoseconds with leading zeros to 19 digits
-  let zs =                                                                                                        // Get the current zeptoseconds (0-999999999999999999999) using performance.now() if available, otherwise default to 0
-    typeof performance !== "undefined" && performance.now                                                         // Check if performance.now() is available
-      ? Math.floor((performance.now() % 1) * 1e21)                                                                // Get the fractional part of performance.now() and convert to zeptoseconds
-      : 0;                                                                                                        // If performance.now() is not available, default to 0
-  zs = zs.toString().padStart(22, "0");                                                                           // Pad the zeptoseconds with leading zeros to 22 digits
-  let ys =                                                                                                        // Get the current yoctoseconds (0-999999999999999999999999) using performance.now() if available, otherwise default to 0
-    typeof performance !== "undefined" && performance.now                                                         // Check if performance.now() is available
-      ? Math.floor((performance.now() % 1) * 1e24)                                                                // Get the fractional part of performance.now() and convert to yoctoseconds
-      : 0;                                                                                                        // If performance.now() is not available, default to 0
-  ys = ys.toString().padStart(25, "0");                                                                           // Pad the yoctoseconds with leading zeros to 25 digits
-  let rs =                                                                                                        // Get the current rontoseconds (0-999999999999999999999999999) using performance.now() if available, otherwise default to 0
-    typeof performance !== "undefined" && performance.now                                                         // Check if performance.now() is available
-      ? Math.floor((performance.now() % 1) * 1e27)                                                                // Get the fractional part of performance.now() and convert to rontoseconds
-      : 0;                                                                                                        // If performance.now() is not available, default to 0
-  rs = rs.toString().padStart(28, "0");                                                                           // Pad the rontoseconds with leading zeros to 28 digits
-  let qs =                                                                                                        // Get the current quectoseconds (0-999999999999999999999999999999) using performance.now() if available, otherwise default to 0
-    typeof performance !== "undefined" && performance.now                                                         // Check if performance.now() is available
-      ? Math.floor((performance.now() % 1) * 1e30)                                                                // Get the fractional part of performance.now() and convert to quectoseconds
-      : 0;                                                                                                        // If performance.now() is not available, default to 0
-  qs = qs.toString().padStart(31, "0");                                                                           // Pad the quectoseconds with leading zeros to 31 digits
-  const pmam = today.getHours() >= 12 ? "pm" : "am";                                                              // Determine if it's AM or PM based on the current hour
-
-  document.getElementById(                                                                                        // Update the HTML element with the current time display
-    TIME_DISPLAY_ID                                                                                               // Get the element by ID for displaying the current time
-  ).innerHTML = `Current Time: ${h}h:${m}m:${s}s:${ms}ms:${us}us:${ns}ns:${ps}ps:${fs}fs:${as}as:${zs}zs:${ys}ys:${rs}rs:${qs}qs ${pmam} ${mh}/${day}/${fy}`; // Set the inner HTML with formatted time string
-                                                                                                                  // Request the next animation frame or set a timeout for the next update
-  if (typeof window !== "undefined" && window.requestAnimationFrame) {                                            // Check if requestAnimationFrame is available in the current environment
-    window.requestAnimationFrame(startTime);                                                                      // Use requestAnimationFrame for smoother updates
-  } else {                                                                                                        // If requestAnimationFrame is not available, use setTimeout
-    setTimeout(startTime, CLOCK_UPDATE_INTERVAL);                                                                 // Use setTimeout to call startTime again after the specified interval
-  }                                                                                                               // End of startTime function
-}
-
-// ---- Canvas Clock Drawing Functions ----
-// Initializes and resizes the canvas for the clock
-function setupCanvas() {                                                                                          // Function to setup the canvas for the clock
-  const canvas = document.getElementById(CANVAS_ID);                                                              // Get the canvas element by ID
-  canvas.width = (canvas.width || canvas.offsetWidth || 0) + 8;                                                   // Set the canvas width, adding 8 pixels for padding
-  canvas.height = (canvas.height || canvas.offsetHeight || 0) + 8;                                                // Set the canvas height, adding 8 pixels for padding
-  return canvas;                                                                                                  // Return the canvas element
-}
-
-// Draws the clock face, numbers, and hands
-function drawClock() {                                                                                            // Function to draw the clock face, numbers, and hands
-  drawFace(ctx, radius);                                                                                          // Draw the clock face with gradient and center
-  drawNumbers(ctx, radius);                                                                                       // Draw the hour numbers on the clock face
-  drawTime(ctx, radius);                                                                                          // Draw all clock hands (hour, minute, second, ms, ns)
-}
-
-// Draws the clock face with gradient and center
-function drawFace(ctx, radius) {                                                                 // Function to draw the clock face
-  ctx.beginPath();                                                                                              // Begin a new path for the clock face
-  ctx.arc(0, 0, radius, 0, 2 * Math.PI);                                                                       // Draw a circle for the clock face
-  ctx.fillStyle = "#ffffff";                                                                 // Set the fill color for the clock face
-  ctx.fill();                                                                 // Fill the clock face with the specified color
-  let grad = ctx.createRadialGradient(0, 0, radius * 0.95, 0, 0, radius * 1.05); // Create a radial gradient for the clock face
-  grad.addColorStop(0, "#173015"); // Start color of the gradient (dark green)
-  grad.addColorStop(0.5, "#00cc"); // Middle color of the gradient (light green)
-  grad.addColorStop(1, "#49c012"); // End color of the gradient (bright green)
-  ctx.strokeStyle = grad; // Set the stroke style to the gradient
-  ctx.lineWidth = radius * 0.1; // Set the line width for the clock face stroke
-  ctx.stroke(); // Stroke the clock face with the gradient
-  ctx.beginPath(); // Begin a new path for the clock center
-  ctx.arc(0, 0, radius * 0.1, 0, 2 * Math.PI); // Draw a circle for the clock center
-  ctx.fillStyle = "#000000"; // Set the fill color for the clock center (black)
-  ctx.fill(); // Fill the clock center with the specified color
-}
-
-// Draws the hour numbers on the clock face
-function drawNumbers(ctx, radius) {                                                                 // Function to draw the hour numbers on the clock face
-  ctx.font = radius * 0.3 + "px arial"; // Set the font size and family for the hour numbers
-  ctx.textBaseline = "middle"; // Set the text baseline to middle for centering the numbers
-  ctx.textAlign = "center"; // Set the text alignment to center for centering the numbers
-  for (let num = 1; num <= 12; num++) { // Loop through numbers 1 to 12 for the clock hours
-    let ang = (num * Math.PI) / 6; // Calculate the angle for each number (30 degrees per hour)
-    ctx.rotate(ang); // Rotate the context to the angle of the number
-    ctx.translate(0, -radius * 0.85); // Translate the context to the position of the number
-    ctx.rotate(-ang); // Rotate back to the original orientation
-    ctx.fillText(num.toString(), 0, 0); // Draw the number at the translated position
-    ctx.rotate(ang); // Rotate back to the original angle for the next number
-    ctx.translate(0, radius * 0.85); // Translate back to the center position
-    ctx.rotate(-ang); // Rotate back to the original orientation
-  }
-}
-
-// Draws all clock hands (hour, minute, second, ms, ns)
-function drawTime(ctx, radius) {                                             // Function to draw all clock hands
-  const now = new Date();                                                    // Get the current date and time
-  let hour = now.getHours() % 12;                                            // Get the current hour (0-11) for 12-hour format
-  let minute = now.getMinutes();                                             // Get the current minute (0-59)
-  let second = now.getSeconds();                                             // Get the current second (0-59)
-  let ms = now.getMilliseconds();                                             // Get the current milliseconds (0-999)
-  let us =                                                                    // Get the current microseconds (0-999999) using performance.now() if available, otherwise default to 0
-    typeof performance !== "undefined" && performance.now                    // Check if performance.now() is available
-      ? Math.floor((performance.now() % 1) * 1e6)                            // Get the fractional part of performance.now() and convert to microseconds
-      : 0;                                                                   // If performance.now() is not available, default to 0
-  let ns =                                                                    // Get the current nanoseconds (0-999999999) using performance.now() if available, otherwise default to 0
-    typeof performance !== "undefined" && performance.now                    // Check if performance.now() is available
-      ? Math.floor((performance.now() % 1) * 1e9)                            // Get the fractional part of performance.now() and convert to nanoseconds
-      : 0;                                                                   // If performance.now() is not available, default to 0
-  let ps =                                                                    // Get the current picoseconds (0-999999999999) using performance.now() if available, otherwise default to 0
-    typeof performance !== "undefined" && performance.now                    // Check if performance.now() is available
-      ? Math.floor((performance.now() % 1) * 1e12)                           // Get the fractional part of performance.now() and convert to picoseconds
-      : 0;                                                                   // If performance.now() is not available, default to 0
-  let fs =                                                                    // Get the current femtoseconds (0-999999999999999) using performance.now() if available, otherwise default to 0
-    typeof performance !== "undefined" && performance.now                    // Check if performance.now() is available
-      ? Math.floor((performance.now() % 1) * 1e15)                           // Get the fractional part of performance.now() and convert to femtoseconds
-      : 0;                                                                   // If performance.now() is not available, default to 0
-  let as =                                                                    // Get the current attoseconds (0-999999999999999999) using performance.now() if available, otherwise default to 0
-    typeof performance !== "undefined" && performance.now                    // Check if performance.now() is available
-      ? Math.floor((performance.now() % 1) * 1e18)                           // Get the fractional part of performance.now() and convert to attoseconds
-      : 0;                                                                   // If performance.now() is not available, default to 0
-  let zs =                                                                    // Get the current zeptoseconds (0-999999999999999999999) using performance.now() if available, otherwise default to 0
-    typeof performance !== "undefined" && performance.now                    // Check if performance.now() is available
-      ? Math.floor((performance.now() % 1) * 1e21)                           // Get the fractional part of performance.now() and convert to zeptoseconds
-      : 0;                                                                   // If performance.now() is not available, default to 0
-  let ys =                                                                    // Get the current yoctoseconds (0-999999999999999999999999) using performance.now() if available, otherwise default to 0
-    typeof performance !== "undefined" && performance.now                    // Check if performance.now() is available
-      ? Math.floor((performance.now() % 1) * 1e24)                           // Get the fractional part of performance.now() and convert to yoctoseconds
-      : 0;                                                                   // If performance.now() is not available, default to 0
-  let rs =                                                                    // Get the current rontoseconds (0-999999999999999999999999999) using performance.now() if available, otherwise default to 0
-    typeof performance !== "undefined" && performance.now                    // Check if performance.now() is available
-      ? Math.floor((performance.now() % 1) * 1e27)                           // Get the fractional part of performance.now() and convert to rontoseconds
-      : 0;                                                                   // If performance.now() is not available, default to 0
-  let qs =                                                                    // Get the current quectoseconds (0-999999999999999999999999999999) using performance.now() if available, otherwise default to 0
-    typeof performance !== "undefined" && performance.now                    // Check if performance.now() is available
-      ? Math.floor((performance.now() % 1) * 1e30)                           // Get the fractional part of performance.now() and convert to quectoseconds
-      : 0;                                                                   // If performance.now() is not available, default to 0
-
-  // Calculate angles for each hand
-  // Convert hour, minute, second, ms, us, ns, ps, fs, as, zs, ys, rs, and qs to radians
-  hour =
-    (hour * Math.PI) / 6 +                                                    // Each hour is 30° (π/6 radians), so hour * π/6
-    (minute * Math.PI) / (6 * 60) +                                           // Each minute adds 0.5° (π/(6*60) radians) to hour hand
-    (second * Math.PI) / (360 * 60) +                                         // Each second adds 1/720° (π/(360*60) radians) to hour hand
-    (ms * Math.PI) / (360 * 60 * 500) +                                       // Each ms adds 1/43200000° (π/(360*60*500) radians) to hour hand
-    (us * Math.PI) / (360 * 60 * 500 * 1e3) +                                 // Each us adds 1/4.32e13° (π/(360*60*500*1e3) radians) to hour hand
-    (ns * Math.PI) / (360 * 60 * 500 * 1e6) +                                 // Each ns adds 1/4.32e16° (π/(360*60*500*1e6) radians) to hour hand
-    (ps * Math.PI) / (360 * 60 * 500 * 1e9) +                                 // Each ps adds 1/4.32e19° (π/(360*60*500*1e9) radians) to hour hand
-    (fs * Math.PI) / (360 * 60 * 500 * 1e12) +                                // Each fs adds 1/4.32e22° (π/(360*60*500*1e12) radians) to hour hand
-    (as * Math.PI) / (360 * 60 * 500 * 1e15) +                                // Each as adds 1/4.32e25° (π/(360*60*500*1e15) radians) to hour hand
-    (zs * Math.PI) / (360 * 60 * 500 * 1e18) +                                // Each zs adds 1/4.32e28° (π/(360*60*500*1e18) radians) to hour hand
-    (ys * Math.PI) / (360 * 60 * 500 * 1e21) +                                // Each ys adds 1/4.32e31° (π/(360*60*500*1e21) radians) to hour hand
-    (rs * Math.PI) / (360 * 60 * 500 * 1e24) +                                // Each rs adds 1/4.32e34° (π/(360*60*500*1e24) radians) to hour hand
-    (qs * Math.PI) / (360 * 60 * 500 * 1e27);                                 // Each qs adds 1/4.32e37° (π/(360*60*500*1e27) radians) to hour hand
-    // Convert minute to radians, adding the contribution from seconds
-  minute = (minute * Math.PI) / 30 + (second * Math.PI) / (30 * 60);          // Each minute is 6° (π/30 radians), each second adds 0.1° (π/(30*60))
-  // Convert second to radians
-  second = (second * Math.PI) / 30;                                           // Each second is 6° (π/30 radians)
-  // Convert milliseconds to radians
-  ms = (ms * Math.PI) / 500;                                                  // Each ms is 0.72° (π/500 radians)
-  // Convert microseconds to radians
-  us = (us * Math.PI) / 500000;                                               // Each us is 0.00072° (π/500000 radians)
-  // Convert nanoseconds to radians
-  ns = (ns * Math.PI) / 500000000;                                            // Each ns is 0.00000072° (π/500000000 radians)
-  // Convert picoseconds to radians
-  ps = (ps * Math.PI) / 500000000000;                                         // Each ps is 0.00000000072° (π/500000000000 radians)
-  // Convert femtoseconds to radians
-  fs = (fs * Math.PI) / 500000000000000;                                      // Each fs is 0.00000000000072° (π/500000000000000 radians)
-  // Convert attoseconds to radians
-  as = (as * Math.PI) / 500000000000000000;                                   // Each as is 0.00000000000000072° (π/500000000000000000 radians)
-  // Convert zeptoseconds to radians
-  zs = (zs * Math.PI) / 500000000000000000000;                                // Each zs is 0.00000000000000000072° (π/500000000000000000000 radians)
-  // Convert yoctoseconds to radians
-  ys = (ys * Math.PI) / 5e23;                                                   // Each ys is 0.00000000000000000000072° (π/5e23 radians)
-  // Convert rontoseconds to radians
-  rs = (rs * Math.PI) / 5e26;                                                   // Each rs is 0.00000000000000000000000072° (π/5e26 radians)
-  // Convert quectoseconds to radians
-  qs = (qs * Math.PI) / 5e29;                                                   // Each qs is 0.00000000000000000000000000072° (π/5e29 radians)
-
-  // Draw hands
-  // Use local variables for hand parameters to avoid repeated calculations and improve readability
-  const hourLen = radius * 0.5, hourWidth = radius * 0.09;
-  const minLen = radius * 0.8, minWidth = radius * 0.07;
-  const secLen = radius * 0.9, secWidth = radius * 0.04;
-  const msLen = radius * 0.9, msWidth = radius * 0.02;
-  const usLen = radius * 0.95, usWidth = radius * 0.015;
-  const nsLen = radius * 0.98, nsWidth = radius * 0.01;
-  const psLen = radius * 0.99, psWidth = radius * 0.005;
-  const fsLen = radius * 0.995, fsWidth = radius * 0.003;
-  const asLen = radius * 0.998, asWidth = radius * 0.0015;
-  const zsLen = radius * 0.999, zsWidth = radius * 0.001;
-  const ysLen = radius * 0.9995, ysWidth = radius * 0.0008;
-  const rsLen = radius * 0.9998, rsWidth = radius * 0.0005;
-  const qsLen = radius * 0.99995, qsWidth = radius * 0.0002;
-  drawHand(ctx, hour, hourLen, hourWidth, "#001d19", 0, "#000");    // hour hand: 50% radius, thickest, dark green
-  drawHand(ctx, minute, minLen, minWidth, "#00463c", 0, "#000");   // minute hand: 80% radius, medium, teal
-  drawHand(ctx, second, secLen, secWidth, "#630c01", 0, "#000");   // second hand: 90% radius, thin, red
-  drawHand(ctx, ms, msLen, msWidth, "#001d19", 0, "#000");         // ms hand: 90% radius, very thin, dark green
-  drawHand(ctx, us, usLen, usWidth, "#ff9800", 0, "#000");         // us hand: 95% radius, very thin, orange
-  drawHand(ctx, ns, nsLen, nsWidth, "#1100ff", 0, "#000");         // ns hand: 98% radius, thinnest, blue
-  drawHand(ctx, ps, psLen, psWidth, "#ff00ff", 0, "#000");         // ps hand: 99% radius, thinnest, magenta
-  drawHand(ctx, fs, fsLen, fsWidth, "#00e5ff", 0, "#000");         // fs hand: 99.5% radius, ultra-thin, cyan
-  drawHand(ctx, as, asLen, asWidth, "#ffffff", 0, "#000");         // as hand: 99.8% radius, ultra-thin, white
-  drawHand(ctx, zs, zsLen, zsWidth, "#cddc39", 0, "#000");         // zs hand: 99.9% radius, ultra-thin, lime
-  drawHand(ctx, ys, ysLen, ysWidth, "#8bc34a", 0, "#000");         // ys hand: 99.95% radius, ultra-thin, light green
-  drawHand(ctx, rs, rsLen, rsWidth, "#4caf50", 0, "#000");         // rs hand: 99.98% radius, ultra-thin, green
-  drawHand(ctx, qs, qsLen, qsWidth, "#009688", 0, "#000");         // qs hand: 99.995% radius, ultra-thin, teal
-}
-
-// Draws a single hand on the clock
-function drawHand(
-  ctx,
-  pos,
-  length,
-  width,
-  color = "#000",
-  shadowBlur = 0,
-  shadowColor = "#000"
-) {
-  ctx.save();                                                                 // Save the current context state
-  ctx.beginPath();                                                            // Begin a new path for the hand
-  ctx.lineWidth = width;                                                      // Set the line width for the hand
-  ctx.lineCap = "round";                                                     // Set the line cap style to round for smooth ends
-  ctx.strokeStyle = color;                                                    // Set the stroke color for the hand
-  ctx.shadowBlur = shadowBlur;                                                // Set the shadow blur effect for the hand
-  ctx.shadowColor = shadowColor;                                              // Set the shadow color for the hand
-  ctx.moveTo(0, 0);                                                           // Move the context to the center of the clock
-  ctx.rotate(pos);                                                            // Rotate the context to the position of the hand (in radians)
-  ctx.lineTo(0, -length);                                                     // Draw the line from the center to the end of the hand
-  ctx.stroke();                                                               // Stroke the path to draw the hand
-  ctx.rotate(-pos);                                                           // Rotate back to the original orientation
-  ctx.restore();                                                              // Restore the context to the previous state
-}
-
-// ---- Initialization ----
-// Setup canvas and context
-const canvas = setupCanvas();                                                 // Call the setupCanvas function to initialize the canvas
-let ctx = canvas.getContext("2d");                                            // Get the 2D rendering context for the canvas
-let radius = canvas.height / 2 + 2;                                           // Calculate the radius of the clock based on the canvas height
-ctx.setTransform(1, 0, 0, 1, 0, 0);                                           // Reset the transformation matrix to identity [scaleX, skewX, skewY, scaleY, translateX, translateY]
-ctx.translate(canvas.width / 2, canvas.height / 2);                           // Translate the context to the center of the canvas [canvas.width / 2, canvas.height / 2]
-radius = radius * 0.9;                                                        // Adjust the radius to fit within the canvas (90% of the calculated radius)
-
-// Use requestAnimationFrame for resilient, smooth, and efficient updates
-function animationLoop() {
-  drawClock();
-  window.requestAnimationFrame(animationLoop);
-}
-
-animationLoop(); // Start the animation loop
-startTime();     // Start the time display function to update the textual time
-*/
