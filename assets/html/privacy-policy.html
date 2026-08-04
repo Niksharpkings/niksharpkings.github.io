@@ -69,6 +69,7 @@
   <link rel="manifest" href="./manifest.json" type="application/manifest+json">
   <link title="stylesheet" media="only screen and (color)" rel="stylesheet" type="text/css"
     href="../css/secondary-styles.css">
+    <link title="stylesheet" media="only screen and (color)" rel="stylesheet" type="text/css" href="../css/clock-widget.css">
 
 </head>
 
@@ -78,6 +79,7 @@
 
     </div>
   </div>
+
   <header>
     <nav>
       <h1 class="title">
@@ -104,6 +106,10 @@
       </ul>
     </nav>
   </header>
+    <div id="canvasID" class="clock-widget" aria-describedby="currentTime">
+    <canvas id="canvas" class="clock-canvas" width="100" height="100"></canvas>
+    <div class="clock-digital" id="currentTime"></div>
+  </div>
   <section class="hero">
     <h2 class="page-title"><a href="./privacy-policy.html" title="privacy-policy">&gt;Privacy Policy&lt;</a><br></h2>
     <br>
@@ -575,6 +581,7 @@
       &copy; 2023 Nikita "niksharpkings Sharpio All rights reserved.
     </div>
   </footer>
+   <script defer src="../javascript/nik-clock-widget.js"></script>
   <script src="../javascript/NikS-Custom-CSSOM-Trailtaletracker.js"></script>
   <noscript>Your browser does not support JavaScript!</noscript>
 </body>
