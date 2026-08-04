@@ -58,11 +58,17 @@
     ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
     ctx.clearRect(0, 0, sizePx, sizePx);
   }
+  
+  
 
   function drawClock(now) {
     if (!ctx) return;
     const center = sizePx / 2;
-    const ms = now.getMilliseconds();
+    const perf = performance.now();
+    const ms = perf % 1000;
+    const us = ms * 1e3;
+    const ns = ms * 1e6;
+    const ps = ms * 1e9;
     const s = now.getSeconds() + ms / 1000;
     const m = now.getMinutes() + s / 60;
     const h = (now.getHours() % 12) + m / 60;
@@ -70,7 +76,6 @@
     ctx.save();
     // clear and paint a dark face background for good contrast
     ctx.clearRect(0, 0, sizePx, sizePx);
-    ctx.translate(0, 0);
     ctx.fillStyle = '#071024';
     ctx.fillRect(0, 0, sizePx, sizePx);
     ctx.translate(center, center);
@@ -92,40 +97,61 @@
       ctx.lineWidth = 2.5;
       ctx.stroke();
     }
+    function drawHand(angle, length, width, color) {
+        ctx.beginPath();
+        ctx.lineWidth = width;
+        ctx.strokeStyle = color;
+        ctx.lineCap = 'round';
+        ctx.moveTo(0, 0);
+        ctx.lineTo(
+          Math.sin(angle) * length,
+          -Math.cos(angle) * length
+        );
+       ctx.stroke();
+}
 
-    // hour
-    ctx.beginPath();
-    ctx.lineWidth = 8;
-    ctx.lineCap = 'round';
-    ctx.strokeStyle = '#ffffff';
-    ctx.moveTo(0, 0);
-    ctx.lineTo(
-      Math.sin((Math.PI * 2) * (h / 12)) * center * 0.45,
-      -Math.cos((Math.PI * 2) * (h / 12)) * center * 0.45
-    );
-    ctx.stroke();
+drawHand(
+  Math.PI * 2 * (h / 12),
+  center * 0.45,
+  8,
+  "#fff"
+);
 
-    // minute
-    ctx.beginPath();
-    ctx.lineWidth = 6;
-    ctx.strokeStyle = '#dbeafe';
-    ctx.moveTo(0, 0);
-    ctx.lineTo(
-      Math.sin((Math.PI * 2) * (m / 60)) * center * 0.65,
-      -Math.cos((Math.PI * 2) * (m / 60)) * center * 0.65
-    );
-    ctx.stroke();
+drawHand(
+  Math.PI * 2 * (m / 60),
+  center * 0.65,
+  6,
+  "#dbeafe"
+);
 
-    // second (smooth)
-    ctx.beginPath();
-    ctx.lineWidth = 3;
-    ctx.strokeStyle = '#60a5fa';
-    ctx.moveTo(0, 0);
-    ctx.lineTo(
-      Math.sin((Math.PI * 2) * (s / 60)) * center * 0.72,
-      -Math.cos((Math.PI * 2) * (s / 60)) * center * 0.72
-    );
-    ctx.stroke();
+drawHand(
+  Math.PI * 2 * (s / 60),
+  center * 0.72,
+  3,
+  "#60a5fa"
+);
+
+drawHand(
+  Math.PI * 2 * (ms / 1000),
+  center * 0.75,
+  2,
+  "#3b82f6"
+);
+
+drawHand(
+  Math.PI * 2 * (us / 1e6),
+  center * 0.78,
+  1,
+  "#2563eb"
+);
+
+drawHand(
+  Math.PI * 2 * (ns / 1e9),
+  center * 0.8,
+  0.5,
+  "#1d4ed8"
+);
+
 
     // hub
     ctx.beginPath();
@@ -139,12 +165,11 @@
       const hh = String(now.getHours()).padStart(2, '0');
       const mm = String(now.getMinutes()).padStart(2, '0');
       const ss = String(now.getSeconds()).padStart(2, '0');
-      displayEl.textContent = `${hh}:${mm}:${ss}`;
-      // ensure digital display is visible even if legacy CSS exists
-      displayEl.style.background = 'rgba(4,6,12,0.7)';
-      displayEl.style.color = '#ffffff';
-      displayEl.style.padding = '6px 10px';
-      displayEl.style.borderRadius = '8px';
+      const ms = String(now.getMilliseconds()).padStart(3,'0');
+      const us = String(performance.now() % 1000 * 1000).padStart(6,'0');
+      const ns = String(performance.now() * 1e6).padStart(9,'0');
+
+displayEl.textContent = `${hh}:${mm}:${ss}:${ms}:${us}:${ns}`;
     }
   }
 
