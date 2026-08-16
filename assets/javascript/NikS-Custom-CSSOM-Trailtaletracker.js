@@ -684,6 +684,58 @@ unless I approve it verbally and also with official signed documentations that g
 This code is not for sale at the moment and is still in development phase, but the style and layout of this design. 
 I do claim and how it is presented and function, is of my own design and creative design from my own imagination or idea. */
 
+// Function to handle touch events
+function handleTouchEvent(e) {
+  const touch = e.touches[0]; // Get the first touch in the list of touches (there will only be one touch in the list)
+  return {
+    clientX: touch.clientX, // X-coordinate of the touch point relative to the viewport
+    clientY: touch.clientY, // Y-coordinate of the touch point relative to the viewport
+    pageX: touch.pageX, // X-coordinate of the touch point relative to the full page
+    pageY: touch.pageY, // Y-coordinate of the touch point relative to the full page
+    screenX: touch.screenX, // X-coordinate of the touch point relative to the screen
+    screenY: touch.screenY, // Y-coordinate of the touch point relative to the screen
+    offsetX: touch.clientX - touch.target.getBoundingClientRect().left, // X-coordinate of the touch point relative to the target element
+    offsetY: touch.clientY - touch.target.getBoundingClientRect().top // Y-coordinate of the touch point relative to the target element
+  };
+}
+
+// Function to handle mouse events
+function handleMouseEvent(e) {
+  return {
+    clientX: e.clientX, // X-coordinate of the mouse pointer relative to the viewport
+    clientY: e.clientY, // Y-coordinate of the mouse pointer relative to the viewport
+    pageX: e.pageX, // X-coordinate of the mouse pointer relative to the full page
+    pageY: e.pageY, // Y-coordinate of the mouse pointer relative to the full page
+    screenX: e.screenX, // X-coordinate of the mouse pointer relative to the screen
+    screenY: e.screenY, // Y-coordinate of the mouse pointer relative to the screen
+    offsetX: e.offsetX, // X-coordinate of the mouse pointer relative to the target element
+    offsetY: e.offsetY // Y-coordinate of the mouse pointer relative to the target element
+  };
+}
+
+// Function to get additional information about the HTML element under the pointer
+function getAdditionalInfo(element) {
+  // Check if element is null or undefined
+  if (!element) {
+    return {}; // Return an empty object if element is null or undefined
+  }
+
+  // Array of attributes to get information about from the HTML element
+  const attributes = [
+    'innerText', 'title', 'alt', 'value', 'type', 'name', 'action', 'method', 'enctype', 'acceptCharset', 'accept',
+    'autocomplete', 'autofocus', 'autocapitalize', 'autocorrect', 'autosave', 'checked', 'disabled', 'form',
+    'formAction', 'formEnctype', 'formMethod', 'formNoValidate', 'formTarget', 'height', 'inputMode', 'list',
+    'max', 'maxLength', 'min', 'minLength', 'multiple', 'pattern', 'placeholder', 'readOnly', 'required', 'size', 'src', 'step', 'width'
+  ];
+
+  const info = {};
+  attributes.forEach(attr => {
+    info[attr] = element[attr] || '';
+  });
+
+  return info;
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   // Add fancy background color to the body
   const body = document.querySelector("body");
@@ -719,37 +771,6 @@ document.addEventListener("DOMContentLoaded", () => {
     shiftKey: false
   };
 
-// Function to handle touch events
-  function handleTouchEvent(e) {
-
-    const touch = e.touches[0]; // Get the first touch in the list of touches (there will only be one touch in the list)
-// Return an object with the following properties
-    return {
-      clientX: touch.clientX, // X-coordinate of the touch point relative to the viewport
-      clientY: touch.clientY, // Y-coordinate of the touch point relative to the viewport
-      pageX: touch.pageX, // X-coordinate of the touch point relative to the full page
-      pageY: touch.pageY, // Y-coordinate of the touch point relative to the full page
-      screenX: touch.screenX, // X-coordinate of the touch point relative to the screen
-      screenY: touch.screenY, // Y-coordinate of the touch point relative to the screen
-      offsetX: touch.clientX - touch.target.getBoundingClientRect().left, // X-coordinate of the touch point relative to the target element
-      offsetY: touch.clientY - touch.target.getBoundingClientRect().top // Y-coordinate of the touch point relative to the target element
-    };
-  }
-
-// Function to handle mouse events
-  function handleMouseEvent(e) {
-    return { // Return an object with the following properties
-      clientX: e.clientX, // X-coordinate of the mouse pointer relative to the viewport
-      clientY: e.clientY, // Y-coordinate of the mouse pointer relative to the viewport
-      pageX: e.pageX, // X-coordinate of the mouse pointer relative to the full page
-      pageY: e.pageY, // Y-coordinate of the mouse pointer relative to the full page
-      screenX: e.screenX, // X-coordinate of the mouse pointer relative to the screen
-      screenY: e.screenY, // Y-coordinate of the mouse pointer relative to the screen
-      offsetX: e.offsetX, // X-coordinate of the mouse pointer relative to the target element
-      offsetY: e.offsetY // Y-coordinate of the mouse pointer relative to the target element
-    };
-  }
-
 // Function to reset modifier keys if none of them are pressed
   function resetModifierKeys(e) {
 // Check if none of the modifier keys are pressed (Alt, Ctrl, Meta, Shift)
@@ -760,33 +781,11 @@ document.addEventListener("DOMContentLoaded", () => {
       modifierKeys.shiftKey = false; // Set shiftKey to false
     }
   }
-// Function to get additional information about the HTML element under the mouse pointer or touch point
-  function getAdditionalInfo(element) {
-
-    // Check if element is null or undefined
-    if (!element) {
-      return {}; // Return an empty object if element is null or undefined
-    }
-// Array of attributes to get information about from the HTML element under the mouse pointer or touch point
-    const attributes = [
-      'innerText', 'title', 'alt', 'value', 'type', 'name', 'action', 'method', 'enctype', 'acceptCharset', 'accept',
-      'autocomplete', 'autofocus', 'autocapitalize', 'autocorrect', 'autosave', 'checked', 'disabled', 'form',
-      'formAction', 'formEnctype', 'formMethod', 'formNoValidate', 'formTarget', 'height', 'inputMode', 'list',
-      'max', 'maxLength', 'min', 'minLength', 'multiple', 'pattern', 'placeholder', 'readOnly', 'required', 'size', 'src', 'step', 'width'
-    ];
-// Object to store the information about the HTML element under the mouse pointer or touch point
-    const info = {}; // Initialize an empty object to store the information about the HTML element under the mouse pointer or touch point
-    attributes.forEach(attr => {
-      info[attr] = element[attr] || '';
-    }); // Get the value of each attribute from the HTML element and store it in the info object if it exists or an empty string if it doesn't exist
-
-    return info; // Return the info object containing the information about the HTML element under the mouse pointer or touch point
-  }
 // Function to generate a log message with the coordinates, event, HTML element, and additional information about the HTML element under the mouse pointer or touch point
   function generateLogMessage(coords, e, element, info) {
 
     const tagName = element.tagName.toLowerCase(); // Get the tag name of the HTML element under the mouse pointer or touch point
-    const className = (typeof element.className === 'string' && element.className.length > 0) ? `.${element.className.split(' ').join('.')}` : ''; // Get the class name of the HTML element under the mouse pointer or touch point
+    const className = (typeof element.className === 'string' && element.className.length > 0) ? `.${element.className.replaceAll(' ', '.')}` : ''; // Get the class name of the HTML element under the mouse pointer or touch point
     const id = element.id ? `#${element.id}` : ''; // Get the ID of the HTML element under the mouse pointer or touch point
     const cssElement = `${id}${className}` || element.style.cssText; // Get the CSS element of the HTML element under the mouse pointer or touch point
 
@@ -897,17 +896,9 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // --- Optimized Event Delegation and Listener Management ---
-  // Use a Set to track active pointer types for durability
-  const activePointers = new Set();
-
   // Unified pointer event handler for mouse and touch
   function pointerHandler(e) {
     setCoords(e);
-    if (e.type === "touchstart" || e.type === "mousedown") {
-      activePointers.add(e.pointerId || "mouse");
-    } else if (e.type === "touchend" || e.type === "mouseup" || e.type === "mouseleave") {
-      activePointers.delete(e.pointerId || "mouse");
-    }
   }
 
   // Use passive listeners for touch/move for better scroll performance
@@ -946,6 +937,5 @@ document.addEventListener("DOMContentLoaded", () => {
   // --- Defensive: Clean up on page unload to avoid leaks ---
   window.addEventListener("beforeunload", () => {
     if (setCoords.rafId) cancelAnimationFrame(setCoords.rafId);
-    activePointers.clear();
   });
 });

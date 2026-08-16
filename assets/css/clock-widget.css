@@ -4,50 +4,109 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0.6rem;
-  padding: 1rem 4rem;
-  margin: 1rem auto;
-  border: 1px solid rgba(255,255,255,0.12);
-  border-radius: 75px;
-  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
-  box-shadow: 0 10px 24px rgba(0,0,0,0.28);
-  backdrop-filter: blur(6px);
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+  margin: 1.2rem auto;
+  width: 96vw;
+  max-width: 640px;
+  border: 2px solid var(--surface-outline-color, rgba(143, 227, 255, 0.26));
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at 14% 16%, color-mix(in srgb, var(--accent-gold-color, #ffd78f) 38%, transparent) 0%, transparent 42%),
+    radial-gradient(circle at 83% 10%, color-mix(in srgb, var(--accent-cyan-color, #7fe8ff) 36%, transparent) 0%, transparent 38%),
+    linear-gradient(160deg, var(--page-shell-color, rgba(3, 9, 13, 0.92)), var(--surface-elevated-color, rgba(10, 24, 31, 0.88)));
+  box-shadow:
+    0 18px 44px rgba(1, 6, 18, 0.58),
+    inset 0 1px 0 rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(10px);
   z-index: 10;
 }
 
 .clock-widget .clock-canvas {
   display: block;
   border-radius: 50%;
-  width: 280px;
-  height: 280px;
-  background: radial-gradient(circle at 35% 25%, rgba(255,255,255,0.06), rgba(0,0,0,0.12) 60%);
-  box-shadow: inset 0 2px 8px rgba(255,255,255,0.02);
-  border: 1px solid rgba(255,255,255,0.06);
+  width: 100px;
+  height: 100px;
+  background:
+    radial-gradient(circle at 34% 23%, rgba(255, 255, 255, 0.16), rgba(4, 19, 27, 0.26) 56%, rgba(3, 11, 16, 0.68));
+  box-shadow:
+    0 14px 34px rgba(0, 0, 0, 0.5),
+    inset 0 0 28px rgba(255, 255, 255, 0.07);
+  border: 1px solid color-mix(in srgb, var(--accent-cyan-color, #7fe8ff) 36%, rgba(255, 255, 255, 0.08));
+  position: relative;
+  outline: 8px solid rgba(140, 222, 255, 0.12);
+  outline-offset: 8px;
 }
 
 .clock-digital {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-  font-size: 0.9rem;
+  font-family: "JetBrains Mono", "IBM Plex Mono", "Consolas", monospace;
+  font-size: 0.84rem;
   font-weight: 700;
-  letter-spacing: 0.12em;
-  background: rgba(4,6,12,0.7);
-  color: white;
-  padding: 6px 10px;
-  border-radius: 8px;
-  box-shadow: 0 6px 18px rgba(0,0,0);
+  letter-spacing: 0.025em;
+  line-height: 1.38;
+  font-variant-numeric: tabular-nums lining-nums;
+  text-rendering: geometricPrecision;
+  white-space: normal;
+  min-height: 8.2rem;
+  width: 100%;
+  max-width: 100%;
+  overflow: visible;
+  overflow-wrap: anywhere;
+  background: linear-gradient(180deg, rgba(4, 17, 24, 0.92), rgba(6, 12, 20, 0.9));
+  color: #f3f7ff;
+  padding: 0.7rem 0.9rem;
+  border-radius: 12px;
+  border: 1px solid color-mix(in srgb, var(--accent-cyan-color, #7fe8ff) 40%, rgba(255, 255, 255, 0.08));
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.42);
 }
 
 /* Strong high-contrast badge for readability */
 .clock-widget .clock-digital {
-  background: rgba(4,6,12,0.6);
+  background: linear-gradient(180deg, rgba(4, 19, 27, 0.96), rgba(5, 15, 23, 0.92));
   color: #ffffff;
-  padding: 6px 10px;
-  border-radius: 8px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.45);
-  text-shadow: 0 1px 0 rgba(0,0,0,0.6);
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.6);
+}
+
+.clock-digital .planck-row {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  width: 100%;
+}
+
+.clock-digital .planck-value {
+  display: inline-block;
+  min-width: 10.5ch;
+  max-width: calc(100% - 16ch);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.clock-widget:hover {
+  box-shadow:
+    0 22px 56px rgba(1, 6, 18, 0.64),
+    inset 0 1px 0 rgba(255, 255, 255, 0.24);
 }
 
 @media (max-width: 640px) {
-  .clock-widget .clock-canvas { width: 140px; height: 140px; }
-  .clock-digital { font-size: 0.78rem; }
+  .clock-widget {
+    margin: 0.7rem auto;
+    padding: 0.9rem;
+    border-radius: 22px;
+    width: calc(100vw - 1rem);
+  }
+
+  .clock-widget .clock-canvas {
+    width: 140px;
+    height: 140px;
+  }
+
+  .clock-digital {
+    font-size: 0.68rem;
+    min-height: 7.3rem;
+    width: 100%;
+    max-width: 100%;
+    line-height: 1.32;
+  }
 }

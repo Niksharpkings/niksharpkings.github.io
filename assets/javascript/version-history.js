@@ -72,4 +72,4 @@ async function loadVersionHistory() {
   }
 }
 
-loadVersionHistory();
+await loadVersionHistory();

@@ -102,7 +102,7 @@ header {
   border: 2px solid rgba(143, 227, 255, 0.65);
   border-radius: 20px;
   background-attachment: fixed;
-  background: linear-gradient(180deg, rgba(2, 13, 18, 0.78) 0%, rgba(5, 21, 27, 0.9) 100%);
+  background-image: linear-gradient(180deg, rgba(2, 13, 18, 0.78) 0%, rgba(5, 21, 27, 0.9) 100%);
   background-position: 100%;
   background-repeat: no-repeat;
   background-size: cover;
@@ -159,8 +159,6 @@ header {
   font-size: 12px;
   font-weight: bold;
   text-align: center;
-  text-shadow: var(--primary-shadow-color);
-  color: rgb(148, 46, 46);
   /*Miscellaneous*/
   list-style-type: none;
   border-radius: 20px;
@@ -359,6 +357,16 @@ nav {
   background: linear-gradient(180deg, rgba(3, 16, 22, 0.72) 0%, rgba(7, 25, 32, 0.72) 100%);
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
 }
+
+header nav menu {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  width: 100%;
+}
 header nav ul {
   display: flex;
   justify-content: center; /* Evenly space the items */
@@ -394,7 +402,6 @@ header nav li a {
   border-radius: 12px;
   outline: none;
   background: linear-gradient(135deg, rgba(4, 20, 27, 0.96) 0%, rgba(14, 52, 66, 0.96) 52%, rgba(5, 20, 26, 0.96) 100%);
- /* background-color: rgb(72, 12, 212); */
   /*Typography stuff*/
   color: #f3fdff;
   font-size: 1.05rem;
@@ -444,7 +451,7 @@ header nav li a:focus {
   position:relative;
   width: 100%;
   background-color: rgb(248, 0, 174);
-  color: white;
+  color: #111111;
   cursor: crosshair;
   user-select: none;
   border-color: #000000;
@@ -478,8 +485,8 @@ header nav li a:focus {
   z-index: 4;
   transform: translateX(-50%);
   /*Box model stuff*/
-  width: min(22rem, 80vw);
-  max-width: 80vw;
+  width: 80vw;
+  max-width: 22rem;
   padding: 0.5rem 0.65rem;
   border-radius: 6px;
   background-color: rgba(20, 17, 17, 0.96);
@@ -557,7 +564,6 @@ hr:after {
   /*Box model stuff*/
   width: auto;
   height: auto;
-  border: 5px solid var(--secondary-hex-color);
   border-radius: 50%;
   /*Miscellaneous*/
   box-shadow: var(--primary-shadow-color);
@@ -1469,6 +1475,8 @@ div .contact-list-item p {
 
   .project-grid-container {
     width: 100%;
+    grid-template-columns: 1fr;
+    padding: 10px;
   }
 
   .projects img {
@@ -1477,6 +1485,7 @@ div .contact-list-item p {
   }
 
   .contact-info iframe {
+    width: 100%;
     max-width: 100%;
   }
 
@@ -1485,17 +1494,20 @@ div .contact-list-item p {
     padding: 10px;
   }
 
-  header nav ul {
+  header nav ul,
+  header nav menu {
     flex-direction: column;
+    gap: 8px;
   }
 
   header nav li {
     margin: 5px 0;
+    width: 100%;
   }
 
   header nav li a {
     font-size: 14px;
-    padding: 8px 0;
+    padding: 10px 8px;
   }
 
   .hero {
@@ -1519,11 +1531,6 @@ div .contact-list-item p {
     font-size: 24px;
   }
 
-  .project-grid-container {
-    grid-template-columns: 1fr;
-    padding: 10px;
-  }
-
   .project-container-left,
   .project-container-right {
     width: 100%;
@@ -1531,11 +1538,6 @@ div .contact-list-item p {
     min-width: 100%;
     max-height: none;
     min-height: auto;
-  }
-
-  .contact-info iframe {
-    width: 100%;
-    max-width: 100%;
   }
 
   footer {

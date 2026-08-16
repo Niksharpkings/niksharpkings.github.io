@@ -38,14 +38,24 @@ const getBatterySnapshot = async () => {
 
 // --- Utility: Formatters ---
 const formatBytes = bytes => {
-  if (typeof bytes !== 'number' || isNaN(bytes)) return 'N/A';
+  if (typeof bytes !== 'number' || Number.isNaN(bytes)) return 'N/A';
   if (bytes < 1024) return `${bytes} B`;
   const units = ['KB', 'MB', 'GB', 'TB', 'PB'];
   let u = -1;
   do { bytes /= 1024; ++u; } while (bytes >= 1024 && u < units.length - 1);
   return `${bytes.toFixed(2)} ${units[u]}`;
 };
-const formatBool = v => v === true ? 'Yes' : v === false ? 'No' : 'N/A';
+const formatBool = (v) => {
+  if (v === true) return 'Yes';
+  if (v === false) return 'No';
+  return 'N/A';
+};
+
+const getPreferredColorScheme = () => {
+  if (window.matchMedia('(prefers-color-scheme: dark)').matches) return 'Dark';
+  if (window.matchMedia('(prefers-color-scheme: light)').matches) return 'Light';
+  return 'No preference';
+};
 const formatList = arr => Array.isArray(arr) ? arr.join(', ') : String(arr);
 
 // --- Info Map: Organized, Deduped, Extensible ---
@@ -63,7 +73,8 @@ const infoMap = [
   }) },
   { key: 'browserVersion', label: 'Browser Version', desc: 'Browser version number (major engine version)', get: () => safeGet(() => {
     const ua = navigator.userAgent;
-    const match = ua.match(/(firefox|edg|chrome|crios|safari|opr|opera)[\s\/]([\d.]+)/i);
+    const browserVersionRegex = /(firefox|edg|chrome|crios|safari|opr|opera)[\s/]([\d.]+)/i;
+    const match = browserVersionRegex.exec(ua);
     return match ? match[2] : 'Unknown';
   }) },
   { key: 'platform', label: 'Platform', desc: 'Browser platform (OS/hardware, e.g. Win32, MacIntel, Linux x86_64)', get: () => navigator.platform },
@@ -111,9 +122,9 @@ const infoMap = [
     return formatBytes(estimate?.quota);
   } },
   // --- Network ---
-  { key: 'connectionType', label: 'Connection Type', desc: 'Network connection type', get: () => safeGet(() => navigator.connection ? navigator.connection.effectiveType : 'N/A') },
-  { key: 'downlink', label: 'Downlink', desc: 'Estimated downlink (Mbps)', get: () => safeGet(() => navigator.connection ? navigator.connection.downlink : 'N/A') },
-  { key: 'rtt', label: 'RTT', desc: 'Estimated round-trip time (ms)', get: () => safeGet(() => navigator.connection ? navigator.connection.rtt : 'N/A') },
+  { key: 'connectionType', label: 'Connection Type', desc: 'Network connection type', get: () => safeGet(() => navigator.connection?.effectiveType ?? 'N/A') },
+  { key: 'downlink', label: 'Downlink', desc: 'Estimated downlink (Mbps)', get: () => safeGet(() => navigator.connection?.downlink ?? 'N/A') },
+  { key: 'rtt', label: 'RTT', desc: 'Estimated round-trip time (ms)', get: () => safeGet(() => navigator.connection?.rtt ?? 'N/A') },
   // --- Battery ---
   { key: 'batteryLevel', label: 'Battery Level', desc: 'Battery charge level (%)', get: async () => {
     const battery = await getBatterySnapshot();
@@ -288,19 +299,19 @@ const infoMap = [
   { key: 'arch', label: 'Architecture', desc: 'CPU architecture', get: () => safeGet(() => process.arch) },
   { key: 'env', label: 'Environment Variables', desc: 'Environment variables', get: () => safeGet(() => JSON.stringify(process.env, null, 2)) },
   { key: 'cwd', label: 'Current Working Directory', desc: 'Current working directory', get: () => safeGet(() => process.cwd()) },
-  { key: 'homeDir', label: 'Home Directory', desc: 'User home directory', get: () => safeGet(() => require('os').homedir()) },
-  { key: 'tempDir', label: 'Temporary Directory', desc: 'Temporary directory', get: () => safeGet(() => require('os').tmpdir()) },
-  { key: 'pathSeparator', label: 'Path Separator', desc: 'Path separator character', get: () => safeGet(() => require('path').sep) },
-  { key: 'pathDelimiter', label: 'Path Delimiter', desc: 'Path delimiter character', get: () => safeGet(() => require('path').delimiter) },
+  { key: 'homeDir', label: 'Home Directory', desc: 'User home directory', get: () => safeGet(() => require('node:os').homedir()) },
+  { key: 'tempDir', label: 'Temporary Directory', desc: 'Temporary directory', get: () => safeGet(() => require('node:os').tmpdir()) },
+  { key: 'pathSeparator', label: 'Path Separator', desc: 'Path separator character', get: () => safeGet(() => require('node:path').sep) },
+  { key: 'pathDelimiter', label: 'Path Delimiter', desc: 'Path delimiter character', get: () => safeGet(() => require('node:path').delimiter) },
   {
     key: 'fileURLToPath', label: 'File URL to Path', desc: 'File URL to Path conversion', get: () => safeGet(() => {
-      const { fileURLToPath } = require('url');
+      const { fileURLToPath } = require('node:url');
       return fileURLToPath('file://' + __filename);
     })
   },
   {
     key: 'pathToFileURL', label: 'Path to File URL', desc: 'Path to File URL conversion', get: () => safeGet(() => {
-      const { pathToFileURL } = require('url');
+      const { pathToFileURL } = require('node:url');
       return pathToFileURL(__filename).href;
     })
   },
@@ -321,8 +332,8 @@ const infoMap = [
   { key: 'memoryUsage', label: 'Memory Usage', desc: 'Memory usage statistics', get: () => safeGet(() => JSON.stringify(process.memoryUsage(), null, 2)) },
   { key: 'cpuUsage', label: 'CPU Usage', desc: 'CPU usage statistics', get: () => safeGet(() => JSON.stringify(process.cpuUsage(), null, 2)) },
   { key: 'upTime', label: 'Uptime', desc: 'System uptime in seconds', get: () => safeGet(() => process.uptime()) },
-  { key: 'loadavg', label: 'Load Average', desc: 'System load average', get: () => safeGet(() => JSON.stringify(require('os').loadavg(), null, 2)) },
-  { key: 'networkInterfaces', label: 'Network Interfaces', desc: 'Network interfaces', get: () => safeGet(() => JSON.stringify(require('os').networkInterfaces(), null, 2)) },
+  { key: 'loadavg', label: 'Load Average', desc: 'System load average', get: () => safeGet(() => JSON.stringify(require('node:os').loadavg(), null, 2)) },
+  { key: 'networkInterfaces', label: 'Network Interfaces', desc: 'Network interfaces', get: () => safeGet(() => JSON.stringify(require('node:os').networkInterfaces(), null, 2)) },
     { id: "lastupdate", label: "Last page update", description: "The last time this page was modified on the server.", value: () => safe(() => document.lastModified) },
   { id: "dhbinfo", label: "Page hostname", description: "The domain name of the current page.", value: () => safe(() => window.location.hostname) },
   { id: "dhbinfo2", label: "Full URL", description: "The full URL of the current page.", value: () => safe(() => window.location.href) },
@@ -494,7 +505,7 @@ const infoMap = [
   { id: "dhbinfo293", label: "Page is in print mode?", description: "Is the page being rendered for print?", value: () => yesNo(safe(() => window.matchMedia('print').matches)) },
   { id: "dhbinfo294", label: "Page prefers reduced motion?", description: "Does the user prefer reduced motion?", value: () => yesNo(safe(() => window.matchMedia('(prefers-reduced-motion: reduce)').matches)) },
   { id: "dhbinfo295", label: "Page prefers contrast?", description: "Does the user prefer high contrast?", value: () => yesNo(safe(() => window.matchMedia('(prefers-contrast: more)').matches)) },
-  { id: "dhbinfo296", label: "Page prefers color scheme?", description: "Does the user prefer a specific color scheme?", value: () => safe(() => window.matchMedia('(prefers-color-scheme: dark)').matches ? 'Dark' : window.matchMedia('(prefers-color-scheme: light)').matches ? 'Light' : 'No preference') },
+  { id: "dhbinfo296", label: "Page prefers color scheme?", description: "Does the user prefer a specific color scheme?", value: () => safe(getPreferredColorScheme) },
   { id: "dhbinfo297", label: "Page prefers reduced data?", description: "Does the user prefer reduced data usage?", value: () => yesNo(safe(() => window.matchMedia('(prefers-reduced-data: reduce)').matches)) },
   { id: "dhbinfo298", label: "Page prefers reduced transparency?", description: "Does the user prefer reduced transparency?", value: () => yesNo(safe(() => window.matchMedia('(prefers-reduced-transparency: reduce)').matches)) },
   { id: "dhbinfo299", label: "Page prefers inverted colors?", description: "Does the user prefer inverted colors?", value: () => yesNo(safe(() => window.matchMedia('(inverted-colors: inverted)').matches)) },
@@ -554,7 +565,7 @@ const normalizedInfoMap = (() => {
     dhbinfoPanel.style.fontSize = '1rem';
     // Insert after summary for best visibility
     const summary = details.querySelector('summary');
-    if (summary && summary.nextSibling) {
+    if (summary?.nextSibling) {
       details.insertBefore(dhbinfoPanel, summary.nextSibling);
     } else {
       details.appendChild(dhbinfoPanel);
@@ -737,13 +748,11 @@ async function updateInfoPanel() {
   }
 }
 
-// --- Initial & Periodic Update (requestAnimationFrame for first paint) ---
-if (window.requestAnimationFrame) {
-  requestAnimationFrame(updateInfoPanel);
-} else {
-  updateInfoPanel();
-}
-setInterval(updateInfoPanel, 3000);
+// --- Initial & Periodic Update ---
+await updateInfoPanel();
+setInterval(() => {
+  void updateInfoPanel();
+}, 3000);
 
 // --- Export for Extensibility ---
 window.dhbinfo = Object.freeze({ infoMap: normalizedInfoMap, updateInfoPanel });

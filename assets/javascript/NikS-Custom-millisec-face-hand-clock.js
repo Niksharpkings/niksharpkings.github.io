@@ -529,7 +529,7 @@ async function getAdaptiveClockInterval() {                                     
       try {                                                                                                         // Try to open an IndexedDB database
         window.indexedDB.open('test');                                                                              // Open a test IndexedDB database
         return false;                                                                                               // If successful, not incognito
-      } catch (e) {                                                                                                 // If an error occurs, likely incognito
+      } catch {                                                                                                      // If an error occurs, likely incognito
         return true;                                                                                                // Return true indicating incognito mode
       }                                                                                                             // End of try-catch
     }
@@ -540,7 +540,7 @@ async function getAdaptiveClockInterval() {                                     
       try {                                                                                                       // Try to open a database
         window.openDatabase(null, null, null, null);                                                              // Attempt to open a database
         return false;                                                                                             // If successful, not incognito
-      } catch (e) {                                                                                               // If an error occurs, likely incognito
+      } catch {                                                                                                    // If an error occurs, likely incognito
         return true;                                                                                              // Return true indicating incognito mode
       }                                                                                                           // End of try-catch
     }                                                                                                             // End of Safari check
@@ -555,7 +555,7 @@ async function getAdaptiveClockInterval() {                                     
       try {                                                                                                       // Try to get battery status
         const battery = await navigator.getBattery();                                                             // Await the battery status
         return battery.saveMode || battery.level < 0.2 || battery.charging === false && battery.level < 0.3;      // Return true if battery saver is active (save mode, low level, or not charging with low level)
-      } catch (e) {                                                                                               // If an error occurs, assume not battery saver
+      } catch {                                                                                                    // If an error occurs, assume not battery saver
         return false;                                                                                             // Return false indicating not battery saver mode
       }                                                                                                           // End of try-catch
     }                                                                                                             // If getBattery API is not available, assume not battery saver
@@ -565,7 +565,7 @@ async function getAdaptiveClockInterval() {                                     
   const isBackground = document.hidden;                                                                           // Use document.hidden to check if the tab is in the background
   const incognito = await isIncognito();                                                                          // Detect incognito mode using the helper function
   const batterySaver = await isBatterySaver();                                                                    // Detect battery saver mode using the helper function
-  
+
   // If background, incognito, or battery saver, use slowest interval
   if (isBackground || incognito || batterySaver) {                                                                // Check if the tab is in the background, incognito mode, or battery saver mode
     interval = 1000;                                                                                              // Set interval to 1000 ms (1 second) for background, incognito, or battery saver
@@ -589,15 +589,43 @@ const CANVAS_ID = "canvas";                                                     
 const TIME_DISPLAY_ID = "currentTime";                                                                            // ID for the time display element
 const PLANCK_TIME_SECONDS = 5.391247e-44;                                                                         // Approximate Planck time in seconds
 let CLOCK_UPDATE_INTERVAL = 10;                                                                                   // Will be set dynamically
+const TWO_PI = Math.PI * 2;
+
+const SUB_MILLISECOND_UNITS = [ // Units for sub-millisecond precision
+  { key: "us", scale: 1e3, pad: 3 },
+  { key: "ns", scale: 1e6, pad: 6 },
+  { key: "ps", scale: 1e9, pad: 9 },
+  { key: "fs", scale: 1e12, pad: 12 },
+  { key: "as", scale: 1e15, pad: 15 },
+  { key: "zs", scale: 1e18, pad: 18 },
+  { key: "ys", scale: 1e21, pad: 21 },
+  { key: "rs", scale: 1e24, pad: 24 },
+  { key: "qs", scale: 1e27, pad: 27 }
+];
+
+const PRIMARY_HANDS = [
+  { key: "hour", length: 0.5, width: 0.09, cssVar: "--hand-hour", fallback: "#001d19" },
+  { key: "minute", length: 0.8, width: 0.07, cssVar: "--hand-minute", fallback: "#00463c" },
+  { key: "second", length: 0.9, width: 0.04, cssVar: "--hand-second", fallback: "#630c01" },
+  { key: "ms", length: 0.9, width: 0.02, cssVar: "--hand-ms", fallback: "#001d19" }
+];
+
+const SUB_MILLISECOND_HANDS = [
+  { key: "us", length: 0.95, width: 0.015, cssVar: "--hand-us", fallback: "#ff9800" },
+  { key: "ns", length: 0.98, width: 0.01, cssVar: "--hand-ns", fallback: "#1100ff" },
+  { key: "ps", length: 0.99, width: 0.005, cssVar: "--hand-ps", fallback: "#ff00ff" },
+  { key: "fs", length: 0.995, width: 0.003, cssVar: "--hand-fs", fallback: "#00e5ff" },
+  { key: "as", length: 0.998, width: 0.0015, cssVar: "--hand-as", fallback: "#ffffff" },
+  { key: "zs", length: 0.999, width: 0.001, cssVar: "--hand-zs", fallback: "#cddc39" },
+  { key: "ys", length: 0.9995, width: 0.0008, cssVar: "--hand-ys", fallback: "#8bc34a" },
+  { key: "rs", length: 0.9998, width: 0.0005, cssVar: "--hand-rs", fallback: "#4caf50" },
+  { key: "qs", length: 0.99995, width: 0.0002, cssVar: "--hand-qs", fallback: "#009688" }
+];
 
 // Read CSS custom properties (with fallback)
-function getCssVar(name, fallback) {
-  try {
-    const v = getComputedStyle(document.documentElement).getPropertyValue(name);
-    return v ? v.trim() : fallback;
-  } catch (e) {
-    return fallback;
-  }
+function getCssVar(name, fallback) { // Function to get CSS custom property value with a fallback
+  const v = getComputedStyle(document.documentElement).getPropertyValue(name); // Get the computed value of the CSS custom property from the root element
+  return v ? v.trim() : fallback; // Return the trimmed value if it exists, otherwise return the fallback value
 }
 
 // Update interval on visibility change, battery, or incognito
@@ -605,16 +633,63 @@ async function updateClockInterval() {                                          
   CLOCK_UPDATE_INTERVAL = await getAdaptiveClockInterval();                                                       // Get the adaptive clock interval
 }                                                                                                                 // End of updateClockInterval function
 document.addEventListener("visibilitychange", updateClockInterval);                                               // Listen for visibility change to update the clock interval
-if (navigator.getBattery) {                                                                                       // If the getBattery API is available
-  navigator.getBattery().then(battery => {                                                                        // Get the battery status
-    battery.addEventListener('chargingchange', updateClockInterval);                                              // Listen for charging change to update the clock interval
-    battery.addEventListener('levelchange', updateClockInterval);                                                 // Listen for battery level change to update the clock interval
-    battery.addEventListener('chargingtimechange', updateClockInterval);                                          // Listen for charging time change to update the clock interval
-    battery.addEventListener('dischargingtimechange', updateClockInterval);                                       // Listen for discharging time change to update the clock interval
-  });                                                                                                             // End of getBattery promise
+async function initializeClockIntervalMonitoring() {
+  if (navigator.getBattery) {
+    try {
+      const battery = await navigator.getBattery();
+      battery.addEventListener("chargingchange", updateClockInterval);
+      battery.addEventListener("levelchange", updateClockInterval);
+      battery.addEventListener("chargingtimechange", updateClockInterval);
+      battery.addEventListener("dischargingtimechange", updateClockInterval);
+    } catch {
+      // Ignore battery API errors; visibility-based updates still work.
+    }
+  }
+  await updateClockInterval();
 }
-// Initial interval setup
-updateClockInterval();                                                                                            // Call the function to set the initial clock update interval
+
+await initializeClockIntervalMonitoring();
+
+function getEpochMilliseconds() {
+  if (typeof performance !== "undefined" && typeof performance.now === "function") {
+    const origin = typeof performance.timeOrigin === "number" ? performance.timeOrigin : Date.now() - performance.now();
+    return origin + performance.now();
+  }
+  return Date.now();
+}
+
+function getTimeSnapshot() {
+  const epochMs = getEpochMilliseconds();
+  const wholeMs = Math.floor(epochMs);
+  const subMillisecondFraction = epochMs - wholeMs;
+  const date = new Date(wholeMs);
+  const msTotal = date.getMilliseconds() + subMillisecondFraction;
+  const secondFraction = msTotal / 1000;
+  const planckTicks = subMillisecondFraction > 0 ? Math.floor((subMillisecondFraction / 1000) / PLANCK_TIME_SECONDS) : 0;
+  const unitValues = {};
+
+  for (const unit of SUB_MILLISECOND_UNITS) {
+    const value = Math.floor(subMillisecondFraction * unit.scale);
+    unitValues[unit.key] = {
+      value,
+      text: value.toString().padStart(unit.pad, "0"),
+      angle: (value / unit.scale) * TWO_PI
+    };
+  }
+
+  return {
+    date,
+    subMillisecondFraction,
+    msTotal,
+    secondFraction,
+    planckTicks,
+    unitValues
+  };
+}
+
+function toAngle(progress, cycle) {
+  return (progress / cycle) * TWO_PI;
+}
 
 // ---- Utility Functions ----
 // Pads numbers < 10 with a leading zero
@@ -625,40 +700,41 @@ function checkTime(i) {                                                         
 // ---- Time Display Functions ----
 // Updates the textual time display with high precision
 function startTime() {                                                                                            // Function to start the time display
-  const today = new Date();                                                                                       // Get the current date and time
-  let mh = checkTime(today.getMonth() + 1);                                                                       // Get the current month (1-12) and pad with leading zero
-  let day = checkTime(today.getDate());                                                                           // Get the current day of the month (1-31) and pad with leading zero
-  let fy = checkTime(today.getFullYear());                                                                        // Get the current full year (4 digits) and pad with leading zero if needed
-  let h = checkTime(today.getHours());                                                                            // Get the current hour (0-23) and pad with leading zero
-  let m = checkTime(today.getMinutes());                                                                          // Get the current minute (0-59) and pad with leading zero
-  let s = checkTime(today.getSeconds());                                                                          // Get the current second (0-59) and pad with leading zero
-  let ms = today.getMilliseconds().toString().padStart(3, "0");                                                   // Get the current milliseconds (0-999) and pad with leading zero to 3 digits
-  const performanceNow = typeof performance !== "undefined" && typeof performance.now === "function" ? performance.now() : 0; // Get high-resolution time if available
-  const fractionalMs = performanceNow - Math.floor(performanceNow);                                                       // Fractional milliseconds within the current ms
-  let us = Math.floor(fractionalMs * 1e3).toString().padStart(3, "0");                                                  // Convert the fractional millisecond to microseconds
-  let ns = Math.floor(fractionalMs * 1e6).toString().padStart(6, "0");                                                  // Convert the fractional millisecond to nanoseconds
-  let ps = Math.floor(fractionalMs * 1e9).toString().padStart(9, "0");                                                  // Convert the fractional millisecond to picoseconds
-  let fs = Math.floor(fractionalMs * 1e12).toString().padStart(12, "0");                                                 // Convert the fractional millisecond to femtoseconds
-  let as = Math.floor(fractionalMs * 1e15).toString().padStart(15, "0");                                                 // Convert the fractional millisecond to attoseconds
-  let zs = Math.floor(fractionalMs * 1e18).toString().padStart(18, "0");                                                 // Convert the fractional millisecond to zeptoseconds
-  let ys = Math.floor(fractionalMs * 1e21).toString().padStart(21, "0");                                                 // Convert the fractional millisecond to yoctoseconds
-  let rs = Math.floor(fractionalMs * 1e24).toString().padStart(24, "0");                                                 // Convert the fractional millisecond to rontoseconds
-  let qs = Math.floor(fractionalMs * 1e27).toString().padStart(27, "0");                                                 // Convert the fractional millisecond to quectoseconds
-  let pt = fractionalMs > 0 ? Math.floor(fractionalMs / PLANCK_TIME_SECONDS) : 0;                                         // Convert the fractional millisecond to Planck-time units
-  pt = pt.toLocaleString("en-US", { useGrouping: false }).padStart(44, "0");                                            // Pad the Planck-time count for readability
-  const pmam = today.getHours() >= 12 ? "PM" : "";                                                              // Determine if it's AM or PM based on the current hour
+  const snapshot = getTimeSnapshot();
+  const today = snapshot.date;                                                                                     // Get the current date and time
+  const mh = checkTime(today.getMonth() + 1);                                                                      // Get the current month (1-12) and pad with leading zero
+  const day = checkTime(today.getDate());                                                                          // Get the current day of the month (1-31) and pad with leading zero
+  const fy = checkTime(today.getFullYear());                                                                       // Get the current full year (4 digits) and pad with leading zero if needed
+  const h = checkTime(today.getHours());                                                                           // Get the current hour (0-23) and pad with leading zero
+  const m = checkTime(today.getMinutes());                                                                         // Get the current minute (0-59) and pad with leading zero
+  const s = checkTime(today.getSeconds());                                                                         // Get the current second (0-59) and pad with leading zero
+  const ms = today.getMilliseconds().toString().padStart(3, "0");                                                 // Get the current milliseconds (0-999) and pad with leading zero to 3 digits
+  const us = snapshot.unitValues.us.text;
+  const ns = snapshot.unitValues.ns.text;
+  const ps = snapshot.unitValues.ps.text;
+  const fs = snapshot.unitValues.fs.text;
+  const as = snapshot.unitValues.as.text;
+  const zs = snapshot.unitValues.zs.text;
+  const ys = snapshot.unitValues.ys.text;
+  const rs = snapshot.unitValues.rs.text;
+  const qs = snapshot.unitValues.qs.text;
+  const compactPt = Number.isFinite(snapshot.planckTicks)
+    ? snapshot.planckTicks.toExponential(6)
+    : "n/a";
+  const subMillisecondDigits = Math.floor(snapshot.subMillisecondFraction * 1e9).toString().padStart(9, "0");
+  const ultraFineDigits = `${ps}${fs}${as}${zs}${ys}${rs}${qs}`.replace(/^0+/, "") || "0";
+  const ultraFinePreview = ultraFineDigits.slice(0, 12);
+  const pmam = today.getHours() >= 12 ? "PM" : "AM";                                                              // Determine if it's AM or PM based on the current hour
 
   const timeDisplayElement = document.getElementById(TIME_DISPLAY_ID);                                              // Find the time display element
   if (timeDisplayElement) {
-    timeDisplayElement.innerHTML = `Current Time: ${h}h:${m}m:${s}s:${ms}ms:${us}us:${ns}ns:
+    timeDisplayElement.innerHTML = `Current Time: ${h}h:${m}m:${s}s:${ms}ms:${us}us:${ns}ns
     <br>
-    ${ps}ps:${fs}fs:${as}as:
+    sub-millisecond(9d): ${subMillisecondDigits}
     <br>
-    ${zs}zs:${ys}ys:
+    ultra-fine tail: ${ultraFinePreview}${ultraFineDigits.length > 12 ? "..." : ""}
     <br>
-    ${rs}rs:${qs}qs:
-    <br>
-    ${pt}pt
+    <span class="planck-row">planck-tick estimate: <span class="planck-value" title="${snapshot.planckTicks.toLocaleString("en-US")}">${compactPt}</span></span>
     <br>
     ${pmam} ${mh}/${day}/${fy}`; // Set the inner HTML with formatted time string
   }
@@ -681,6 +757,7 @@ function setupCanvas() {                                                        
 // Draws the clock face, numbers, and hands
 function drawClock() {                                                                                            // Function to draw the clock face, numbers, and hands
   drawFace(ctx, radius);                                                                                          // Draw the clock face with gradient and center
+  drawTickMarks(ctx, radius);                                                                                     // Draw minute/hour ticks around the dial
   drawNumbers(ctx, radius);                                                                                       // Draw the hour numbers on the clock face
   drawTime(ctx, radius);                                                                                          // Draw all clock hands (hour, minute, second, ms, ns)
 }
@@ -689,26 +766,55 @@ function drawClock() {                                                          
 function drawFace(ctx, radius) {                                                                 // Function to draw the clock face
   ctx.beginPath();                                                                                              // Begin a new path for the clock face
   ctx.arc(0, 0, radius, 0, 2 * Math.PI);                                                                       // Draw a circle for the clock face
-  ctx.fillStyle = getCssVar('--clock-face-fill', '#ffffff');                                                                 // Set the fill color for the clock face
+  ctx.fillStyle = getCssVar('--clock-face-fill', '#f7f9ff');                                                                 // Set the fill color for the clock face
   ctx.fill();                                                                 // Fill the clock face with the specified color
   let grad = ctx.createRadialGradient(0, 0, radius * 0.95, 0, 0, radius * 1.05); // Create a radial gradient for the clock face
-  grad.addColorStop(0, getCssVar('--clock-grad-0', '#173015')); // Start color of the gradient (dark green)
-  grad.addColorStop(0.5, getCssVar('--clock-grad-1', '#00cc')); // Middle color of the gradient (light green)
-  grad.addColorStop(1, getCssVar('--clock-grad-2', '#49c012')); // End color of the gradient (bright green)
+  grad.addColorStop(0, getCssVar('--clock-grad-0', '#8aa3ff')); // Start color of the gradient
+  grad.addColorStop(0.5, getCssVar('--clock-grad-1', '#5dd4ff')); // Middle color of the gradient
+  grad.addColorStop(1, getCssVar('--clock-grad-2', '#ffcf6a')); // End color of the gradient
   ctx.strokeStyle = grad; // Set the stroke style to the gradient
   ctx.lineWidth = radius * 0.1; // Set the line width for the clock face stroke
   ctx.stroke(); // Stroke the clock face with the gradient
   ctx.beginPath(); // Begin a new path for the clock center
   ctx.arc(0, 0, radius * 0.1, 0, 2 * Math.PI); // Draw a circle for the clock center
-  ctx.fillStyle = getCssVar('--clock-center', '#000000'); // Set the fill color for the clock center (black)
+  ctx.fillStyle = getCssVar('--clock-center', '#0b1228'); // Set the fill color for the clock center
   ctx.fill(); // Fill the clock center with the specified color
+}
+
+function drawTickMarks(ctx, radius) {
+  const majorColor = getCssVar("--clock-tick-major", "#10214d");
+  const minorColor = getCssVar("--clock-tick-minor", "rgba(16, 33, 77, 0.45)");
+  const majorInner = radius * 0.77;
+  const majorOuter = radius * 0.92;
+  const minorInner = radius * 0.83;
+  const minorOuter = radius * 0.92;
+
+  ctx.save();
+  for (let i = 0; i < 60; i++) {
+    const angle = (i * Math.PI) / 30;
+    const isMajor = i % 5 === 0;
+    const inner = isMajor ? majorInner : minorInner;
+    const outer = isMajor ? majorOuter : minorOuter;
+
+    ctx.beginPath();
+    ctx.lineCap = "round";
+    ctx.lineWidth = isMajor ? radius * 0.022 : radius * 0.008;
+    ctx.strokeStyle = isMajor ? majorColor : minorColor;
+    ctx.moveTo(Math.cos(angle) * inner, Math.sin(angle) * inner);
+    ctx.lineTo(Math.cos(angle) * outer, Math.sin(angle) * outer);
+    ctx.stroke();
+  }
+  ctx.restore();
 }
 
 // Draws the hour numbers on the clock face
 function drawNumbers(ctx, radius) {                                                                 // Function to draw the hour numbers on the clock face
-  ctx.font = radius * 0.3 + "px arial"; // Set the font size and family for the hour numbers
+  ctx.font = `700 ${radius * 0.2}px "Trebuchet MS", "Verdana", sans-serif`; // Set the font size and family for the hour numbers
   ctx.textBaseline = "middle"; // Set the text baseline to middle for centering the numbers
   ctx.textAlign = "center"; // Set the text alignment to center for centering the numbers
+  ctx.fillStyle = getCssVar("--clock-number-color", "#0f1f49");
+  ctx.shadowBlur = radius * 0.015;
+  ctx.shadowColor = "rgba(255, 255, 255, 0.6)";
   for (let num = 1; num <= 12; num++) { // Loop through numbers 1 to 12 for the clock hours
     let ang = (num * Math.PI) / 6; // Calculate the angle for each number (30 degrees per hour)
     ctx.rotate(ang); // Rotate the context to the angle of the number
@@ -723,122 +829,46 @@ function drawNumbers(ctx, radius) {                                             
 
 // Draws all clock hands (hour, minute, second, ms, ns)
 function drawTime(ctx, radius) {                                             // Function to draw all clock hands
-  const now = new Date();                                                    // Get the current date and time
-  let hour = now.getHours() % 12;                                            // Get the current hour (0-11) for 12-hour format
-  let minute = now.getMinutes();                                             // Get the current minute (0-59)
-  let second = now.getSeconds();                                             // Get the current second (0-59)
-  let ms = now.getMilliseconds();
-  const fractionalSecond = typeof performance !== "undefined" && performance.now ? performance.now() % 1 : 0;
-  let us =                                                                   // Get the current microseconds (0-999999) using performance.now() if available, otherwise default to 0
-    typeof performance !== "undefined" && performance.now                    // Check if performance.now() is available
-      ? Math.floor(fractionalSecond * 1e6)                                   // Get the fractional part of performance.now() and convert to microseconds
-      : 0;                                                                   // If performance.now() is not available, default to 0
-  let ns =                                                                   // Get the current nanoseconds (0-999999999) using performance.now() if available, otherwise default to 0
-    typeof performance !== "undefined" && performance.now                    // Check if performance.now() is available
-      ? Math.floor(fractionalSecond * 1e9)                                   // Get the fractional part of performance.now() and convert to nanoseconds
-      : 0;                                                                   // If performance.now() is not available, default to 0
-  let ps =                                                                   // Get the current picoseconds (0-999999999999) using performance.now() if available, otherwise default to 0
-    typeof performance !== "undefined" && performance.now                    // Check if performance.now() is available
-      ? Math.floor(fractionalSecond * 1e12)                                  // Get the fractional part of performance.now() and convert to picoseconds
-      : 0;                                                                   // If performance.now() is not available, default to 0
-  let fs =                                                                   // Get the current femtoseconds (0-999999999999999) using performance.now() if available, otherwise default to 0
-    typeof performance !== "undefined" && performance.now                    // Check if performance.now() is available
-      ? Math.floor(fractionalSecond * 1e15)                                  // Get the fractional part of performance.now() and convert to femtoseconds
-      : 0;                                                                   // If performance.now() is not available, default to 0
-  let as =                                                                   // Get the current attoseconds (0-999999999999999999) using performance.now() if available, otherwise default to 0
-    typeof performance !== "undefined" && performance.now                    // Check if performance.now() is available
-      ? Math.floor(fractionalSecond * 1e18)                                  // Get the fractional part of performance.now() and convert to attoseconds
-      : 0;                                                                   // If performance.now() is not available, default to 0
-  let zs =                                                                   // Get the current zeptoseconds (0-999999999999999999999) using performance.now() if available, otherwise default to 0
-    typeof performance !== "undefined" && performance.now                    // Check if performance.now() is available
-      ? Math.floor(fractionalSecond * 1e21)                                  // Get the fractional part of performance.now() and convert to zeptoseconds
-      : 0;                                                                   // If performance.now() is not available, default to 0
-  let ys =                                                                   // Get the current yoctoseconds (0-999999999999999999999999) using performance.now() if available, otherwise default to 0
-    typeof performance !== "undefined" && performance.now                    // Check if performance.now() and convert to yoctoseconds
-      ? Math.floor(fractionalSecond * 1e24)                                  // Get the fractional part of performance.now() and convert to yoctoseconds
-      : 0;                                                                   // If performance.now() is not available, default to 0
-  let rs =                                                                   // Get the current rontoseconds (0-999999999999999999999999999) using performance.now() if available, otherwise default to 0
-    typeof performance !== "undefined" && performance.now                    // Check if performance.now() is available
-      ? Math.floor(fractionalSecond * 1e27)                                  // Get the fractional part of performance.now() and convert to rontoseconds
-      : 0;                                                                   // If performance.now() is not available, default to 0
-  let qs =                                                                   // Get the current quectoseconds (0-999999999999999999999999999999) using performance.now() if available, otherwise default to 0
-    typeof performance !== "undefined" && performance.now                    // Check if performance.now() is available
-      ? Math.floor(fractionalSecond * 1e30)                                  // Get the fractional part of performance.now() and convert to quectoseconds
-      : 0;                                                                   // If performance.now() is not available, default to 0
-  let pt = fractionalSecond > 0 ? Math.floor(fractionalSecond / PLANCK_TIME_SECONDS) : 0;
+  const snapshot = getTimeSnapshot();
+  const now = snapshot.date;
+  const secondProgress = now.getSeconds() + snapshot.secondFraction;
+  const minuteProgress = now.getMinutes() + secondProgress / 60;
+  const hourProgress = now.getHours() % 12 + minuteProgress / 60;
 
-  // Calculate angles for each hand
-  // Convert hour, minute, second, ms, us, ns, ps, fs, as, zs, ys, rs, and qs to radians
-  hour =
-    (hour * Math.PI) / 6 +                                                    // Each hour is 30° (π/6 radians), so hour * π/6
-    (minute * Math.PI) / (6 * 60) +                                           // Each minute adds 0.5° (π/(6*60) radians) to hour hand
-    (second * Math.PI) / (360 * 60) +                                         // Each second adds 1/720° (π/(360*60) radians) to hour hand
-    (ms * Math.PI) / (360 * 60 * 1000) +                                      // Each ms adds 1/21600000 of the hour-hand cycle
-    (us * Math.PI) / (360 * 60 * 1000 * 1e3) +                                // Each us adds 1/21600000000 of the hour-hand cycle
-    (ns * Math.PI) / (360 * 60 * 1000 * 1e6) +                                // Each ns adds 1/21600000000000 of the hour-hand cycle
-    (ps * Math.PI) / (360 * 60 * 1000 * 1e9) +                                // Each ps adds 1/21600000000000000 of the hour-hand cycle
-    (fs * Math.PI) / (360 * 60 * 1000 * 1e12) +                               // Each fs adds 1/21600000000000000000 of the hour-hand cycle
-    (as * Math.PI) / (360 * 60 * 1000 * 1e15) +                               // Each as adds 1/21600000000000000000000 of the hour-hand cycle
-    (zs * Math.PI) / (360 * 60 * 1000 * 1e18) +                               // Each zs adds 1/21600000000000000000000000 of the hour-hand cycle
-    (ys * Math.PI) / (360 * 60 * 1000 * 1e21) +                               // Each ys adds 1/21600000000000000000000000000 of the hour-hand cycle
-    (rs * Math.PI) / (360 * 60 * 1000 * 1e24) +                               // Each rs adds 1/21600000000000000000000000000000 of the hour-hand cycle
-    (qs * Math.PI) / (360 * 60 * 1000 * 1e27);                                // Each qs adds 1/21600000000000000000000000000000000 of the hour-hand cycle
-    // Convert minute to radians, adding the contribution from seconds
-  minute = (minute * Math.PI) / 30 + (second * Math.PI) / (30 * 60);          // Each minute is 6° (π/30 radians), each second adds 0.1° (π/(30*60))
-  // Convert second to radians
-  second = (second * Math.PI) / 30;                                           // Each second is 6° (π/30 radians)
-  // Convert milliseconds to radians
-  ms = (ms * Math.PI) / 500;                                                  // Each ms is 0.72° (π/500 radians)
-  // Convert microseconds to radians
-  us = (us * Math.PI) / 500000;                                               // Each us is 0.00072° (π/500000 radians)
-  // Convert nanoseconds to radians
-  ns = (ns * Math.PI) / 500000000;                                            // Each ns is 0.00000072° (π/500000000 radians)
-  // Convert picoseconds to radians
-  ps = (ps * Math.PI) / 500000000000;                                         // Each ps is 0.00000000072° (π/500000000000 radians)
-  // Convert femtoseconds to radians
-  fs = (fs * Math.PI) / 500000000000000;                                      // Each fs is 0.00000000000072° (π/500000000000000 radians)
-  // Convert attoseconds to radians
-  as = (as * Math.PI) / 500000000000000000;                                   // Each as is 0.00000000000000072° (π/500000000000000000 radians)
-  // Convert zeptoseconds to radians
-  zs = (zs * Math.PI) / 500000000000000000000;                                // Each zs is 0.00000000000000000072° (π/500000000000000000000 radians)
-  // Convert yoctoseconds to radians
-  ys = (ys * Math.PI) / 5e23;                                                   // Each ys is 0.00000000000000000000072° (π/5e23 radians)
-  // Convert rontoseconds to radians
-  rs = (rs * Math.PI) / 5e26;                                                   // Each rs is 0.00000000000000000000000072° (π/5e26 radians)
-  // Convert quectoseconds to radians
-  qs = (qs * Math.PI) / 5e29;                                                   // Each qs is 0.00000000000000000000000000072° (π/5e29 radians)
-  pt = ((pt % 1000000000) / 1000000000) * Math.PI * 2;                       // Use a tiny angle so the Planck-time hand remains visually stable
+  const angles = {
+    hour: toAngle(hourProgress, 12),
+    minute: toAngle(minuteProgress, 60),
+    second: toAngle(secondProgress, 60),
+    ms: toAngle(snapshot.msTotal, 1000)
+  };
 
-  // Draw hands
-  // Use local variables for hand parameters to avoid repeated calculations and improve readability
-  const hourLen = radius * 0.5, hourWidth = radius * 0.09;
-  const minLen = radius * 0.8, minWidth = radius * 0.07;
-  const secLen = radius * 0.9, secWidth = radius * 0.04;
-  const msLen = radius * 0.9, msWidth = radius * 0.02;
-  const usLen = radius * 0.95, usWidth = radius * 0.015;
-  const nsLen = radius * 0.98, nsWidth = radius * 0.01;
-  const psLen = radius * 0.99, psWidth = radius * 0.005;
-  const fsLen = radius * 0.995, fsWidth = radius * 0.003;
-  const asLen = radius * 0.998, asWidth = radius * 0.0015;
-  const zsLen = radius * 0.999, zsWidth = radius * 0.001;
-  const ysLen = radius * 0.9995, ysWidth = radius * 0.0008;
-  const rsLen = radius * 0.9998, rsWidth = radius * 0.0005;
-  const qsLen = radius * 0.99995, qsWidth = radius * 0.0002;
-  const ptLen = radius * 0.99999, ptWidth = radius * 0.0001;
-  drawHand(ctx, hour, hourLen, hourWidth, getCssVar('--hand-hour', '#001d19'), 0, "#000");    // hour hand: 50% radius, thickest, dark green
-  drawHand(ctx, minute, minLen, minWidth, getCssVar('--hand-minute', '#00463c'), 0, "#000");   // minute hand: 80% radius, medium, teal
-  drawHand(ctx, second, secLen, secWidth, getCssVar('--hand-second', '#630c01'), 0, "#000");   // second hand: 90% radius, thin, red
-  drawHand(ctx, ms, msLen, msWidth, getCssVar('--hand-ms', '#001d19'), 0, "#000");         // ms hand: 90% radius, very thin, dark green
-  drawHand(ctx, us, usLen, usWidth, getCssVar('--hand-us', '#ff9800'), 0, "#000");         // us hand: 95% radius, orange
-  drawHand(ctx, ns, nsLen, nsWidth, getCssVar('--hand-ns', '#1100ff'), 0, "#000");         // ns hand: 98% radius, blue
-  drawHand(ctx, ps, psLen, psWidth, getCssVar('--hand-ps', '#ff00ff'), 0, "#000");         // ps hand: 99% radius, magenta
-  drawHand(ctx, fs, fsLen, fsWidth, getCssVar('--hand-fs', '#00e5ff'), 0, "#000");         // fs hand: 99.5% radius, cyan
-  drawHand(ctx, as, asLen, asWidth, getCssVar('--hand-as', '#ffffff'), 0, "#000");         // as hand: 99.8% radius, white
-  drawHand(ctx, zs, zsLen, zsWidth, getCssVar('--hand-zs', '#cddc39'), 0, "#000");         // zs hand: 99.9% radius, lime
-  drawHand(ctx, ys, ysLen, ysWidth, getCssVar('--hand-ys', '#8bc34a'), 0, "#000");         // ys hand: 99.95% radius, light green
-  drawHand(ctx, rs, rsLen, rsWidth, getCssVar('--hand-rs', '#4caf50'), 0, "#000");         // rs hand: 99.98% radius, green
-  drawHand(ctx, qs, qsLen, qsWidth, getCssVar('--hand-qs', '#009688'), 0, "#000");         // qs hand: 99.995% radius, teal
-  drawHand(ctx, pt, ptLen, ptWidth, getCssVar('--hand-pt', '#9c27b0'), 0, "#000");         // pt hand: nearly full radius, purple
+  for (const hand of PRIMARY_HANDS) {
+    drawHand(
+      ctx,
+      angles[hand.key],
+      radius * hand.length,
+      radius * hand.width,
+      getCssVar(hand.cssVar, hand.fallback),
+      0,
+      "#000"
+    );
+  }
+
+  for (const hand of SUB_MILLISECOND_HANDS) {
+    const unitState = snapshot.unitValues[hand.key];
+    drawHand(
+      ctx,
+      unitState.angle,
+      radius * hand.length,
+      radius * hand.width,
+      getCssVar(hand.cssVar, hand.fallback),
+      0,
+      "#000"
+    );
+  }
+
+  const planckAngle = ((snapshot.planckTicks % 1000000000) / 1000000000) * TWO_PI;
+  drawHand(ctx, planckAngle, radius * 0.99999, radius * 0.0001, getCssVar("--hand-pt", "#9c27b0"), 0, "#000");
 }
 
 // Draws a single hand on the clock

@@ -1,7 +1,14 @@
 {
   "title": "Git push versions",
-  "currentVersion": "v1.2.8",
+  "currentVersion": "v1.2.9",
   "versions": [
+    {
+      "version": "v1.2.9",
+      "date": "Aug 15, 2026",
+      "time": "~11:15pm PDT",
+      "notes": "Fixed up the time, add new css for the clock, resume & project section, fixed some javascript code for the clock, resume & project section, and added a new project to the project section.",
+      "label": "v1.2.9 - | Aug 15, 2026 ~11:15pm PDT | Fixed up the time, add new css for the clock, resume & project section, fixed some javascript code for the clock, resume & project section, and added a new project to the project section."
+    },
     {
       "version": "v1.2.8",
       "date": "Aug 3, 2026",
