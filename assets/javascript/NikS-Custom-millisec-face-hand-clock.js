@@ -728,11 +728,11 @@ function startTime() {                                                          
 
   const timeDisplayElement = document.getElementById(TIME_DISPLAY_ID);                                              // Find the time display element
   if (timeDisplayElement) {
-    timeDisplayElement.innerHTML = `Current Time: ${h}h:${m}m:${s}s:${ms}ms:${us}us:${ns}ns
+    timeDisplayElement.innerHTML = `Current Time: ${h}h:${m}m:${s}s:${ms}ms:${us}µs:${ns}ns:${ps}ps
     <br>
     sub-millisecond(9d): ${subMillisecondDigits}
     <br>
-    ultra-fine tail: ${ultraFinePreview}${ultraFineDigits.length > 12 ? "..." : ""}
+    ultra-fine tail: ${ultraFinePreview}${ultraFineDigits.length > 12 ? "..." : ""} ps
     <br>
     <span class="planck-row">planck-tick estimate: <span class="planck-value" title="${snapshot.planckTicks.toLocaleString("en-US")}">${compactPt}</span></span>
     <br>
