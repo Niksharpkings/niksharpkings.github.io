@@ -12,6 +12,7 @@ Last Updated to this repo: August 28, 2026 01:00pm PDT -8 GMT
 
 #### Git push Versions :
 
+* `v1.3.1 - | Aug 28, 2026 ~ 05:00pm PDT | M4-C4: Quiz-it-up 2.0 Revamped`
 * `v1.3.0 - | Aug 28, 2026 ~01:00pm PDT | Fixed the clock to show the time, removed all seconds below picosecond and added remainder.`
 * `v1.2.9 - | Aug 15, 2026 ~11:15pm PDT | Fixed up the time, add new css for the clock, resume & project section, fixed some javascript code for the clock, resume & project section, and added a new project to the project section.`
 * `v1.2.8 - | Aug 3, 2026 ~4:47pm PDT | Adjusted the clock, edited the CSS for the clock, resume & project section`

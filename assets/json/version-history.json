@@ -1,7 +1,14 @@
 {
   "title": "Git push versions",
-  "currentVersion": "v1.3.0",
+  "currentVersion": "v1.3.1",
   "versions": [
+    {
+      "version": "v1.3.1",
+      "date": "Aug 28, 2026",
+      "time": "~05:00pm PDT",
+      "notes": "M4-C4: Quiz-it-up 2.0 Revamped project added",
+      "label": "v1.3.1 - | Aug 28, 2026 ~05:00pm PDT | M4-C4: Quiz-it-up 2.0 Revamped"
+    },
     {
       "version": "v1.3.0",
       "date": "Aug 28, 2026",

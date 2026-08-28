@@ -710,6 +710,14 @@ const projectsData = [
     imageAlt: "passwordgeneratorv2"
   },
   {
+    title: "M4-C4: Quiz-it-up 2.0 Revamped",
+    liveLink: "https://niksharpkings.github.io/challenge-4-quiz-it-up",
+    repoLink: "https://github.com/Niksharpkings/challenge-4-quiz-it-up",
+    description: "Quiz-it-up 2.0 revamped project UCLAx Student Project, using basic Javascript and webAPI, with simple css and Html coding practices. JS Objects and Arrays. Pushed Objects into Arrays and then save these into localStorage.Used JSON.stringify and JSON.parse methods to save and access the localStorage",
+    imageSrc: "./assets/images/challenge-4-quiz-it-up.png",
+    imageAlt: "challenge-4-quiz-it-up"
+  },
+  {
     title: "Surf Report",
     liveLink: "N/a",
     repoLink: "N/a",
