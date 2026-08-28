@@ -1,7 +1,14 @@
 {
   "title": "Git push versions",
-  "currentVersion": "v1.2.9",
+  "currentVersion": "v1.3.0",
   "versions": [
+    {
+      "version": "v1.3.0",
+      "date": "Aug 28, 2026",
+      "time": "~01:00pm PDT",
+      "notes": "Fixed the clock to show the time, removed all seconds below picosecond and added remainder.",
+      "label": "v1.3.0 - | Aug 28, 2026 ~01:00pm PDT | Fixed the clock to show the time, removed all seconds below picosecond and added remainder."
+    },
     {
       "version": "v1.2.9",
       "date": "Aug 15, 2026",

@@ -8,10 +8,12 @@
 	This profile webpage is undergoing reconstruction and development. Currently, I'm pursuing for a Computer Science Associate Degree while in hopes of reaching a transfer to a UCSU in aim of a Bachelor's and/or Master Degree in Computer Programming. I am also, taking certificate course at codecademy.com and revamping/redoing all my UCLAx-U2 coding bootcamp projects as there is a lot of depreciations, expired  free-trial features, and missing or over-rushed features and lots of tunings, tweakings, and optimizations needed. I plan to finish the revamp/redoing off all the UCLAx-U2 projects/modules one year...
 ```
 
-Last Updated to this repo: August 3, 2026 11:00am PDT -8 GMT
+Last Updated to this repo: August 28, 2026 01:00pm PDT -8 GMT
 
 #### Git push Versions :
 
+* `v1.3.0 - | Aug 28, 2026 ~01:00pm PDT | Fixed the clock to show the time, removed all seconds below picosecond and added remainder.`
+* `v1.2.9 - | Aug 15, 2026 ~11:15pm PDT | Fixed up the time, add new css for the clock, resume & project section, fixed some javascript code for the clock, resume & project section, and added a new project to the project section.`
 * `v1.2.8 - | Aug 3, 2026 ~4:47pm PDT | Adjusted the clock, edited the CSS for the clock, resume & project section`
 * `v1.2.7 - | Aug 3, 2026 ~12:00pm PDT | Tuned the clock and css for the clock and project section`
 * `v1.2.6 - | July 11, 2026 ~11:30am PDT | Added more Orders_of_magnitude_(time).`

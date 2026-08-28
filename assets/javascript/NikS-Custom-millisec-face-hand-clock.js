@@ -594,7 +594,7 @@ const TWO_PI = Math.PI * 2;
 const SUB_MILLISECOND_UNITS = [ // Units for sub-millisecond precision
   { key: "us", scale: 1e3, pad: 3 },
   { key: "ns", scale: 1e6, pad: 6 },
-  { key: "ps", scale: 1e9, pad: 9 },
+  // { key: "ps", scale: 1e9, pad: 9 }, // Disabled: browser timing cannot legitimately measure picoseconds.
   { key: "fs", scale: 1e12, pad: 12 },
   { key: "as", scale: 1e15, pad: 15 },
   { key: "zs", scale: 1e18, pad: 18 },
@@ -613,7 +613,7 @@ const PRIMARY_HANDS = [
 const SUB_MILLISECOND_HANDS = [
   { key: "us", length: 0.95, width: 0.015, cssVar: "--hand-us", fallback: "#ff9800" },
   { key: "ns", length: 0.98, width: 0.01, cssVar: "--hand-ns", fallback: "#1100ff" },
-  { key: "ps", length: 0.99, width: 0.005, cssVar: "--hand-ps", fallback: "#ff00ff" },
+  // { key: "ps", length: 0.99, width: 0.005, cssVar: "--hand-ps", fallback: "#ff00ff" }, // Disabled: derived picoseconds are not measured.
   { key: "fs", length: 0.995, width: 0.003, cssVar: "--hand-fs", fallback: "#00e5ff" },
   { key: "as", length: 0.998, width: 0.0015, cssVar: "--hand-as", fallback: "#ffffff" },
   { key: "zs", length: 0.999, width: 0.001, cssVar: "--hand-zs", fallback: "#cddc39" },
@@ -665,8 +665,19 @@ function getTimeSnapshot() {
   const date = new Date(wholeMs);
   const msTotal = date.getMilliseconds() + subMillisecondFraction;
   const secondFraction = msTotal / 1000;
-  const planckTicks = subMillisecondFraction > 0 ? Math.floor((subMillisecondFraction / 1000) / PLANCK_TIME_SECONDS) : 0;
+  const planckTicks = Math.floor(secondFraction / PLANCK_TIME_SECONDS);
   const unitValues = {};
+  const secondUnitValues = {
+    ms: Math.floor(secondFraction * 1e3).toString().padStart(3, "0"),
+    us: Math.floor(secondFraction * 1e6).toString().padStart(6, "0"),
+    ns: Math.floor(secondFraction * 1e9).toString().padStart(9, "0"),
+    // ps: Math.floor(secondFraction * 1e12).toString().padStart(12, "0")
+  };
+  const remainderValues = {
+    subMsUs: Math.floor(secondFraction * 1e6) % 1e3,
+    subUsNs: Math.floor(secondFraction * 1e9) % 1e3,
+    subNsPs: Math.floor(secondFraction * 1e12) % 1e3
+  };
 
   for (const unit of SUB_MILLISECOND_UNITS) {
     const value = Math.floor(subMillisecondFraction * unit.scale);
@@ -683,7 +694,9 @@ function getTimeSnapshot() {
     msTotal,
     secondFraction,
     planckTicks,
-    unitValues
+    unitValues,
+    secondUnitValues,
+    remainderValues
   };
 }
 
@@ -708,33 +721,26 @@ function startTime() {                                                          
   const h = checkTime(today.getHours());                                                                           // Get the current hour (0-23) and pad with leading zero
   const m = checkTime(today.getMinutes());                                                                         // Get the current minute (0-59) and pad with leading zero
   const s = checkTime(today.getSeconds());                                                                         // Get the current second (0-59) and pad with leading zero
-  const ms = today.getMilliseconds().toString().padStart(3, "0");                                                 // Get the current milliseconds (0-999) and pad with leading zero to 3 digits
-  const us = snapshot.unitValues.us.text;
-  const ns = snapshot.unitValues.ns.text;
-  const ps = snapshot.unitValues.ps.text;
-  const fs = snapshot.unitValues.fs.text;
-  const as = snapshot.unitValues.as.text;
-  const zs = snapshot.unitValues.zs.text;
-  const ys = snapshot.unitValues.ys.text;
-  const rs = snapshot.unitValues.rs.text;
-  const qs = snapshot.unitValues.qs.text;
+  const ms = snapshot.secondUnitValues.ms;
+  const us = snapshot.secondUnitValues.us;
+  const ns = snapshot.secondUnitValues.ns;
+  // const ps = snapshot.secondUnitValues.ps; // Disabled: browser timing cannot legitimately measure picoseconds.
   const compactPt = Number.isFinite(snapshot.planckTicks)
     ? snapshot.planckTicks.toExponential(6)
     : "n/a";
-  const subMillisecondDigits = Math.floor(snapshot.subMillisecondFraction * 1e9).toString().padStart(9, "0");
-  const ultraFineDigits = `${ps}${fs}${as}${zs}${ys}${rs}${qs}`.replace(/^0+/, "") || "0";
-  const ultraFinePreview = ultraFineDigits.slice(0, 12);
+  const subMsUs = snapshot.remainderValues.subMsUs.toString().padStart(3, "0");
+  const subUsNs = snapshot.remainderValues.subUsNs.toString().padStart(3, "0");
+  const subNsPs = snapshot.remainderValues.subNsPs.toString().padStart(3, "0");
+  // const ultraFineDigits = snapshot.unitValues.ps.text; // Disabled: derived picoseconds are not measured.
   const pmam = today.getHours() >= 12 ? "PM" : "AM";                                                              // Determine if it's AM or PM based on the current hour
 
   const timeDisplayElement = document.getElementById(TIME_DISPLAY_ID);                                              // Find the time display element
   if (timeDisplayElement) {
-    timeDisplayElement.innerHTML = `Current Time: ${h}h:${m}m:${s}s:${ms}ms:${us}µs:${ns}ns:${ps}ps
+    timeDisplayElement.innerHTML = `Current Time: ${h}h:${m}m:${s}s:${ms}ms:${us}μs:${ns}ns
     <br>
-    sub-millisecond(9d): ${subMillisecondDigits}
+    remainders: sub-ms=${subMsUs}μs; sub-μs=${subUsNs}ns; sub-ns=${subNsPs}ps*
     <br>
-    ultra-fine tail: ${ultraFinePreview}${ultraFineDigits.length > 12 ? "..." : ""} ps
-    <br>
-    <span class="planck-row">planck-tick estimate: <span class="planck-value" title="${snapshot.planckTicks.toLocaleString("en-US")}">${compactPt}</span></span>
+    Planck-time estimate*:${compactPt}
     <br>
     ${pmam} ${mh}/${day}/${fy}`; // Set the inner HTML with formatted time string
   }
