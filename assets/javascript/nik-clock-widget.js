@@ -68,7 +68,6 @@
     const ms = perf % 1000;
     const us = ms * 1e3;
     const ns = ms * 1e6;
-    const ps = ms * 1e9;
     const s = now.getSeconds() + ms / 1000;
     const m = now.getMinutes() + s / 60;
     const h = (now.getHours() % 12) + m / 60;
@@ -107,7 +106,7 @@
           Math.sin(angle) * length,
           -Math.cos(angle) * length
         );
-       ctx.stroke();
+      ctx.stroke();
 }
 
 drawHand(
@@ -166,10 +165,12 @@ drawHand(
       const mm = String(now.getMinutes()).padStart(2, '0');
       const ss = String(now.getSeconds()).padStart(2, '0');
       const ms = String(now.getMilliseconds()).padStart(3,'0');
-      const us = String(performance.now() % 1000 * 1000).padStart(6,'0');
-      const ns = String(performance.now() * 1e6).padStart(9,'0');
+      const subsecondMs = now.getMilliseconds() + (performance.now() % 1);
+      const us = String(Math.floor(subsecondMs * 1e3)).padStart(6,'0');
+      const ns = String(Math.floor(subsecondMs * 1e6)).padStart(9,'0');
+      const ps = String(Math.floor(subsecondMs * 1e9)).padStart(12,'0');
 
-displayEl.textContent = `${hh}:${mm}:${ss}:${ms}:${us}:${ns}`;
+      displayEl.textContent = `${hh}:${mm}:${ss}:${ms}:${us}:${ns}:${ps}`;
     }
   }
 

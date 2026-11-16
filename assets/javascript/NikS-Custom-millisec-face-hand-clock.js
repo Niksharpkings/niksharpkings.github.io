@@ -666,17 +666,18 @@ function getTimeSnapshot() {
   const msTotal = date.getMilliseconds() + subMillisecondFraction;
   const secondFraction = msTotal / 1000;
   const planckTicks = Math.floor(secondFraction / PLANCK_TIME_SECONDS);
+  const secondTotalPs = Math.floor(secondFraction * 1e12);
   const unitValues = {};
   const secondUnitValues = {
-    ms: Math.floor(secondFraction * 1e3).toString().padStart(3, "0"),
-    us: Math.floor(secondFraction * 1e6).toString().padStart(6, "0"),
-    ns: Math.floor(secondFraction * 1e9).toString().padStart(9, "0"),
-    // ps: Math.floor(secondFraction * 1e12).toString().padStart(12, "0")
+    ms: Math.floor(secondTotalPs / 1e9).toString().padStart(3, "0"),
+    us: Math.floor(secondTotalPs / 1e6).toString().padStart(6, "0"),
+    ns: Math.floor(secondTotalPs / 1e3).toString().padStart(9, "0"),
+    ps: secondTotalPs.toString().padStart(12, "0")
   };
   const remainderValues = {
-    subMsUs: Math.floor(secondFraction * 1e6) % 1e3,
-    subUsNs: Math.floor(secondFraction * 1e9) % 1e3,
-    subNsPs: Math.floor(secondFraction * 1e12) % 1e3
+    subMsUs: Math.floor(secondTotalPs / 1e6) % 1e3,
+    subUsNs: Math.floor(secondTotalPs / 1e3) % 1e9,
+    subNsPs: secondTotalPs % 1e9
   };
 
   for (const unit of SUB_MILLISECOND_UNITS) {
@@ -724,19 +725,18 @@ function startTime() {                                                          
   const ms = snapshot.secondUnitValues.ms;
   const us = snapshot.secondUnitValues.us;
   const ns = snapshot.secondUnitValues.ns;
-  // const ps = snapshot.secondUnitValues.ps; // Disabled: browser timing cannot legitimately measure picoseconds.
+  const ps = snapshot.secondUnitValues.ps;
   const compactPt = Number.isFinite(snapshot.planckTicks)
     ? snapshot.planckTicks.toExponential(6)
     : "n/a";
   const subMsUs = snapshot.remainderValues.subMsUs.toString().padStart(3, "0");
   const subUsNs = snapshot.remainderValues.subUsNs.toString().padStart(3, "0");
   const subNsPs = snapshot.remainderValues.subNsPs.toString().padStart(3, "0");
-  // const ultraFineDigits = snapshot.unitValues.ps.text; // Disabled: derived picoseconds are not measured.
   const pmam = today.getHours() >= 12 ? "PM" : "AM";                                                              // Determine if it's AM or PM based on the current hour
 
   const timeDisplayElement = document.getElementById(TIME_DISPLAY_ID);                                              // Find the time display element
   if (timeDisplayElement) {
-    timeDisplayElement.innerHTML = `Current Time: ${h}h:${m}m:${s}s:${ms}ms:${us}μs:${ns}ns
+    timeDisplayElement.innerHTML = `Current Time: ${h}h:${m}m:${s}s:${ms}ms:${us}μs:${ns}ns:${ps}ps*
     <br>
     remainders: sub-ms=${subMsUs}μs; sub-μs=${subUsNs}ns; sub-ns=${subNsPs}ps*
     <br>
