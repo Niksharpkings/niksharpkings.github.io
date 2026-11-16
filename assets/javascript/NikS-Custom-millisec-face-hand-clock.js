@@ -647,6 +647,25 @@ function getEpochMilliseconds() {
   return Date.now();
 }
 
+function getEpochTimeParts() {
+  if (
+    typeof performance !== "undefined" &&
+    typeof performance.timeOrigin === "number" &&
+    typeof performance.now === "function"
+  ) {
+    const origin = performance.timeOrigin;
+    const elapsed = performance.now();
+    const fraction = (origin % 1) + (elapsed % 1);
+
+    return {
+      wholeMs: Math.floor(origin) + Math.floor(elapsed) + Math.floor(fraction),
+      subMs: fraction % 1
+    };
+  }
+
+  return { wholeMs: Date.now(), subMs: 0 };
+}
+
 function getTimeSnapshot() {
   const epochMs = getEpochMilliseconds();
   const wholeMs = Math.floor(epochMs);
