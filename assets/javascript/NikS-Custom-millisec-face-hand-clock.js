@@ -587,20 +587,15 @@ async function getAdaptiveClockInterval() {                                     
 //=====================
 const CANVAS_ID = "canvas";                                                                                       // ID for the canvas element
 const TIME_DISPLAY_ID = "currentTime";                                                                            // ID for the time display element
-const PLANCK_TIME_SECONDS = 5.391247e-44;                                                                         // Approximate Planck time in seconds
+const PLANCK_TIME_SECONDS = 5.39116e-44;                                                                          // Approximate Planck time in seconds
 let CLOCK_UPDATE_INTERVAL = 10;                                                                                   // Will be set dynamically
 const TWO_PI = Math.PI * 2;
 
-const SUB_MILLISECOND_UNITS = [ // Units for sub-millisecond precision
-  { key: "us", scale: 1e3, pad: 3 },
-  { key: "ns", scale: 1e6, pad: 6 },
-  // { key: "ps", scale: 1e9, pad: 9 }, // Disabled: browser timing cannot legitimately measure picoseconds.
-  { key: "fs", scale: 1e12, pad: 12 },
-  { key: "as", scale: 1e15, pad: 15 },
-  { key: "zs", scale: 1e18, pad: 18 },
-  { key: "ys", scale: 1e21, pad: 21 },
-  { key: "rs", scale: 1e24, pad: 24 },
-  { key: "qs", scale: 1e27, pad: 27 }
+const SUB_MILLISECOND_UNITS = [
+  { key: "ms", scale: 1e3, pad: 3 },
+  { key: "us", scale: 1e6, pad: 6 },
+  { key: "ns", scale: 1e9, pad: 9 },
+  { key: "ps", scale: 1e12, pad: 12 }
 ];
 
 const PRIMARY_HANDS = [
@@ -613,13 +608,7 @@ const PRIMARY_HANDS = [
 const SUB_MILLISECOND_HANDS = [
   { key: "us", length: 0.95, width: 0.015, cssVar: "--hand-us", fallback: "#ff9800" },
   { key: "ns", length: 0.98, width: 0.01, cssVar: "--hand-ns", fallback: "#1100ff" },
-  // { key: "ps", length: 0.99, width: 0.005, cssVar: "--hand-ps", fallback: "#ff00ff" }, // Disabled: derived picoseconds are not measured.
-  { key: "fs", length: 0.995, width: 0.003, cssVar: "--hand-fs", fallback: "#00e5ff" },
-  { key: "as", length: 0.998, width: 0.0015, cssVar: "--hand-as", fallback: "#ffffff" },
-  { key: "zs", length: 0.999, width: 0.001, cssVar: "--hand-zs", fallback: "#cddc39" },
-  { key: "ys", length: 0.9995, width: 0.0008, cssVar: "--hand-ys", fallback: "#8bc34a" },
-  { key: "rs", length: 0.9998, width: 0.0005, cssVar: "--hand-rs", fallback: "#4caf50" },
-  { key: "qs", length: 0.99995, width: 0.0002, cssVar: "--hand-qs", fallback: "#009688" }
+  { key: "ps", length: 0.99, width: 0.005, cssVar: "--hand-ps", fallback: "#ff00ff" }
 ];
 
 // Read CSS custom properties (with fallback)
@@ -685,8 +674,19 @@ function getTimeSnapshot() {
     unitValues[unit.key] = {
       value,
       text: value.toString().padStart(unit.pad, "0"),
-      angle: (value / unit.scale) * TWO_PI
+      angle: (value / unit.scale) * TWO_PI,
+      cycle: unit.scale,
+      // remainder: remainderValues[`sub${unit.key.toUpperCase()}`],
+      // planckTicks: Math.floor((remainderValues[`sub${unit.key.toUpperCase()}`] / unit.scale) / PLANCK_TIME_SECONDS),
+      // planckTimeSeconds: PLANCK_TIME_SECONDS,
+      // planckTimeFraction: (remainderValues[`sub${unit.key.toUpperCase()}`] / unit.scale) / PLANCK_TIME_SECONDS,
+      // planckTimeRemainder: remainderValues[`sub${unit.key.toUpperCase()}`] % PLANCK_TIME_SECONDS,
+      // planckTimeRemainderFraction: (remainderValues[`sub${unit.key.toUpperCase()}`] % PLANCK_TIME_SECONDS) / PLANCK_TIME_SECONDS,
+      // planckTimeRemainderTicks: Math.floor((remainderValues[`sub${unit.key.toUpperCase()}`] % PLANCK_TIME_SECONDS) / PLANCK_TIME_SECONDS),
+      // planckTimeRemainderTicksFraction: ((remainderValues[`sub${unit.key.toUpperCase()}`] % PLANCK_TIME_SECONDS) / PLANCK_TIME_SECONDS) % 1,
+      // planckTimeRemainderTicksFractionInverse: 1 - ((remainderValues[`sub${unit.key.toUpperCase()}`] % PLANCK_TIME_SECONDS) / PLANCK_TIME_SECONDS) % 1
     };
+  
   }
 
   return {

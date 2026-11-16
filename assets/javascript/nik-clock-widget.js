@@ -12,6 +12,7 @@
   let ctx = null;
   let sizePx = 220;
 
+
   function getOrCreateWidget() {
     const existing = document.querySelector('.clock-widget');
     if (existing) return existing;
@@ -58,8 +59,6 @@
     ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
     ctx.clearRect(0, 0, sizePx, sizePx);
   }
-  
-  
 
   function drawClock(now) {
     if (!ctx) return;
