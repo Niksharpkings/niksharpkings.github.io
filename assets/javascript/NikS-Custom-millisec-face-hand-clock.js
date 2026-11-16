@@ -748,16 +748,13 @@ function startTime() {                                                          
   const compactPt = Number.isFinite(snapshot.planckTicks)
     ? snapshot.planckTicks.toExponential(6)
     : "n/a";
-  const subMsUs = snapshot.remainderValues.subMsUs.toString().padStart(3, "0");
-  const subUsNs = snapshot.remainderValues.subUsNs.toString().padStart(3, "0");
-  const subNsPs = snapshot.remainderValues.subNsPs.toString().padStart(3, "0");
   const pmam = today.getHours() >= 12 ? "PM" : "AM";                                                              // Determine if it's AM or PM based on the current hour
 
   const timeDisplayElement = document.getElementById(TIME_DISPLAY_ID);                                              // Find the time display element
   if (timeDisplayElement) {
     timeDisplayElement.innerHTML = `Current Time: ${h}h:${m}m:${s}s:${ms}ms:${us}μs:${ns}ns:${ps}ps*
     <br>
-    remainders: sub-ms=${subMsUs}μs; sub-μs=${subUsNs}ns; sub-ns=${subNsPs}ps*
+    remainders: sub-ms=${ms}ms; sub-us=${us}μs; sub-ns=${ns}ns; sub-ps=${ps}ps*
     <br>
     Planck-time estimate*:${compactPt}
     <br>
